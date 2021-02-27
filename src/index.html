@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-
+<script src="assets/handlebars-v4.7.6.js"></script>
+<div id="main">
+    <form method="POST" class="pin-builder">
+        <div id="grid">
+            <div class="pin-builder__commitment-row">
+                <select name="boards" class="pin-builder__board-selector"></select>
+                <input type="submit" class="pin-builder__save-pin-button">
+            </div>
+            <input type="file" class="pin-builder__image-drop">
+            <input type="text" class="pin-builder__pin-title" placeholder="Add your title">
+            <div class="pin-builder__profile-row">
+                <img src="assets/default-avatar.png" class="pin-builder__profile-row__avatar">
+                <div class="pin-builder__profile-row__name">Nikita Ermilov</div>
+            </div>
+            <input type="text" class="pin-builder__pin-description" placeholder="Tell everyone what your Pin is about">
+            <input type="text" class="pin-builder__destination-link" placeholder="Add a destination link">
+        </div>
+    </form>
+</div>
 </body>
 </html>
