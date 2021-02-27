@@ -6,6 +6,11 @@
   },
   "devDependencies": {
     "eslint": "^7.20.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "husky": "^5.1.1"
+  },
+  "scripts": {
+    "postinstall": "husky install",
+    "lint": "npx eslint src/"
   }
 }
