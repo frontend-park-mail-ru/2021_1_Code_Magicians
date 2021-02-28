@@ -1,29 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+
 </head>
 <body>
-<script src="assets/handlebars-v4.7.6.js"></script>
+<script src="assets/js/handlebars-v4.7.6.js"></script>
+<div class="page-header">
+    <img src="assets/img/logo.png" alt="pinterest" class="page-header__main-page-link">
+    <button class="page-header__home-button">Home</button>
+    <button class="page-header__today-pins-button">Today</button>
+    <button class="page-header__following-button">Following</button>
+    <input class="page-header__search-bar" type="text" placeholder="Search">
+    <img src="assets/img/bell.jpg" alt="pinterest" class="page-header__updates page-header__user-elem">
+    <img src="assets/img/msg.jpg" alt="messages" class="page-header__messages page-header__user-elem">
+    <img src="assets/img/default-avatar.png" alt="profile" class="page-header__profile-button page-header__user-elem">
+    <select class="page-header__user-menu page-header__user-elem"></select>
+</div>
 <div id="main">
-    <form method="POST" class="pin-builder">
-        <div id="grid">
-            <div class="pin-builder__commitment-row">
-                <select name="boards" class="pin-builder__board-selector"></select>
-                <input type="submit" class="pin-builder__save-pin-button">
+    <div class="pin-column">
+        <form method="POST" class="pin-builder__form">
+            <div id="pin-builder">
+                <div class="pin-builder__commitment-row">
+                    <select class="pin-builder__board-selector">
+                        <option value="" disabled selected hidden>Select</option>
+                    </select>
+                    <input type="submit" class="pin-builder__save-pin-button" value="Save">
+                </div>
+                <input type="file" class="pin-builder__image-drop">
+                <textarea class="pin-builder__pin-title" placeholder="Add your title"></textarea>
+                <div class="pin-builder__profile-row">
+                    <img src="assets/img/default-avatar.png" class="pin-builder__profile-row__avatar">
+                    <span class="pin-builder__profile-row__name">Nikita Ermilov</span>
+                </div>
+                <textarea class="pin-builder__pin-description" placeholder="Tell everyone what your Pin is about"></textarea>
+                <textarea class="pin-builder__destination-link" placeholder="Add a destination link"></textarea>
             </div>
-            <input type="file" class="pin-builder__image-drop">
-            <input type="text" class="pin-builder__pin-title" placeholder="Add your title">
-            <div class="pin-builder__profile-row">
-                <img src="assets/default-avatar.png" class="pin-builder__profile-row__avatar">
-                <div class="pin-builder__profile-row__name">Nikita Ermilov</div>
-            </div>
-            <input type="text" class="pin-builder__pin-description" placeholder="Tell everyone what your Pin is about">
-            <input type="text" class="pin-builder__destination-link" placeholder="Add a destination link">
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 </body>
 </html>
