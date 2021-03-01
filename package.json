@@ -12,6 +12,8 @@
   },
   "scripts": {
     "postinstall": "husky install",
-    "lint": "npx -s eslint src/"
+    "lint": "npx -s eslint src/",
+    "fix": "npx -s eslint src/ --fix",
+    "compile_hbs": "npx handlebars src/views/*/*.hbs -f src/assets/js/handlebars.precompiled.js"
   }
 }
