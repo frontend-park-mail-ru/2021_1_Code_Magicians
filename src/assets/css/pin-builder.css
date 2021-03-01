@@ -1,16 +1,11 @@
+* {
+    --main-bg-color: rgb(35 38 39);
+    --dark-bg-color: rgb(26 28 28);
+}
+
 #pin-builder {
-    height: 610px;
-    width: 800px;
-    border-radius: 17px;
-    padding-right: 40px;
-    padding-left: 40px;
-    padding-top: 40px;
-    margin: 50px;
-
-    background-color: rgb(26 28 28);
-
     display: grid;
-    grid-template-areas: ". top-row"
+    grid-template-areas: "top-row top-row"
                          "image-zone ."
                          "image-zone title"
                          "image-zone profile"
@@ -18,28 +13,35 @@
                          "image-zone ."
                          "image-zone ."
                          "image-zone ."
-                         ". dest-link"
+                         ". dest-link";
 
+    height: 610px;
+    width: 800px;
+
+    margin: 50px;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-top: 40px;
+
+    border-radius: 17px;
+
+    background-color: var(--dark-bg-color);
 }
 
 
 #pin-builder > textarea {
-    outline: none;
-    border: none;
-    resize: none;
-
     max-height: 30%;
     max-width: 350px;
 
-    color: gray;
-    background-color: rgb(26 28 28);
+    resize: none;
+
+    outline: none;
+    border: none;
     border-bottom: 1px solid #3c4041;
 
-}
+    color: gray;
+    background-color: transparent;
 
-.pin-builder__commitment-row > * {
-    height: 60%;
-    width: 15%;
 }
 
 .pin-builder__commitment-row {
@@ -51,67 +53,68 @@
 }
 
 .pin-builder__image-drop {
-    margin: 5px;
-    border-radius: 15px;
+    grid-area: image-zone;
+
     min-width: auto;
     width: 85%;
 
-    background-color: rgb(35 38 39) !important;
+    margin: 5px;
 
-    grid-area: image-zone;
-    text-align: center;
+    border-radius: 15px;
+
+    background-color: var(--main-bg-color) !important;
 }
 
 .pin-builder__pin-title {
+    grid-area: title;
+
     margin: 5px;
 
     font-size: 17px;
-
-    grid-area: title;
 }
 
 .pin-builder__profile-row {
-    margin: 5px;
-
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    max-height: inherit;
 
     grid-area: profile;
+
+    max-height: inherit;
+
+    margin: 5px;
 }
 
 .pin-builder__pin-description {
+    grid-area: description;
+
     margin: 5px;
 
     font-size: 15px;
 
-    background-color: rgb(35 38 39);
+    background-color: var(--main-bg-color);
     color: rgb(179 171 157) !important;
 
-    grid-area: description;
 }
 .pin-builder__destination-link {
+    grid-area: dest-link;
+
     margin: 5px;
 
     font-size: 15px;
 
-    background-color: rgb(35 38 39);
-
-    grid-area: dest-link;
+    background-color: var(--main-bg-color);
 }
 
 
 .pin-builder__profile-row__avatar {
     width: 50px;
     height: 50px;
+
     margin-left: 15px;
     margin-right: 15px;
+
     border-radius: 50%;
-}
-
-.pin-builder__form {
-
 }
 
 .pin-column {
@@ -122,19 +125,21 @@
 }
 
 #main {
-    background: rgb(35 38 39);
+    position: absolute;
+    top: 8%;
+    left: 0;
 
     display: flex;
     justify-content: center;
 
-    position: fixed;
-    top: 8%;
-    left: 0;
     width: 100%;
     height: 100%;
 }
 
 .pin-builder__save-pin-button {
+    height: 54%;
+    width: 8%;
+
     outline: none;
     border: none;
     border-top-right-radius: 10px;
@@ -144,27 +149,69 @@
     font-weight: bold;
     line-height: 0;
 
-
     color: white;
     background-color: red;
+
+    cursor: pointer;
 }
 
 .pin-builder__board-selector {
+    height: 54%;
+    width: 20%;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
     outline: none;
     border: none;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    width: 40%;
-    padding-left: 5px;
-    padding-right: 5px;
 
     font-size: 17px;
     font-weight: bold;
 
-    background-color: rgb(35 38 39);
+    background-color: var(--main-bg-color);
     color: gray;
 }
 
 .pin-builder__profile-row__name {
     color: white;
+}
+
+body {
+    background: var(--main-bg-color);
+}
+
+button {
+    cursor: pointer;
+}
+
+.plus-button {
+    position: fixed;
+    top: 12%;
+    left: 2%;
+
+    width: 40px;
+    height: 60px;
+
+    border-radius: 10px;
+    outline: none;
+    border: none;
+
+    font-size: 40px;
+    font-weight: bold;
+
+    color: gray;
+    background-color: var(--dark-bg-color);
+}
+
+.delete-duplicate-menu {
+    height: auto;
+
+    margin-right: auto;
+
+    outline: none;
+    border: none;
+
+    cursor: pointer;
 }
