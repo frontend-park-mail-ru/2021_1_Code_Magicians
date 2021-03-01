@@ -1,3 +1,5 @@
+const maxBuildersPerPage = 10;
+
 /**
  * Adding one pin-builder instance
  * @param {object} context Context for hbs
@@ -18,7 +20,11 @@ export function addPlusButton(context) {
   const plus = document.createElement('button');
   plus.innerText = '+';
   plus.className = 'plus-button';
-  plus.addEventListener('click', () => addPinBuilder(context));
+  plus.addEventListener('click', () => {
+    if (document.querySelectorAll('.pin-builder').length < maxBuildersPerPage) {
+      addPinBuilder(context);
+    }
+  });
 
   document
       .getElementById('app')

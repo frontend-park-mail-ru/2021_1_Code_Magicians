@@ -54,15 +54,27 @@
 
 .pin-builder__image-drop {
     grid-area: image-zone;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 
     min-width: auto;
     width: 85%;
 
     margin: 5px;
 
-    border-radius: 15px;
+    background: url("../img/drop-zone.png") no-repeat center;
+}
 
-    background-color: var(--main-bg-color) !important;
+.pin-builder__image-drop-zone {
+    height: 100%;
+    width: 100%;
+
+    outline: none;
+
+    opacity: 0;
+
+    cursor: pointer;
 }
 
 .pin-builder__pin-title {
@@ -172,6 +184,8 @@
 
     background-color: var(--main-bg-color);
     color: gray;
+
+    cursor: pointer;
 }
 
 .pin-builder__profile-row__name {
@@ -201,7 +215,7 @@ button {
     font-size: 40px;
     font-weight: bold;
 
-    color: gray;
+    color: lightgray;
     background-color: var(--dark-bg-color);
 }
 

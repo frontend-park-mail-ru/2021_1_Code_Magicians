@@ -8,17 +8,17 @@
 
 </head>
 <body>
-<script type="module" src="./views/page-header/page-header.js"></script>
-<script type="module" src="./views/pin-builder/pin-builder.js"></script>
+<script type="module" src="modules/page-header.js"></script>
+<script type="module" src="modules/pin-builder.js"></script>
 <script src="assets/js/handlebars-v4.7.6.js"></script>
-<script type="module" src="./main.js"></script>
+<script type="module" src="views/pin-builder/pinBuilderPage.js"></script>
 
 <script type="text/x-handlebars-template" id="page-header-template">
     <div class="page-header">
         <img src="assets/img/logo.png" alt="pinterest" class="page-header__main-page-link">
-        <button class="page-header__home-button">Home</button>
-        <button class="page-header__today-pins-button">Today</button>
-        <button class="page-header__following-button">Following</button>
+        <button class="page-header__home-button header-button">Home</button>
+        <button class="page-header__today-pins-button header-button">Today</button>
+        <button class="page-header__following-button header-button">Following</button>
         <input class="page-header__search-bar" type="text" placeholder="Search">
         <img src="assets/img/bell.jpg" alt="pinterest" class="page-header__updates page-header__user-elem">
         <img src="assets/img/msg.jpg" alt="messages" class="page-header__messages page-header__user-elem">
@@ -40,7 +40,9 @@
                 </select>
                 <input type="submit" class="pin-builder__save-pin-button" value="Save">
             </div>
-            <input type="file" class="pin-builder__image-drop">
+            <div class="pin-builder__image-drop">
+                <input type="file" class="pin-builder__image-drop-zone">
+            </div>
             <textarea class="pin-builder__pin-title" placeholder="Add your title"></textarea>
             <div class="pin-builder__profile-row">
                 <img src="{{ user.avatarURL }}" class="pin-builder__profile-row__avatar">
