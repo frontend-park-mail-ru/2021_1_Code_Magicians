@@ -2,3 +2,9 @@
     --main-bg-color: rgb(35, 38, 39);
     --dark-bg-color: rgb(26, 28, 28);
 }
+
+body {
+    margin: 0;
+
+    background: var(--main-bg-color);
+}
