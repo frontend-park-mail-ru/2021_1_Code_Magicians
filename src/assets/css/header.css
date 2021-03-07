@@ -18,6 +18,10 @@
 .page-header > button {
     height: 46px;
 
+    padding: 20px 15px;
+    margin-left: 0;
+    margin-right: 0;
+
     border-radius: 40px;
     border: none;
     outline: none;
@@ -55,6 +59,7 @@
     font-weight: bold;
 
     background-color: var(--main-bg-color);
+    color: lightgray;
 }
 
 .page-header__user-elem {

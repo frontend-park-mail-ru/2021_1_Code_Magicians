@@ -1,4 +1,5 @@
 import {addPageHeader} from '../page-header/pageHeader.js';
+import {addColorSwitchCallback} from '../../modules/layoutUtils/hoverBckgChange.js';
 
 const maxBuildersPerPage = 10;
 const application = document.getElementById('app');
@@ -7,10 +8,27 @@ const application = document.getElementById('app');
  * Adding one pin-builder instance
  * @param {object} context Context for hbs
  */
-export function addPinBuilder(context) {
+function addPinBuilder(context) {
   const template = Handlebars.templates['pinBuilder.hbs'];
   const html = template(context);
-  document.querySelector('.pin-column').innerHTML += html;
+  const builder = document.createElement('div');
+  builder.innerHTML = html;
+
+  const switchMaker = addColorSwitchCallback(
+      '--main-bg-color',
+      '--dark-bg-color',
+      'backgroundColor');
+
+  switchMaker(builder.querySelector('.delete-duplicate-menu-button'));
+
+  builder.querySelectorAll('textarea').forEach((field) => {
+    addColorSwitchCallback(
+        'rgb(6, 98, 189)',
+        'rgb(60, 64, 65)',
+        'borderBottomColor',
+        'focus')(field);
+  });
+  document.querySelector('.pin-column').appendChild(builder);
 }
 
 
@@ -18,7 +36,7 @@ export function addPinBuilder(context) {
  * Adding button to increase pin-builders' number
  * @param {object} context context to new pin-builder
  */
-export function addPlusButton(context) {
+function addPlusButton(context) {
   const plus = document.createElement('button');
   plus.innerText = '+';
   plus.className = 'plus-button';
@@ -27,6 +45,7 @@ export function addPlusButton(context) {
       addPinBuilder(context);
     }
   });
+  addColorSwitchCallback('rgb(40, 42, 43)', '--dark-bg-color', 'backgroundColor')(plus);
 
   application.appendChild(plus);
 }

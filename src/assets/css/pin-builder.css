@@ -14,7 +14,7 @@
     width: 800px;
 
     margin: 50px;
-    padding: 20px 40px 15px;
+    padding: 35px 40px 15px;
 
     border-radius: 17px;
 
@@ -30,7 +30,7 @@
 
     outline: none;
     border: none;
-    border-bottom: 1px solid #3c4041;
+    border-bottom: 1px solid rgb(60, 64, 65);
 
     color: gray;
     background-color: transparent;
@@ -116,7 +116,7 @@
     width: 50px;
     height: 50px;
 
-    margin-left: 15px;
+    margin-left: 0;
     margin-right: 15px;
 
     border-radius: 50%;
@@ -166,6 +166,7 @@
 
     outline: none;
     border: none;
+    border-right: var(--main-bg-color) 5px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 
@@ -188,11 +189,11 @@ button {
 
 .plus-button {
     position: fixed;
-    top: 150px;
+    top: 130px;
     left: 40px;
 
-    width: 40px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
 
     border-radius: 10px;
     outline: none;
@@ -205,14 +206,26 @@ button {
     background-color: var(--dark-bg-color);
 }
 
-.delete-duplicate-menu {
-    height: auto;
+.delete-duplicate-menu-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 35px;
+    width: 35px;
 
     margin-right: auto;
     margin-left: 12px;
 
     outline: none;
     border: none;
+    border-radius: 50%;
+
+    letter-spacing: 1px;
+    font-size: 16px;
+
+    color: lightgray;
+    background-color: var(--dark-bg-color);
 
     cursor: pointer;
 }
