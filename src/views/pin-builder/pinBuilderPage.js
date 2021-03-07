@@ -1,8 +1,8 @@
 import {addPageHeader} from '../page-header/pageHeader.js';
-import {addColorSwitchCallback} from '../../modules/layoutUtils/hoverBckgChange.js';
+import {addColorSwitchCallback} from '../../modules/layoutUtils/colorChanger.js';
 
 const maxBuildersPerPage = 10;
-const application = document.getElementById('app');
+const app = document.getElementById('app');
 
 /**
  * Adding one pin-builder instance
@@ -47,7 +47,7 @@ function addPlusButton(context) {
   });
   addColorSwitchCallback('rgb(40, 42, 43)', '--dark-bg-color', 'backgroundColor')(plus);
 
-  application.appendChild(plus);
+  app.appendChild(plus);
 }
 
 
@@ -67,7 +67,7 @@ export function pinBuilderPage() {
     },
   };
 
-  application.innerHTML = '';
+  app.innerHTML = '';
 
   const main = document.createElement('div');
   main.className = 'main';
@@ -75,11 +75,9 @@ export function pinBuilderPage() {
   pinColumn.className = 'pin-column';
   main.appendChild(pinColumn);
 
-  application.appendChild(main);
+  app.appendChild(main);
 
   addPageHeader(context);
   addPinBuilder(context);
   addPlusButton(context);
 }
-
-pinBuilderPage();
