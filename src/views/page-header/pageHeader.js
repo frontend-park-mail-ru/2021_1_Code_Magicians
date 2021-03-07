@@ -1,4 +1,4 @@
-import {addColorSwitchCallback} from '../../modules/layoutUtils/hoverBckgChange.js';
+import {addColorSwitchCallback} from '../../modules/layoutUtils/colorChanger.js';
 
 /**
  * Adding header on the page

@@ -23,7 +23,7 @@ export function switchColorFunc(elem, color1, color2, colorProp = 'color') {
 }
 
 /**
- * Adding header on the page
+ * Adding callback to switch color on events like focus, hover and others
  * @param {string} color1
  * @param {string} color2
  * @param {string} colorProp
@@ -45,5 +45,3 @@ export function addColorSwitchCallback(color1, color2, colorProp = 'color', even
     elem.addEventListener(ev2, switchColorFunc(elem, color1, color2, colorProp));
   };
 }
-
-
