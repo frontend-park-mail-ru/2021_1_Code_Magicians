@@ -108,6 +108,12 @@ function createInput(type, text, name) {
 function menuPage() {
   application.innerHTML = '';
 
+  let authorized;
+  HttpModule.get({
+    url: '/auth/check',
+    callback: (status, response) => authorized = status === 200,
+  });
+
   Object
       .entries(config)
       .map(([menuKey, {text, href}]) => {
@@ -115,6 +121,13 @@ function menuPage() {
         menuItem.href = href;
         menuItem.textContent = text;
         menuItem.dataset.section = menuKey;
+
+        if (['pinBuilder', 'logout'].indexOf(menuKey) !== -1) {
+          if (!authorized) return null;
+        }
+        if (menuKey === 'signup') {
+          if (authorized) return null;
+        }
 
         return menuItem;
       })
@@ -130,7 +143,6 @@ function signupPage() {
   const usernameInput = createInput('username', 'Username', 'username');
   const emailInput = createInput('email', 'Емайл', 'email');
   const passwordInput = createInput('password', 'Пароль', 'password');
-  const ageInput = createInput('number', 'Возраст', 'age');
 
   const submitBtn = document.createElement('input');
   submitBtn.type = 'submit';
@@ -138,11 +150,9 @@ function signupPage() {
 
   const back = createBack();
 
-
   form.appendChild(usernameInput);
   form.appendChild(emailInput);
   form.appendChild(passwordInput);
-  form.appendChild(ageInput);
   form.appendChild(submitBtn);
   form.appendChild(back);
 
