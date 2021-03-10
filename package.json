@@ -1,16 +1,32 @@
 {
-  "name": "pinterest",
+  "name": "sample-2021-1",
   "version": "1.0.0",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "eslint": "^7.20.0",
-    "eslint-config-google": "^0.14.0",
-    "husky": "^5.1.1"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "postinstall": "husky install",
-    "lint": "npx eslint src/"
+    "start": "DEBUG=http node server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tmpl": "./node_modules/.bin/fest-build --dir=src",
+    "prestart": "npm run tmpl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/sample-2021-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/sample-2021-1/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/sample-2021-1#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "fest": "^0.12.1",
+    "morgan": "^1.9.1",
+    "uuid": "^3.3.2"
   }
 }
