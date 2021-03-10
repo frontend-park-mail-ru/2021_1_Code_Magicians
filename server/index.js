@@ -95,34 +95,8 @@ app.post('/login', function (req, res) {
   res.status(200).json({id});
 });
 
-app.get('/me', function (req, res) {
-  const id = req.cookies['podvorot'];
-  const email = ids[id];
-  if (!email || !users[email]) {
-    return res.status(401).end();
-  }
-
-  users[email].score += 1;
-
-  res.json(users[email]);
-});
-
-app.get('/users', function (req, res) {
-  const scorelist = Object.values(users)
-      .sort((l, r) => r.score - l.score)
-      .map(user => {
-        return {
-          email: user.email,
-          age: user.age,
-          score: user.score,
-        }
-      });
-
-  res.json(scorelist);
-});
-
 const port = process.env.PORT || 8081;
 
-app.listen(port, function () {
+app.listen(port, '0.0.0.0', function () {
   console.log(`Server listening port ${port}`);
 });

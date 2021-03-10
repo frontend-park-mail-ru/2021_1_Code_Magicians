@@ -23,21 +23,33 @@ const config = {
     text: 'Авторизоваться!',
     open: loginPage,
   },
-  profile: {
-    href: '/profile',
-    text: 'Профиль',
-    open: profilePage,
-  },
   pinBuilder: {
     href: '/pin-builder',
     text: 'Create pin',
     open: pinBuilderPage,
   },
-  leaders: {
-    href: '/leaders',
-    text: 'Рейтинг',
-    open: leaderboardPage,
+  logout: {
+    href: '/auth/logout',
+    text: 'Log out',
+    open: logOutPage,
   }
+}
+
+function logOutPage() {
+  const back = createBack();
+  HttpModule.post({
+    url: '/auth/logout',
+    callback: (status, response) => {
+      if (status === 200) {
+        menuPage();
+      } else {
+        const {error} = JSON.parse(response);
+        alert(error);
+      }
+    },
+  });
+
+  alert('logged out successfully');
 }
 
 function pinBuilderPage() {
@@ -84,47 +96,6 @@ function pinBuilderPage() {
   });
 
   application.appendChild(form);
-}
-
-function leaderboardPage (users) {
-  application.innerHTML = '';
-
-  const leaderboardSection = document.createElement('section');
-  leaderboardSection.dataset.sectionName = 'leaderboard';
-
-  const header = document.createElement('h1');
-  header.textContent = 'Рейтинг';
-
-  const back = createBack();
-
-  leaderboardSection.appendChild(header);
-  leaderboardSection.appendChild(document.createElement('br'));
-
-  if (users) {
-    const Board = new BoardComponent({
-      parent: leaderboardSection,
-      data: users,
-    });
-    Board.render({
-      type: RENDER_MAP.TMPL,
-    });
-  } else {
-    const em = document.createElement('em');
-    em.textContent = 'Loading';
-    leaderboardSection.appendChild(em);
-
-    HttpModule.get({
-      url: '/users',
-      callback: function (_, response) {
-        const users = JSON.parse(response);
-        leaderboardPage(users);
-      },
-    });
-  }
-
-  leaderboardSection.appendChild(document.createElement('br'));
-  leaderboardSection.appendChild(back);
-  application.appendChild(leaderboardSection);
 }
 
 function createInput(type, text, name) {
@@ -205,7 +176,7 @@ function loginPage() {
   application.innerHTML = '';
   const form = document.createElement('form');
 
-  const emailInput = createInput('email', 'Емайл', 'email');
+  const usernameInput = createInput('username', 'username', 'username');
   const passwordInput = createInput('password', 'Пароль', 'password');
 
   const submitBtn = document.createElement('input');
@@ -214,7 +185,7 @@ function loginPage() {
 
   const back = createBack();
 
-  form.appendChild(emailInput);
+  form.appendChild(usernameInput);
   form.appendChild(passwordInput);
   form.appendChild(submitBtn);
   form.appendChild(back);
@@ -223,12 +194,12 @@ function loginPage() {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    const email = emailInput.value.trim();
+    const username = usernameInput.value.trim();
     const password = passwordInput.value.trim();
 
     HttpModule.post({
       url: '/auth/login',
-      body: {email, password},
+      body: {username, password},
       callback: (status, response) => {
         if (status === 200) {
           profilePage();
@@ -243,50 +214,6 @@ function loginPage() {
   application.appendChild(form);
 }
 
-function profilePage() {
-  application.innerHTML = '';
-
-  HttpModule.asyncGetUsingFetch({
-    url: '/me'
-  })
-      .then(({status, parsedJson}) => {
-        const span = document.createElement('span');
-        span.innerHTML = `Мне ${parsedJson.age} и я крутой на ${parsedJson.score} очков`;
-
-
-        application.appendChild(span);
-
-        const back = createBack();
-
-        application.appendChild(back);
-
-
-        const {images} = parsedJson;
-
-        if (images && Array.isArray(images)) {
-          const div = document.createElement('div');
-          application.appendChild(div);
-
-          images.forEach((imageSrc) => {
-            div.innerHTML += `<img src="${imageSrc}" width="400" />`;
-          });
-        }
-
-        return;
-      })
-      .catch((err) => {
-        if (err instanceof Error) {
-          // handle JSON.parse error
-        }
-
-        const {status, responseText} = err;
-
-        alert(`АХТУНГ! НЕТ АВТОРИЗАЦИИ: ${JSON.stringify({status, responseText})}`);
-
-        loginPage();
-      });
-}
-
 menuPage();
 
 application.addEventListener('click', e => {
@@ -297,4 +224,3 @@ application.addEventListener('click', e => {
     config[target.dataset.section].open();
   }
 });
-
