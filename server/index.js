@@ -13,6 +13,8 @@ app.use(express.static(path.resolve(__dirname, '..', 'src')));
 app.use(body.json());
 app.use(cookie());
 
+app.all('/', (req, res) => res.sendFile(`${__dirname}/src/index.html`));
+
 const users = {
   'd.dorofeev@corp.mail.ru': {
     email: 'd.dorofeev@corp.mail.ru',
@@ -119,7 +121,7 @@ app.get('/users', function (req, res) {
   res.json(scorelist);
 });
 
-const port = process.env.PORT || 2000;
+const port = process.env.PORT || 8081;
 
 app.listen(port, function () {
   console.log(`Server listening port ${port}`);

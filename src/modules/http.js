@@ -8,22 +8,24 @@
             body = null,
             callback = noop,
         } = {}) {
+            url = 'http://52.59.228.167:8080' + url
             const xhr = new XMLHttpRequest();
             xhr.open(method, url, true);
             xhr.withCredentials = true;
-        
+            xhr.mode = 'cors';
+
             xhr.addEventListener('readystatechange', function() {
                 if (xhr.readyState !== XMLHttpRequest.DONE) return;
         
                 callback(xhr.status, xhr.responseText);
             });
-        
+
             if (body) {
                 xhr.setRequestHeader('Content-type', 'application/json; charset=utf8');
                 xhr.send(JSON.stringify(body));
                 return;
             }
-        
+
             xhr.send();
         }
 

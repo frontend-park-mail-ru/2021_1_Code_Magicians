@@ -28,15 +28,62 @@ const config = {
     text: 'Профиль',
     open: profilePage,
   },
-  about: {
-    href: '/about',
-    text: 'Контакты',
+  pinBuilder: {
+    href: '/pin-builder',
+    text: 'Create pin',
+    open: pinBuilderPage,
   },
   leaders: {
     href: '/leaders',
     text: 'Рейтинг',
     open: leaderboardPage,
   }
+}
+
+function pinBuilderPage() {
+  application.innerHTML = '<h1>Pin builder</h1>';
+
+  const form = document.createElement('form');
+
+  const titleInput = createInput('title', 'Title', 'title');
+  const descriptionInput = createInput('description', 'description', 'description');
+  const tagsInput = createInput('tags', 'Tags divided by " "', 'tags');
+
+  const submitBtn = document.createElement('input');
+  submitBtn.type = 'submit';
+  submitBtn.value = 'Create pin!';
+
+  const back = createBack();
+
+  form.appendChild(titleInput);
+  form.appendChild(descriptionInput);
+  form.appendChild(tagsInput);
+  form.appendChild(submitBtn);
+  form.appendChild(back);
+
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const title = titleInput.value.trim();
+    const description = descriptionInput.value.trim();
+    const tags = tagsInput.value.trim().split(' ');
+    const avatarImage = 'testtset';
+
+    HttpModule.post({
+      url: '/pin',
+      body: {title, description, tags, avatarImage},
+      callback: (status, response) => {
+        if (status === 201) {
+          profilePage();
+        } else {
+          const {error} = JSON.parse(response);
+          alert(error);
+        }
+      },
+    });
+  });
+
+  application.appendChild(form);
 }
 
 function leaderboardPage (users) {
