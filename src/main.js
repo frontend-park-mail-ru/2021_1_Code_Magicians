@@ -36,11 +36,11 @@ const config = {
 }
 
 function logOutPage() {
-  const back = createBack();
   HttpModule.post({
     url: '/auth/logout',
     callback: (status, response) => {
       if (status === 200) {
+        alert('logged out successfully');
         menuPage();
       } else {
         const {error} = JSON.parse(response);
@@ -48,8 +48,6 @@ function logOutPage() {
       }
     },
   });
-
-  alert('logged out successfully');
 }
 
 function pinBuilderPage() {
