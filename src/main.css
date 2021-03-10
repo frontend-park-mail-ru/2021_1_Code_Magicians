@@ -2,4 +2,6 @@
 
 a, input, img {
     display: block;
+    width: fit-content;
+    padding: 10px;
 }
