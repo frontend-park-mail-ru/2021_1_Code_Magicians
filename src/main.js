@@ -86,7 +86,7 @@ function pinBuilderPage() {
       body: {title, description, tags, avatarImage},
       callback: (status, response) => {
         if (status === 201) {
-          profilePage();
+          menuPage();
         } else {
           const {error} = JSON.parse(response);
           alert(error);
@@ -160,7 +160,7 @@ function signupPage() {
       body: {username, email, password},
       callback: (status, response) => {
         if (status === 201) {
-          profilePage();
+          menuPage();
         } else {
           const {error} = JSON.parse(response);
           alert(error);
@@ -202,7 +202,7 @@ function loginPage() {
       body: {username, password},
       callback: (status, response) => {
         if (status === 200) {
-          profilePage();
+          menuPage();
         } else {
           const {error} = JSON.parse(response);
           alert(error);
