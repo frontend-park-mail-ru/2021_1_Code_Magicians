@@ -50,8 +50,10 @@ function profilePage() {
         if (status === 200) {
           let username = document.createElement('div');
           username.className = 'username';
+
           let user = JSON.parse(response);
           username.innerHTML = user.username;
+
           application.appendChild(username);
         }
       }
@@ -81,10 +83,10 @@ function pinBuilderPage() {
 
   const form = document.createElement('form');
 
-  const titleInput = createInput('title', 'Title', 'title');
-  const descriptionInput = createInput('description', 'description', 'description');
-  const tagsInput = createInput('tags', 'Tags divided by " "', 'tags');
-  const boardNumberInput = createInput('boardNumber', 'board number', 'boardNumber');
+  const titleInput = createInput('text', 'Title', 'title');
+  const descriptionInput = createInput('text', 'description', 'description');
+  const tagsInput = createInput('text', 'Tags divided by " "', 'tags');
+  const boardNumberInput = createInput('text', 'board number', 'boardNumber');
 
   const submitBtn = document.createElement('input');
   submitBtn.type = 'submit';
@@ -163,15 +165,23 @@ function menuPage() {
     },
   });
 }
-
+function uint8ToString(buf) {
+  let i, length, out = '';
+  for (i = 0, length = buf.length; i < length; i += 1) {
+    out += String.fromCharCode(buf[i]);
+  }
+  return out;
+}
 function signupPage() {
   application.innerHTML = '<h1>Регистрация!</h1>';
 
   const form = document.createElement('form');
 
-  const usernameInput = createInput('username', 'Username', 'username');
-  const emailInput = createInput('email', 'Емайл', 'email');
+  const usernameInput = createInput('text', 'Username', 'username');
+  const emailInput = createInput('text', 'Емайл', 'email');
   const passwordInput = createInput('password', 'Пароль', 'password');
+  const avatarImageInput = createInput('file', 'avatar', 'avatarImage');
+
 
   const submitBtn = document.createElement('input');
   submitBtn.type = 'submit';
@@ -182,6 +192,7 @@ function signupPage() {
   form.appendChild(usernameInput);
   form.appendChild(emailInput);
   form.appendChild(passwordInput);
+  form.appendChild(avatarImageInput);
   form.appendChild(submitBtn);
   form.appendChild(back);
 
@@ -192,9 +203,24 @@ function signupPage() {
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
 
+    let avatar = '';
+
+    let file = evt.srcElement.files[0];
+    let reader = new FileReader();
+    reader.readAsBinaryString(file);
+
+    reader.onload = function() {
+      avatar = btoa(reader.result);
+    };
+    reader.onerror = function() {
+      console.log('there are some problems');
+    };
+
+
+
     HttpModule.post({
       url: '/auth/signup',
-      body: {username, email, password},
+      body: {username, email, password, avatar},
       callback: (status, response) => {
         if (status === 201) {
           menuPage();
@@ -213,8 +239,8 @@ function loginPage() {
   application.innerHTML = '';
   const form = document.createElement('form');
 
-  const usernameInput = createInput('username', 'username', 'username');
-  const passwordInput = createInput('password', 'Пароль', 'password');
+  const usernameInput = createInput('text', 'username', 'username');
+  const passwordInput = createInput('text', 'Пароль', 'password');
 
   const submitBtn = document.createElement('input');
   submitBtn.type = 'submit';
