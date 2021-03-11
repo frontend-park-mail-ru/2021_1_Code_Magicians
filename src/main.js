@@ -41,6 +41,7 @@ const config = {
 }
 
 function profilePage() {
+  application.innerHTML = '';
   const back = createBack();
 
   HttpModule.get({
