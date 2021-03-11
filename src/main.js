@@ -205,7 +205,7 @@ function signupPage() {
 
     let avatar = '';
 
-    let file = evt.srcElement.files[0];
+    let file = avatarImageInput.files[0];
     let reader = new FileReader();
     reader.readAsBinaryString(file);
 
