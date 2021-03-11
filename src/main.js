@@ -111,31 +111,31 @@ function createInput(type, text, name) {
 function menuPage() {
   application.innerHTML = '';
 
-  let authorized;
   HttpModule.get({
     url: '/auth/check',
-    callback: (status, response) => authorized = status === 200,
+    callback: (status, response) => {
+      let authorized = status === 200;
+      Object
+          .entries(config)
+          .map(([menuKey, {text, href}]) => {
+            const menuItem = document.createElement('a');
+            menuItem.href = href;
+            menuItem.textContent = text;
+            menuItem.dataset.section = menuKey;
+
+            if (['pinBuilder', 'logout'].indexOf(menuKey) !== -1) {
+              if (!authorized) return document.createElement('div');
+            }
+            if (menuKey === 'signup') {
+              if (authorized) return document.createElement('div');
+            }
+
+            return menuItem;
+          })
+          .forEach(element => application.appendChild(element))
+      ;
+    },
   });
-
-  Object
-      .entries(config)
-      .map(([menuKey, {text, href}]) => {
-        const menuItem = document.createElement('a');
-        menuItem.href = href;
-        menuItem.textContent = text;
-        menuItem.dataset.section = menuKey;
-
-        if (['pinBuilder', 'logout'].indexOf(menuKey) !== -1) {
-          if (!authorized) return null;
-        }
-        if (menuKey === 'signup') {
-          if (authorized) return null;
-        }
-
-        return menuItem;
-      })
-      .forEach(element => application.appendChild(element))
-  ;
 }
 
 function signupPage() {
