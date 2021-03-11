@@ -126,7 +126,7 @@ function menuPage() {
             if (['pinBuilder', 'logout'].indexOf(menuKey) !== -1) {
               if (!authorized) return document.createElement('div');
             }
-            if (menuKey === 'signup') {
+            if (['signup', 'login'].indexOf(menuKey) !== -1) {
               if (authorized) return document.createElement('div');
             }
 
