@@ -49,6 +49,7 @@ function profilePage() {
       callback: (status, response) => {
         if (status === '200') {
           let username = document.createElement('div');
+          username.className = 'username';
           let user = JSON.parse(response);
           username.innerHTML = user.username;
           application.appendChild(username);

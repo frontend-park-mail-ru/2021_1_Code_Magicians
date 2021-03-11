@@ -5,3 +5,7 @@ a, input, img {
     width: fit-content;
     margin: 20px;
 }
+
+.username {
+    margin: 15px;
+}
