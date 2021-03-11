@@ -55,6 +55,7 @@ function profilePage() {
 
           let user = JSON.parse(response);
           username.innerHTML = user.username;
+
           let image = new Image();
           image.src = user.avatar;
           application.appendChild(image);
@@ -196,12 +197,12 @@ function signupPage() {
     let avatar = '';
 
     let file = avatarImageInput.files[0];
-    console.log(file)
     let reader = new FileReader();
     reader.readAsBinaryString(file);
 
     reader.onload = function() {
       avatar = reader.result;
+
       HttpModule.post({
         url: '/auth/signup',
         body: {username, email, password, avatar},
