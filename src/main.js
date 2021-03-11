@@ -58,6 +58,7 @@ function pinBuilderPage() {
   const titleInput = createInput('title', 'Title', 'title');
   const descriptionInput = createInput('description', 'description', 'description');
   const tagsInput = createInput('tags', 'Tags divided by " "', 'tags');
+  const boardNumberInput = createInput('boardNumber', 'board number', 'boardNumber');
 
   const submitBtn = document.createElement('input');
   submitBtn.type = 'submit';
@@ -68,6 +69,7 @@ function pinBuilderPage() {
   form.appendChild(titleInput);
   form.appendChild(descriptionInput);
   form.appendChild(tagsInput);
+  form.appendChild(boardNumberInput);
   form.appendChild(submitBtn);
   form.appendChild(back);
 
@@ -77,11 +79,12 @@ function pinBuilderPage() {
     const title = titleInput.value.trim();
     const description = descriptionInput.value.trim();
     const tags = tagsInput.value.trim().split(' ');
-    const avatarImage = 'testtset';
+    const boardNumber = boardNumberInput.value.trim();
+    const pinImage = 'testtset';
 
     HttpModule.post({
       url: '/pin',
-      body: {title, description, tags, avatarImage},
+      body: {title, description, tags, pinImage, boardNumber},
       callback: (status, response) => {
         if (status === 201) {
           menuPage();
