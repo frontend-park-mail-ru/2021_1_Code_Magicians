@@ -47,7 +47,7 @@ function profilePage() {
   HttpModule.get({
       url: '/profile',
       callback: (status, response) => {
-        if (status === '200') {
+        if (status === 200) {
           let username = document.createElement('div');
           username.className = 'username';
           let user = JSON.parse(response);
