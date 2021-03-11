@@ -10,17 +10,17 @@ const application = document.getElementById('app');
 const config = {
   menu: {
     href: '/menu',
-    text: 'Меню!',
+    text: 'Menu',
     open: menuPage,
   },
   signup: {
     href: '/signup',
-    text: 'Зарегистрироваться!',
+    text: 'Sign up!',
     open: signupPage,
   },
   login: {
     href: '/login',
-    text: 'Авторизоваться!',
+    text: 'Log in!',
     open: loginPage,
   },
   pinBuilder: {
@@ -28,15 +28,15 @@ const config = {
     text: 'Create pin',
     open: pinBuilderPage,
   },
-  logout: {
-    href: '/auth/logout',
-    text: 'Log out',
-    open: logOutPage,
-  },
   profile: {
     href: '/profile',
     text: 'My profile',
     open: profilePage,
+  },
+  logout: {
+    href: '/auth/logout',
+    text: 'Log out',
+    open: logOutPage,
   },
 }
 
