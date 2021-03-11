@@ -202,26 +202,19 @@ function signupPage() {
 
     reader.onload = function() {
       avatar = reader.result;
-
+      HttpModule.post({
+        url: '/auth/signup',
+        body: {username, email, password, avatar},
+        callback: (status, response) => {
+          if (status === 201) {
+            menuPage();
+          } else {
+            const {error} = JSON.parse(response);
+            alert(error);
+          }
+        },
+      });
     };
-    reader.onerror = function() {
-      console.log('there are some problems');
-    };
-
-
-
-    HttpModule.post({
-      url: '/auth/signup',
-      body: {username, email, password, avatar},
-      callback: (status, response) => {
-        if (status === 201) {
-          menuPage();
-        } else {
-          const {error} = JSON.parse(response);
-          alert(error);
-        }
-      },
-    });
   });
 
   application.appendChild(form);
