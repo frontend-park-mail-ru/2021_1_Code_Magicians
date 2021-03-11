@@ -32,7 +32,31 @@ const config = {
     href: '/auth/logout',
     text: 'Log out',
     open: logOutPage,
-  }
+  },
+  profile: {
+    href: '/profile',
+    text: 'My profile',
+    open: profilePage,
+  },
+}
+
+function profilePage() {
+  const back = createBack();
+
+  HttpModule.get({
+      url: '/profile',
+      callback: (status, response) => {
+        if (status === '200') {
+          let username = document.createElement('div');
+          let user = JSON.parse(response);
+          username.innerHTML = user.username;
+          application.appendChild(username);
+        }
+      }
+    }
+  );
+
+  application.appendChild(back);
 }
 
 function logOutPage() {
@@ -123,7 +147,7 @@ function menuPage() {
             menuItem.textContent = text;
             menuItem.dataset.section = menuKey;
 
-            if (['pinBuilder', 'logout'].indexOf(menuKey) !== -1) {
+            if (['pinBuilder', 'logout', 'profile'].indexOf(menuKey) !== -1) {
               if (!authorized) return document.createElement('div');
             }
             if (['signup', 'login'].indexOf(menuKey) !== -1) {
