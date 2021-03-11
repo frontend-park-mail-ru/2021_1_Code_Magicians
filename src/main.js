@@ -50,9 +50,14 @@ function profilePage() {
         if (status === 200) {
           let username = document.createElement('div');
           username.className = 'username';
+          let avatarImage = document.createElement('img');
+          avatarImage.className = 'avatar';
 
           let user = JSON.parse(response);
           username.innerHTML = user.username;
+          let image = new Image();
+          image.src = user.avatar;
+          application.appendChild(image);
 
           application.appendChild(username);
         }
@@ -165,13 +170,7 @@ function menuPage() {
     },
   });
 }
-function uint8ToString(buf) {
-  let i, length, out = '';
-  for (i = 0, length = buf.length; i < length; i += 1) {
-    out += String.fromCharCode(buf[i]);
-  }
-  return out;
-}
+
 function signupPage() {
   application.innerHTML = '<h1>Регистрация!</h1>';
 
