@@ -132,15 +132,6 @@ function pinBuilderPage() {
   application.appendChild(form);
 }
 
-function createInput(type, text, name) {
-  const input = document.createElement('input');
-  input.type = type;
-  input.name = name;
-  input.placeholder = text;
-
-  return input;
-}
-
 function menuPage() {
   application.innerHTML = '';
 
@@ -205,11 +196,13 @@ function signupPage() {
     let avatar = '';
 
     let file = avatarImageInput.files[0];
+    console.log(file)
     let reader = new FileReader();
     reader.readAsBinaryString(file);
 
     reader.onload = function() {
-      avatar = btoa(reader.result);
+      avatar = reader.result;
+
     };
     reader.onerror = function() {
       console.log('there are some problems');
@@ -286,3 +279,12 @@ application.addEventListener('click', e => {
     config[target.dataset.section].open();
   }
 });
+
+function createInput(type, text, name) {
+  const input = document.createElement('input');
+  input.type = type;
+  input.name = name;
+  input.placeholder = text;
+
+  return input;
+}
