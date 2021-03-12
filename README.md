@@ -48,3 +48,9 @@ $ git submodule update
 ## Backend repo
 
 [Backend](https://github.com/go-park-mail-ru/2021_1_Code_Magicians)
+
+## Grading spreadsheets
+
+[go development](https://docs.google.com/spreadsheets/d/1VvhxrB1AG97RUBaVNrUfAb07qsEUNa6M-MPab-dGvkk/edit)
+
+[frontend](https://docs.google.com/spreadsheets/d/1TxWbWSkQO8nZeldlmWxswU-iB6sRwnikLSQXGdaUDg4/edit#gid=1799090103)
