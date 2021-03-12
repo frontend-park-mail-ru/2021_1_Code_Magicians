@@ -22,6 +22,14 @@
 
 [swagger.io](https://app.swaggerhub.com/apis/code-mexicans/pinterestAPI) (legacy)
 
+&nbsp;&nbsp;&nbsp;&nbsp; Also API was added by git submodule in both front and back repositories. After cloning
+any of them you should run:
+
+```
+$ git submodule init
+$ git submodule update
+```
+
 ## Team 
 - Frontend
     - [Никита Ермилов](https://github.com/GrateJastes)
