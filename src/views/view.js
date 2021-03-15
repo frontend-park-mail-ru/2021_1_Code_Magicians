@@ -1,13 +1,13 @@
 import {Component} from '../components/component.js';
 
 /**
- * Base view class
+ * Base view class (abstract)
  */
 export class View extends Component {
   /**
    * Constructs new view
-   * @param {Object} props
-   * @param {HTMLElement} parent
+   * @param {Object} props Properties, for utility usage and for inner components' templates
+   * @param {HTMLElement} parent Parent HTMLElement, in which view's html will insert
    */
   constructor(props, parent) {
     super(props);
