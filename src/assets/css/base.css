@@ -1,0 +1,11 @@
+* {
+    --main-bg-color: rgb(35, 38, 39);
+    --dark-bg-color: rgb(26, 28, 28);
+    --auth-text-color: rgb(213, 207, 197);
+}
+
+body {
+    margin: 0;
+
+    background: var(--main-bg-color);
+}

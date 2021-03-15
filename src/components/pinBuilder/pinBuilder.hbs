@@ -1,0 +1,26 @@
+<form method="POST" class="pin-builder__form">
+    <div id="pin-builder">
+        <div class="pin-builder__commitment-row">
+            <button class="delete-duplicate-menu-button">&bull;&bull;&bull;</button>
+            <select class="pin-builder__board-selector">
+                <option value="" disabled selected hidden>Select</option>
+                {{#each user.boards}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+            <input type="submit" class="pin-builder__save-pin-button" value="Save">
+        </div>
+        <div class="pin-builder__image-drop">
+            <input type="file" class="pin-builder__image-drop-zone">
+        </div>
+        <textarea class="pin-builder__pin-title" placeholder="Add your title"></textarea>
+        <div class="pin-builder__profile-row">
+            <img src="{{ user.avatarURL }}" class="pin-builder__profile-row__avatar">
+            <span class="pin-builder__profile-row__name">{{ user.name }}</span>
+        </div>
+        <textarea class="pin-builder__pin-description"
+                  placeholder="Tell everyone what your Pin is about"></textarea>
+        <textarea class="pin-builder__destination-link"
+                  placeholder="Add a destination link"></textarea>
+    </div>
+</form>

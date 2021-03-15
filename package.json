@@ -5,11 +5,15 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "eslint": "^7.20.0",
     "eslint-config-google": "^0.14.0",
+    "handlebars": "^4.7.7",
     "husky": "^5.1.1"
   },
   "scripts": {
+    "start": "node server/index.js",
+    "prestart": "npx handlebars src/*/*/*.hbs -f src/assets/js/handlebars.precompiled.js",
     "postinstall": "husky install",
     "lint": "npx eslint src/"
   }
