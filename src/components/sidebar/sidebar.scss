@@ -8,19 +8,38 @@
   align-items: center;
   justify-content: center;
 
-  width: 100px;
   height: 100%;
 
+  border-right: 5px solid var(--almost-white);
+
   background-color: var(--white);
+
+  z-index: 1;
 }
 
 .sidebar {
   &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     justify-self: flex-start;
 
-    margin: 20px auto auto;
+    width: 45px;
+    height: 45px;
+
+    margin: 10px auto auto;
 
     cursor: pointer;
+
+    &__image {
+      width: 40px;
+      height: 40px;
+    }
+
+    &__image:hover {
+      zoom: 105%;
+    }
   }
 
   &__view-selector {
@@ -30,8 +49,8 @@
     align-items: center;
 
     margin: auto 0;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 
     background-color: var(--red);
   }
@@ -53,7 +72,7 @@
     display: flex;
     align-items: center;
 
-    width: 100px;
+    width: 60px;
     height: 45px;
 
     cursor: pointer;
@@ -77,14 +96,13 @@
     }
 
     &__icon:hover {  // later will affect on any hover on __option.
-      height: 26px;
-      width: 33px;
+      zoom: 120%;
     }
   }
 }
 
 .view-selector__option__mark {
-  opacity: 0;  // will display on option hover and while target view is active
+  //opacity: 0;  // will display on option hover and while target view is active
   justify-self: flex-start;
 
   &__image {
@@ -108,13 +126,14 @@
 
   cursor: pointer;
 
+  background-color: transparent;
+
   &__icon {
     width: 25px;
     height: 25px;
   }
 
   &__icon:hover {
-    width: 30px;
-    height: 30px;
+    zoom: 120%;
   }
 }
