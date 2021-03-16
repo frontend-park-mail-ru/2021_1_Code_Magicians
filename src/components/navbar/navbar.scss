@@ -1,0 +1,141 @@
+.page__navbar {
+  position: fixed;
+  top: 0;
+  left: 60px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  width: 100%;
+  height: 60px;
+
+  padding: 5px 0;
+
+  border-bottom: 2px solid var(--almost-white);
+
+  background-color: var(--white);
+}
+
+.navbar {
+  &__search-icon {
+    margin-right: -30px;
+
+    z-index: 1;
+  }
+
+  &__search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-grow: 1;
+    justify-self: flex-start;
+
+    margin-left: 100px;
+    margin-right: 140px;
+
+    border-radius: 10px;
+  }
+
+  &__search-input {
+    flex-grow: 1;
+
+    height: 40px;
+
+    padding-left: 40px;
+
+    border-radius: 20px;
+    border: none;
+    outline: none;
+
+    font-size: 16px;
+  }
+
+  &__search-input:focus {
+    background-color: var(--almost-white);
+  }
+  &__search-input:hover {
+    background-color: var(--almost-white);
+  }
+
+  &__search-wiper {
+    margin-left: -30px;
+    cursor: pointer;
+  }
+
+  &__search-wiper:hover {
+    zoom: 105%;
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 40px;
+    margin-right: 130px;
+  }
+
+  &__user-avatar {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+  }
+
+  &__username {
+    margin-left: 20px;
+
+    font-size: 15px;
+
+    color: var(--gray);
+
+    cursor: pointer;
+  }
+
+  &__user-change-button {
+    border: none;
+    outline: none;
+
+    background-color: transparent;
+
+    cursor: pointer;
+  }
+}
+
+.navbar__action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 30px;
+  width: 30px;
+
+  margin-right: 2px;
+  margin-left: 2px;
+
+  border: none;
+  outline: none;
+
+  background-color: transparent;
+
+  cursor: pointer;
+
+  &__icon:hover {
+    zoom: 110%;
+  }
+}
