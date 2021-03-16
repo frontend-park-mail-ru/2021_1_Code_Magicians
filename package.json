@@ -7,10 +7,16 @@
   "devDependencies": {
     "eslint": "^7.20.0",
     "eslint-config-google": "^0.14.0",
-    "husky": "^5.1.1"
+    "handlebars": "^4.7.7",
+    "husky": "^5.1.1",
+    "sass": "^1.32.8"
   },
   "scripts": {
+    "start": "node server/index.js",
+    "prestart": "npm run compile_hbs && npm run compile_scss",
     "postinstall": "husky install",
-    "lint": "npx eslint src/"
+    "lint": "npx eslint src/",
+    "compile_hbs": "npx handlebars src/**/*.hbs -f src/assets/js/handlebars.precompiled.js",
+    "compile_scss": "npx sass src/**/*.cscc src/assets/css/scss.precompiled.css"
   }
 }

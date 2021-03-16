@@ -14,14 +14,14 @@ printf "Validating JS:\n\n"
 for FILE in $STAGED_JS_FILES
 do
   if npx -s eslint "$FILE"; then
-    printf "\t\033[32mESLint Passed: %s\033[0m" "$FILE"
+    printf "\t\033[32mESLint Passed: %s\033[0m\n" "$FILE"
   else
-    printf "\t\033[41mESLint Failed: %s\033[0m" "$FILE"
+    printf "\t\033[41mESLint Failed: %s\033[0m\n" "$FILE"
     PASS=false
   fi
 done
 
-printf "\n\nJS validation done.\n\n"
+printf "\nJS validation done.\n\n"
 
 if ! $PASS; then
   printf "\033[41mCOMMIT FAILED:\033[0m Your commit contains files that should pass ESLint but do not. Please fix the ESLint errors and try again.\n"
