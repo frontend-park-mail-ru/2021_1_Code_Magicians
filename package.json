@@ -13,10 +13,9 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "prestart": "npm run compile_hbs && npm run compile_scss",
+    "prestart": "npm run compile_hbs",
     "postinstall": "husky install",
     "lint": "npx eslint src/",
-    "compile_hbs": "npx handlebars src/**/*.hbs -f src/assets/js/handlebars.precompiled.js",
-    "compile_scss": "npx sass src/**/*.cscc src/assets/css/scss.precompiled.css"
+    "compile_hbs": "npx handlebars src/**/*.hbs -f src/assets/js/handlebars.precompiled.js"
   }
 }
