@@ -60,7 +60,6 @@
 }
 
 .view-selector__option__mark {
-  opacity: 0;
   justify-self: flex-start;
 }
 .view-selector__option__mark__image {
@@ -77,6 +76,7 @@
   margin: 7px 0;
   border: none;
   outline: none;
+  background-color: transparent;
   cursor: pointer;
 }
 .slider-button__icon {
