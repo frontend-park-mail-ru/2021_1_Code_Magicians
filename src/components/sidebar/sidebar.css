@@ -1,0 +1,91 @@
+.page__sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100%;
+  background-color: var(--white);
+}
+
+.sidebar__logo {
+  justify-self: flex-start;
+  margin: 20px auto auto;
+  cursor: pointer;
+}
+.sidebar__view-selector {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: var(--red);
+}
+.sidebar__slider-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-self: flex-end;
+  margin: auto auto 20px;
+}
+
+.view-selector__option {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  height: 45px;
+  cursor: pointer;
+}
+.view-selector__option__button {
+  justify-self: center;
+  margin: auto;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.view-selector__option__icon {
+  height: 23px;
+  width: 30px;
+}
+.view-selector__option__icon:hover {
+  height: 26px;
+  width: 33px;
+}
+
+.view-selector__option__mark {
+  opacity: 0;
+  justify-self: flex-start;
+}
+.view-selector__option__mark__image {
+  width: 5px;
+  height: 45px;
+}
+
+.slider-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 7px 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.slider-button__icon {
+  width: 25px;
+  height: 25px;
+}
+.slider-button__icon:hover {
+  width: 30px;
+  height: 30px;
+}
+
+/*# sourceMappingURL=sidebar.css.map */
