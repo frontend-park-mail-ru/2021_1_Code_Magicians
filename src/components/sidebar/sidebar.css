@@ -50,24 +50,30 @@
 
 .view-selector__option {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  width: 60px;
-  height: 45px;
-  cursor: pointer;
-}
-.view-selector__option__button {
   justify-self: center;
   margin: auto;
+}
+.view-selector__option_selected::before {
+  content: url("../../assets/img/svg/page__sidebar/Selector.svg");
+}
+.view-selector__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 45px;
   border: none;
   outline: none;
   background-color: transparent;
   cursor: pointer;
 }
-.view-selector__option__icon {
+.view-selector__icon {
   height: 23px;
   width: 30px;
 }
-.view-selector__option__icon:hover {
+.view-selector__icon:hover {
   zoom: 120%;
 }
 
