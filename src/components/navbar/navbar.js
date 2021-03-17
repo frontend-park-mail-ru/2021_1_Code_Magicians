@@ -18,8 +18,6 @@ export class Navbar extends Component {
    */
   render() {
     const tmpl = Handlebars.templates['navbar.hbs'];
-    return tmpl({
-      user: this.props.user,
-    });
+    return tmpl(this.props);
   }
 }

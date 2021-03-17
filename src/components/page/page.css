@@ -1,3 +1,10 @@
-
+.page__content {
+  position: fixed;
+  top: 72px;
+  left: 68px;
+  width: 96%;
+  height: 92%;
+  border: 2px solid var(--red);
+}
 
 /*# sourceMappingURL=page.css.map */
