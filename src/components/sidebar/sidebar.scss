@@ -70,34 +70,40 @@
 .view-selector {
   &__option {
     display: flex;
+    flex-direction: row;
     align-items: center;
+
+    justify-self: center;
+
+    margin: auto;
+
+    &_selected::before {
+      content: url("../../assets/img/svg/page__sidebar/Selector.svg");
+    }
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     width: 60px;
     height: 45px;
 
+    border: none;
+    outline: none;
+
+    background-color: transparent;
+
     cursor: pointer;
+  }
 
-    &__button {
-      justify-self: center;
-
-      margin: auto;
-
-      border: none;
-      outline: none;
-
-      background-color: transparent;
-
-      cursor: pointer;
-    }
-
-    &__icon {
-      height: 23px;
-      width: 30px;
-    }
-
-    &__icon:hover {  // later will affect on any hover on __option.
-      zoom: 120%;
-    }
+  &__icon {
+    height: 23px;
+    width: 30px;
+  }
+  &__icon:hover {  // later will affect on any hover on __option.
+    zoom: 120%;
   }
 }
 
