@@ -53,12 +53,16 @@
     font-size: 16px;
   }
 
-  &__search-input:focus {
-    background-color: var(--almost-white);
-  }
   &__search-input:hover {
     background-color: var(--almost-white);
   }
+  &__search-input:focus {
+    background-color: var(--almost-white);
+  }
+  &__search-input:focus::placeholder {
+    color: transparent;
+  }
+
 
   &__search-wiper {
     margin-left: -30px;
@@ -66,7 +70,7 @@
   }
 
   &__search-wiper:hover {
-    zoom: 105%;
+    transform: scale(1.05);
   }
 
   &__user {
@@ -136,6 +140,6 @@
   cursor: pointer;
 
   &__icon:hover {
-    zoom: 110%;
+    transform: scale(1.1);
   }
 }

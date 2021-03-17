@@ -36,18 +36,21 @@
   outline: none;
   font-size: 16px;
 }
+.navbar__search-input:hover {
+  background-color: var(--almost-white);
+}
 .navbar__search-input:focus {
   background-color: var(--almost-white);
 }
-.navbar__search-input:hover {
-  background-color: var(--almost-white);
+.navbar__search-input:focus::placeholder {
+  color: transparent;
 }
 .navbar__search-wiper {
   margin-left: -30px;
   cursor: pointer;
 }
 .navbar__search-wiper:hover {
-  zoom: 105%;
+  transform: scale(1.05);
 }
 .navbar__user {
   display: flex;
@@ -97,7 +100,7 @@
   cursor: pointer;
 }
 .navbar__action__icon:hover {
-  zoom: 110%;
+  transform: scale(1.1);
 }
 
 /*# sourceMappingURL=navbar.css.map */

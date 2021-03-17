@@ -27,7 +27,7 @@
   height: 40px;
 }
 .sidebar__logo__image:hover {
-  zoom: 105%;
+  transform: scale(1.05);
 }
 .sidebar__view-selector {
   display: flex;
@@ -74,7 +74,7 @@
   width: 30px;
 }
 .view-selector__icon:hover {
-  zoom: 120%;
+  transform: scale(1.15);
 }
 
 .view-selector__option__mark {
@@ -102,7 +102,7 @@
   height: 25px;
 }
 .slider-button__icon:hover {
-  zoom: 120%;
+  transform: scale(1.15);
 }
 
 /*# sourceMappingURL=sidebar.css.map */
