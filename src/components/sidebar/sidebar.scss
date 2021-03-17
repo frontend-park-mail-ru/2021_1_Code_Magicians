@@ -38,7 +38,7 @@
     }
 
     &__image:hover {
-      zoom: 105%;
+      transform: scale(1.05);
     }
   }
 
@@ -103,7 +103,7 @@
     width: 30px;
   }
   &__icon:hover {  // later will affect on any hover on __option.
-    zoom: 120%;
+    transform: scale(1.15);
   }
 }
 
@@ -140,6 +140,6 @@
   }
 
   &__icon:hover {
-    zoom: 120%;
+    transform: scale(1.15);
   }
 }
