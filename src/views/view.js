@@ -11,34 +11,34 @@ export class View extends Component {
    */
   constructor(props, parent) {
     super(props);
-    this.parent = parent;
+    this._parent = parent;
   }
 
   /**
    * Shows view on the screen
    */
   show() {
-    this.parent.insertAdjacentHTML('afterbegin', this.render());
-    this.didMount();
+    this._parent.insertAdjacentHTML('afterbegin', this.render());
+    this._didMount();
   }
 
   /**
    * Removes view from the screen
    */
   remove() {
-    this.willUnmount();
-    this.parent.innerHTML = '';
+    this._willUnmount();
+    this._parent.innerHTML = '';
   }
 
   /**
    * Called right after showing view
    */
-  didMount() {
+  _didMount() {
   }
 
   /**
    * Called before removing view
    */
-  willUnmount() {
+  _willUnmount() {
   }
 }
