@@ -1,10 +1,13 @@
-.page__content {
-  position: fixed;
-  top: 72px;
-  left: 68px;
+.page {
+  height: 100%;
+  width: 100%;
 
-  width: 96%;
-  height: 92%;
+  &__content {
+    display: flex;
+    flex-direction: column;
 
-  border: 2px solid var(--red);
+    height: 100%;
+
+    margin-left: 75px;
+  }
 }
