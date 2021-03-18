@@ -1,8 +1,4 @@
 .page__navbar {
-  position: fixed;
-  top: 0;
-  left: 60px;
-
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -19,12 +15,6 @@
 }
 
 .navbar {
-  &__search-icon {
-    margin-right: -30px;
-
-    z-index: 1;
-  }
-
   &__search-form {
     display: flex;
     justify-content: center;
@@ -33,10 +23,15 @@
     flex-grow: 1;
     justify-self: flex-start;
 
-    margin-left: 100px;
-    margin-right: 140px;
+    margin-left: 70px;
+    margin-right: 100px;
 
-    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    border-radius: 20px;
+
+    background-color: var(--white);
   }
 
   &__search-input {
@@ -44,29 +39,34 @@
 
     height: 40px;
 
-    padding-left: 40px;
+    padding-left: 7px;
 
-    border-radius: 20px;
     border: none;
     outline: none;
 
     font-size: 16px;
 
-    background-color: var(--white);
+    background-color: inherit;
   }
 
-  &__search-input:hover {
+  &__search-form:hover {
     background-color: var(--almost-white);
   }
+
   &__search-input:focus {
     background-color: var(--almost-white);
   }
+
+  &__search-input:focus &__search-form {
+    background-color: var(--almost-white);
+  }
+
   &__search-input:focus::placeholder {
     color: transparent;
   }
 
   &__search-wiper {
-    margin-left: -30px;
+    transition: 0.1s;
     cursor: pointer;
   }
 
@@ -74,7 +74,7 @@
     transform: scale(1.05);
   }
 
-  &__user {
+  &__user-section {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -82,19 +82,9 @@
 
     margin-left: auto;
 
-    padding-left: 30px;
+    padding-left: 40px;
 
     border-left: 2px dotted var(--almost-white);
-  }
-
-  &__actions {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: 40px;
-    margin-right: 130px;
   }
 
   &__user-avatar {
@@ -125,6 +115,37 @@
     cursor: pointer;
   }
 
+  &__auth-link {
+    margin: 0 10px;
+    padding: 10px;
+
+    border: 1px solid var(--red);
+    border-radius: 5px;
+
+    text-decoration: none;
+
+    color: var(--gray);
+    background-color: var(--white);
+
+    cursor: pointer;
+
+    transition: 0.1s;
+  }
+
+  &__auth-link:hover {
+    background-color: var(--almost-white);
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 40px;
+    margin-right: 80px;
+  }
+
   &__action {
     display: flex;
     justify-content: center;
@@ -144,7 +165,11 @@
     cursor: pointer;
   }
 
-  &__action-icon:hover {
+  &__action-icon {
+    transition: 0.2s;
+  }
+
+  &__action:hover &__action-icon {
     transform: scale(1.1);
   }
 }

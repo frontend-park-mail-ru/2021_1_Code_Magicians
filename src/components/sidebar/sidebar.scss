@@ -9,37 +9,38 @@
   justify-content: center;
 
   height: 100%;
+  width: 70px;
 
   border-right: 5px solid var(--almost-white);
 
   background-color: var(--white);
-
-  z-index: 1;
 }
 
 .sidebar {
-  &__logo {
+  &__logo-link {
     display: flex;
     justify-content: center;
     align-items: center;
 
     justify-self: flex-start;
 
-    width: 45px;
-    height: 45px;
+    width: 100%;
+    height: 55px;
 
     margin: 10px auto auto;
 
     cursor: pointer;
+  }
 
-    &__image {
-      width: 40px;
-      height: 40px;
-    }
+  &__logo-image {
+    width: 50px;
+    height: 50px;
 
-    &__image:hover {
-      transform: scale(1.05);
-    }
+    transition: 0.4s;
+  }
+
+  &__logo-image:hover {
+    transform: scale(1.05);
   }
 
   &__view-selector {
@@ -47,6 +48,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    width: 100%;
 
     margin: auto 0;
     padding-top: 30px;
@@ -69,51 +72,48 @@
 
 .view-selector {
   &__option {
+    position: relative;
+
     display: flex;
     flex-direction: row;
     align-items: center;
 
     justify-self: center;
 
-    margin: auto;
+    width: 100%;
+
+    margin: 0;
 
     &_selected::before {
-      content: url("../../assets/img/svg/page__sidebar/Selector.svg");
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 100%;
+      background-color: white;  // not var(--white). It shouldn't change with theme
     }
   }
 
-  &__button {
+  &__link {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 60px;
+    width: 100%;
     height: 45px;
-
-    border: none;
-    outline: none;
 
     background-color: transparent;
 
     cursor: pointer;
   }
 
+  &__link:hover &__icon {
+    transform: scale(1.1);
+  }
+
   &__icon {
+    transition: 0.2s;
     height: 23px;
     width: 30px;
-  }
-  &__icon:hover {  // later will affect on any hover on __option.
-    transform: scale(1.15);
-  }
-}
-
-.view-selector__option__mark {
-  //opacity: 0;  // will display on option hover and while target view is active
-  justify-self: flex-start;
-
-  &__image {
-    width: 5px;
-    height: 45px;
   }
 }
 
@@ -137,9 +137,11 @@
   &__icon {
     width: 25px;
     height: 25px;
-  }
 
-  &__icon:hover {
-    transform: scale(1.15);
+    transition: 0.2s;
   }
+}
+
+.slider-button:hover .slider-button__icon {
+  transform: scale(1.12);
 }

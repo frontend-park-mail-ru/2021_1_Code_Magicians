@@ -1,7 +1,4 @@
 .page__navbar {
-  position: fixed;
-  top: 0;
-  left: 60px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -13,62 +10,55 @@
   background-color: var(--white);
 }
 
-.navbar__search-icon {
-  margin-right: -30px;
-  z-index: 1;
-}
 .navbar__search-form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
   justify-self: flex-start;
-  margin-left: 100px;
-  margin-right: 140px;
-  border-radius: 10px;
+  margin-left: 70px;
+  margin-right: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 20px;
+  background-color: var(--white);
 }
 .navbar__search-input {
   flex-grow: 1;
   height: 40px;
-  padding-left: 40px;
-  border-radius: 20px;
+  padding-left: 7px;
   border: none;
   outline: none;
   font-size: 16px;
-  background-color: var(--white);
+  background-color: inherit;
 }
-.navbar__search-input:hover {
+.navbar__search-form:hover {
   background-color: var(--almost-white);
 }
 .navbar__search-input:focus {
+  background-color: var(--almost-white);
+}
+.navbar__search-input:focus .navbar__search-form {
   background-color: var(--almost-white);
 }
 .navbar__search-input:focus::placeholder {
   color: transparent;
 }
 .navbar__search-wiper {
-  margin-left: -30px;
+  transition: 0.1s;
   cursor: pointer;
 }
 .navbar__search-wiper:hover {
   transform: scale(1.05);
 }
-.navbar__user {
+.navbar__user-section {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-left: auto;
-  padding-left: 30px;
+  padding-left: 40px;
   border-left: 2px dotted var(--almost-white);
-}
-.navbar__actions {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-left: 40px;
-  margin-right: 130px;
 }
 .navbar__user-avatar {
   width: 30px;
@@ -88,6 +78,28 @@
   background-color: transparent;
   cursor: pointer;
 }
+.navbar__auth-link {
+  margin: 0 10px;
+  padding: 10px;
+  border: 1px solid var(--red);
+  border-radius: 5px;
+  text-decoration: none;
+  color: var(--gray);
+  background-color: var(--white);
+  cursor: pointer;
+  transition: 0.1s;
+}
+.navbar__auth-link:hover {
+  background-color: var(--almost-white);
+}
+.navbar__actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40px;
+  margin-right: 80px;
+}
 .navbar__action {
   display: flex;
   justify-content: center;
@@ -101,7 +113,10 @@
   background-color: transparent;
   cursor: pointer;
 }
-.navbar__action-icon:hover {
+.navbar__action-icon {
+  transition: 0.2s;
+}
+.navbar__action:hover .navbar__action-icon {
   transform: scale(1.1);
 }
 
