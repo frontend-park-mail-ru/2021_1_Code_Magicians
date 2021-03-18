@@ -42,7 +42,7 @@ class StateManager {
    * Publish state change
    * @param {String} stateName
    */
-  publishStateChange(stateName) {
+  _publishStateChange(stateName) {
     if (this.listeners[stateName]) {
       this.listeners[stateName].forEach((listener) => listener());
     }
@@ -55,7 +55,16 @@ class StateManager {
    */
   setState(stateName, state) {
     this._storage[stateName] = {...this._storage[stateName], ...state};
-    this.publishStateChange(stateName);
+    this._publishStateChange(stateName);
+  }
+
+  /**
+   * Returns asked state
+   * @param {String} stateName
+   * @return {Object}
+   */
+  getState(stateName) {
+    return this._storage[stateName];
   }
 }
 
