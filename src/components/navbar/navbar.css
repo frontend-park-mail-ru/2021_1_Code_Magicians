@@ -21,7 +21,6 @@
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 20px;
-  background-color: var(--white);
 }
 .navbar__search-input {
   flex-grow: 1;
@@ -30,15 +29,13 @@
   border: none;
   outline: none;
   font-size: 16px;
+  color: var(--gray);
   background-color: inherit;
 }
 .navbar__search-form:hover {
   background-color: var(--almost-white);
 }
-.navbar__search-input:focus {
-  background-color: var(--almost-white);
-}
-.navbar__search-input:focus .navbar__search-form {
+.navbar__search-form:focus-within {
   background-color: var(--almost-white);
 }
 .navbar__search-input:focus::placeholder {

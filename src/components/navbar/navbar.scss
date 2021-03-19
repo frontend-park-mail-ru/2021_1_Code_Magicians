@@ -30,8 +30,6 @@
     padding-right: 15px;
 
     border-radius: 20px;
-
-    background-color: var(--white);
   }
 
   &__search-input {
@@ -46,6 +44,7 @@
 
     font-size: 16px;
 
+    color: var(--gray);
     background-color: inherit;
   }
 
@@ -53,11 +52,7 @@
     background-color: var(--almost-white);
   }
 
-  &__search-input:focus {
-    background-color: var(--almost-white);
-  }
-
-  &__search-input:focus &__search-form {
+  &__search-form:focus-within {
     background-color: var(--almost-white);
   }
 
