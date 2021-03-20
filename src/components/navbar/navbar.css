@@ -21,6 +21,7 @@
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 20px;
+  transition: 0.3s;
 }
 .navbar__search-form:hover {
   background-color: var(--almost-white);
@@ -35,7 +36,7 @@
   border: none;
   outline: none;
   font-size: 16px;
-  color: var(--gray);
+  color: var(--black);
   background-color: inherit;
 }
 .navbar__search-input:focus::placeholder {
@@ -55,7 +56,6 @@
   align-items: center;
   margin-left: auto;
   padding-left: 40px;
-  border-left: 2px dotted var(--almost-white);
 }
 .navbar__user-avatar {
   width: 30px;
