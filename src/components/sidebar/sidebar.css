@@ -75,7 +75,7 @@
   background-color: transparent;
   cursor: pointer;
 }
-.view-selector__link:hover .view-selector__icon {
+.view-selector__link:hover .view-selector__link__icon {
   transform: scale(1.1);
 }
 .view-selector__icon {
