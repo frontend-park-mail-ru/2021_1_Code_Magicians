@@ -5,7 +5,7 @@
         <img src="assets/img/svg/page__navbar/x-mark.svg" alt="X-mark" class="navbar__search-wiper">
     </form>
     <div class="navbar__user-section">
-        {{!#if userIsAuthorised}}
+        {{#if userIsAuthorised}}
             <a href="/profile">
                 <img src="assets/img/default-avatar.jpg" alt="Avatar" class="navbar__user-avatar">
             </a>
@@ -13,10 +13,10 @@
             <button class="navbar__user-toggle">
                 <img src="assets/img/svg/page__navbar/dropdown-arrow.svg" alt="Dropdown" class="navbar__user-change-icon">
             </button>
-        {{!else}}
-<!--            <a href="/signin" class="navbar__auth-link">Sign in</a>-->
-<!--            <a href="/signup" class="navbar__auth-link">Sign up</a>-->
-        {{!/if}}
+        {{else}}
+            <a href="/signin" class="navbar__auth-link">Sign in</a>
+            <a href="/signup" class="navbar__auth-link">Sign up</a>
+        {{/if}}
     </div>
     <div class="navbar__actions">
         <a class="navbar__action" href="/create-pin">
