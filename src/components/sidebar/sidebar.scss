@@ -1,0 +1,151 @@
+.page__sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 70px;
+
+  border-right: 5px solid var(--almost-white);
+
+  background-color: var(--white);
+}
+
+.sidebar {
+  &__logo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    justify-self: flex-start;
+
+    width: 100%;
+    height: 55px;
+
+    margin: 10px auto auto;
+
+    cursor: pointer;
+  }
+
+  &__logo-image {
+    width: 50px;
+    height: 50px;
+
+    transition: 0.4s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &__view-selector {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    margin: auto 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    background-color: var(--red);
+  }
+
+  &__popup-toggles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    justify-self: flex-end;
+
+    margin: auto auto 20px;
+  }
+}
+
+.view-selector {
+  $root: &;
+
+  &__item {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    justify-self: center;
+
+    width: 100%;
+
+    margin: 0;
+
+    &_selected::before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 100%;
+      background-color: white;  // not var(--white). It shouldn't change with theme
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 45px;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+    &:hover #{$root}__icon {
+      transform: scale(1.1);
+    }
+  }
+
+  &__icon {
+    transition: 0.2s;
+    height: 23px;
+    width: 30px;
+  }
+}
+
+.popup-toggle {
+  $root: &;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  margin: 7px 0;
+
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  background-color: transparent;
+
+  &__icon {
+    width: 25px;
+    height: 25px;
+
+    transition: 0.2s;
+  }
+
+  &:hover #{$root}__icon {
+    transform: scale(1.12);
+  }
+}

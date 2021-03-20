@@ -1,0 +1,12 @@
+.page {
+  height: 100%;
+  width: 100%;
+}
+.page__wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 75px;
+}
+
+/*# sourceMappingURL=page.css.map */
