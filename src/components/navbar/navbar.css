@@ -22,6 +22,12 @@
   padding-right: 15px;
   border-radius: 20px;
 }
+.navbar__search-form:hover {
+  background-color: var(--almost-white);
+}
+.navbar__search-form:focus-within {
+  background-color: var(--almost-white);
+}
 .navbar__search-input {
   flex-grow: 1;
   height: 40px;
@@ -31,12 +37,6 @@
   font-size: 16px;
   color: var(--gray);
   background-color: inherit;
-}
-.navbar__search-form:hover {
-  background-color: var(--almost-white);
-}
-.navbar__search-form:focus-within {
-  background-color: var(--almost-white);
 }
 .navbar__search-input:focus::placeholder {
   color: transparent;

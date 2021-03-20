@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
 }
-.page__content {
+.page__wrap {
   display: flex;
   flex-direction: column;
   height: 100%;

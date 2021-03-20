@@ -58,7 +58,7 @@
     background-color: var(--red);
   }
 
-  &__slider-buttons {
+  &__popup-toggles {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,7 +71,7 @@
 }
 
 .view-selector {
-  &__option {
+  &__item {
     position: relative;
 
     display: flex;
@@ -117,7 +117,7 @@
   }
 }
 
-.slider-button {
+.popup-toggle {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,8 +140,8 @@
 
     transition: 0.2s;
   }
-}
 
-.slider-button:hover .slider-button__icon {
-  transform: scale(1.12);
+  &:hover .slider-button__icon {
+    transform: scale(1.12);
+  }
 }
