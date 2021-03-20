@@ -75,7 +75,7 @@
   background-color: transparent;
   cursor: pointer;
 }
-.view-selector__link:hover .view-selector__link__icon {
+.view-selector__link:hover .view-selector__icon {
   transform: scale(1.1);
 }
 .view-selector__icon {
@@ -101,7 +101,7 @@
   height: 25px;
   transition: 0.2s;
 }
-.popup-toggle:hover .slider-button__icon {
+.popup-toggle:hover .popup-toggle__icon {
   transform: scale(1.12);
 }
 

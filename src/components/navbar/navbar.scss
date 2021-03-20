@@ -15,6 +15,8 @@
 }
 
 .navbar {
+  $root: &;
+
   &__search-form {
     display: flex;
     justify-content: center;
@@ -124,13 +126,13 @@
 
     cursor: pointer;
 
-    transition: 0.1s;
+    transition: 0.3s;
 
     &:hover {
       background-color: var(--almost-white);
     }
   }
-  
+
   &__actions {
     display: flex;
     flex-direction: row;
@@ -159,7 +161,7 @@
 
     cursor: pointer;
 
-    &:hover &__action-icon {
+    &:hover #{$root}__action-icon {
       transform: scale(1.1);
     }
   }

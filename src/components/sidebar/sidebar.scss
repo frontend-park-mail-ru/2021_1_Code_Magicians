@@ -71,6 +71,8 @@
 }
 
 .view-selector {
+  $root: &;
+
   &__item {
     position: relative;
 
@@ -105,7 +107,7 @@
 
     cursor: pointer;
 
-    &:hover &__icon {
+    &:hover #{$root}__icon {
       transform: scale(1.1);
     }
   }
@@ -118,6 +120,8 @@
 }
 
 .popup-toggle {
+  $root: &;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,7 +145,7 @@
     transition: 0.2s;
   }
 
-  &:hover .slider-button__icon {
+  &:hover #{$root}__icon {
     transform: scale(1.12);
   }
 }
