@@ -125,12 +125,12 @@
     cursor: pointer;
 
     transition: 0.1s;
-  }
 
-  &__auth-link:hover {
-    background-color: var(--almost-white);
+    &:hover {
+      background-color: var(--almost-white);
+    }
   }
-
+  
   &__actions {
     display: flex;
     flex-direction: row;
@@ -158,13 +158,13 @@
     background-color: transparent;
 
     cursor: pointer;
+
+    &:hover &__action-icon {
+      transform: scale(1.1);
+    }
   }
 
   &__action-icon {
     transition: 0.2s;
-  }
-
-  &__action:hover &__action-icon {
-    transform: scale(1.1);
   }
 }

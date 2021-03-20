@@ -110,11 +110,11 @@
   background-color: transparent;
   cursor: pointer;
 }
+.navbar__action:hover .navbar__action__action-icon {
+  transform: scale(1.1);
+}
 .navbar__action-icon {
   transition: 0.2s;
-}
-.navbar__action:hover .navbar__action-icon {
-  transform: scale(1.1);
 }
 
 /*# sourceMappingURL=navbar.css.map */
