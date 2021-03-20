@@ -8,7 +8,7 @@ export class NotFoundView extends View {
    * Makes new NotFoundView
    * @param {Object} props
    */
-  constructor(props) {
+  constructor(props = {}) {
     super(props, document.getElementById('app'));
   }
 

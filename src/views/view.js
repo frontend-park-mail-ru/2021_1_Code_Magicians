@@ -16,10 +16,10 @@ export class View extends Component {
 
   /**
    * Shows view on the screen
-   * @param {String} path for parsing to get arguments
+   * @param {Object} pathArgs from path
    */
-  show(path) {
-    this.props.path = path;
+  show(pathArgs) {
+    this.props.pathArgs = pathArgs;
     this._parent.insertAdjacentHTML('afterbegin', this.render());
     this._didMount();
   }
