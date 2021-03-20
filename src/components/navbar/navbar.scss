@@ -113,7 +113,7 @@
   }
 
   &__auth-link {
-    margin: 0 10px;
+    margin: 0 7px;
     padding: 10px;
 
     border: 1px solid var(--red);
@@ -121,7 +121,6 @@
 
     text-decoration: none;
 
-    color: var(--gray);
     background-color: var(--white);
 
     cursor: pointer;
@@ -129,8 +128,21 @@
     transition: 0.3s;
 
     &:hover {
+      opacity: 0.9;
+    }
+
+    &_signin {
+      color: var(--white);
+
+      background-color: red;
+    }
+
+    &_signup {
+      color: var(--black);
+
       background-color: var(--almost-white);
     }
+
   }
 
   &__actions {
