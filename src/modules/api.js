@@ -10,7 +10,7 @@ export class API {
    * @param {String} username
    * @param {String} email
    * @param {String} password
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static signupUser({username, email, password}) {
     return HTTPModule.post(
@@ -27,7 +27,7 @@ export class API {
    * Log in user into the app
    * @param {String} username
    * @param {String} password
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static loginUser({username, password}) {
     return HTTPModule.post(
@@ -41,7 +41,7 @@ export class API {
 
   /**
    * Log out from current session
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static logoutUser() {
     return HTTPModule.post('/auth/logout');
@@ -49,7 +49,7 @@ export class API {
 
   /**
    * Check if user is authenticated
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static checkUserAuth() {
     return HTTPModule.get('/auth/check');
@@ -66,7 +66,7 @@ export class API {
   /**
    * Get profile by username OR ID
    * @param {String} usernameOrID
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static getProfileByUsernameOrID(usernameOrID) {
     return HTTPModule.get('/profile/' + usernameOrID);
@@ -75,7 +75,7 @@ export class API {
   /**
    * Update profile
    * @param {Object} changes
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static editProfile(changes) {
     return HTTPModule.put('/profile/edit', changes);
@@ -84,7 +84,7 @@ export class API {
   /**
    * Update user password
    * @param {String} newPassword
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static changeUserPassword(newPassword) {
     return HTTPModule.put('/profile/password', {password: newPassword});
@@ -92,7 +92,7 @@ export class API {
 
   /**
    * Delete profile
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static deleteSelfProfile() {
     return HTTPModule.delete('/profile/delete');
@@ -102,7 +102,7 @@ export class API {
    * Create new board
    * @param {String} title
    * @param {String} description
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static createBoard({title, description}) {
     return HTTPModule.post('/board', {title: title, description: description});
@@ -111,7 +111,7 @@ export class API {
   /**
    * Get board by ID
    * @param {String} boardID
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static getBoardByID(boardID) {
     return HTTPModule.get('/board/' + boardID);
@@ -120,7 +120,7 @@ export class API {
   /**
    * Create new pin
    * @param {Object} pinInfo
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static createPin(pinInfo) {
     return HTTPModule.post('/pin', pinInfo);
@@ -129,7 +129,7 @@ export class API {
   /**
    * Get pin by ID
    * @param {String} pinID
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static getPinByID(pinID) {
     return HTTPModule.get('/pin/' + pinID);
@@ -138,7 +138,7 @@ export class API {
   /**
    * Delete pin by ID
    * @param {String} pinID
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static deletePinByID(pinID) {
     return HTTPModule.delete('/pin/' + pinID);
@@ -147,7 +147,7 @@ export class API {
   /**
    * Get pins by board id of their board
    * @param {String} boardID
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static getPinsByBoardID(boardID) {
     return HTTPModule.get('/pins/' + boardID);

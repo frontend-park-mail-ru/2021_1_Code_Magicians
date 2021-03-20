@@ -18,7 +18,7 @@ export class HTTPModule {
    * @param {String} path
    * @param {Object} options
    * @param {Object} body
-   * @return {Promise<{parsedJson: any, status: number}>}
+   * @return {Object}
    * @private
    */
   static async _requestBackend(path, options = {}, body = null) {
@@ -45,7 +45,7 @@ export class HTTPModule {
   /**
    * GET
    * @param {String} path
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static get(path) {
     return this._requestBackend(path, {method: 'GET'});
@@ -65,7 +65,7 @@ export class HTTPModule {
    * PUT
    * @param {String} path
    * @param {Object} body
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static put(path, body) {
     return this._requestBackend(path, {method: 'PUT', body});
@@ -74,7 +74,7 @@ export class HTTPModule {
   /**
    * DELETE
    * @param {String} path
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static delete(path) {
     return this._requestBackend(path, {method: 'DELETE'});
