@@ -1,5 +1,4 @@
 import {NotFoundView} from '../views/notFoundView.js';
-import stateManager from './stateManager.js';
 
 /**
  * Router
@@ -58,16 +57,6 @@ class Router {
    */
   start() {
     const currentURL = window.location.pathname;
-
-    stateManager.setState(
-        'currentURL',
-        {url: currentURL},
-    );
-
-    stateManager.addStateListener(
-        'currentURL',
-        () => this.go(stateManager.getState('currentURL').url),
-    );
 
     window.addEventListener('popstate', () => this.go(window.location.pathname));
     window.addEventListener('click', (ev) => {
