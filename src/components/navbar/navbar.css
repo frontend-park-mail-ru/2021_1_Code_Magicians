@@ -69,7 +69,7 @@
   color: var(--gray);
   cursor: pointer;
 }
-.navbar__user-change-button {
+.navbar__user-toggle {
   border: none;
   outline: none;
   background-color: transparent;
