@@ -84,7 +84,7 @@
   color: var(--gray);
   background-color: var(--white);
   cursor: pointer;
-  transition: 0.1s;
+  transition: 0.3s;
 }
 .navbar__auth-link:hover {
   background-color: var(--almost-white);
@@ -110,7 +110,7 @@
   background-color: transparent;
   cursor: pointer;
 }
-.navbar__action:hover .navbar__action__action-icon {
+.navbar__action:hover .navbar__action-icon {
   transform: scale(1.1);
 }
 .navbar__action-icon {
