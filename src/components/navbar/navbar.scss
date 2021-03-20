@@ -30,6 +30,14 @@
     padding-right: 15px;
 
     border-radius: 20px;
+
+    &:hover {
+      background-color: var(--almost-white);
+    }
+
+    &:focus-within {
+      background-color: var(--almost-white);
+    }
   }
 
   &__search-input {
@@ -46,27 +54,19 @@
 
     color: var(--gray);
     background-color: inherit;
-  }
 
-  &__search-form:hover {
-    background-color: var(--almost-white);
-  }
-
-  &__search-form:focus-within {
-    background-color: var(--almost-white);
-  }
-
-  &__search-input:focus::placeholder {
-    color: transparent;
+    &:focus::placeholder {
+      color: transparent;
+    }
   }
 
   &__search-wiper {
     transition: 0.1s;
     cursor: pointer;
-  }
 
-  &__search-wiper:hover {
-    transform: scale(1.05);
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   &__user-section {
