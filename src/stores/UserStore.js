@@ -1,7 +1,7 @@
-import {actionTypes, defaultAvatarLink} from '../../consts/consts.js';
-import {API} from '../../modules/api.js';
-import {eventMixin} from '../../modules/eventMixin.js';
-import {Store} from '../store.js';
+import {actionTypes, defaultAvatarLink} from '../consts/consts.js';
+import {API} from '../modules/api.js';
+import {eventMixin} from '../modules/eventMixin.js';
+import {Store} from './Store.js';
 
 /**
  * UserStore
