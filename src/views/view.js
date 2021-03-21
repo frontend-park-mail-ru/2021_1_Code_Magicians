@@ -23,6 +23,14 @@ export class View extends Component {
   }
 
   /**
+   * Refreshes view
+   */
+  refresh() {
+    this.remove();
+    this.show();
+  }
+
+  /**
    * Removes view from the screen
    */
   remove() {
