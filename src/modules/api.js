@@ -1,6 +1,5 @@
 import {HTTPModule} from './http.js';
 
-// There will be models of client-sided instances. And they will be used in functions like createX or updateX
 /**
  * Module that provides abstraction to communicate with server via standard API
  */
@@ -57,7 +56,7 @@ export class API {
 
   /**
    * Get profile of the current user
-   * @return {Promise<{parsedJson: Object, status: number}>}
+   * @return {Object}
    */
   static getSelfProfile() {
     return HTTPModule.get('/profile');
@@ -69,7 +68,7 @@ export class API {
    * @return {Object}
    */
   static getProfileByUsernameOrID(usernameOrID) {
-    return HTTPModule.get('/profile/' + usernameOrID);
+    return HTTPModule.get(`/profile/${usernameOrID}`);
   }
 
   /**
@@ -114,7 +113,16 @@ export class API {
    * @return {Object}
    */
   static getBoardByID(boardID) {
-    return HTTPModule.get('/board/' + boardID);
+    return HTTPModule.get(`/board/${boardID}`);
+  }
+
+  /**
+   * Get boards by author ID
+   * @param {String} authorID
+   * @return {Object}
+   */
+  static getProfileBoards(authorID) {
+    return HTTPModule.get(`/boards/${authorID}`);
   }
 
   /**
@@ -132,7 +140,7 @@ export class API {
    * @return {Object}
    */
   static getPinByID(pinID) {
-    return HTTPModule.get('/pin/' + pinID);
+    return HTTPModule.get(`/pin/${pinID}`);
   }
 
   /**
@@ -141,7 +149,7 @@ export class API {
    * @return {Object}
    */
   static deletePinByID(pinID) {
-    return HTTPModule.delete('/pin/' + pinID);
+    return HTTPModule.delete(`/pin/${pinID}`);
   }
 
   /**
@@ -150,6 +158,6 @@ export class API {
    * @return {Object}
    */
   static getPinsByBoardID(boardID) {
-    return HTTPModule.get('/pins/' + boardID);
+    return HTTPModule.get(`/pins/${boardID}`);
   }
 }
