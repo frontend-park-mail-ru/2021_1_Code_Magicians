@@ -1,7 +1,9 @@
-import {actionTypes, defaultAvatarLink} from '../consts/consts.js';
+import {actionTypes} from '../consts/consts.js';
 import {API} from '../modules/api.js';
 import {eventMixin} from '../modules/eventMixin.js';
 import {Store} from './Store.js';
+import {Profile} from '../models/Profile.js';
+import {User} from '../models/User.js';
 
 /**
  * UserStore
@@ -13,16 +15,31 @@ class UserStore extends Store {
   constructor() {
     super();
 
-    this._username = '';
-    this._email = '';
+    this._fetchUserData();
+    if (this._errorMessage) this.trigger('change');
+  }
 
-    this._firstName = '';
-    this._lastName = '';
-    this._avatarLink = 'assets/img/default-avatar.jpg';
-    this._id = 0;
+  /**
+   * Fetch it
+   * @private
+   */
+  _fetchUserData() {
+    let authorized = false;
+    let profile = new Profile();
 
-    this._status = 'unauthorized';
-    this._errorMessage = '';
+    const response = API.getSelfProfile();
+    switch (response.status) {
+      case 401:
+        break;
+      case 200:
+        authorized = true;
+        profile = new Profile(response.responseBody);
+        break;
+      default:
+        this._errorMessage = 'internal error';
+    }
+
+    this._user = new User(profile, authorized);
   }
 
   /**
@@ -32,6 +49,7 @@ class UserStore extends Store {
   processEvent(action) {
     let changed = true;
     this._errorMessage = '';
+
     switch (action) {
       case actionTypes.user.login:
         this._login(action.data);
@@ -40,7 +58,16 @@ class UserStore extends Store {
         this._logout();
         break;
       case actionTypes.user.signup:
-        this._signup();
+        this._signup(action.data);
+        break;
+      case actionTypes.user.deleteProfile:
+        this._deleteProfile();
+        break;
+      case actionTypes.user.editProfile:
+        this._editProfile(action.data);
+        break;
+      case actionTypes.user.changePassword:
+        this._changePassword(action.data.password);
         break;
       default:
         changed = false;
@@ -56,22 +83,24 @@ class UserStore extends Store {
    * @private
    */
   _login(credentials) {
+    if (this._user.authorized()) {
+      this._errorMessage = 'already authorized';
+      return;
+    }
+
     const response = API.loginUser(credentials);
     switch (response.status) {
       case 403:
-        this._status = 'authorized';
         this._errorMessage = 'already authorized';
-
         break;
       case 200:
-        this._status = 'authorized';
         this._fetchUserData();
-
         break;
       case 400:
-        this._status = 'unauthorized';
-        this._errorMessage = 'invalid data';
-
+        this._errorMessage = 'invalid credentials';
+        break;
+      case 404:
+        this._errorMessage = 'user not found';
         break;
       default:
         this._errorMessage = 'internal error';
@@ -80,10 +109,11 @@ class UserStore extends Store {
 
   /**
    * signup
+   * @param {Object} credentials
    * @private
    */
-  _signup() {
-
+  _signup(credentials) {
+    // TODO:
   }
 
   /**
@@ -91,51 +121,41 @@ class UserStore extends Store {
    * @private
    */
   _logout() {
-
+    // TODO:
   }
 
   /**
-   * fetch
+   * delete profile
    * @private
    */
-  _fetchUserData() {
-    const response = API.getSelfProfile();
-    switch (response.status) {
-      case 401:
-        this._status = 'unauthorized';
-        break;
-      case 200:
-        const profile = response.responseBody;
+  _deleteProfile() {
+    // TODO:
+  }
 
-        this._username = profile.username;
-        this._id = profile.id;
-        this._firstName = profile.firstName;
-        this._lastName = profile.lastName;
-        this._avatarLink = profile.avatarLink || defaultAvatarLink;
+  /**
+   * Add changes to user profile
+   * @param {Object} changes
+   * @private
+   */
+  _editProfile(changes) {
+    // TODO:
+  }
 
-        break;
-      default:
-        this._errorMessage = 'internal error';
-    }
+  /**
+   * Change password
+   * @param {String} newPassword
+   * @private
+   */
+  _changePassword(newPassword) {
+    // TODO:
   }
 
   /**
    * Returns user data
-   * @return {{firstName: string, lastName: string, avatarLink: string, email: string, username: string}}
+   * @return {User}
    */
-  getUserData() {
-    return this._status === 'authorized' ? {
-      username: this._username,
-      email: this._email,
-
-      firstName: this._firstName,
-      lastName: this._lastName,
-      avatarLink: this._avatarLink,
-
-      id: this._id,
-
-      errorMessage: this._errorMessage,
-    } : {errorMessage: this._errorMessage};
+  getUser() {
+    return this._user;
   }
 }
 
