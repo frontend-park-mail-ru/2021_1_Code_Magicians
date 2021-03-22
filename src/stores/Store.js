@@ -1,9 +1,10 @@
 import {appDispatcher} from '../appManagers/dispatcher.js';
+import {eventMixin} from '../modules/eventMixin.js';
 
 /**
  * Basic Store class
  */
-export class Store {
+class Store {
   /**
    * Makes new Store
    */
@@ -21,3 +22,7 @@ export class Store {
   processEvent(action) {
   }
 }
+
+Object.assign(Store.prototype, eventMixin);
+
+export default Store;

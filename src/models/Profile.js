@@ -11,6 +11,7 @@ export class Profile extends Model {
    *   username,
    *   firstName,
    *   lastName,
+   *   email,
    *   avatarLink,
    * }
    */

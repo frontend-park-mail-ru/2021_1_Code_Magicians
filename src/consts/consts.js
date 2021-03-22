@@ -1,6 +1,6 @@
 import {appDispatcher} from '../appManagers/dispatcher.js';
 
-export const backendURL = 'localhost:3000';
+export const backendURL = 'http://localhost:3000';
 
 export const actionTypes = {
   user: {
@@ -31,5 +31,20 @@ export const actionsList = {
         password: password,
       },
     });
+  },
+};
+
+export const storeStatuses = {
+  userStore: {
+    ok: 'ok',
+
+    alreadyAuthorized: 'already authorized',
+    invalidCreds: 'invalid credentials',
+    userNotFound: 'user not found',
+    userAlreadyExists: 'user already exists',
+    unauthorized: 'unauthorized',
+    editConflict: 'edit conflict',
+
+    internalError: 'internal error',
   },
 };

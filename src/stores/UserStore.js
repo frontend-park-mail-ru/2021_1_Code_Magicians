@@ -1,7 +1,6 @@
-import {actionTypes} from '../consts/consts.js';
+import {actionTypes, storeStatuses} from '../consts/consts.js';
 import {API} from '../modules/api.js';
-import {eventMixin} from '../modules/eventMixin.js';
-import {Store} from './Store.js';
+import Store from './Store.js';
 import {Profile} from '../models/Profile.js';
 import {User} from '../models/User.js';
 
@@ -16,30 +15,6 @@ class UserStore extends Store {
     super();
 
     this._fetchUserData();
-    if (this._errorMessage) this.trigger('change');
-  }
-
-  /**
-   * Fetch it
-   * @private
-   */
-  _fetchUserData() {
-    let authorized = false;
-    let profile = new Profile();
-
-    const response = API.getSelfProfile();
-    switch (response.status) {
-      case 401:
-        break;
-      case 200:
-        authorized = true;
-        profile = new Profile(response.responseBody);
-        break;
-      default:
-        this._errorMessage = 'internal error';
-    }
-
-    this._user = new User(profile, authorized);
   }
 
   /**
@@ -48,7 +23,7 @@ class UserStore extends Store {
    */
   processEvent(action) {
     let changed = true;
-    this._errorMessage = '';
+    this._status = 'ok';
 
     switch (action) {
       case actionTypes.user.login:
@@ -84,26 +59,27 @@ class UserStore extends Store {
    */
   _login(credentials) {
     if (this._user.authorized()) {
-      this._errorMessage = 'already authorized';
+      this._status = storeStatuses.userStore.alreadyAuthorized;
       return;
     }
 
     const response = API.loginUser(credentials);
     switch (response.status) {
       case 403:
-        this._errorMessage = 'already authorized';
+        this._user.onLogin();
+        this._status = storeStatuses.userStore.alreadyAuthorized;
         break;
       case 200:
         this._fetchUserData();
         break;
       case 400:
-        this._errorMessage = 'invalid credentials';
+        this._status = storeStatuses.userStore.invalidCreds;
         break;
       case 404:
-        this._errorMessage = 'user not found';
+        this._status = 'user not found';
         break;
       default:
-        this._errorMessage = 'internal error';
+        this._status = storeStatuses.userStore.internalError;
     }
   }
 
@@ -113,7 +89,29 @@ class UserStore extends Store {
    * @private
    */
   _signup(credentials) {
-    // TODO:
+    if (this._user.authorized()) {
+      this._status = storeStatuses.userStore.alreadyAuthorized;
+      return;
+    }
+
+    const response = API.signupUser(credentials);
+    switch (response.status) {
+      case 201:
+        this._fetchUserData();
+        break;
+      case 403:
+        this._user.onLogin();
+        this._status = storeStatuses.userStore.alreadyAuthorized;
+        break;
+      case 400:
+        this._status = storeStatuses.userStore.invalidCreds;
+        break;
+      case 409:
+        this._status = storeStatuses.userStore.userAlreadyExists;
+        break;
+      default:
+        this._status = storeStatuses.userStore.internalError;
+    }
   }
 
   /**
@@ -121,7 +119,22 @@ class UserStore extends Store {
    * @private
    */
   _logout() {
-    // TODO:
+    if (!this._user.authorized()) {
+      this._status = storeStatuses.userStore.unauthorized;
+      return;
+    }
+
+    const response = API.logoutUser();
+    switch (response.status) {
+      case 200:
+        this._user.onLogout();
+        break;
+      case 401:
+        this._status = storeStatuses.userStore.unauthorized;
+        break;
+      default:
+        this._status = storeStatuses.userStore.internalError;
+    }
   }
 
   /**
@@ -129,7 +142,22 @@ class UserStore extends Store {
    * @private
    */
   _deleteProfile() {
-    // TODO:
+    if (!this._user.authorized()) {
+      this._status = storeStatuses.userStore.unauthorized;
+      return;
+    }
+
+    const response = API.deleteSelfProfile();
+    switch (response.status) {
+      case 200:
+        this._user.onLogout();
+        break;
+      case 401:
+        this._status = storeStatuses.userStore.unauthorized;
+        break;
+      default:
+        this._status = storeStatuses.userStore.internalError;
+    }
   }
 
   /**
@@ -138,7 +166,25 @@ class UserStore extends Store {
    * @private
    */
   _editProfile(changes) {
-    // TODO:
+    if (!this._user.authorized()) {
+      this._status = storeStatuses.userStore.unauthorized;
+      return;
+    }
+
+    const response = API.editProfile(changes);
+    switch (response.status) {
+      case 200:
+        this._fetchUserData();
+        break;
+      case 401:
+        this._status = storeStatuses.userStore.unauthorized;
+        break;
+      case 409:
+        this._status = storeStatuses.userStore.editConflict;
+        break;
+      default:
+        this._status = storeStatuses.userStore.internalError;
+    }
   }
 
   /**
@@ -147,8 +193,47 @@ class UserStore extends Store {
    * @private
    */
   _changePassword(newPassword) {
-    // TODO:
+    if (!this._user.authorized()) {
+      this._status = storeStatuses.userStore.unauthorized;
+      return;
+    }
+
+    const response = API.changeUserPassword(newPassword);
+    switch (response.status) {
+      case 200:
+        break;
+      case 401:
+        this._status = storeStatuses.userStore.unauthorized;
+        break;
+      default:
+        this._status = storeStatuses.userStore.internalError;
+    }
   }
+
+
+  /**
+   * Fetch it
+   * @private
+   */
+  _fetchUserData() {
+    let authorized = false;
+    let profile = new Profile();
+
+    const response = API.getSelfProfile();
+    switch (response.status) {
+      case 401:
+        break;
+      case 200:
+        authorized = true;
+        profile = new Profile(response.responseBody);
+        break;
+      default:
+        this._status = storeStatuses.userStore.internalError;
+    }
+
+    this._user = new User(profile, authorized);
+  }
+
 
   /**
    * Returns user data
@@ -157,7 +242,14 @@ class UserStore extends Store {
   getUser() {
     return this._user;
   }
+
+  /**
+   * Get current store status
+   * @return {String} status
+   */
+  getStatus() {
+    return this._status;
+  }
 }
 
-Object.assign(UserStore.prototype, eventMixin);
 export const userStore = new UserStore();

@@ -12,12 +12,14 @@ export class View extends Component {
   constructor(props, parent) {
     super(props);
     this.parent = parent;
+    this.active = false;
   }
 
   /**
    * Shows view on the screen
    */
   show() {
+    this.active = true;
     this.parent.insertAdjacentHTML('afterbegin', this.render());
     this.didMount();
   }
@@ -26,26 +28,29 @@ export class View extends Component {
    * Refreshes view
    */
   refresh() {
-    this.remove();
-    this.show();
+    if (this.active) {
+      this.remove();
+      this.show();
+    }
   }
 
   /**
    * Removes view from the screen
    */
   remove() {
+    this.active = false;
     this.willUnmount();
     this.parent.innerHTML = '';
   }
 
   /**
-   * Called right after showing view
+   * Called right after showing the view
    */
   didMount() {
   }
 
   /**
-   * Called before removing view
+   * Called before removing the view
    */
   willUnmount() {
   }
