@@ -22,6 +22,14 @@ export class HTTPModule {
    * @private
    */
   static async _requestBackend(path, options = {}, body = null) {
+    if (['POST', 'PUT', 'DELETE'].includes(options.method)) {
+      options.headers = options.headers || {};
+      options.headers = {
+        ...options.headers,
+        'X-CSRF-Token': this._getCSRFToken(),
+      };
+    }
+
     try {
       const response = await fetch(
           this.makeURL(path),
@@ -33,15 +41,21 @@ export class HTTPModule {
           },
       );
 
+      if (response.headers.has('X-CSRF-Token')) {
+        this._setCSRFToken(response.headers.get('X-CSRF-Token'));
+      }
+
       const parsedJson = await response.json();
 
       return {
         status: response.status,
+        headers: response.headers,
         responseBody: parsedJson,
       };
     } catch (e) {
       return {
         status: 500,
+        headers: new Map(),
         responseBody: {},
       };
     }
@@ -73,7 +87,7 @@ export class HTTPModule {
    * @return {Object}
    */
   static put(path, body) {
-    return this._requestBackend(path, {method: 'PUT', body});
+    return this._requestBackend(path, {method: 'PUT'}, body);
   }
 
   /**
@@ -83,5 +97,23 @@ export class HTTPModule {
    */
   static delete(path) {
     return this._requestBackend(path, {method: 'DELETE'});
+  }
+
+  /**
+   * Get existing CSRF token
+   * @return {String}
+   * @private
+   */
+  static _getCSRFToken() {
+    return window.localStorage.getItem('CSRF-Token');
+  }
+
+  /**
+   * Set new CSRF token, provided by server
+   * @param {String} token
+   * @private
+   */
+  static _setCSRFToken(token) {
+    window.localStorage.setItem('CSRF-token', token);
   }
 }
