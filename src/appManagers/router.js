@@ -12,7 +12,8 @@ import {pathTemplates} from '../consts/pathTemplates.js';
 function getPathArgs(path, template) {
   const splitPath = path.split('/');
 
-  return template
+  // noinspection UnnecessaryLocalVariableJS
+  const pathArgs = template
       .split('/')
       .reduce((args, propName, index) => {
         if (propName.startsWith(':')) {
@@ -21,6 +22,8 @@ function getPathArgs(path, template) {
 
         return args;
       }, {});
+
+  return pathArgs;
 }
 
 /**

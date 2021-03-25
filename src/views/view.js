@@ -21,26 +21,26 @@ export class View extends Component {
   show(pathArgs) {
     this.props.pathArgs = pathArgs;
     this._parent.insertAdjacentHTML('afterbegin', this.render());
-    this._didMount();
+    this.didMount();
   }
 
   /**
    * Removes view from the screen
    */
   remove() {
-    this._willUnmount();
+    this.willUnmount();
     this._parent.innerHTML = '';
   }
 
   /**
    * Called right after showing view
    */
-  _didMount() {
+  didMount() {
   }
 
   /**
    * Called before removing view
    */
-  _willUnmount() {
+  willUnmount() {
   }
 }
