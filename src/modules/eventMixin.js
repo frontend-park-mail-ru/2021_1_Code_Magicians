@@ -28,8 +28,9 @@ export const eventMixin = {
    * Trigger event with some data
    * @param {String} event
    * @param {args} args
+   * @private
    */
-  trigger(event, ...args) {
+  _trigger(event, ...args) {
     this._listeners = this._listeners || {};
     if (! (event in this._listeners)) return;
     this

@@ -1,8 +1,11 @@
-import {actionTypes, storeStatuses} from '../consts/consts.js';
-import {API} from '../modules/api.js';
-import Store from './Store.js';
-import {Profile} from '../models/Profile.js';
-import {User} from '../models/User.js';
+import {API} from '../../modules/api.js';
+import Store from '../Store.js';
+import {Profile} from '../../models/profile/Profile.js';
+import {User} from '../../models/user/User.js';
+import {actionTypes} from '../../actions/actions.js';
+import {constants} from '../../consts/consts.js';
+
+const storeStatuses = constants.store.statuses.userStore;
 
 /**
  * UserStore
@@ -14,6 +17,7 @@ class UserStore extends Store {
   constructor() {
     super();
 
+    this._user = new User(new Profile());
     this._fetchUserData();
   }
 
@@ -49,7 +53,7 @@ class UserStore extends Store {
         break;
     }
 
-    if (changed) this.trigger('change');
+    if (changed) this._trigger('change');
   }
 
   /**
@@ -59,7 +63,7 @@ class UserStore extends Store {
    */
   _login(credentials) {
     if (this._user.authorized()) {
-      this._status = storeStatuses.userStore.alreadyAuthorized;
+      this._status = storeStatuses.alreadyAuthorized;
       return;
     }
 
@@ -67,19 +71,19 @@ class UserStore extends Store {
     switch (response.status) {
       case 403:
         this._user.onLogin();
-        this._status = storeStatuses.userStore.alreadyAuthorized;
+        this._status = storeStatuses.alreadyAuthorized;
         break;
       case 200:
         this._fetchUserData();
         break;
       case 400:
-        this._status = storeStatuses.userStore.invalidCreds;
+        this._status = storeStatuses.invalidCreds;
         break;
       case 404:
         this._status = 'user not found';
         break;
       default:
-        this._status = storeStatuses.userStore.internalError;
+        this._status = storeStatuses.internalError;
     }
   }
 
@@ -90,7 +94,7 @@ class UserStore extends Store {
    */
   _signup(credentials) {
     if (this._user.authorized()) {
-      this._status = storeStatuses.userStore.alreadyAuthorized;
+      this._status = storeStatuses.alreadyAuthorized;
       return;
     }
 
@@ -101,16 +105,16 @@ class UserStore extends Store {
         break;
       case 403:
         this._user.onLogin();
-        this._status = storeStatuses.userStore.alreadyAuthorized;
+        this._status = storeStatuses.alreadyAuthorized;
         break;
       case 400:
-        this._status = storeStatuses.userStore.invalidCreds;
+        this._status = storeStatuses.invalidCreds;
         break;
       case 409:
-        this._status = storeStatuses.userStore.userAlreadyExists;
+        this._status = storeStatuses.userAlreadyExists;
         break;
       default:
-        this._status = storeStatuses.userStore.internalError;
+        this._status = storeStatuses.internalError;
     }
   }
 
@@ -120,7 +124,7 @@ class UserStore extends Store {
    */
   _logout() {
     if (!this._user.authorized()) {
-      this._status = storeStatuses.userStore.unauthorized;
+      this._status = storeStatuses.unauthorized;
       return;
     }
 
@@ -130,10 +134,10 @@ class UserStore extends Store {
         this._user.onLogout();
         break;
       case 401:
-        this._status = storeStatuses.userStore.unauthorized;
+        this._status = storeStatuses.unauthorized;
         break;
       default:
-        this._status = storeStatuses.userStore.internalError;
+        this._status = storeStatuses.internalError;
     }
   }
 
@@ -143,7 +147,7 @@ class UserStore extends Store {
    */
   _deleteProfile() {
     if (!this._user.authorized()) {
-      this._status = storeStatuses.userStore.unauthorized;
+      this._status = storeStatuses.unauthorized;
       return;
     }
 
@@ -153,10 +157,10 @@ class UserStore extends Store {
         this._user.onLogout();
         break;
       case 401:
-        this._status = storeStatuses.userStore.unauthorized;
+        this._status = storeStatuses.unauthorized;
         break;
       default:
-        this._status = storeStatuses.userStore.internalError;
+        this._status = storeStatuses.internalError;
     }
   }
 
@@ -167,7 +171,7 @@ class UserStore extends Store {
    */
   _editProfile(changes) {
     if (!this._user.authorized()) {
-      this._status = storeStatuses.userStore.unauthorized;
+      this._status = storeStatuses.unauthorized;
       return;
     }
 
@@ -177,13 +181,13 @@ class UserStore extends Store {
         this._fetchUserData();
         break;
       case 401:
-        this._status = storeStatuses.userStore.unauthorized;
+        this._status = storeStatuses.unauthorized;
         break;
       case 409:
-        this._status = storeStatuses.userStore.editConflict;
+        this._status = storeStatuses.editConflict;
         break;
       default:
-        this._status = storeStatuses.userStore.internalError;
+        this._status = storeStatuses.internalError;
     }
   }
 
@@ -194,7 +198,7 @@ class UserStore extends Store {
    */
   _changePassword(newPassword) {
     if (!this._user.authorized()) {
-      this._status = storeStatuses.userStore.unauthorized;
+      this._status = storeStatuses.unauthorized;
       return;
     }
 
@@ -203,10 +207,10 @@ class UserStore extends Store {
       case 200:
         break;
       case 401:
-        this._status = storeStatuses.userStore.unauthorized;
+        this._status = storeStatuses.unauthorized;
         break;
       default:
-        this._status = storeStatuses.userStore.internalError;
+        this._status = storeStatuses.internalError;
     }
   }
 
@@ -228,7 +232,7 @@ class UserStore extends Store {
         profile = new Profile(response.responseBody);
         break;
       default:
-        this._status = storeStatuses.userStore.internalError;
+        this._status = storeStatuses.internalError;
     }
 
     this._user = new User(profile, authorized);
