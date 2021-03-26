@@ -1,5 +1,3 @@
-const prefix = 'ID_';
-
 /**
  * Dispatcher
  */
@@ -19,7 +17,7 @@ class Dispatcher {
    * @return {String} dispatch token for waitFor
    */
   register(callback) {
-    const ID = prefix + this._nextID;
+    const ID = `ID_${this._nextID}`;
     this._callbacks.set(ID, callback);
 
     return ID;

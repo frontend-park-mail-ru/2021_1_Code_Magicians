@@ -1,4 +1,7 @@
 import {HTTPModule} from './http.js';
+import {constants} from '../consts/consts.js';
+
+const paths = constants.network.paths;
 
 /**
  * Module that provides abstraction to communicate with server via standard API
@@ -13,7 +16,7 @@ export class API {
    */
   static signupUser({username, email, password}) {
     return HTTPModule.post(
-        '/auth/signup',
+        paths.signup,
         {
           username: username,
           email: email,
@@ -30,7 +33,7 @@ export class API {
    */
   static loginUser({username, password}) {
     return HTTPModule.post(
-        '/auth/login',
+        paths.login,
         {
           username: username,
           password: password,
@@ -43,7 +46,7 @@ export class API {
    * @return {Object}
    */
   static logoutUser() {
-    return HTTPModule.post('/auth/logout');
+    return HTTPModule.post(paths.logout);
   }
 
   /**
@@ -51,7 +54,7 @@ export class API {
    * @return {Object}
    */
   static checkUserAuth() {
-    return HTTPModule.get('/auth/check');
+    return HTTPModule.get(paths.authCheck);
   }
 
   /**
@@ -59,7 +62,7 @@ export class API {
    * @return {Object}
    */
   static getSelfProfile() {
-    return HTTPModule.get('/profile');
+    return HTTPModule.get(paths.selfProfile);
   }
 
   /**
@@ -68,7 +71,7 @@ export class API {
    * @return {Object}
    */
   static getProfileByUsernameOrID(usernameOrID) {
-    return HTTPModule.get(`/profile/${usernameOrID}`);
+    return HTTPModule.get(`${paths.profile}/${usernameOrID}`);
   }
 
   /**
@@ -77,7 +80,7 @@ export class API {
    * @return {Object}
    */
   static editProfile(changes) {
-    return HTTPModule.put('/profile/edit', changes);
+    return HTTPModule.put(paths.editProfile, changes);
   }
 
   /**
@@ -86,7 +89,7 @@ export class API {
    * @return {Object}
    */
   static changeUserPassword(newPassword) {
-    return HTTPModule.put('/profile/password', {password: newPassword});
+    return HTTPModule.put(paths.changePassword, {password: newPassword});
   }
 
   /**
@@ -94,7 +97,7 @@ export class API {
    * @return {Object}
    */
   static deleteSelfProfile() {
-    return HTTPModule.delete('/profile/delete');
+    return HTTPModule.delete(paths.deleteProfile);
   }
 
   /**
@@ -104,7 +107,7 @@ export class API {
    * @return {Object}
    */
   static createBoard({title, description}) {
-    return HTTPModule.post('/board', {title: title, description: description});
+    return HTTPModule.post(paths.board, {title: title, description: description});
   }
 
   /**
@@ -113,7 +116,7 @@ export class API {
    * @return {Object}
    */
   static getBoardByID(boardID) {
-    return HTTPModule.get(`/board/${boardID}`);
+    return HTTPModule.get(`${paths.board}/${boardID}`);
   }
 
   /**
@@ -122,7 +125,7 @@ export class API {
    * @return {Object}
    */
   static getProfileBoards(authorID) {
-    return HTTPModule.get(`/boards/${authorID}`);
+    return HTTPModule.get(`${paths.boards}/${authorID}`);
   }
 
   /**
@@ -131,7 +134,7 @@ export class API {
    * @return {Object}
    */
   static createPin(pinInfo) {
-    return HTTPModule.post('/pin', pinInfo);
+    return HTTPModule.post(paths.pin, pinInfo);
   }
 
   /**
@@ -140,7 +143,7 @@ export class API {
    * @return {Object}
    */
   static getPinByID(pinID) {
-    return HTTPModule.get(`/pin/${pinID}`);
+    return HTTPModule.get(`${paths.pin}/${pinID}`);
   }
 
   /**
@@ -149,7 +152,7 @@ export class API {
    * @return {Object}
    */
   static deletePinByID(pinID) {
-    return HTTPModule.delete(`/pin/${pinID}`);
+    return HTTPModule.delete(`${paths.pin}/${pinID}`);
   }
 
   /**
@@ -158,6 +161,6 @@ export class API {
    * @return {Object}
    */
   static getPinsByBoardID(boardID) {
-    return HTTPModule.get(`/pins/${boardID}`);
+    return HTTPModule.get(`${paths.pins}${boardID}`);
   }
 }
