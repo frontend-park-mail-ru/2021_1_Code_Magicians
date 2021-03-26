@@ -29,7 +29,7 @@ class UserStore extends Store {
     let changed = true;
     this._status = 'ok';
 
-    switch (action) {
+    switch (action.actionType) {
       case actionTypes.user.login:
         this._login(action.data);
         break;
@@ -46,7 +46,7 @@ class UserStore extends Store {
         this._editProfile(action.data);
         break;
       case actionTypes.user.changePassword:
-        this._changePassword(action.data.password);
+        this._changePassword(action.data);
         break;
       default:
         changed = false;
@@ -193,16 +193,16 @@ class UserStore extends Store {
 
   /**
    * Change password
-   * @param {String} newPassword
+   * @param {Object} data - payload data with password
    * @private
    */
-  _changePassword(newPassword) {
+  _changePassword(data) {
     if (!this._user.authorized()) {
       this._status = storeStatuses.unauthorized;
       return;
     }
 
-    const response = API.changeUserPassword(newPassword);
+    const response = API.changeUserPassword(data.password);
     switch (response.status) {
       case 200:
         break;

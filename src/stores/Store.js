@@ -11,6 +11,7 @@ class Store {
   constructor() {
     this.processEvent = this.processEvent.bind(this);
     this.dispatcherToken = appDispatcher.register(this.processEvent);
+    this._status = 'ok';
   }
 
   /**
