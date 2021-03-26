@@ -30,6 +30,9 @@ export class HTTPModule {
       };
     }
 
+    let status = 500;
+    let headers = new Headers();
+    let responseBody = {};
     try {
       const response = await fetch(
           this.makeURL(path),
@@ -45,20 +48,16 @@ export class HTTPModule {
         this._setCSRFToken(response.headers.get('X-CSRF-Token'));
       }
 
-      const parsedJson = await response.json();
+      responseBody = await response.json();
+      headers = response.headers;
+      status = response.status;
+    } catch (e) {}
 
-      return {
-        status: response.status,
-        headers: response.headers,
-        responseBody: parsedJson,
-      };
-    } catch (e) {
-      return {
-        status: 500,
-        headers: new Map(),
-        responseBody: {},
-      };
-    }
+    return {
+      status: status,
+      headers: headers,
+      responseBody: responseBody,
+    };
   }
 
   /**
