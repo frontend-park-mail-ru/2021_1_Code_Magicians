@@ -12,6 +12,7 @@
         "sourceType": "module"
     },
     "rules": {
-        "max-len": "off"
+        "max-len": "off",
+        "arrow-parens": "off"
     }
 }
