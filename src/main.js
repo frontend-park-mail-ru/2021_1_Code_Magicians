@@ -1,7 +1,7 @@
-import {Page} from './components/page/page.js';
+import {appRouter} from './appManagers/router.js';
+import {ProfileView} from './views/profile/profileView.js';
 
-const application = document.getElementById('app');
+appRouter.start();
 
-const page = new Page({});
-
-application.innerHTML = page.render();
+appRouter.register('/profile', new ProfileView({}));
+appRouter.go('/profile');

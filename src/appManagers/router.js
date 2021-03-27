@@ -1,4 +1,4 @@
-import {NotFoundView} from '../views/notFoundView.js';
+import {NotFoundView} from '../views/notFoundView/notFoundView.js';
 
 import {pathParamRegExp, regSubstr} from '../consts/regexp.js';
 import {pathTemplates} from '../consts/pathTemplates.js';

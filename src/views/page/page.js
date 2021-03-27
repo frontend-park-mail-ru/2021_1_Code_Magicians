@@ -18,7 +18,7 @@ export class Page extends View {
   }
 
   /**
-   * Returns the html code for page__sidebar
+   * Returns base page layout html
    * @return {string} final html
    */
   render() {
