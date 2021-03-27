@@ -1,4 +1,4 @@
-import {backendURL} from '../consts/consts.js';
+import {constants} from '../consts/consts.js';
 
 /**
  * Basic HTTP-module to communicate with the great server itself
@@ -10,7 +10,7 @@ export class HTTPModule {
    * @return {String}
    */
   static makeURL(path) {
-    return backendURL + path;
+    return constants.network.backendURL + path;
   }
 
   /**
