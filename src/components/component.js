@@ -6,7 +6,7 @@ export class Component {
    * Constructs new component
    * @param {Object} props Properties, for utility usage and for inner templates rendering
    */
-  constructor(props) {
+  constructor(props = {}) {
     this.props = {...props};
   }
 
