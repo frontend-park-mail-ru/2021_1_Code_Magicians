@@ -73,7 +73,10 @@ class Router {
 
     this._currentView = key ? this._routes.get(key) : this._routes.get(pathTemplates.notFound);
 
-    window.history.pushState(null, null, path);
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, null, path);
+    }
+
     this._currentView.show(getPathArgs(path, key));
   }
 
