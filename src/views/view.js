@@ -11,16 +11,20 @@ export class View extends Component {
    */
   constructor(props, parent) {
     super(props);
-    this.parent = parent;
-    this.active = false;
+
+    this._active = false;
+    this._parent = parent;
   }
 
   /**
    * Shows view on the screen
+   * @param {Object} pathArgs from path
    */
-  show() {
+  show(pathArgs) {
+    this.props.pathArgs = pathArgs;
     this.active = true;
-    this.parent.insertAdjacentHTML('afterbegin', this.render());
+    
+    this._parent.insertAdjacentHTML('afterbegin', this.render());
     this.didMount();
   }
 
@@ -30,7 +34,7 @@ export class View extends Component {
   refresh() {
     if (this.active) {
       this.remove();
-      this.show();
+      this.show(this.props.pathArgs);
     }
   }
 
@@ -38,9 +42,10 @@ export class View extends Component {
    * Removes view from the screen
    */
   remove() {
-    this.active = false;
+    this._active = false;
+
     this.willUnmount();
-    this.parent.innerHTML = '';
+    this._parent.innerHTML = '';
   }
 
   /**
