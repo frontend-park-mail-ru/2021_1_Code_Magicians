@@ -66,6 +66,18 @@
   height: 100%;
   background-color: white;
 }
+.view-selector__item::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background-color: white;
+  opacity: 0;
+  transition: all 0.2s;
+}
+.view-selector__item:hover::before {
+  opacity: 1;
+}
 .view-selector__link {
   display: flex;
   align-items: center;
@@ -76,7 +88,7 @@
   cursor: pointer;
 }
 .view-selector__link:hover .view-selector__icon {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 .view-selector__icon {
   transition: 0.2s;

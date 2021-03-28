@@ -88,10 +88,30 @@
 
     &_selected::before {
       content: '';
+
       position: absolute;
+
       width: 3px;
       height: 100%;
+
       background-color: white;  // not var(--white). It shouldn't change with theme
+    }
+
+    &::before {
+      content: '';
+
+      position: absolute;
+
+      width: 3px;
+      height: 100%;
+
+      background-color: white;  // not var(--white). It shouldn't change with theme
+
+      opacity: 0;
+      transition: all 0.2s;
+    }
+    &:hover::before {
+      opacity: 1;
     }
   }
 
@@ -108,7 +128,7 @@
     cursor: pointer;
 
     &:hover #{$root}__icon {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
   }
 

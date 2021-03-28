@@ -2,8 +2,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  margin-top: 40px;
-  margin-left: 40px;
+  margin: 40px 0 30px 40px;
 
   &__board {
     display: flex;
@@ -26,9 +25,14 @@
   }
 
   &__title {
+    margin-top: 4px;
+
     color: var(--gray);
 
+    text-decoration: underline;
+
     transition: 0.3s;
+
     &:hover {
       color: var(--black);
     }

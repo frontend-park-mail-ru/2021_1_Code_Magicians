@@ -1,8 +1,7 @@
 .profile-boards {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 40px;
-  margin-left: 40px;
+  margin: 40px 0 30px 40px;
 }
 .profile-boards__board {
   display: flex;
@@ -19,7 +18,9 @@
   object-fit: cover;
 }
 .profile-boards__title {
+  margin-top: 4px;
   color: var(--gray);
+  text-decoration: underline;
   transition: 0.3s;
 }
 .profile-boards__title:hover {

@@ -72,4 +72,16 @@ export class ProfileBoardsView extends ProfileView {
           if (link.innerHTML === 'Boards') link.classList.add('profile-links__link_active');
         });
   }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    this
+        ._parent
+        .querySelectorAll('.profile-links__link')
+        .forEach(link => {
+          link.classList.remove('profile-links__link_active');
+        });
+  }
 }
