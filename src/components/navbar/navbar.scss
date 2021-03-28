@@ -6,7 +6,7 @@
   justify-content: flex-end;
   align-items: center;
 
-  width: 100%;
+  width: 1765px;
   height: 60px;
 
   padding: 5px 0;
@@ -91,6 +91,8 @@
     height: 30px;
 
     border-radius: 50%;
+
+    object-fit: cover;
 
     cursor: pointer;
   }

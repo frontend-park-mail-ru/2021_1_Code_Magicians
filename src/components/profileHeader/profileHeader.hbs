@@ -4,9 +4,11 @@
     <div class="profile-info__main-info">
         <div class="profile-info__username-zone">
             <span class="profile-info__username">Username usernamov</span>
-            <a href="/settings" class="profile-info__settings">
-                <img src="/assets/img/svg/profile-header/user-settings.svg" alt="settings" class="profile-info__settings-gear">
-            </a>
+            {{#if selfProfile}}
+                <a href="/settings" class="profile-info__settings">
+                    <img src="/assets/img/svg/profile-header/user-settings.svg" alt="settings" class="profile-info__settings-icon">
+                </a>
+            {{/if}}
         </div>
         <div class="profile-info__additional-info">
             <span class="profile-info__user-location">Moscow, Russian Federation</span>
