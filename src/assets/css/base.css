@@ -22,8 +22,11 @@ body {
     --red: rgba(203, 7, 15, 1);
     --gray: rgba(169, 169, 169, 1);
     --black: rgba(37, 37, 37, 1);
+    --perm-white: rgba(255, 255, 255, 1);
 
     --main-elements-shadow: rgba(0, 0, 0, 0.05);
+
+    --perm-blur: rgba(33, 36, 40, 0.3);
 
     --theme-transition: 0.5s;
 }
@@ -34,4 +37,5 @@ body {
     --red: rgba(203, 7, 15, 1);
     --gray: rgba(169, 169, 169, 1);
     --black: rgba(230, 230, 230, 1);
+    --perm-white: rgba(255, 255, 255, 1);
 }
