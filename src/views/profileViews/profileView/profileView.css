@@ -1,0 +1,10 @@
+.profile-header-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-content-wrapper {
+  display: flex;
+}
+
+/*# sourceMappingURL=profileView.css.map */

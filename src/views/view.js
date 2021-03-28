@@ -14,7 +14,6 @@ export class View extends Component {
 
     this._active = false;
     this._parent = parent;
-    this._page = null;
   }
 
   /**
@@ -25,16 +24,7 @@ export class View extends Component {
     this.props.pathArgs = pathArgs;
     this.active = true;
 
-    if (this._page) { // then we show it first
-      this._page.show(pathArgs);
-      this
-          ._parent
-          .getElementsByClassName('page__content')[0]
-          .insertAdjacentHTML('afterbegin', this.render());
-    } else {
-      this._parent.insertAdjacentHTML('afterbegin', this.render());
-    }
-
+    this._parent.insertAdjacentHTML('afterbegin', this.render());
     this.didMount();
   }
 
@@ -54,7 +44,6 @@ export class View extends Component {
   remove() {
     this._active = false;
 
-    if (this._page) this._page.willUnmount();
     this.willUnmount();
     this._parent.innerHTML = '';
   }

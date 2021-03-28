@@ -142,7 +142,7 @@ class UserStore extends Store {
   }
 
   /**
-   * delete profile
+   * delete profileViews
    * @private
    */
   _deleteProfile() {
@@ -165,7 +165,7 @@ class UserStore extends Store {
   }
 
   /**
-   * Add changes to user profile
+   * Add changes to user profileViews
    * @param {Object} changes
    * @private
    */

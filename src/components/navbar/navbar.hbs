@@ -1,17 +1,17 @@
 <div class="page__navbar">
     <form class="navbar__search-form">
-        <img src="assets/img/svg/page__navbar/Search.svg" alt="Search" class="navbar__search-icon">
+        <img src="/assets/img/svg/page__navbar/Search.svg" alt="Search" class="navbar__search-icon">
         <input type="text" class="navbar__search-input" placeholder="Looking things up">
-        <img src="assets/img/svg/page__navbar/x-mark.svg" alt="X-mark" class="navbar__search-wiper">
+        <img src="/assets/img/svg/page__navbar/x-mark.svg" alt="X-mark" class="navbar__search-wiper">
     </form>
     <div class="navbar__user-section">
         {{#if userIsAuthorised}}
             <a href="/profile">
-                <img src="assets/img/default-avatar.jpg" alt="Avatar" class="navbar__user-avatar">
+                <img src="/assets/img/default-avatar.jpg" alt="Avatar" class="navbar__user-avatar">
             </a>
             <span class="navbar__username"> Username Usernamov </span>
             <button class="navbar__user-toggle">
-                <img src="assets/img/svg/page__navbar/dropdown-arrow.svg" alt="Dropdown" class="navbar__user-change-icon">
+                <img src="/assets/img/svg/page__navbar/dropdown-arrow.svg" alt="Dropdown" class="navbar__user-change-icon">
             </button>
         {{else}}
             <a href="/signin" class="navbar__auth-link navbar__auth-link_signin">Sign in</a>
@@ -20,13 +20,13 @@
     </div>
     <div class="navbar__actions">
         <a class="navbar__action" href="/create-pin">
-            <img src="assets/img/svg/page__navbar/Create_pin.svg" alt="Plus" class="navbar__action-icon">
+            <img src="/assets/img/svg/page__navbar/Create_pin.svg" alt="Plus" class="navbar__action-icon">
         </a>
         <button class="navbar__action">
-            <img src="assets/img/svg/page__navbar/stats.svg" alt="Stats" class="navbar__action-icon ">
+            <img src="/assets/img/svg/page__navbar/stats.svg" alt="Stats" class="navbar__action-icon ">
         </button>
         <button class="navbar__action">
-            <img src="assets/img/svg/page__navbar/more.svg" alt="Dropdown" class="navbar__action-icon">
+            <img src="/assets/img/svg/page__navbar/more.svg" alt="Dropdown" class="navbar__action-icon">
         </button>
     </div>
 </div>

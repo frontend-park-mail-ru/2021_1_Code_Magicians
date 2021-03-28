@@ -1,6 +1,6 @@
 import {NotFoundView} from '../views/notFoundView/notFoundView.js';
 
-import {pathParamRegExp, regSubstr} from '../consts/regexp.js';
+import {pathParamRegExp, regSubstr, urlRegexp} from '../consts/regexp.js';
 import {pathTemplates} from '../consts/pathTemplates.js';
 
 /**
@@ -100,9 +100,18 @@ class Router {
   start() {
     window.addEventListener('popstate', () => this.go(window.location.pathname));
     window.addEventListener('click', ev => {
+      let targetURL = '';
       if (ev.target instanceof HTMLAnchorElement) {
+        targetURL = ev.target.href;
+      } else {
+        const parentAnchor = ev.target.closest('a');
+        if (parentAnchor) {
+          targetURL = parentAnchor.href;
+        }
+      }
+      if (targetURL) {
         ev.preventDefault();
-        this.go(ev.target.href);
+        this.go(targetURL.replace(urlRegexp, ''));
       }
     });
 

@@ -1,17 +1,17 @@
-import {Navbar} from '../../components/navbar/navbar.js';
-import {Sidebar} from '../../components/sidebar/sidebar.js';
-import {View} from '../view.js';
+import {Navbar} from '../navbar/navbar.js';
+import {Sidebar} from '../sidebar/sidebar.js';
+import {Component} from '../component.js';
 
 /**
  * Base page component
  */
-export class Page extends View {
+export class Page extends Component {
   /**
    * Constructs new page
    * @param {Object} props
    */
   constructor(props) {
-    super(props, document.getElementById('app'));
+    super(props);
 
     this._pageNavbar = new Navbar(props);
     this._pageSidebar = new Sidebar(props);

@@ -1,7 +1,8 @@
 export const constants = {
   network: {
     backendURL: 'http://localhost:3000',
-    defaultAvatarLink: 'assets/img/default-avatar.jpg',
+    frontendURL: `http://${window.location.hostname}:3000`,
+    defaultAvatarLink: '/assets/img/default-avatar.jpg',
 
     paths: {
       signup: '/auth/signup',
@@ -10,10 +11,10 @@ export const constants = {
       authCheck: '/auth/check',
 
       profile: 'profile',
-      selfProfile: '/profile',
-      editProfile: '/profile/edit',
-      changePassword: '/profile/password',
-      deleteProfile: 'profile/delete',
+      selfProfile: '/profileViews',
+      editProfile: '/profileViews/edit',
+      changePassword: '/profileViews/password',
+      deleteProfile: 'profileViews/delete',
 
       board: '/board',
       boards: '/boards',
