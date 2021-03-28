@@ -86,17 +86,6 @@
 
     margin: 0;
 
-    &_selected::before {
-      content: '';
-
-      position: absolute;
-
-      width: 3px;
-      height: 100%;
-
-      background-color: white;  // not var(--white). It shouldn't change with theme
-    }
-
     &::before {
       content: '';
 
@@ -110,7 +99,12 @@
       opacity: 0;
       transition: all 0.2s;
     }
+
     &:hover::before {
+      opacity: 1;
+    }
+
+    &_selected::before {
       opacity: 1;
     }
   }

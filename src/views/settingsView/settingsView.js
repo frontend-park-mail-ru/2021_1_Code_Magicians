@@ -66,6 +66,12 @@ export class SettingsView extends View {
             link.classList.add('settings__section-link_active');
           }
         });
+
+    this._parent.querySelectorAll('.view-selector__item').forEach(item => {
+      if (item.getAttribute('data-view') === 'settings') {
+        item.classList.add('view-selector__item_selected');
+      }
+    });
   }
 
   /**
@@ -78,5 +84,11 @@ export class SettingsView extends View {
         .forEach(link => {
           link.classList.remove('settings__section-link_active');
         });
+
+    this._parent.querySelectorAll('.view-selector__item').forEach(item => {
+      if (item.getAttribute('data-view') === 'settings') {
+        item.classList.remove('view-selector__item_selected');
+      }
+    });
   }
 }
