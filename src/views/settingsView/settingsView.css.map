@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"settingsView.css"}
+{"version":3,"sourceRoot":"","sources":["settingsView.scss"],"names":[],"mappings":"AAAA;EACE;EAEA;;;AAGF;EACE;EAEA;;AAEA;EACE;EACA;EACA;EAEA;EACA;EACA;EAEA;;AAGF;EACE;EAEA;EACA;EAEA;EACA;EAEA;EACA;EAEA;;AAEA;EACE;;AAIJ;EACE;EACA","file":"settingsView.css"}

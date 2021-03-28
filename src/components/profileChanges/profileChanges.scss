@@ -1,0 +1,163 @@
+.profile-changes {
+  display: flex;
+  flex-direction: column;
+
+  width: 1200px;
+  height: 500px;
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    color: var(--black);
+  }
+
+  &__description {
+    margin-top: 7px;
+
+    color: var(--black);
+  }
+
+  &__settings-form {
+    display: flex;
+    align-items: center;
+
+    width: 1000px;
+
+    margin-top: auto;
+  }
+
+  &__avatar {
+    &-zone {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      width: 150px;
+      height: 230px;
+
+      margin-right: auto;
+      margin-left: 50px;
+    }
+
+    &-title {
+      margin-right: auto;
+
+      font-size: 18px;
+
+      color: var(--black);
+    }
+
+    &-preview {
+      width: 150px;
+      height: 150px;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+    }
+
+    &-change-button {
+      width: 110px;
+      height: 40px;
+
+      margin-top: auto;
+
+      outline: none;
+      border: none;
+      border-radius: 20px;
+
+      font-size: 14px;
+
+      color: var(--white);
+      background-color: var(--gray);
+
+      cursor: pointer;
+
+      transition: 0.2s;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    align-self: flex-end;
+
+    height: 350px;
+
+    margin-top: 50px;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &-name {
+      color: var(--black);
+
+      font-size: 15px;
+    }
+
+    &-input {
+      width: 400px;
+
+      border: none;
+      border-radius: 4px;
+
+      box-shadow: 0 3px 2px -2px var(--gray);
+      outline: none;
+
+      font-size: 22px;
+
+      background-color: inherit;
+
+      transition: 0.2s;
+
+      &::placeholder {
+        transition: 0.1s;
+        color: var(--gray);
+      }
+
+      &:focus {
+        background-color: var(--almost-white);
+
+        box-shadow: 0 3px 2px -2px var(--red);
+      }
+
+      &:focus::placeholder {
+        color: transparent;
+      }
+    }
+  }
+
+  &__submit-button {
+    width: 110px;
+    height: 40px;
+
+    outline: none;
+    border: none;
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    color: var(--white);
+    background-color: var(--gray);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}

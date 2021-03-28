@@ -1,0 +1,47 @@
+.settings-wrapper {
+  background-color: var(--white);
+
+  height: 100%;
+}
+
+.settings {
+  display: flex;
+
+  height: 100%;
+
+  &__sections {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-left: 40px;
+    padding-right: 40px;
+    padding-top: 80px;
+
+    border-right: 2px solid var(--almost-white);
+  }
+
+  &__section {
+    margin: 10px 0;
+
+    border: none;
+    outline: none;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    color: var(--black);
+    background-color: transparent;
+
+    cursor: pointer;
+
+    &_active {
+      text-decoration: underline;
+    }
+  }
+
+  &__form-wrapper {
+    margin-top: 80px;
+    margin-left: 150px;
+  }
+}

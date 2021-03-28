@@ -10,7 +10,8 @@
 }
 
 .page__content {
-  margin-top: 72px;
+  padding-top: 72px;
+  height: 100%;
 }
 
 /*# sourceMappingURL=page.css.map */
