@@ -6,6 +6,7 @@ import {ProfileBoardsView} from './views/profileViews/profileBoardsView/profileB
 appRouter
     .register('/profile', new ProfileView({}))
     .register('/profile/boards', new ProfileBoardsView({}))
-    .register('/settings', new SettingsView({}));
+    .register('/settings', new SettingsView({}))
+    .register('/settings/:section', new SettingsView({}));
 
 appRouter.start();

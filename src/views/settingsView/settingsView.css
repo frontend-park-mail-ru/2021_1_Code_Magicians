@@ -16,17 +16,16 @@
   padding-top: 80px;
   border-right: 2px solid var(--almost-white);
 }
-.settings__section {
+.settings__section-link {
   margin: 10px 0;
-  border: none;
-  outline: none;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
+  text-decoration: none;
   color: var(--black);
   background-color: transparent;
   cursor: pointer;
 }
-.settings__section_active {
+.settings__section-link_active {
   text-decoration: underline;
 }
 .settings__form-wrapper {

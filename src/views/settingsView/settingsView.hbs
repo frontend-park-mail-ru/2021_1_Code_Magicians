@@ -1,15 +1,15 @@
 <div class="settings-wrapper">
     <div class="settings">
         <div class="settings__sections">
-            <button class="settings__section settings__section_active">
+            <a data-section="profile" href="/settings/profile" class="settings__section-link settings__section-link_active">
                 Profile changes
-            </button>
-            <button class="settings__section">
+            </a>
+            <a data-section="notifications" href="/settings/notifications" class="settings__section-link">
                 Notifications
-            </button>
-            <button class="settings__section">
+            </a>
+            <a data-section="security" href="/settings/security" class="settings__section-link">
                 Security
-            </button>
+            </a>
         </div>
         <div class="settings__form-wrapper">
             {{{ settingsForm }}}
