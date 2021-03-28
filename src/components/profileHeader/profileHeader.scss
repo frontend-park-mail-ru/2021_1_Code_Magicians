@@ -41,6 +41,7 @@
     font-size: 24px;
     font-weight: bold;
 
+    color: var(--black);
   }
 
   &__settings {
@@ -99,6 +100,8 @@
     &-counter {
       font-weight: bold;
       font-size: 24px;
+
+      color: var(--black);
     }
 
     &-name {

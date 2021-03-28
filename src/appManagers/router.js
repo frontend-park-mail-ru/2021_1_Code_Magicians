@@ -55,6 +55,11 @@ class Router {
    * @param {String} path
    */
   go(path) {
+    if (path === '/back') {
+      this.back();
+      return;
+    }
+
     const prevView = this._currentView;
     if (prevView) {
       prevView.remove();

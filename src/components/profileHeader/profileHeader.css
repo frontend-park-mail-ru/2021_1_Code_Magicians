@@ -27,6 +27,7 @@
 .profile-info__username {
   font-size: 24px;
   font-weight: bold;
+  color: var(--black);
 }
 .profile-info__settings {
   display: flex;
@@ -67,6 +68,7 @@
 .profile-info__stat-counter {
   font-weight: bold;
   font-size: 24px;
+  color: var(--black);
 }
 .profile-info__stat-name {
   color: var(--gray);
