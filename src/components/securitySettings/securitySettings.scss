@@ -1,0 +1,12 @@
+.security-settings {
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    height: 200px;
+
+    margin-top: 50px;
+  }
+}
