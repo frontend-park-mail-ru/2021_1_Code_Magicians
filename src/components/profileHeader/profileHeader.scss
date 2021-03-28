@@ -113,6 +113,8 @@
     color: var(--black);
     background-color: inherit;
 
+    transition: 0.3s;
+
     &:hover {
       color: var(--white);
       background-color: var(--red);

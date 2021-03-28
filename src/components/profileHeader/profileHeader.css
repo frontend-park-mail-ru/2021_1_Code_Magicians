@@ -79,6 +79,7 @@
   border-right: 2px solid var(--almost-white);
   color: var(--black);
   background-color: inherit;
+  transition: 0.3s;
 }
 .profile-links__link:hover {
   color: var(--white);
