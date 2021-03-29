@@ -62,7 +62,9 @@ export class API {
    * @return {Object}
    */
   static getSelfProfile() {
-    return HTTPModule.get(paths.selfProfile);
+    let result;
+    HTTPModule.get(paths.selfProfile).then((response) => result = response);
+    return result;
   }
 
   /**

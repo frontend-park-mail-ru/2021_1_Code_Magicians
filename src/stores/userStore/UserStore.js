@@ -67,24 +67,25 @@ class UserStore extends Store {
       return;
     }
 
-    const response = API.loginUser(credentials);
-    switch (response.status) {
-      case 403:
-        this._user.onLogin();
-        this._status = storeStatuses.alreadyAuthorized;
-        break;
-      case 200:
-        this._fetchUserData();
-        break;
-      case 400:
-        this._status = storeStatuses.invalidCreds;
-        break;
-      case 404:
-        this._status = 'user not found';
-        break;
-      default:
-        this._status = storeStatuses.internalError;
-    }
+    API.loginUser(credentials).then((response) => {
+      switch (response.status) {
+        case 403:
+          this._user.onLogin();
+          this._status = storeStatuses.alreadyAuthorized;
+          break;
+        case 200:
+          this._fetchUserData();
+          break;
+        case 400:
+          this._status = storeStatuses.invalidCreds;
+          break;
+        case 404:
+          this._status = 'user not found';
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+    });
   }
 
   /**
@@ -98,24 +99,25 @@ class UserStore extends Store {
       return;
     }
 
-    const response = API.signupUser(credentials);
-    switch (response.status) {
-      case 201:
-        this._fetchUserData();
-        break;
-      case 403:
-        this._user.onLogin();
-        this._status = storeStatuses.alreadyAuthorized;
-        break;
-      case 400:
-        this._status = storeStatuses.invalidCreds;
-        break;
-      case 409:
-        this._status = storeStatuses.userAlreadyExists;
-        break;
-      default:
-        this._status = storeStatuses.internalError;
-    }
+    API.signupUser(credentials).then((response) => {
+      switch (response.status) {
+        case 201:
+          this._fetchUserData();
+          break;
+        case 403:
+          this._user.onLogin();
+          this._status = storeStatuses.alreadyAuthorized;
+          break;
+        case 400:
+          this._status = storeStatuses.invalidCreds;
+          break;
+        case 409:
+          this._status = storeStatuses.userAlreadyExists;
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+    });
   }
 
   /**
@@ -128,17 +130,18 @@ class UserStore extends Store {
       return;
     }
 
-    const response = API.logoutUser();
-    switch (response.status) {
-      case 200:
-        this._user.onLogout();
-        break;
-      case 401:
-        this._status = storeStatuses.unauthorized;
-        break;
-      default:
-        this._status = storeStatuses.internalError;
-    }
+    API.logoutUser().then((response) => {
+      switch (response.status) {
+        case 200:
+          this._user.onLogout();
+          break;
+        case 401:
+          this._status = storeStatuses.unauthorized;
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+    });
   }
 
   /**
@@ -151,17 +154,18 @@ class UserStore extends Store {
       return;
     }
 
-    const response = API.deleteSelfProfile();
-    switch (response.status) {
-      case 200:
-        this._user.onLogout();
-        break;
-      case 401:
-        this._status = storeStatuses.unauthorized;
-        break;
-      default:
-        this._status = storeStatuses.internalError;
-    }
+    API.deleteSelfProfile().then((response) => {
+      switch (response.status) {
+        case 200:
+          this._user.onLogout();
+          break;
+        case 401:
+          this._status = storeStatuses.unauthorized;
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+    });
   }
 
   /**
@@ -175,20 +179,21 @@ class UserStore extends Store {
       return;
     }
 
-    const response = API.editProfile(changes);
-    switch (response.status) {
-      case 200:
-        this._fetchUserData();
-        break;
-      case 401:
-        this._status = storeStatuses.unauthorized;
-        break;
-      case 409:
-        this._status = storeStatuses.editConflict;
-        break;
-      default:
-        this._status = storeStatuses.internalError;
-    }
+    API.editProfile(changes).then((response) => {
+      switch (response.status) {
+        case 200:
+          this._fetchUserData();
+          break;
+        case 401:
+          this._status = storeStatuses.unauthorized;
+          break;
+        case 409:
+          this._status = storeStatuses.editConflict;
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+    });
   }
 
   /**
@@ -202,16 +207,17 @@ class UserStore extends Store {
       return;
     }
 
-    const response = API.changeUserPassword(data.password);
-    switch (response.status) {
-      case 200:
-        break;
-      case 401:
-        this._status = storeStatuses.unauthorized;
-        break;
-      default:
-        this._status = storeStatuses.internalError;
-    }
+    API.changeUserPassword(data.password).then((response) => {
+      switch (response.status) {
+        case 200:
+          break;
+        case 401:
+          this._status = storeStatuses.unauthorized;
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+    });
   }
 
 
@@ -223,19 +229,19 @@ class UserStore extends Store {
     let authorized = false;
     let profile = new Profile();
 
-    const response = API.getSelfProfile();
-    switch (response.status) {
-      case 401:
-        break;
-      case 200:
-        authorized = true;
-        profile = new Profile(response.responseBody);
-        break;
-      default:
-        this._status = storeStatuses.internalError;
-    }
-
-    this._user = new User(profile, authorized);
+    API.getSelfProfile().then((response) => {
+      switch (response.status) {
+        case 401:
+          break;
+        case 200:
+          authorized = true;
+          profile = new Profile(response.responseBody);
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+      this._user = new User(profile, authorized);
+    });
   }
 
 

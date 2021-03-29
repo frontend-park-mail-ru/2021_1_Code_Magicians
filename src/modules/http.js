@@ -33,13 +33,14 @@ export class HTTPModule {
     let status = 500;
     let headers = new Headers();
     let responseBody = {};
+
     try {
       const response = await fetch(
           this.makeURL(path),
           {
             credentials: 'include',
             mode: 'cors',
-            body: body,
+            body: JSON.stringify(body),
             ...options,
           },
       );

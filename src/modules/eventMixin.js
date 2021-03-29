@@ -35,6 +35,6 @@ export const eventMixin = {
     if (! (event in this._listeners)) return;
     this
         ._listeners[event]
-        .forEach(listenersArr => listenersArr.forEach(listener => listener.apply(this, args)));
+        .forEach((listener) => listener.apply(this, args));
   },
 };
