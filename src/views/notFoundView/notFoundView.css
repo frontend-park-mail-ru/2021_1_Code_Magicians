@@ -1,4 +1,4 @@
-.not-found {
+.page-error {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,18 +7,18 @@
   color: var(--black);
   background-color: var(--white);
 }
-.not-found__back-link {
+.page-error__back-link {
   margin-top: auto;
   margin-bottom: 200px;
 }
-.not-found__description {
+.page-error__description {
   margin-top: 30px;
   color: var(--black);
 }
-.not-found__contact-link {
+.page-error__contact-link {
   margin-left: 15px;
 }
-.not-found__back-link {
+.page-error__back-link {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +32,7 @@
   background-color: var(--almost-white);
   transition: 0.1s;
 }
-.not-found__back-link:hover {
+.page-error__back-link:hover {
   color: var(--white);
   background-color: var(--red);
 }

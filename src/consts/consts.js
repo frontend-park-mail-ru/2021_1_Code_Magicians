@@ -1,7 +1,6 @@
 export const constants = {
   network: {
     backendURL: 'http://localhost:3000',
-    frontendURL: `http://${window.location.hostname}:3000`,
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
 
     paths: {

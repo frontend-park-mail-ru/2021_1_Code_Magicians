@@ -93,13 +93,13 @@
 .navbar__auth-link:hover {
   opacity: 0.9;
 }
-.navbar__auth-link_signin {
+.navbar__auth-link_primary {
   margin-left: 0;
   margin-right: 15px;
   color: var(--white);
   background-color: red;
 }
-.navbar__auth-link_signup {
+.navbar__auth-link_secondary {
   margin-left: 15px;
   margin-right: 180px;
   color: var(--black);
