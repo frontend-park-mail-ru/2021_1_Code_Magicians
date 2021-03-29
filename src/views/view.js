@@ -22,7 +22,7 @@ export class View extends Component {
    */
   show(pathArgs) {
     this.props.pathArgs = pathArgs;
-    this.active = true;
+    this._active = true;
 
     this._parent.insertAdjacentHTML('afterbegin', this.render());
     this.didMount();
@@ -32,7 +32,7 @@ export class View extends Component {
    * Refreshes view
    */
   refresh() {
-    if (this.active) {
+    if (this._active) {
       this.remove();
       this.show(this.props.pathArgs);
     }
@@ -46,17 +46,5 @@ export class View extends Component {
 
     this.willUnmount();
     this._parent.innerHTML = '';
-  }
-
-  /**
-   * Called right after showing the view
-   */
-  didMount() {
-  }
-
-  /**
-   * Called before removing the view
-   */
-  willUnmount() {
   }
 }

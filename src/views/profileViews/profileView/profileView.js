@@ -21,14 +21,15 @@ export class ProfileView extends View {
    * @return {String}
    */
   render() {
-    this._profileHeader = new ProfileHeader({...this.props});
+    this._nestedComponents.set('profileHeader', new ProfileHeader({...this.props}));
+    this._nestedComponents.get('profileHeader').setState({section: 'profile'});
 
     const tmpl = Handlebars.templates['profileView.hbs'];
 
     this._page = new Page({
       ...this.props,
       page__content: tmpl({
-        profileHeader: this._profileHeader.render(),
+        profileHeader: this._nestedComponents.get('profileHeader').render(),
         profileContent: this._profileMainContent,
       }),
     });

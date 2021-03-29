@@ -20,4 +20,18 @@ export class ProfileHeader extends Component {
     const tmpl = Handlebars.templates['profileHeader.hbs'];
     return tmpl(this.props);
   }
+
+  /**
+   * Did
+   */
+  didMount() {
+    document
+        .querySelectorAll('.profile-links__link')
+        .forEach(link => {
+          // link.classList.remove('profile-links__link_active');
+          if (link.getAttribute('data-target') === this._state.section) {
+            link.classList.add('profile-links__link_active');
+          }
+        });
+  }
 }

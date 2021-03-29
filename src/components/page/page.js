@@ -13,8 +13,8 @@ export class Page extends Component {
   constructor(props) {
     super(props);
 
-    this._pageNavbar = new Navbar(props);
-    this._pageSidebar = new Sidebar(props);
+    this._nestedComponents.set('pageNavbar', new Navbar(props));
+    this._nestedComponents.set('pageSidebar', new Sidebar(props));
   }
 
   /**
@@ -22,10 +22,12 @@ export class Page extends Component {
    * @return {string} final html
    */
   render() {
+    this._nestedComponents.get('pageSidebar').setState({...this._state});
+
     const tmpl = Handlebars.templates['page.hbs'];
     return tmpl({
-      page__navbar: this._pageNavbar.render(),
-      page__sidebar: this._pageSidebar.render(),
+      page__navbar: this._nestedComponents.get('pageNavbar').render(),
+      page__sidebar: this._nestedComponents.get('pageSidebar').render(),
       ...this.props,
     });
   }
