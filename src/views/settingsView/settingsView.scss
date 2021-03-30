@@ -2,6 +2,8 @@
   background-color: var(--white);
 
   height: 100%;
+
+  transition: var(--theme-transition);
 }
 
 .settings {
@@ -19,6 +21,7 @@
     padding-top: 80px;
 
     border-right: 2px solid var(--almost-white);
+    transition: var(--theme-transition);
   }
 
   &__section-link {
@@ -73,6 +76,7 @@
 
       font-size: 22px;
 
+      color: var(--black);
       background-color: inherit;
 
       transition: 0.2s;

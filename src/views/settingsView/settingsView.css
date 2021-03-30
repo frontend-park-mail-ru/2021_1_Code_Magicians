@@ -1,6 +1,7 @@
 .settings-wrapper {
   background-color: var(--white);
   height: 100%;
+  transition: var(--theme-transition);
 }
 
 .settings {
@@ -15,6 +16,7 @@
   padding-right: 40px;
   padding-top: 80px;
   border-right: 2px solid var(--almost-white);
+  transition: var(--theme-transition);
 }
 .settings__section-link {
   margin: 10px 0;
@@ -53,6 +55,7 @@
   box-shadow: 0 3px 2px -2px var(--gray);
   outline: none;
   font-size: 22px;
+  color: var(--black);
   background-color: inherit;
   transition: 0.2s;
 }

@@ -20,6 +20,8 @@ body {
     --red: rgba(203, 7, 15, 1);
     --gray: rgba(169, 169, 169, 1);
     --black: rgba(37, 37, 37, 1);
+
+    --theme-transition: 0.2s;
 }
 
 :root[theme='dark'] {
@@ -28,4 +30,6 @@ body {
     --red: rgba(203, 7, 15, 1);
     --gray: rgba(169, 169, 169, 1);
     --black: rgba(230, 230, 230, 1);
+
+    --theme-transition: 0.2s;
 }

@@ -10,6 +10,7 @@
   width: 70px;
   border-right: 5px solid var(--almost-white);
   background-color: var(--white);
+  transition: var(--theme-transition);
 }
 
 .sidebar__theme-toggle {
