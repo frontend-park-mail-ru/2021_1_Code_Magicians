@@ -14,6 +14,8 @@ export class View extends Component {
 
     this._active = false;
     this._parent = parent;
+
+    this.refresh = this.refresh.bind(this);
   }
 
   /**

@@ -26,7 +26,6 @@ class UserStore extends Store {
    * @param {Object} action
    */
   processEvent(action) {
-    let changed = true;
     this._status = 'ok';
 
     switch (action.actionType) {
@@ -48,12 +47,7 @@ class UserStore extends Store {
       case actionTypes.user.changePassword:
         this._changePassword(action.data);
         break;
-      default:
-        changed = false;
-        break;
     }
-
-    if (changed) this._trigger('change');
   }
 
   /**
@@ -85,6 +79,7 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
+      this._trigger('change');
     });
   }
 
@@ -117,6 +112,7 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
+      this._trigger('change');
     });
   }
 
@@ -141,6 +137,7 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
+      this._trigger('change');
     });
   }
 
@@ -165,6 +162,7 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
+      this._trigger('change');
     });
   }
 
@@ -193,6 +191,7 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
+      this._trigger('change');
     });
   }
 
@@ -217,6 +216,7 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
+      this._trigger('change');
     });
   }
 
@@ -241,6 +241,7 @@ class UserStore extends Store {
           this._status = storeStatuses.internalError;
       }
       this._user = new User(profile, authorized);
+      this._trigger('change');
     });
   }
 

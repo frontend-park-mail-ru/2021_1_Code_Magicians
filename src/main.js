@@ -10,3 +10,4 @@ appRouter
     .register('/settings/:section', new SettingsView({}));
 
 appRouter.start();
+

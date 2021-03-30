@@ -30,9 +30,11 @@ export class HTTPModule {
       };
     }
 
-    let status = 500;
+    let status = 228;
     let headers = new Headers();
     let responseBody = {};
+
+    if (body) options = {...options, body: JSON.stringify(body)};
 
     try {
       const response = await fetch(
@@ -40,7 +42,6 @@ export class HTTPModule {
           {
             credentials: 'include',
             mode: 'cors',
-            body: JSON.stringify(body),
             ...options,
           },
       );
@@ -52,7 +53,9 @@ export class HTTPModule {
       responseBody = await response.json();
       headers = response.headers;
       status = response.status;
-    } catch (e) {}
+    } catch (e) {
+      console.log('network error');
+    }
 
     return {
       status: status,

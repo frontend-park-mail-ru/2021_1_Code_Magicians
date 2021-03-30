@@ -8,21 +8,23 @@
     <div class="profile-changes__settings-form">
         <div class="profile-changes__avatar-zone">
             <span class="profile-changes__avatar-title">Avatar</span>
-            <img src="/assets/img/default-avatar.jpg" alt="avatar" class="profile-changes__avatar-preview">
+            <img src="{{user.avatar}}" alt="avatar" class="profile-changes__avatar-preview">
             <button class="profile-changes__avatar-change-button">Change</button>
         </div>
         <div class="profile-changes__fields">
             <div class="settings__field">
                 <span class="settings__field-name">Name</span>
-                <input type="text" class="settings__field-input" placeholder="Add name">
+                <input
+                    type="text" class="settings__field-input"
+                    placeholder="{{#if user.name}}{{user.name}}{{else}}Add name{{/if}}">
             </div>
             <div class="settings__field">
                 <span class="settings__field-name">Username</span>
-                <input type="text" class="settings__field-input" placeholder="UsernameNick">
+                <input type="text" class="settings__field-input" placeholder="{{user.username}}">
             </div>
             <div class="settings__field">
                 <span class="settings__field-name">Email</span>
-                <input type="text" class="settings__field-input" placeholder="email@gmail.com">
+                <input type="email" class="settings__field-input" placeholder="{{user.email}}">
             </div>
             <input type="submit" class="settings__submit-button">
         </div>

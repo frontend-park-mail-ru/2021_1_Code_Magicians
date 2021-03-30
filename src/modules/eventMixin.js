@@ -20,21 +20,18 @@ export const eventMixin = {
    */
   unbind(event, callback) {
     this._listeners = this._listeners || {};
-    if (!(event in this._listeners)) return;
-    this._listeners[event].splice(this._listeners[event].indexOf(callback), 1);
+    if (!this._listeners[event]) return;
+    this._listeners[event] = this._listeners[event].filter((listener) => listener !== callback);
   },
 
   /**
    * Trigger event with some data
    * @param {String} event
-   * @param {args} args
    * @private
    */
-  _trigger(event, ...args) {
+  _trigger(event) {
     this._listeners = this._listeners || {};
-    if (! (event in this._listeners)) return;
-    this
-        ._listeners[event]
-        .forEach((listener) => listener.apply(this, args));
+    if (!this._listeners[event]) return;
+    this._listeners[event].forEach((listener) => listener());
   },
 };

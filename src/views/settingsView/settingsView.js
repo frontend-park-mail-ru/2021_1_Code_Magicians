@@ -4,6 +4,7 @@ import {Page} from '../../components/page/page.js';
 import {ProfileChanges} from '../../components/profileChanges/profileChanges.js';
 import {SecuritySettings} from '../../components/securitySettings/securitySettings.js';
 import {NotificationSettings} from '../../components/notificationSettings/notificationSettings.js';
+import {userStore} from '../../stores/userStore/UserStore.js';
 
 /**
  * Profile settings view
@@ -15,6 +16,8 @@ export class SettingsView extends View {
    */
   constructor(props = {}) {
     super(props, document.getElementById('app'));
+
+    userStore.bind('change', this.refresh);
   }
 
   /**
@@ -61,7 +64,7 @@ export class SettingsView extends View {
     this
         ._parent
         .querySelectorAll('.settings__section-link')
-        .forEach(link => {
+        .forEach((link) => {
           if (link.getAttribute('data-section') === sectionName) {
             link.classList.add('settings__section-link_active');
           }
