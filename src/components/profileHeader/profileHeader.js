@@ -28,8 +28,7 @@ export class ProfileHeader extends Component {
     document
         .querySelectorAll('.profile-links__link')
         .forEach((link) => {
-          // link.classList.remove('profile-links__link_active');
-          if (link.href === window.location.pathname) {
+          if (link.href.endsWith(window.location.pathname)) {
             link.classList.add('profile-links__link_active');
           }
         });

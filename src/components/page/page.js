@@ -22,8 +22,6 @@ export class Page extends Component {
    * @return {string} final html
    */
   render() {
-    this._nestedComponents.get('pageSidebar').setState({...this._state});
-
     const tmpl = Handlebars.templates['page.hbs'];
     return tmpl({
       page__navbar: this._nestedComponents.get('pageNavbar').render(),

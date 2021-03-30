@@ -1,4 +1,5 @@
 import {Component} from '../component.js';
+import {urlRegexp} from '../../consts/regexp.js';
 
 /**
  * Side bar (page__sidebar)
@@ -29,9 +30,9 @@ export class Sidebar extends Component {
   didMount() {
     document
         .querySelectorAll('.view-selector__item')
-        .forEach(item => {
-          // item.classList.remove('view-selector__item_selected');
-          if (item.getAttribute('data-view') === this._state.view) {
+        .forEach((item) => {
+          const link = item.querySelector('.view-selector__link');
+          if (window.location.pathname.startsWith(link.href.replace(urlRegexp, ''))) {
             item.classList.add('view-selector__item_selected');
           }
         });

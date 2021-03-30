@@ -22,7 +22,6 @@ export class ProfileView extends View {
    */
   render() {
     this._nestedComponents.set('profileHeader', new ProfileHeader({...this.props}));
-    this._nestedComponents.get('profileHeader').setState({section: 'profile'});
 
     const tmpl = Handlebars.templates['profileView.hbs'];
 

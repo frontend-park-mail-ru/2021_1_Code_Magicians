@@ -59,13 +59,4 @@ export class ProfileBoardsView extends ProfileView {
 
     return super.render();
   }
-
-  /**
-   * Did
-   */
-  didMount() {
-    this._nestedComponents.get('profileHeader').setState({section: 'boards'});
-
-    super.didMount();
-  }
 }
