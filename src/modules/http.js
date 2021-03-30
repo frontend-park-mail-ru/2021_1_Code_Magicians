@@ -23,18 +23,28 @@ export class HTTPModule {
    */
   static async _requestBackend(path, options = {}, body = null) {
     if (['POST', 'PUT', 'DELETE'].includes(options.method)) {
-      options.headers = options.headers || {};
-      options.headers = {
-        ...options.headers,
-        'X-CSRF-Token': this._getCSRFToken(),
-      };
+      if (this._getCSRFToken()) {
+        options.headers = options.headers || {};
+        options.headers = {
+          ...options.headers,
+          'X-CSRF-Token': this._getCSRFToken(),
+        };
+      }
     }
+
+    // options.headers = {...options.headers, 'Origin': window.location.origin};
 
     let status = 228;
     let headers = new Headers();
     let responseBody = {};
 
-    if (body) options = {...options, body: JSON.stringify(body)};
+    if (body) {
+      options = {...options, body: JSON.stringify(body)};
+      options.headers = {
+        ...options.headers,
+        'Content-Type': 'application/json;charset=utf-8',
+      };
+    }
 
     try {
       const response = await fetch(
@@ -45,6 +55,7 @@ export class HTTPModule {
             ...options,
           },
       );
+      console.log(response.headers);
 
       if (response.headers.has('X-CSRF-Token')) {
         this._setCSRFToken(response.headers.get('X-CSRF-Token'));
@@ -54,7 +65,7 @@ export class HTTPModule {
       headers = response.headers;
       status = response.status;
     } catch (e) {
-      console.log('network error');
+      console.log('Network or unknown error');
     }
 
     return {

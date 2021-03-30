@@ -12,7 +12,7 @@ export class User extends Model {
    * @param {boolean} authorized
    */
   constructor(profile, authorized = false) {
-    super({isAuthorized: authorized});
+    super({_isAuthorized: authorized});
     this.profile = profile;
   }
 
@@ -27,7 +27,7 @@ export class User extends Model {
    * unauthorize
    */
   onLogout() {
-    this.isAuthorized = false;
+    this._isAuthorized = false;
   }
 
   /**

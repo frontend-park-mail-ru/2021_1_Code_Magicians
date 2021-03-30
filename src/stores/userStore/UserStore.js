@@ -191,6 +191,7 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
+      console.log('profile edited. Status: ', response.status);
       this._trigger('change');
     });
   }

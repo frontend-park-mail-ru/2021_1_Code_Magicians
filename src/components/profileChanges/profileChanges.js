@@ -1,5 +1,6 @@
 import {Component} from '../component.js';
 import {userStore} from '../../stores/userStore/UserStore.js';
+import {actions} from '../../actions/actions.js';
 
 /**
  * Profile changes form
@@ -27,9 +28,14 @@ export class ProfileChanges extends Component {
    * Did
    */
   didMount() {
-    // const form = document.querySelector('.profile-changes');
-    // form.que
-    super.didMount();
+    document.querySelector('.profile-changes').addEventListener('submit', this.submit);
+  }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    document.querySelector('.profile-changes').removeEventListener('submit', this.submit);
   }
 
   /**
@@ -37,6 +43,20 @@ export class ProfileChanges extends Component {
    * @param {Event} ev
    */
   submit(ev) {
+    ev.preventDefault();
+    const target = ev.target;
 
+    const changes = {};
+
+    const name = target.querySelector('[name="name"]').value.trim();
+
+    const username = target.querySelector('[name="username"]').value.trim();
+    const email = target.querySelector('[name="email"]').value.trim();
+
+    if (name) changes['name'] = name;
+    changes['username'] = username;
+    changes['email'] = email;
+
+    actions.user.editProfile(changes);
   }
 }
