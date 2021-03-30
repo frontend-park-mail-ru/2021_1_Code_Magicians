@@ -30,6 +30,9 @@
 .navbar__search-form:focus-within {
   background-color: var(--almost-white);
 }
+.navbar__search-icon {
+  color: var(--gray);
+}
 .navbar__search-input {
   flex-grow: 1;
   height: 40px;
@@ -44,11 +47,14 @@
   color: transparent;
 }
 .navbar__search-wiper {
-  transition: 0.1s;
+  font-size: 13px;
+  color: var(--gray);
+  opacity: 0.6;
+  transition: 0.2s;
   cursor: pointer;
 }
 .navbar__search-wiper:hover {
-  transform: scale(1.05);
+  opacity: 0.9;
 }
 .navbar__user-section {
   display: flex;
@@ -66,16 +72,20 @@
   cursor: pointer;
 }
 .navbar__username {
-  margin-left: 20px;
+  margin-left: 15px;
   font-size: 15px;
-  color: var(--gray);
-  cursor: pointer;
+  color: var(--black);
 }
 .navbar__user-toggle {
+  display: none;
   border: none;
   outline: none;
   background-color: transparent;
   cursor: pointer;
+}
+.navbar__user-toggle-icon {
+  font-size: 16px;
+  color: var(--gray);
 }
 .navbar__auth-link {
   display: flex;
@@ -84,26 +94,31 @@
   width: 80px;
   padding: 10px;
   border: 1px solid var(--red);
-  border-radius: 5px;
+  border-radius: 2px;
   text-decoration: none;
   background-color: var(--white);
   cursor: pointer;
   transition: 0.3s;
 }
-.navbar__auth-link:hover {
-  opacity: 0.9;
-}
 .navbar__auth-link_primary {
   margin-left: 0;
   margin-right: 15px;
-  color: var(--white);
-  background-color: red;
+  color: white;
+  background-color: var(--red);
+}
+.navbar__auth-link_primary:hover {
+  background-color: var(--almost-white);
+  color: var(--black);
 }
 .navbar__auth-link_secondary {
   margin-left: 15px;
   margin-right: 180px;
   color: var(--black);
   background-color: var(--almost-white);
+}
+.navbar__auth-link_secondary:hover {
+  background-color: var(--red);
+  color: white;
 }
 .navbar__actions {
   display: flex;
@@ -123,13 +138,20 @@
   margin-left: 2px;
   border: none;
   outline: none;
+  text-decoration: none;
   background-color: transparent;
   cursor: pointer;
 }
 .navbar__action:hover .navbar__action-icon {
-  transform: scale(1.1);
+  color: var(--red);
 }
 .navbar__action-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: var(--gray);
+  text-decoration: none;
   transition: 0.2s;
 }
 

@@ -31,7 +31,7 @@ export class Component {
    */
   didMount() {
     if (this._nestedComponents.size) {
-      this._nestedComponents.forEach(component => component.didMount());
+      this._nestedComponents.forEach((component) => component.didMount());
     }
   }
 
@@ -40,7 +40,7 @@ export class Component {
    */
   willUnmount() {
     if (this._nestedComponents.size) {
-      this._nestedComponents.forEach(component => component.willUnmount());
+      this._nestedComponents.forEach((component) => component.willUnmount());
     }
   }
 }

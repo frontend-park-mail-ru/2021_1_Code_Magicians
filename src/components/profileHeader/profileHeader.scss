@@ -55,21 +55,27 @@
     border: none;
     outline: none;
 
+    text-decoration: none;
+
     background-color: transparent;
 
     cursor: pointer;
 
     &:hover #{$root}-icon {
-      transform: scale(1.02);
+      color: var(--red)
     }
 
     &-icon {
-      width: 20px;
-      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       margin: auto;
 
-      transition: 0.3s;
+
+      color: var(--gray);
+
+      transition: 0.2s;
     }
   }
 

@@ -46,6 +46,10 @@
     }
   }
 
+  &__search-icon {
+    color: var(--gray);
+  }
+
   &__search-input {
     flex-grow: 1;
 
@@ -67,11 +71,16 @@
   }
 
   &__search-wiper {
-    transition: 0.1s;
+    font-size: 13px;
+
+    color: var(--gray);
+    opacity: 0.6;
+
+    transition: 0.2s;
     cursor: pointer;
 
     &:hover {
-      transform: scale(1.05);
+      opacity: 0.9;
     }
   }
 
@@ -98,22 +107,28 @@
   }
 
   &__username {
-    margin-left: 20px;
+    margin-left: 15px;
 
     font-size: 15px;
 
-    color: var(--gray);
-
-    cursor: pointer;
+    color: var(--black);
   }
 
   &__user-toggle {
+    display: none;
+
     border: none;
     outline: none;
 
     background-color: transparent;
 
     cursor: pointer;
+
+    &-icon {
+      font-size: 16px;
+
+      color: var(--gray);
+    }
   }
 
   &__auth-link {
@@ -126,7 +141,7 @@
     padding: 10px;
 
     border: 1px solid var(--red);
-    border-radius: 5px;
+    border-radius: 2px;
 
     text-decoration: none;
 
@@ -136,17 +151,18 @@
 
     transition: 0.3s;
 
-    &:hover {
-      opacity: 0.9;
-    }
-
     &_primary {
       margin-left: 0;
       margin-right: 15px;
 
-      color: var(--white);
+      color: white; // always white
 
-      background-color: red;
+      background-color: var(--red);
+
+      &:hover {
+        background-color: var(--almost-white);
+        color: var(--black);
+      }
     }
 
     &_secondary {
@@ -156,6 +172,11 @@
       color: var(--black);
 
       background-color: var(--almost-white);
+
+      &:hover {
+        background-color: var(--red);
+        color: white; // always white
+      }
     }
 
   }
@@ -184,16 +205,27 @@
     border: none;
     outline: none;
 
+    text-decoration: none;
+
     background-color: transparent;
 
     cursor: pointer;
 
     &:hover #{$root}__action-icon {
-      transform: scale(1.1);
+      color: var(--red);
     }
   }
 
   &__action-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 18px;
+
+    color: var(--gray);
+    text-decoration: none;
+
     transition: 0.2s;
   }
 }

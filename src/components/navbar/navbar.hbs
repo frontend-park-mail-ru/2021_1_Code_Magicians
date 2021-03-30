@@ -1,8 +1,8 @@
 <div class="page__navbar">
     <form class="navbar__search-form">
-        <img src="/assets/img/svg/page__navbar/Search.svg" alt="Search" class="navbar__search-icon">
+        <i class="fas fa-search navbar__search-icon"></i>
         <input type="text" class="navbar__search-input" placeholder="Looking things up">
-        <img src="/assets/img/svg/page__navbar/x-mark.svg" alt="X-mark" class="navbar__search-wiper">
+        <i class="fas fa-times navbar__search-wiper"></i>
     </form>
     <div class="navbar__user-section">
         {{#if userIsAuthorised}}
@@ -11,18 +11,15 @@
             </a>
             <span class="navbar__username"> Username Usernamov </span>
             <button class="navbar__user-toggle">
-                <img src="/assets/img/svg/page__navbar/dropdown-arrow.svg" alt="Dropdown" class="navbar__user-change-icon">
+                <i class="fas fa-caret-down navbar__user-toggle-icon"></i>
             </button>
         </div>
         <div class="navbar__actions">
             <a class="navbar__action" href="/create-pin">
-                <img src="/assets/img/svg/page__navbar/Create_pin.svg" alt="Plus" class="navbar__action-icon">
+                <i class="fas fa-plus navbar__action-icon"></i>
             </a>
             <button class="navbar__action">
-                <img src="/assets/img/svg/page__navbar/stats.svg" alt="Stats" class="navbar__action-icon ">
-            </button>
-            <button class="navbar__action">
-                <img src="/assets/img/svg/page__navbar/more.svg" alt="Dropdown" class="navbar__action-icon">
+                <i class="fas fa-ellipsis-v navbar__action-icon"></i>
             </button>
         </div>
         {{else}}

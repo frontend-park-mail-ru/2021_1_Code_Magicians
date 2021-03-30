@@ -35,17 +35,20 @@
   margin-left: 5px;
   border: none;
   outline: none;
+  text-decoration: none;
   background-color: transparent;
   cursor: pointer;
 }
 .profile-info__settings:hover .profile-info__settings-icon {
-  transform: scale(1.02);
+  color: var(--red);
 }
 .profile-info__settings-icon {
-  width: 20px;
-  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: auto;
-  transition: 0.3s;
+  color: var(--gray);
+  transition: 0.2s;
 }
 .profile-info__user-location {
   font-size: 15px;

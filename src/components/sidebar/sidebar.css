@@ -12,11 +12,14 @@
   background-color: var(--white);
 }
 
-.sidebar__logo-link {
+.sidebar__theme-toggle {
   display: flex;
   justify-content: center;
   align-items: center;
   justify-self: flex-start;
+  outline: none;
+  border: none;
+  background-color: transparent;
   width: 100%;
   height: 55px;
   margin: 10px auto auto;
@@ -28,7 +31,7 @@
   transition: 0.4s;
 }
 .sidebar__logo-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 .sidebar__view-selector {
   display: flex;
@@ -80,16 +83,17 @@
   justify-content: center;
   width: 100%;
   height: 45px;
+  text-decoration: none;
   background-color: transparent;
+  color: white;
   cursor: pointer;
 }
-.view-selector__link:hover .view-selector__icon {
-  transform: scale(1.05);
-}
 .view-selector__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
   transition: 0.2s;
-  height: 23px;
-  width: 30px;
 }
 
 .popup-toggle {
@@ -105,12 +109,18 @@
   background-color: transparent;
 }
 .popup-toggle__icon {
-  width: 25px;
-  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  color: var(--gray);
   transition: 0.2s;
 }
+.popup-toggle__icon_active {
+  color: var(--red);
+}
 .popup-toggle:hover .popup-toggle__icon {
-  transform: scale(1.12);
+  color: var(--red);
 }
 
 /*# sourceMappingURL=sidebar.css.map */

@@ -47,4 +47,12 @@ export class View extends Component {
     this.willUnmount();
     this._parent.innerHTML = '';
   }
+
+  /**
+   * Did
+   */
+  didMount() {
+    document.documentElement.setAttribute('theme', window.localStorage.getItem('theme'));
+    super.didMount();
+  }
 }

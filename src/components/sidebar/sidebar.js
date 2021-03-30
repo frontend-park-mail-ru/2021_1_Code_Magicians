@@ -11,6 +11,8 @@ export class Sidebar extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.toggleTheme.bind(this);
   }
 
   /**
@@ -25,6 +27,18 @@ export class Sidebar extends Component {
   }
 
   /**
+   * Toggles theme
+   * @param {Event} ev
+   */
+  toggleTheme(ev) {
+    const htmlTag = document.documentElement;
+    const newTheme = htmlTag.getAttribute('theme') === 'dark' ? 'light' : 'dark';
+
+    window.localStorage.setItem('theme', newTheme);
+    htmlTag.setAttribute('theme', newTheme);
+  }
+
+  /**
    * Did
    */
   didMount() {
@@ -36,5 +50,14 @@ export class Sidebar extends Component {
             item.classList.add('view-selector__item_selected');
           }
         });
+
+    document.querySelector('.sidebar__theme-toggle').addEventListener('click', this.toggleTheme);
+  }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    document.querySelector('.sidebar__theme-toggle').removeEventListener('click', this.toggleTheme);
   }
 }
