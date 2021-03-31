@@ -13,6 +13,7 @@
   transition: var(--theme-transition);
 }
 .settings__section-link {
+  width: 120px;
   margin: 10px 0;
   font-size: 18px;
   font-weight: bold;

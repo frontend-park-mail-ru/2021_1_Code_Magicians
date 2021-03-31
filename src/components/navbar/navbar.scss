@@ -14,7 +14,6 @@
 
   padding: 5px 70px;
 
-
   border-bottom: 2px solid var(--almost-white);
 
   background-color: var(--white);
@@ -188,6 +187,8 @@
   }
 
   &__auth-link {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -207,26 +208,42 @@
 
     transition: 0.3s;
 
-    &_primary {
-      color: white; // always white
+
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+
+      width: 100%;
+      height: 100%;
 
       background-color: var(--red);
 
-      &:hover {
-        background-color: var(--almost-white);
-        color: var(--black);
-      }
+      transition: 0.2s;
     }
 
+    &:hover::before {
+      filter: brightness(90%);
+    }
+
+    &_primary {
+      color: white; // always white
+
+      &::before {
+        background-color: var(--red);
+      }
+    }
     &_secondary {
       color: var(--black);
 
-      background-color: var(--almost-white);
-
-      &:hover {
-        background-color: var(--red);
-        color: white; // always white
+      &::before {
+        background-color: var(--almost-white);
       }
     }
+  }
+
+  &__auth-text {
+    position: relative;
   }
 }
