@@ -1,39 +1,33 @@
-.page__navbar {
+.navbar {
+  $root: &;
+
   position: fixed;
+  top: 0;
+  left: 75px;
+  right: 0;
 
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 
-  width: 100%;
   height: 60px;
 
-  padding: 5px 0;
+  padding: 5px 70px;
+
 
   border-bottom: 2px solid var(--almost-white);
 
   background-color: var(--white);
 
   transition: var(--theme-transition);
-}
-
-.navbar {
-  $root: &;
 
   &__search-form {
     display: flex;
-    justify-content: center;
     align-items: center;
 
     flex-grow: 1;
-    justify-self: flex-start;
 
-    margin-left: 70px;
-    margin-right: 100px;
-
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0 15px;
 
     border-radius: 20px;
 
@@ -45,6 +39,10 @@
 
     &:focus-within {
       background-color: var(--almost-white);
+    }
+
+    &:valid #{$root}__search-wiper {
+      visibility: visible;
     }
   }
 
@@ -65,7 +63,7 @@
     font-size: 16px;
 
     color: var(--black);
-    background-color: inherit;
+    background-color: transparent;
 
     &:focus::placeholder {
       color: transparent;
@@ -73,45 +71,48 @@
   }
 
   &__search-wiper {
+    border: none;
+    outline: none;
+    background-color: transparent;
+
     font-size: 13px;
 
     color: var(--gray);
     opacity: 0.6;
+    visibility: hidden;
 
-    transition: 0.2s;
     cursor: pointer;
-
-    &:hover {
-      opacity: 0.9;
-    }
   }
 
   &__user-section {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
 
-    margin-left: auto;
+    width: 250px;
 
-    padding-left: 40px;
+    padding-left: 100px;
   }
 
   &__user-avatar {
-    width: 30px;
+    min-width: 30px;
     height: 30px;
 
     border-radius: 50%;
 
     object-fit: cover;
-
-    cursor: pointer;
   }
 
   &__username {
+    max-width: 180px;
+
     margin-left: 15px;
 
     font-size: 15px;
+    text-decoration: none;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     color: var(--black);
   }
@@ -133,64 +134,9 @@
     }
   }
 
-  &__auth-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 80px;
-
-    padding: 10px;
-
-    border: 1px solid var(--red);
-    border-radius: 2px;
-
-    text-decoration: none;
-
-    background-color: var(--white);
-
-    cursor: pointer;
-
-    transition: 0.3s;
-
-    &_primary {
-      margin-left: 0;
-      margin-right: 15px;
-
-      color: white; // always white
-
-      background-color: var(--red);
-
-      &:hover {
-        background-color: var(--almost-white);
-        color: var(--black);
-      }
-    }
-
-    &_secondary {
-      margin-left: 15px;
-      margin-right: 180px;
-
-      color: var(--black);
-
-      background-color: var(--almost-white);
-
-      &:hover {
-        background-color: var(--red);
-        color: white; // always white
-      }
-    }
-
-  }
-
   &__actions {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-
-    margin-left: 40px;
-    margin-right: 160px;
   }
 
   &__action {
@@ -229,5 +175,58 @@
     text-decoration: none;
 
     transition: 0.2s;
+  }
+
+  &__auth-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 250px;
+
+    padding-left: 120px;
+  }
+
+  &__auth-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+
+    padding: 10px;
+
+    border: 1px solid var(--red);
+    border-radius: 2px;
+
+    text-decoration: none;
+
+    background-color: var(--white);
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    &_primary {
+      color: white; // always white
+
+      background-color: var(--red);
+
+      &:hover {
+        background-color: var(--almost-white);
+        color: var(--black);
+      }
+    }
+
+    &_secondary {
+      color: var(--black);
+
+      background-color: var(--almost-white);
+
+      &:hover {
+        background-color: var(--red);
+        color: white; // always white
+      }
+    }
   }
 }

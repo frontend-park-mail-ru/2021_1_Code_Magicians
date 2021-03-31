@@ -5,16 +5,16 @@
 }
 
 .settings {
+  position: relative;
   display: flex;
   height: 100%;
+  background-color: var(--white);
 }
 .settings__sections {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 40px;
-  padding-right: 40px;
-  padding-top: 80px;
+  padding: 80px 40px 0;
   border-right: 2px solid var(--almost-white);
   transition: var(--theme-transition);
 }
@@ -24,15 +24,18 @@
   font-weight: bold;
   text-decoration: none;
   color: var(--black);
-  background-color: transparent;
   cursor: pointer;
+}
+.settings__section-link:hover {
+  text-decoration: underline;
 }
 .settings__section-link_active {
   text-decoration: underline;
 }
 .settings__form-wrapper {
-  margin-top: 80px;
-  margin-left: 150px;
+  position: absolute;
+  top: 80px;
+  left: 350px;
 }
 .settings__title {
   margin-top: 0;

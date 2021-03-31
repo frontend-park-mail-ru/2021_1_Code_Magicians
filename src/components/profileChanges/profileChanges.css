@@ -1,8 +1,8 @@
 .profile-changes {
   display: flex;
   flex-direction: column;
-  width: 1200px;
-  height: 500px;
+  height: 550px;
+  background-color: transparent;
 }
 .profile-changes__description {
   margin-top: 7px;
@@ -11,8 +11,10 @@
 .profile-changes__settings-form {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 1000px;
   margin-top: auto;
+  padding-left: 50px;
 }
 .profile-changes__avatar-zone {
   display: flex;
@@ -21,11 +23,9 @@
   align-items: center;
   width: 150px;
   height: 230px;
-  margin-right: auto;
-  margin-left: 50px;
 }
 .profile-changes__avatar-title {
-  margin-right: auto;
+  align-self: flex-start;
   font-size: 18px;
   color: var(--black);
 }
@@ -56,9 +56,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  align-self: flex-end;
   height: 350px;
-  margin-top: 50px;
 }
 
 /*# sourceMappingURL=profileChanges.css.map */

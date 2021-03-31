@@ -20,4 +20,30 @@ export class Navbar extends Component {
     const tmpl = Handlebars.templates['navbar.hbs'];
     return tmpl(this.props);
   }
+
+  /**
+   * On wiper
+   * @param {Event} ev
+   */
+  wipeSearchField(ev) {
+    document.querySelector('.navbar__search-input').value = '';
+  }
+
+  /**
+   * Did
+   */
+  didMount() {
+    document
+        .querySelector('.navbar__search-wiper')
+        .addEventListener('click', this.wipeSearchField);
+  }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    document
+        .querySelector('.navbar__search-wiper')
+        .removeEventListener('click', this.wipeSearchField);
+  }
 }

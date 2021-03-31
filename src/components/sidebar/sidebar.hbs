@@ -1,30 +1,33 @@
-<div class="page__sidebar">
-    <button class="sidebar__theme-toggle">
+<div class="sidebar">
+    <a href="/home" class="sidebar__home-link">
         <img src="/assets/img/Logo.png" alt="logo" class="sidebar__logo-image">
-    </button>
+    </a>
     <div class="sidebar__view-selector">
-        <div data-view="home" class="view-selector__item">
-            <a class="view-selector__link" href="/home">
-                <i class="fas fa-home view-selector__icon"></i>
+        <div data-view="home" class="sidebar__view-option">
+            <a class="sidebar__view-link" href="/home">
+                <i class="fas fa-home sidebar__view-icon"></i>
             </a>
         </div>
-        <div data-view="boards" class="view-selector__item">
-            <a class="view-selector__link" href="/boards">
-                <i class="fas fa-layer-group view-selector__icon"></i>
+        <div data-view="boards" class="sidebar__view-option">
+            <a class="sidebar__view-link" href="/boards">
+                <i class="fas fa-layer-group sidebar__view-icon"></i>
             </a>
         </div>
-        <div data-view="settings" class="view-selector__item">
-            <a class="view-selector__link" href="/settings">
-                <i class="fas fa-cog view-selector__icon"></i>
+        <div data-view="settings" class="sidebar__view-option">
+            <a class="sidebar__view-link" href="/settings">
+                <i class="fas fa-cog sidebar__view-icon"></i>
             </a>
         </div>
     </div>
-    <div class="sidebar__popup-toggles">
-        <button class="popup-toggle">
-            <i class="fas fa-comment-dots popup-toggle__icon"></i>
+    <div class="sidebar__toggles">
+        <button class="sidebar__toggle slider-toggle">
+            <i class="fas fa-comment-dots sidebar__toggle-icon"></i>
         </button>
-        <button class="popup-toggle">
-            <i class="fas fa-bell popup-toggle__icon"></i>
+        <button class="sidebar__toggle slider-toggle">
+            <i class="fas fa-bell sidebar__toggle-icon"></i>
+        </button>
+        <button class="sidebar__toggle theme-toggle">
+            <i class="fas fa-moon sidebar__toggle-icon theme-toggle-icon"></i>
         </button>
     </div>
 </div>

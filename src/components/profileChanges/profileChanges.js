@@ -50,11 +50,11 @@ export class ProfileChanges extends Component {
 
     const name = target.querySelector('[name="name"]').value.trim();
 
-    // const username = target.querySelector('[name="username"]').value.trim();
+    const username = target.querySelector('[name="username"]').value.trim();
     const email = target.querySelector('[name="email"]').value.trim();
 
     if (name) changes['name'] = name;
-    // changes['username'] = username;  // backend hasn't it
+    changes['username'] = username;
     changes['email'] = email;
 
     actions.user.editProfile(changes);

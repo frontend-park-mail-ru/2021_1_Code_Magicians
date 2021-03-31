@@ -5,6 +5,7 @@
   padding: 20px 80px 30px 30px;
   border-bottom: 2px solid var(--almost-white);
   background-color: var(--white);
+  transition: var(--theme-transition);
 }
 .profile-info__avatar {
   height: 130px;
@@ -20,35 +21,44 @@
 .profile-info__username-zone {
   display: flex;
   align-items: center;
-  width: 255px;
+  width: 260px;
   height: 35px;
 }
 .profile-info__username {
   font-size: 24px;
   font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: var(--black);
 }
 .profile-info__settings {
   display: flex;
-  width: 25px;
-  height: 25px;
-  margin-left: 5px;
-  border: none;
-  outline: none;
+  align-items: center;
+  margin-left: 7px;
   text-decoration: none;
-  background-color: transparent;
   cursor: pointer;
 }
 .profile-info__settings:hover .profile-info__settings-icon {
   color: var(--red);
 }
 .profile-info__settings-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
   color: var(--gray);
   transition: 0.2s;
+}
+.profile-info__follow-toggle {
+  margin-left: 7px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.profile-info__follow-toggle :hover {
+  color: var(--red);
+}
+.profile-info__follow-icon {
+  font-size: 16px;
+  color: var(--gray);
+  cursor: pointer;
 }
 .profile-info__user-location {
   font-size: 15px;
@@ -80,8 +90,9 @@
   display: flex;
   align-items: center;
   height: 54px;
-  border-bottom: 2px solid var(--almost-white);
   background-color: var(--white);
+  border-bottom: 2px solid var(--almost-white);
+  transition: var(--theme-transition);
 }
 .profile-links__link {
   display: flex;
@@ -90,12 +101,10 @@
   height: 100%;
   width: 150px;
   text-decoration: none;
-  text-align: center;
   font-size: 18px;
   border-right: 2px solid var(--almost-white);
   color: var(--black);
-  background-color: inherit;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 .profile-links__link:hover {
   color: var(--white);

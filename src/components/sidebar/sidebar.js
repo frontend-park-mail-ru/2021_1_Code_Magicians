@@ -34,6 +34,13 @@ export class Sidebar extends Component {
 
     window.localStorage.setItem('theme', newTheme);
     htmlTag.setAttribute('theme', newTheme);
+
+    const icon = document.querySelector('.theme-toggle-icon');
+
+    const newFaClass = icon.classList.contains('far') ? 'fas' : 'far';
+    const oldFaClass = newFaClass === 'fas' ? 'far' : 'fas';
+
+    icon.classList.replace(oldFaClass, newFaClass);
   }
 
   /**
@@ -41,21 +48,21 @@ export class Sidebar extends Component {
    */
   didMount() {
     document
-        .querySelectorAll('.view-selector__item')
+        .querySelectorAll('.sidebar__view-option')
         .forEach((item) => {
-          const link = item.querySelector('.view-selector__link');
+          const link = item.querySelector('.sidebar__view-link');
           if (window.location.pathname.startsWith(link.href.replace(urlRegexp, ''))) {
-            item.classList.add('view-selector__item_selected');
+            item.classList.add('sidebar__view-option_selected');
           }
         });
 
-    document.querySelector('.sidebar__theme-toggle').addEventListener('click', this.toggleTheme);
+    document.querySelector('.theme-toggle').addEventListener('click', this.toggleTheme);
   }
 
   /**
    * Will
    */
   willUnmount() {
-    document.querySelector('.sidebar__theme-toggle').removeEventListener('click', this.toggleTheme);
+    document.querySelector('.theme-toggle').removeEventListener('click', this.toggleTheme);
   }
 }

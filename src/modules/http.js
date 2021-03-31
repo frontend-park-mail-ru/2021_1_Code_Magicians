@@ -55,7 +55,6 @@ export class HTTPModule {
             ...options,
           },
       );
-      console.log(response.headers);
 
       if (response.headers.has('X-CSRF-Token')) {
         this._setCSRFToken(response.headers.get('X-CSRF-Token'));

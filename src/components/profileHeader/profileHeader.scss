@@ -1,4 +1,6 @@
 .profile-info {
+  $root: &;
+
   display: flex;
   align-items: center;
 
@@ -9,6 +11,8 @@
   border-bottom: 2px solid var(--almost-white);
 
   background-color: var(--white);
+
+  transition: var(--theme-transition);
 
   &__avatar {
     height: 130px;
@@ -23,7 +27,6 @@
     display: flex;
     flex-direction: column;
 
-
     margin-left: 50px;
   }
 
@@ -31,13 +34,17 @@
     display: flex;
     align-items: center;
 
-    width: 255px;
+    width: 260px;
     height: 35px;
   }
 
   &__username {
     font-size: 24px;
     font-weight: bold;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     color: var(--black);
   }
@@ -46,18 +53,11 @@
     $root: &;
 
     display: flex;
+    align-items: center;
 
-    width: 25px;
-    height: 25px;
-
-    margin-left: 5px;
-
-    border: none;
-    outline: none;
+    margin-left: 7px;
 
     text-decoration: none;
-
-    background-color: transparent;
 
     cursor: pointer;
 
@@ -66,20 +66,34 @@
     }
 
     &-icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      margin: auto;
-
-
       color: var(--gray);
 
       transition: 0.2s;
     }
   }
 
-  &__user-location {
+  &__follow-toggle {
+    margin-left: 7px;
+
+    border: none;
+    outline: none;
+
+    background-color: transparent;
+
+    :hover {
+        color: var(--red);
+      }
+  }
+
+  &__follow-icon {
+    font-size: 16px;
+
+    color: var(--gray);
+
+    cursor: pointer;
+  }
+
+  &__user-location { // will be real name (if public)
     font-size: 15px;
 
     color: var(--gray);
@@ -120,9 +134,11 @@
 
   height: 54px;
 
+  background-color: var(--white);
+
   border-bottom: 2px solid var(--almost-white);
 
-  background-color: var(--white);
+  transition: var(--theme-transition);
 
   &__link {
     display: flex;
@@ -133,15 +149,13 @@
     width: 150px;
 
     text-decoration: none;
-    text-align: center;
     font-size: 18px;
 
     border-right: 2px solid var(--almost-white);
 
     color: var(--black);
-    background-color: inherit;
 
-    transition: 0.3s;
+    transition: 0.2s;
 
     &:hover {
       color: var(--white);

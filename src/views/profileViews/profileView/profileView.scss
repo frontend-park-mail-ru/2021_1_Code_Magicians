@@ -5,4 +5,8 @@
 
 .profile-content-wrapper {
   display: flex;
+
+  background-color: var(--almost-white);
+
+  transition: var(--theme-transition);
 }
