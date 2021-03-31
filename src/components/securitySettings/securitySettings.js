@@ -1,5 +1,8 @@
 import {Component} from '../component.js';
 import {actions} from '../../actions/actions.js';
+import {userStore} from '../../stores/userStore/UserStore.js';
+import {constants} from '../../consts/consts.js';
+import {passwordRegexp} from '../../consts/regexp.js';
 
 /**
  * Security settings form
@@ -28,6 +31,11 @@ export class SecuritySettings extends Component {
    */
   didMount() {
     document.querySelector('.security-settings').addEventListener('submit', this.submit);
+
+    if (userStore.getStatus() === constants.store.statuses.userStore.passwordChanged) {
+      alert('password changed successfully');
+      actions.user.statusProcessed();
+    }
   }
 
   /**
@@ -46,6 +54,11 @@ export class SecuritySettings extends Component {
 
     const newPassword = document.querySelector('[name="new-password"]');
     const confirmPassword = document.querySelector('[name="confirm-password"]');
+
+    if (!newPassword.value.match(passwordRegexp)) {
+      alert('Password must be 8 chars length at least');
+      return;
+    }
 
     if (newPassword.value !== confirmPassword.value) {
       alert('Password must be same');

@@ -2,6 +2,7 @@ import {Component} from '../component.js';
 import {userStore} from '../../stores/userStore/UserStore.js';
 import {actions} from '../../actions/actions.js';
 import {firstNameRegexp, usernameRegexp} from '../../consts/regexp.js';
+import {constants} from '../../consts/consts.js';
 
 /**
  * Profile changes form
@@ -30,6 +31,11 @@ export class ProfileChanges extends Component {
    */
   didMount() {
     document.querySelector('.profile-changes').addEventListener('submit', this.submit);
+
+    if (userStore.getStatus() === constants.store.statuses.userStore.profileEdited) {
+      alert('profile edited successfully');
+      actions.user.statusProcessed();
+    }
   }
 
   /**

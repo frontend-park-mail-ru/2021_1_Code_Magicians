@@ -10,6 +10,8 @@ export const actionTypes = {
     editProfile: 'edit-profileViews',
     deleteProfile: 'delete-profileViews',
     changePassword: 'change-password',
+
+    statusProcessed: 'error-processed',
   },
 };
 
@@ -64,6 +66,13 @@ export const actions = {
         data: {
           password: password,
         },
+      });
+    },
+
+    statusProcessed: () => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.user.statusProcessed,
+        data: {},
       });
     },
   },

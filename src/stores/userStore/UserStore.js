@@ -26,7 +26,7 @@ class UserStore extends Store {
    * @param {Object} action
    */
   processEvent(action) {
-    this._status = 'ok';
+    this._status = storeStatuses.ok;
 
     switch (action.actionType) {
       case actionTypes.user.login:
@@ -46,6 +46,9 @@ class UserStore extends Store {
         break;
       case actionTypes.user.changePassword:
         this._changePassword(action.data);
+        break;
+      case actionTypes.user.statusProcessed:
+        this._status = storeStatuses.ok;
         break;
     }
   }
@@ -188,6 +191,7 @@ class UserStore extends Store {
       switch (response.status) {
         case 200:
           this._fetchUserData();
+          this._status = storeStatuses.profileEdited;
           break;
         case 401:
           this._status = storeStatuses.unauthorized;
@@ -198,7 +202,6 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
-      console.log('profile edited. Status: ', response.status);
       this._trigger('change');
     });
   }
