@@ -1,6 +1,7 @@
 import {Component} from '../component.js';
 import {userStore} from '../../stores/userStore/UserStore.js';
 import {actions} from '../../actions/actions.js';
+import {firstNameRegexp, usernameRegexp} from '../../consts/regexp.js';
 
 /**
  * Profile changes form
@@ -48,12 +49,25 @@ export class ProfileChanges extends Component {
 
     const changes = {};
 
-    const name = target.querySelector('[name="name"]').value.trim();
-
+    const firstName = target.querySelector('[name="firstName"]').value.trim();
     const username = target.querySelector('[name="username"]').value.trim();
     const email = target.querySelector('[name="email"]').value.trim();
 
-    if (name) changes['name'] = name;
+    const usernameIsValid = username.match(usernameRegexp);
+    if (!usernameIsValid) {
+      alert('username invalid');
+      return;
+    }
+
+    if (firstName) {
+      const firstNameIsValid = firstName.match(firstNameRegexp);
+      if (!firstNameIsValid) {
+        alert('name invalid');
+        return;
+      }
+    }
+
+    changes['firstName'] = firstName;
     changes['username'] = username;
     changes['email'] = email;
 

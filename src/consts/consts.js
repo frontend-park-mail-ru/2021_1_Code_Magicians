@@ -33,6 +33,7 @@ export const constants = {
         userAlreadyExists: 'user already exists',
         unauthorized: 'unauthorized',
         editConflict: 'edit conflict',
+        passwordChanged: 'password changed',
 
         internalError: 'internal error',
       },

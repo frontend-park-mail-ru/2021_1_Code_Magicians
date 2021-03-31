@@ -177,6 +177,13 @@ class UserStore extends Store {
       return;
     }
 
+    const profile = this._user.profile;
+    changes =
+      Object
+          .fromEntries(Object.entries(changes).filter((change) => change[1] !== profile[change[0]]));
+
+    if (Object.keys(changes).length === 0) return;
+
     API.editProfile(changes).then((response) => {
       switch (response.status) {
         case 200:
@@ -210,6 +217,7 @@ class UserStore extends Store {
     API.changeUserPassword(data.password).then((response) => {
       switch (response.status) {
         case 200:
+          this._status = storeStatuses.passwordChanged;
           break;
         case 401:
           this._status = storeStatuses.unauthorized;

@@ -32,8 +32,6 @@ export class HTTPModule {
       }
     }
 
-    // options.headers = {...options.headers, 'Origin': window.location.origin};
-
     let status = 228;
     let headers = new Headers();
     let responseBody = {};
@@ -60,7 +58,7 @@ export class HTTPModule {
         this._setCSRFToken(response.headers.get('X-CSRF-Token'));
       }
 
-      responseBody = await response.json();
+      if (response.headers.has('Content-Type')) responseBody = await response.json();
       headers = response.headers;
       status = response.status;
     } catch (e) {
