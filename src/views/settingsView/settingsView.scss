@@ -2,8 +2,6 @@
   background-color: var(--white);
 
   height: 100%;
-
-  transition: var(--theme-transition);
 }
 
 .settings {
@@ -14,6 +12,8 @@
   height: 100%;
 
   background-color: var(--white);
+
+  transition: var(--theme-transition);
 
   &__sections {
     display: flex;
