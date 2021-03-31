@@ -1,8 +1,8 @@
 <div class="profile-info">
-    <img src="{{profile.avatarLink}}/assets/img/default-avatar.jpg" alt="avatar" class="profile-info__avatar">
+    <img src="{{profile.avatarLink}}" alt="avatar" class="profile-info__avatar">
     <div class="profile-info__main-info">
         <div class="profile-info__username-zone">
-            <span class="profile-info__username">{{profile.username}}Username usernamov</span>
+            <span class="profile-info__username">{{profile.username}}</span>
             {{#if selfProfile}}
                 <a href="/settings" class="profile-info__settings">
                     <i class="fas fa-cog profile-info__settings-icon"></i>
@@ -14,7 +14,7 @@
             {{/if}}
         </div>
         <div class="profile-info__additional-info">
-            <span class="profile-info__user-location">{{profile.name}}Moscow, Russian Federation</span>
+            <span class="profile-info__user-real-name">{{profile.firstName}}</span>
         </div>
     </div>
     <div class="profile-info__stats">

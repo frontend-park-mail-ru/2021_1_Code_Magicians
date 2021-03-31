@@ -91,9 +91,13 @@
     color: var(--gray);
 
     cursor: pointer;
+
+    &:hover {
+      background-color: var(--red);
+    }
   }
 
-  &__user-location { // will be real name (if public)
+  &__user-real-name {
     font-size: 15px;
 
     color: var(--gray);

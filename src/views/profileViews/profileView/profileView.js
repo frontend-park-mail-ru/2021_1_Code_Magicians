@@ -1,6 +1,7 @@
 import {View} from '../../view.js';
 import {Page} from '../../../components/page/page.js';
 import {ProfileHeader} from '../../../components/profileHeader/profileHeader.js';
+import {userStore} from '../../../stores/userStore/UserStore.js';
 
 /**
  * Base profile view
@@ -14,6 +15,7 @@ export class ProfileView extends View {
     super(props, document.getElementById('app'));
 
     this._profileMainContent = ''; // different in different views
+    userStore.bind('change', this.refresh);
   }
 
   /**

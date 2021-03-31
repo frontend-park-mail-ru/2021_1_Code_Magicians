@@ -60,7 +60,10 @@
   color: var(--gray);
   cursor: pointer;
 }
-.profile-info__user-location {
+.profile-info__follow-icon:hover {
+  background-color: var(--red);
+}
+.profile-info__user-real-name {
   font-size: 15px;
   color: var(--gray);
 }
