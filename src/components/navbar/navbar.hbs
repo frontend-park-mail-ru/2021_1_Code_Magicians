@@ -8,7 +8,7 @@
     </form>
     {{#if userIsAuthorised}}
         <div class="navbar__user-section">
-            <img src="/assets/img/default-avatar.jpg" alt="Avatar" class="navbar__user-avatar">
+            <img src="{{user.avatarLink}}" alt="Avatar" class="navbar__user-avatar">
             <a href="/profile" class="navbar__username"> {{user.username}} </a>
         </div>
         <div class="navbar__actions">
