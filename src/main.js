@@ -18,3 +18,4 @@ appRouter
     .register('/login', new LoginView({}));
 
 appRouter.start();
+
