@@ -22,7 +22,7 @@
   color: var(--gray);
 }
 .pin-builder__tip-text_small {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--gray);
   padding-bottom: 20px;
 }
@@ -32,7 +32,7 @@
   justify-self: end;
   justify-content: end;
   padding-bottom: 20px;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--gray);
 }
 .pin-builder__button {
@@ -41,17 +41,16 @@
 .pin-builder__button_gray {
   border-radius: 45px;
   background: var(--gray);
-  padding: 10px 15px;
+  padding: 10px 25px;
   border: none;
   color: white;
 }
 .pin-builder__upload-icon {
   background-color: var(--white);
   color: var(--gray);
-  fill: var(--red);
-  height: 30px;
-  width: 30px;
-  margin: 20px;
+  padding-bottom: 30px;
+  font-size: 35px;
+  align-items: center;
 }
 .pin-builder__upload-icon_image {
   background-color: var(--white);
@@ -90,9 +89,15 @@
 .pin-builder-form__input {
   border: none;
   background: none;
-  width: content-box;
+  width: 100%;
+  color: var(--black);
 }
-.pin-builder-form__input:focus-within {
+.pin-builder-form__input:focus {
+  border: none;
+  background: none;
+  outline: none;
+}
+.pin-builder-form__input:active {
   border: none;
   background: none;
   outline: none;
@@ -121,17 +126,19 @@
   margin-bottom: 20px;
   width: 50px;
   height: 50px;
+  object-fit: cover;
   border-radius: 50%;
 }
 .author-info__description {
   padding-left: 10px;
 }
 .author-info__description_name {
-  font-size: 16px;
+  color: var(--black);
+  font-size: 18px;
   font-weight: bold;
 }
 .author-info__description_followers {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--gray);
 }
 
@@ -147,16 +154,15 @@
   justify-content: start;
   border: none;
   outline: none;
-  background-color: transparent;
   cursor: pointer;
   width: fit-content;
   padding: 2px 10px;
-  background-color: white;
-  border-radius: 10px;
-  border: none;
-  outline: none;
+  background-color: var(--white);
+  border-radius: 5px;
 }
 .pin-board-selector__input {
+  background-color: var(--white);
+  color: var(--black);
   border: none;
   outline: none;
 }
@@ -169,6 +175,11 @@
   border: none;
   outline: none;
   background: none;
+}
+
+.user-icon {
+  font-size: 10px;
+  color: var(--gray);
 }
 
 /*# sourceMappingURL=pinBuilder.css.map */
