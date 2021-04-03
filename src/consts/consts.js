@@ -1,7 +1,7 @@
 export const constants = {
   network: {
-    // backendURL: 'http://52.59.228.167:8080',
-    backendURL: 'http://localhost:8080',
+    backendURL: 'http://52.59.228.167:8080',
+    // backendURL: 'http://localhost:8080',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
 
     paths: {
