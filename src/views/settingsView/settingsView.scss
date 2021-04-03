@@ -7,16 +7,37 @@
 
   transition: var(--theme-transition);
 
-  &__sections {
+  &__sidebar {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 
-    padding: 80px 40px 0;
-
     border-right: 2px solid var(--almost-white);
+  }
+
+  &__sections {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 40px 20px;
+
 
     transition: var(--theme-transition);
+
+    border-bottom: 2px solid var(--almost-white);
+  }
+
+  &__logout-button {
+    margin-top: 30px;
+    margin-left: 40px;
+    padding: 0;
+
+    outline: none;
+    border: none;
+
+    font-size: 16px;
+
+    background-color: transparent;
   }
 
   &__section-link {
@@ -24,20 +45,23 @@
 
     margin: 10px 0;
 
+    text-decoration: none;
     font-size: 18px;
+
+    &_active {
+      text-decoration: underline;
+    }
+  }
+
+  &__option {
     font-weight: bold;
 
-    text-decoration: none;
 
     color: var(--black);
 
     cursor: pointer;
 
     &:hover {
-      text-decoration: underline;
-    }
-
-    &_active {
       text-decoration: underline;
     }
   }

@@ -5,6 +5,9 @@ import {ProfileChanges} from '../../components/profileChanges/profileChanges.js'
 import {SecuritySettings} from '../../components/securitySettings/securitySettings.js';
 import {NotificationSettings} from '../../components/notificationSettings/notificationSettings.js';
 import {userStore} from '../../stores/userStore/UserStore.js';
+import {urlRegexp} from '../../consts/regexp.js';
+import {actions} from '../../actions/actions.js';
+import {appRouter} from '../../appManagers/router.js';
 
 /**
  * Profile settings view
@@ -56,20 +59,49 @@ export class SettingsView extends View {
   }
 
   /**
-   * Did
+   * Process section settings links
    */
-  didMount() {
-    const sectionName = this.props.pathArgs['section'] || 'profile';
-
+  processSections() {
     this
         ._parent
         .querySelectorAll('.settings__section-link')
         .forEach((link) => {
-          if (link.getAttribute('data-section') === sectionName) {
+          if (window.location.pathname === '/settings') {
+            if (link.href.replace(urlRegexp, '') === '/settings/profile') {
+              link.classList.add('settings__section-link_active');
+            }
+          } else if (link.href.replace(urlRegexp, '').startsWith(window.location.pathname)) {
             link.classList.add('settings__section-link_active');
           }
         });
+  }
+
+  /**
+   * On logout button
+   */
+  logout() {
+    actions.user.logout();
+
+    appRouter.go('/');
+  }
+
+  /**
+   * Did
+   */
+  didMount() {
+    this.processSections();
+
+    document.querySelector('.settings__logout-button').addEventListener('click', this.logout);
 
     super.didMount();
+  }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    document.querySelector('.settings__logout-button').removeEventListener('click', this.logout);
+
+    super.willUnmount();
   }
 }
