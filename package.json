@@ -13,7 +13,7 @@
     "sass": "^1.32.8"
   },
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node server/index.js 8081",
     "prestart": "npm run compile_hbs",
     "postinstall": "husky install",
     "lint": "npx eslint src/",

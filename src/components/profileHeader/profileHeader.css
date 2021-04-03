@@ -52,7 +52,7 @@
   outline: none;
   background-color: transparent;
 }
-.profile-info__follow-toggle :hover {
+.profile-info__follow-toggle:hover {
   color: var(--red);
 }
 .profile-info__follow-icon {
