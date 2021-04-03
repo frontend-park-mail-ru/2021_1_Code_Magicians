@@ -20,7 +20,10 @@ export const eventMixin = {
    */
   unbind(event, callback) {
     this._listeners = this._listeners || {};
-    if (!this._listeners[event]) return;
+    if (!this._listeners[event]) {
+      return;
+    }
+
     this._listeners[event] = this._listeners[event].filter((listener) => listener !== callback);
   },
 
@@ -31,7 +34,10 @@ export const eventMixin = {
    */
   _trigger(event) {
     this._listeners = this._listeners || {};
-    if (!this._listeners[event]) return;
+    if (!this._listeners[event]) {
+      return;
+    }
+
     this._listeners[event].forEach((listener) => listener());
   },
 };

@@ -7,8 +7,8 @@ export const actionTypes = {
     logout: 'logout',
     checkAuth: 'check-auth',
 
-    editProfile: 'edit-profileViews',
-    deleteProfile: 'delete-profileViews',
+    editProfile: 'edit-profile',
+    deleteProfile: 'delete-profile',
     changePassword: 'change-password',
 
     statusProcessed: 'error-processed',

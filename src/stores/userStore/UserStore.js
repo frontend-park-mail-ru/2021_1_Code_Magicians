@@ -145,7 +145,7 @@ class UserStore extends Store {
   }
 
   /**
-   * delete profileViews
+   * Delete profile
    * @private
    */
   _deleteProfile() {
@@ -170,7 +170,7 @@ class UserStore extends Store {
   }
 
   /**
-   * Add changes to user profileViews
+   * Add changes to user profile
    * @param {Object} changes
    * @private
    */
@@ -185,7 +185,9 @@ class UserStore extends Store {
       Object
           .fromEntries(Object.entries(changes).filter((change) => change[1] !== profile[change[0]]));
 
-    if (Object.keys(changes).length === 0) return;
+    if (Object.keys(changes).length === 0) {
+      return;
+    }
 
     API.editProfile(changes).then((response) => {
       switch (response.status) {

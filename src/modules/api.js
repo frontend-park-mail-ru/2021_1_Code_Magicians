@@ -8,7 +8,7 @@ const paths = constants.network.paths;
  */
 export class API {
   /**
-   * Create user profileViews
+   * Create user profile
    * @param {String} username
    * @param {String} email
    * @param {String} password
@@ -58,7 +58,7 @@ export class API {
   }
 
   /**
-   * Get profileViews of the current user
+   * Get profile of the current user
    * @return {Object}
    */
   static getSelfProfile() {
@@ -66,7 +66,7 @@ export class API {
   }
 
   /**
-   * Get profileViews by username OR ID
+   * Get profile by username OR ID
    * @param {String} usernameOrID
    * @return {Object}
    */
@@ -75,7 +75,7 @@ export class API {
   }
 
   /**
-   * Update profileViews
+   * Update profile
    * @param {Object} changes
    * @return {Object}
    */
@@ -93,7 +93,7 @@ export class API {
   }
 
   /**
-   * Delete profileViews
+   * Delete profile
    * @return {Object}
    */
   static deleteSelfProfile() {

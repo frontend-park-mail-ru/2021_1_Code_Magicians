@@ -7,7 +7,7 @@ import {Profile} from '../../models/profile/Profile.js';
  */
 export class ProfileHeader extends Component {
   /**
-   * Constructs new profileViews header component
+   * Constructs new profile header component
    * @param {Object} props
    */
   constructor(props) {
@@ -15,7 +15,7 @@ export class ProfileHeader extends Component {
   }
 
   /**
-   * Returns the html code for the profileViews header
+   * Returns the html code for the profile header
    * @return {string} final html
    */
   render() {
