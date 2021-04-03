@@ -1,0 +1,12 @@
+.profile-header-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-content-wrapper {
+  display: flex;
+  background-color: var(--almost-white);
+  transition: var(--theme-transition);
+}
+
+/*# sourceMappingURL=profileView.css.map */

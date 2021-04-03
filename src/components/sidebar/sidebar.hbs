@@ -1,30 +1,33 @@
-<div class="page__sidebar">
-    <a class="sidebar__logo-link" href="/home">
-        <img src="assets/img/Logo.png" alt="logo" class="sidebar__logo-image">
+<div class="sidebar">
+    <a href="/home" class="sidebar__home-link">
+        <img src="/assets/img/Logo.png" alt="logo" class="sidebar__logo-image">
     </a>
     <div class="sidebar__view-selector">
-        <div class="view-selector__item">
-            <a class="view-selector__link" href="/home">
-                <img src="assets/img/svg/page__sidebar/Home.svg" alt="Home" class="view-selector__icon">
+        <div data-view="home" class="sidebar__view-option">
+            <a class="sidebar__view-link" href="/home">
+                <i class="fas fa-home sidebar__view-icon"></i>
             </a>
         </div>
-        <div class="view-selector__item view-selector__item_selected">
-            <a class="view-selector__link" href="/boards">
-                <img src="assets/img/svg/page__sidebar/Boards.svg" alt="Boards" class="view-selector__icon">
+        <div data-view="boards" class="sidebar__view-option">
+            <a class="sidebar__view-link" href="/boards">
+                <i class="fas fa-layer-group sidebar__view-icon"></i>
             </a>
         </div>
-        <div class="view-selector__item">
-            <a class="view-selector__link" href="/settings">
-                <img src="assets/img/svg/page__sidebar/Settings.svg" alt="Settings" class="view-selector__icon">
+        <div data-view="settings" class="sidebar__view-option">
+            <a class="sidebar__view-link" href="/settings">
+                <i class="fas fa-cog sidebar__view-icon"></i>
             </a>
         </div>
     </div>
-    <div class="sidebar__popup-toggles">
-        <button class="popup-toggle">
-            <img src="assets/img/svg/page__sidebar/Messages.svg" alt="Messages" class="popup-toggle__icon">
+    <div class="sidebar__toggles">
+        <button class="sidebar__toggle slider-toggle">
+            <i class="fas fa-comment-dots sidebar__toggle-icon"></i>
         </button>
-        <button class="popup-toggle">
-            <img src="assets/img/svg/page__sidebar/Notifications.svg" alt="Notifications" class="popup-toggle__icon">
+        <button class="sidebar__toggle slider-toggle">
+            <i class="fas fa-bell sidebar__toggle-icon"></i>
+        </button>
+        <button class="sidebar__toggle theme-toggle">
+            <i class="fas fa-moon sidebar__toggle-icon theme-toggle-icon"></i>
         </button>
     </div>
 </div>

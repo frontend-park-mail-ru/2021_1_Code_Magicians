@@ -1,4 +1,4 @@
-import {View} from './view.js';
+import {View} from '../view.js';
 
 /**
  * Page not found view
@@ -17,6 +17,8 @@ export class NotFoundView extends View {
    * @return {string}
    */
   render() {
-    return '<h1>404 NOT FOUND</h1>';
+    const tmpl = Handlebars.templates['notFoundView.hbs'];
+
+    return tmpl({});
   }
 }

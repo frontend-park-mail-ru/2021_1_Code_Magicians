@@ -14,6 +14,8 @@ export class View extends Component {
 
     this._active = false;
     this._parent = parent;
+
+    this.refresh = this.refresh.bind(this);
   }
 
   /**
@@ -22,8 +24,8 @@ export class View extends Component {
    */
   show(pathArgs) {
     this.props.pathArgs = pathArgs;
-    this.active = true;
-    
+    this._active = true;
+
     this._parent.insertAdjacentHTML('afterbegin', this.render());
     this.didMount();
   }
@@ -32,7 +34,7 @@ export class View extends Component {
    * Refreshes view
    */
   refresh() {
-    if (this.active) {
+    if (this._active) {
       this.remove();
       this.show(this.props.pathArgs);
     }
@@ -49,14 +51,10 @@ export class View extends Component {
   }
 
   /**
-   * Called right after showing the view
+   * Did
    */
   didMount() {
-  }
-
-  /**
-   * Called before removing the view
-   */
-  willUnmount() {
+    document.documentElement.setAttribute('theme', window.localStorage.getItem('theme'));
+    super.didMount();
   }
 }

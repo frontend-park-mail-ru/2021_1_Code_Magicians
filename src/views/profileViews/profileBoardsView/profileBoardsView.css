@@ -1,0 +1,30 @@
+.profile-boards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 40px 0 30px 40px;
+}
+.profile-boards__board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 340px;
+  margin: 5px 12px;
+}
+.profile-boards__board-avatar {
+  width: 300px;
+  height: 310px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.profile-boards__title {
+  margin-top: 4px;
+  color: var(--gray);
+  text-decoration: underline;
+  transition: 0.3s;
+}
+.profile-boards__title:hover {
+  color: var(--black);
+}
+
+/*# sourceMappingURL=profileBoardsView.css.map */

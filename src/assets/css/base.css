@@ -1,9 +1,11 @@
 html {
     height: 100%;
+    width: 100%;
 }
 
 body {
     height: 100%;
+    width: 100%;
 
     margin: 0;
     background-color: var(--almost-white);
@@ -20,6 +22,8 @@ body {
     --red: rgba(203, 7, 15, 1);
     --gray: rgba(169, 169, 169, 1);
     --black: rgba(37, 37, 37, 1);
+
+    --theme-transition: 0.5s;
 }
 
 :root[theme='dark'] {

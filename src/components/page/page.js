@@ -1,9 +1,9 @@
-import {Component} from '../component.js';
 import {Navbar} from '../navbar/navbar.js';
 import {Sidebar} from '../sidebar/sidebar.js';
+import {Component} from '../component.js';
 
 /**
- * Main page component
+ * Base page component
  */
 export class Page extends Component {
   /**
@@ -13,19 +13,19 @@ export class Page extends Component {
   constructor(props) {
     super(props);
 
-    this.pageNavbar = new Navbar(props);
-    this.pageSidebar = new Sidebar(props);
+    this._nestedComponents.set('pageNavbar', new Navbar(props));
+    this._nestedComponents.set('pageSidebar', new Sidebar(props));
   }
 
   /**
-   * Returns the html code for page__sidebar
+   * Returns base page layout html
    * @return {string} final html
    */
   render() {
     const tmpl = Handlebars.templates['page.hbs'];
     return tmpl({
-      page__navbar: this.pageNavbar.render(),
-      page__sidebar: this.pageSidebar.render(),
+      page__navbar: this._nestedComponents.get('pageNavbar').render(),
+      page__sidebar: this._nestedComponents.get('pageSidebar').render(),
       ...this.props,
     });
   }

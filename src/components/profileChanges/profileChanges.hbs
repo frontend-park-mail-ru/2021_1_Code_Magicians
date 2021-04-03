@@ -1,0 +1,49 @@
+<form class="profile-changes">
+    <h1 class="settings__title">
+        Profile changes
+    </h1>
+    <p class="profile-changes__description">
+        You can change some fields here or make them private (will be available later)
+    </p>
+    <div class="profile-changes__settings-form">
+        <div class="profile-changes__avatar-zone">
+            <span class="profile-changes__avatar-title">Avatar</span>
+            <img src="{{user.avatarLink}}" alt="avatar" class="profile-changes__avatar-preview">
+            <button class="profile-changes__avatar-change-button">Change</button>
+        </div>
+        <div class="profile-changes__fields">
+            <div class="settings__field">
+                <span class="settings__field-name">Name</span>
+                <input
+                        type="text"
+                        class="settings__field-input"
+                        {{#if user.firstName}}
+                            value="{{user.firstName}}"
+                        {{else}}
+                            placeholder="Add name"
+                        {{/if}}
+                        name="firstName"
+                >
+            </div>
+            <div class="settings__field">
+                <span class="settings__field-name">Username</span>
+                <input
+                        type="text"
+                        class="settings__field-input"
+                        value="{{user.username}}"
+                        name="username"
+                >
+            </div>
+            <div class="settings__field">
+                <span class="settings__field-name">Email</span>
+                <input
+                        type="email"
+                        class="settings__field-input"
+                        value="{{user.email}}"
+                        name="email"
+                >
+            </div>
+            <input type="submit" class="settings__submit-button">
+        </div>
+    </div>
+</form>

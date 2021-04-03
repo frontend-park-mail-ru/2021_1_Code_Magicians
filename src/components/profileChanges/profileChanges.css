@@ -1,0 +1,64 @@
+.profile-changes {
+  display: flex;
+  flex-direction: column;
+  height: 550px;
+  width: 100%;
+}
+.profile-changes__description {
+  margin-top: 7px;
+  color: var(--black);
+}
+.profile-changes__settings-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 800px;
+  padding-left: 50px;
+  padding-right: 30px;
+  margin-top: auto;
+}
+.profile-changes__avatar-zone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 230px;
+}
+.profile-changes__avatar-title {
+  align-self: flex-start;
+  font-size: 18px;
+  color: var(--black);
+}
+.profile-changes__avatar-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profile-changes__avatar-change-button {
+  width: 110px;
+  height: 40px;
+  margin-top: auto;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  color: var(--white);
+  background-color: var(--gray);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.profile-changes__avatar-change-button:hover {
+  opacity: 0.9;
+}
+.profile-changes__fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 350px;
+  width: 45%;
+}
+
+/*# sourceMappingURL=profileChanges.css.map */

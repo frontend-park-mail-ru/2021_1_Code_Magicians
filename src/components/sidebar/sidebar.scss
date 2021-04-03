@@ -1,151 +1,142 @@
-.page__sidebar {
+.sidebar {
+  $root: &;
+
   position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
-  height: 100%;
   width: 70px;
+
+  padding: 12px 0 25px;
 
   border-right: 5px solid var(--almost-white);
 
   background-color: var(--white);
-}
 
-.sidebar {
-  &__logo-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  transition: var(--theme-transition);
 
-    justify-self: flex-start;
+  &__home-link {
+    width: 50px;
+    height: 50px;
 
-    width: 100%;
-    height: 55px;
-
-    margin: 10px auto auto;
+    background-color: transparent;
 
     cursor: pointer;
   }
 
   &__logo-image {
-    width: 50px;
-    height: 50px;
+    width: inherit;
+    height: inherit;
 
     transition: 0.4s;
 
     &:hover {
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
   }
 
   &__view-selector {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
     width: 100%;
 
-    margin: auto 0;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 30px 0;
 
     background-color: var(--red);
   }
 
-  &__popup-toggles {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    justify-self: flex-end;
-
-    margin: auto auto 20px;
-  }
-}
-
-.view-selector {
-  $root: &;
-
-  &__item {
+  &__view-option {
     position: relative;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    justify-self: center;
 
     width: 100%;
 
-    margin: 0;
-
-    &_selected::before {
+    &::before {
       content: '';
+
       position: absolute;
+
       width: 3px;
       height: 100%;
-      background-color: white;  // not var(--white). It shouldn't change with theme
+
+      background-color: white;  // always white
+
+      opacity: 0;
+      transition: 0.2s;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
+    &_selected::before {
+      opacity: 1;
     }
   }
 
-  &__link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  &__view {
+    &-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-    width: 100%;
-    height: 45px;
+      width: 100%;
+      height: 45px;
+
+      text-decoration: none;
+
+      color: white; // always white
+
+      cursor: pointer;
+    }
+
+    &-icon {
+      font-size: 23px;
+    }
+  }
+
+  &__toggles {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 120px;
+  }
+
+  &__toggle {
+    border: none;
+    outline: none;
 
     background-color: transparent;
 
     cursor: pointer;
 
-    &:hover #{$root}__icon {
-      transform: scale(1.1);
+    &-icon {
+      font-size: 25px;
+
+      color: var(--gray);
+
+      transition: 0.2s;
     }
   }
 
-  &__icon {
-    transition: 0.2s;
-    height: 23px;
-    width: 30px;
+  .slider-toggle:hover &__toggle-icon {
+    color: var(--red);
+  }
+
+  .theme-toggle:hover &__toggle-icon {
+    opacity: 0.9;
   }
 }
 
-.popup-toggle {
-  $root: &;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 30px;
-  height: 30px;
-
-  margin: 7px 0;
-
-  border: none;
-  outline: none;
-
-  cursor: pointer;
-
-  background-color: transparent;
-
-  &__icon {
-    width: 25px;
-    height: 25px;
-
-    transition: 0.2s;
-  }
-
-  &:hover #{$root}__icon {
-    transform: scale(1.12);
-  }
+.theme-toggle {
+  margin-top: 15px;
 }

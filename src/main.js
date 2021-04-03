@@ -1,7 +1,13 @@
-import {Page} from './components/page/page.js';
+import {appRouter} from './appManagers/router.js';
+import {ProfileView} from './views/profileViews/profileView/profileView.js';
+import {SettingsView} from './views/settingsView/settingsView.js';
+import {ProfileBoardsView} from './views/profileViews/profileBoardsView/profileBoardsView.js';
 
-const application = document.getElementById('app');
+appRouter
+    .register('/profile', new ProfileView({}))
+    .register('/profile/boards', new ProfileBoardsView({}))
+    .register('/settings', new SettingsView({}))
+    .register('/settings/:section', new SettingsView({}));
 
-const page = new Page({});
+appRouter.start();
 
-application.innerHTML = page.render();

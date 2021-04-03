@@ -1,32 +1,32 @@
-<div class="page__navbar">
-    <form class="navbar__search-form">
-        <img src="assets/img/svg/page__navbar/Search.svg" alt="Search" class="navbar__search-icon">
-        <input type="text" class="navbar__search-input" placeholder="Looking things up">
-        <img src="assets/img/svg/page__navbar/x-mark.svg" alt="X-mark" class="navbar__search-wiper">
+<div class="navbar">
+    <form class="navbar__search-form" novalidate>
+        <i class="fas fa-search navbar__search-icon"></i>
+        <input type="text" class="navbar__search-input" placeholder="Looking things up" required>
+        <button class="navbar__search-wiper">
+            <i class="fas fa-times navbar__search-wiper-icon"></i>
+        </button>
     </form>
-    <div class="navbar__user-section">
-        {{#if userIsAuthorised}}
-            <a href="/profile">
-                <img src="assets/img/default-avatar.jpg" alt="Avatar" class="navbar__user-avatar">
+    {{#if userIsAuthorised}}
+        <div class="navbar__user-section">
+            <img src="{{user.avatarLink}}" alt="Avatar" class="navbar__user-avatar">
+            <a href="/profile" class="navbar__username"> {{user.username}} </a>
+        </div>
+        <div class="navbar__actions">
+            <a class="navbar__action" href="/create-pin">
+                <i class="fas fa-plus navbar__action-icon"></i>
             </a>
-            <span class="navbar__username"> Username Usernamov </span>
-            <button class="navbar__user-toggle">
-                <img src="assets/img/svg/page__navbar/dropdown-arrow.svg" alt="Dropdown" class="navbar__user-change-icon">
+            <button class="navbar__action">
+                <i class="fas fa-ellipsis-v navbar__action-icon"></i>
             </button>
-        {{else}}
-            <a href="/signin" class="navbar__auth-link navbar__auth-link_signin">Sign in</a>
-            <a href="/signup" class="navbar__auth-link navbar__auth-link_signup">Sign up</a>
-        {{/if}}
-    </div>
-    <div class="navbar__actions">
-        <a class="navbar__action" href="/create-pin">
-            <img src="assets/img/svg/page__navbar/Create_pin.svg" alt="Plus" class="navbar__action-icon">
-        </a>
-        <button class="navbar__action">
-            <img src="assets/img/svg/page__navbar/stats.svg" alt="Stats" class="navbar__action-icon ">
-        </button>
-        <button class="navbar__action">
-            <img src="assets/img/svg/page__navbar/more.svg" alt="Dropdown" class="navbar__action-icon">
-        </button>
-    </div>
+        </div>
+    {{else}}
+        <div class="navbar__auth-section">
+            <a href="/signin" class="navbar__auth-link navbar__auth-link_primary">
+                <span class="navbar__auth-text">Sign in</span>
+            </a>
+            <a href="/signup" class="navbar__auth-link navbar__auth-link_secondary">
+                <span class="navbar__auth-text">Sign up</span>
+            </a>
+        </div>
+    {{/if}}
 </div>

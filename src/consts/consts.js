@@ -1,7 +1,8 @@
 export const constants = {
   network: {
-    backendURL: 'http://localhost:3000',
-    defaultAvatarLink: 'assets/img/default-avatar.jpg',
+    backendURL: 'http://52.59.228.167:8080',
+    // backendURL: 'http://localhost:8080',
+    defaultAvatarLink: '/assets/img/default-avatar.jpg',
 
     paths: {
       signup: '/auth/signup',
@@ -33,6 +34,9 @@ export const constants = {
         userAlreadyExists: 'user already exists',
         unauthorized: 'unauthorized',
         editConflict: 'edit conflict',
+
+        passwordChanged: 'password changed',
+        profileEdited: 'profile edited',
 
         internalError: 'internal error',
       },

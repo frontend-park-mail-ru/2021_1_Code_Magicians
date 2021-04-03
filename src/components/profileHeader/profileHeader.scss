@@ -1,0 +1,174 @@
+.profile-info {
+  $root: &;
+
+  display: flex;
+  align-items: center;
+
+  height: 130px;
+
+  padding: 20px 80px 30px 30px;
+
+  border-bottom: 2px solid var(--almost-white);
+
+  background-color: var(--white);
+
+  transition: var(--theme-transition);
+
+  &__avatar {
+    height: 130px;
+    width: 130px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+  }
+
+  &__main-info {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 50px;
+  }
+
+  &__username-zone {
+    display: flex;
+    align-items: center;
+
+    width: 260px;
+    height: 35px;
+  }
+
+  &__username {
+    font-size: 24px;
+    font-weight: bold;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: var(--black);
+  }
+
+  &__settings {
+    $root: &;
+
+    display: flex;
+    align-items: center;
+
+    margin-left: 7px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    &:hover #{$root}-icon {
+      color: var(--red)
+    }
+
+    &-icon {
+      color: var(--gray);
+
+      transition: 0.2s;
+    }
+  }
+
+  &__follow-toggle {
+    margin-left: 7px;
+
+    border: none;
+    outline: none;
+
+    background-color: transparent;
+
+    &:hover {
+        color: var(--red);
+      }
+  }
+
+  &__follow-icon {
+    font-size: 16px;
+
+    color: var(--gray);
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--red);
+    }
+  }
+
+  &__user-real-name {
+    font-size: 15px;
+
+    color: var(--gray);
+  }
+
+  &__stats {
+    display: flex;
+    justify-content: space-between;
+
+    margin-left: auto;
+
+    width: 300px;
+    height: 100%;
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-counter {
+      font-weight: bold;
+      font-size: 24px;
+
+      color: var(--black);
+    }
+
+    &-name {
+      color: var(--gray);
+    }
+  }
+}
+
+.profile-links {
+  display: flex;
+  align-items: center;
+
+  height: 54px;
+
+  background-color: var(--white);
+
+  border-bottom: 2px solid var(--almost-white);
+
+  transition: var(--theme-transition);
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 150px;
+
+    text-decoration: none;
+    font-size: 18px;
+
+    border-right: 2px solid var(--almost-white);
+
+    color: var(--black);
+
+    transition: 0.2s;
+
+    &:hover {
+      color: var(--white);
+      background-color: var(--red);
+    }
+
+    &_active {
+      color: var(--white);
+      background-color: var(--red);
+    }
+  }
+}

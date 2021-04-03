@@ -1,6 +1,6 @@
-import {NotFoundView} from '../views/notFoundView.js';
+import {NotFoundView} from '../views/notFoundView/notFoundView.js';
 
-import {pathParamRegExp, regSubstr} from '../consts/regexp.js';
+import {pathParamRegExp, regSubstr, urlRegexp} from '../consts/regexp.js';
 import {pathTemplates} from '../consts/pathTemplates.js';
 
 /**
@@ -10,6 +10,7 @@ import {pathTemplates} from '../consts/pathTemplates.js';
  * @return {Object}
  */
 function getPathArgs(path, template) {
+  if (!template) return {};
   const splitPath = path.split('/');
 
   // noinspection UnnecessaryLocalVariableJS
@@ -34,8 +35,8 @@ class Router {
    * Makes new router
    */
   constructor() {
-    this.routes = new Map();
-    this.routes.set('/404', new NotFoundView());
+    this._routes = new Map();
+    this.register('/404', new NotFoundView());
   }
 
   /**
@@ -45,7 +46,7 @@ class Router {
    * @return {Router}
    */
   register(path, view) {
-    this.routes.set(path, view);
+    this._routes.set(path, view);
     return this;
   }
 
@@ -54,12 +55,17 @@ class Router {
    * @param {String} path
    */
   go(path) {
-    const prevView = this.currentView;
+    if (path === '/back') {
+      this.back();
+      return;
+    }
+
+    const prevView = this._currentView;
     if (prevView) {
       prevView.remove();
     }
 
-    const key = [...this.routes.keys()].find(key => {
+    const key = [...this._routes.keys()].find(key => {
       return RegExp(
           `^${
             key.replaceAll(
@@ -70,11 +76,13 @@ class Router {
       ).test(path);
     });
 
-    this.currentView = key ? this.routes.get(key) : this.routes.get(pathTemplates.notFound);
+    this._currentView = key ? this._routes.get(key) : this._routes.get(pathTemplates.notFound);
 
-    window.history.pushState(null, null, path);
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, null, path);
+    }
 
-    this.currentView.show(getPathArgs(path, key));
+    this._currentView.show(getPathArgs(path, key));
   }
 
   /**
@@ -97,9 +105,18 @@ class Router {
   start() {
     window.addEventListener('popstate', () => this.go(window.location.pathname));
     window.addEventListener('click', ev => {
+      let targetURL = '';
       if (ev.target instanceof HTMLAnchorElement) {
+        targetURL = ev.target.href;
+      } else {
+        const parentAnchor = ev.target.closest('a');
+        if (parentAnchor) {
+          targetURL = parentAnchor.href;
+        }
+      }
+      if (targetURL) {
         ev.preventDefault();
-        this.go(ev.target.href);
+        this.go(targetURL.replace(urlRegexp, ''));
       }
     });
 
@@ -107,4 +124,4 @@ class Router {
   }
 }
 
-export default new Router();
+export const appRouter = new Router();
