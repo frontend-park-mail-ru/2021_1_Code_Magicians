@@ -12,9 +12,10 @@ export class Pin extends Model {
    *   title,
    *   description,
    *   tags,
+   *   imageLink,
    * }
    */
-  constructor(props) {
+  constructor(props = {}) {
     super(props);
   }
 }

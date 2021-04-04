@@ -40,6 +40,17 @@ export const constants = {
 
         internalError: 'internal error',
       },
+      pinsStore: {
+        ok: 'ok',
+        pinCreated: 'pin-created',
+        pinDeleted: 'pin-deleted',
+
+        triedToDeleteForeignPin: 'foreign-pin-delete',
+        userUnauthorized: 'unauthorized',
+
+        clientSidedError: 'client-sided-error',
+        internalError: 'internal-error',
+      },
     },
   },
 };

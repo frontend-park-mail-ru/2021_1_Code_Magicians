@@ -18,10 +18,11 @@ export class HTTPModule {
    * @param {String} path
    * @param {Object} options
    * @param {Object} body
+   * @param {Boolean} serialize
    * @return {Object}
    * @private
    */
-  static async _requestBackend(path, options = {}, body = null) {
+  static async _requestBackend(path, options = {}, body = null, serialize = true) {
     if (['POST', 'PUT', 'DELETE'].includes(options.method)) {
       if (this._getCSRFToken()) {
         options.headers = options.headers || {};
@@ -37,11 +38,19 @@ export class HTTPModule {
     let responseBody = {};
 
     if (body) {
-      options = {...options, body: JSON.stringify(body)};
-      options.headers = {
-        ...options.headers,
-        'Content-Type': 'application/json;charset=utf-8',
-      };
+      if (serialize) {
+        options = {...options, body: JSON.stringify(body)};
+        options.headers = {
+          ...options.headers,
+          'Content-Type': 'application/json;charset=utf-8',
+        };
+      } else {
+        options = {...options, body: body};
+        options.headers = {
+          ...options.headers,
+          'Content-Type': 'multipart/form-data',
+        };
+      }
     }
 
     try {
@@ -88,10 +97,11 @@ export class HTTPModule {
    * POST
    * @param {String} path
    * @param {Object} body
+   * @param {Boolean} serialize
    * @return {Object}
    */
-  static post(path, body = null) {
-    return this._requestBackend(path, {method: 'POST'}, body);
+  static post(path, body = null, serialize = true) {
+    return this._requestBackend(path, {method: 'POST'}, body, serialize);
   }
 
   /**
