@@ -37,6 +37,11 @@ class PinsStore extends Store {
     this._pin = new Pin();
 
     this._status = storeStatuses.ok;
+
+    this._lastAction = {
+      actionType: null,
+      data: {},
+    };
   }
 
   /**
@@ -45,6 +50,10 @@ class PinsStore extends Store {
    */
   processEvent(action) {
     this._status = storeStatuses.ok;
+    if (this._lastAction === action &&
+      action.actionType !== actionTypes.pins.createPin) {
+      return;
+    }
 
     switch (action.actionType) {
       case actionTypes.pins.createPin:
@@ -69,7 +78,14 @@ class PinsStore extends Store {
         appDispatcher.waitFor(['boardsStore.dispatcherToken']);
         this._fetchBoardPins(action.data);
         break;
+      case actionTypes.pins.statusProcessed:
+        this._status = storeStatuses.ok;
+        break;
+      default:
+        return;
     }
+
+    this._lastAction = action;
   }
 
   /**
@@ -87,6 +103,7 @@ class PinsStore extends Store {
       switch (response.status) {
         case 201:
           this._status = storeStatuses.pinCreated;
+          this._trigger('change');
           break;
         case 403:
           this._status = storeStatuses.userUnauthorized;

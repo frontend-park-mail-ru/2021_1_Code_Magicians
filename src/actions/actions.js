@@ -17,6 +17,8 @@ export const actionTypes = {
     createPin: 'create-pin',
     deletePin: 'delete-pin',
     loadPinsFeed: 'load-pins-feed',
+
+    statusProcessed: 'pins-status-processed',
   },
   common: {
     loadForeignProfile: 'load-profile',
@@ -126,6 +128,14 @@ export const actions = {
         actionType: actionTypes.common.loadPin,
         data: {
           pinID: pinID,
+        },
+      });
+    },
+    loadBoard: (boardID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.common.loadBoard,
+        data: {
+          boardID: boardID,
         },
       });
     },
