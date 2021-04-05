@@ -40,6 +40,12 @@ export const constants = {
 
         internalError: 'internal error',
       },
+      boardsStore: {
+        ok: 'boards-ok',
+
+        boardCreated: 'board-created',
+        boardDeleted: 'board-deleted',
+      },
     },
   },
 };

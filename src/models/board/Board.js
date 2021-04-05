@@ -11,7 +11,7 @@ export class Board extends Model {
    *   authorID,
    *   title,
    *   description,
-   *   avatarIndex,
+   *   avatarLink,
    * }
    */
   constructor(props) {
