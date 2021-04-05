@@ -8,6 +8,19 @@ import {API} from '../../modules/api.js';
 
 const storeStatuses = constants.store.statuses.boardsStore;
 
+const boardsGenerator = function* () {
+  for (let i = 1; i <= 10; i++) {
+    yield new Board({
+      ID: i,
+      authorID: 100 + i % 3,
+      title: `title${i}`,
+      description: 'blah blah blah',
+      avatarLink: 'assets/img/default-avatar.jpg',
+    });
+  }
+};
+const boardsFeed = [...boardsGenerator()]; // temporary mock
+
 /**
  * BoardsStore
  */
@@ -33,8 +46,6 @@ class BoardsStore extends Store {
       return;
     }
 
-    this._status = storeStatuses.ok;
-
     switch (action.actionType) {
       case actionTypes.boards.createBoard:
         appDispatcher.waitFor([userStore.dispatcherToken]);
@@ -52,7 +63,10 @@ class BoardsStore extends Store {
         break;
       case actionTypes.common.loadForeignProfile:
         appDispatcher.waitFor(['profilesStore.dispatcherToken']);
-        this._fetchProfileBoards({profileID: 'profilesStore.getProfile().ID'});
+        this._fetchProfileBoards({authorID: 'profilesStore.getProfile().ID'});
+        break;
+      case actionTypes.boards.statusProcessed:
+        this._status = storeStatuses.ok;
         break;
       default:
         return;
@@ -135,6 +149,23 @@ class BoardsStore extends Store {
    * @private
    */
   _fetchBoard(data) {
+    API.getBoardByID(data.boardID).then((response) => {
+      switch (response.status) {
+        case 200:
+          this._board = new Board(response.responseBody);
+          this._trigger('change');
+          break;
+        case 400:
+        case 404:
+          console.log('Board fetching error. Status: ', response.status);
+          this._status = storeStatuses.clientSidedError;
+          break;
+        default:
+          console.log('Internal error');
+          this._status = storeStatuses.internalError;
+          break;
+      }
+    });
   }
 
   /**
@@ -143,6 +174,23 @@ class BoardsStore extends Store {
    * @private
    */
   _fetchProfileBoards(data) {
+    API.getProfileBoards(data.authorID).then((response) => {
+      switch (response.status) {
+        case 200:
+          this._boards = response.responseBody.boards;
+          this._trigger('change');
+          break;
+        case 400:
+        case 404:
+          console.log('Boards by profile fetching error. Status: ', response.status);
+          this._status = storeStatuses.clientSidedError;
+          break;
+        default:
+          console.log('Internal error');
+          this._status = storeStatuses.internalError;
+          break;
+      }
+    });
   }
 
   /**
@@ -151,6 +199,8 @@ class BoardsStore extends Store {
    * @private
    */
   _fetchBoardsFeed(data) {
+    this._boards = boardsFeed; // later will go to the server for data
+    this._trigger('change');
   }
 }
 

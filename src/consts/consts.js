@@ -42,6 +42,7 @@ export const constants = {
       },
       boardsStore: {
         ok: 'boards-ok',
+        statusProcessed: 'status-processed',
 
         userUnauthorized: 'unauthorized',
 
