@@ -43,8 +43,13 @@ export const constants = {
       boardsStore: {
         ok: 'boards-ok',
 
+        userUnauthorized: 'unauthorized',
+
         boardCreated: 'board-created',
         boardDeleted: 'board-deleted',
+
+        clientSidedError: 'client-sided-error',
+        internalError: 'internal-error',
       },
     },
   },

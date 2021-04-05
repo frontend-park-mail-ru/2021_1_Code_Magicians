@@ -13,6 +13,16 @@ export const actionTypes = {
 
     statusProcessed: 'error-processed',
   },
+  boards: {
+    createBoard: 'create-board',
+    deleteBoard: 'delete-board',
+    loadBoardsFeed: 'load-boards-feed',
+  },
+  common: {
+    loadForeignProfile: 'load-profile',
+    loadPin: 'load-pin', // load pin for pin's page. It contains messages, author's profile and so on
+    loadBoard: 'load-board',
+  },
 };
 
 export const actions = {
@@ -73,6 +83,56 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.user.statusProcessed,
         data: {},
+      });
+    },
+  },
+  boards: {
+    createBoard: (boardData) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.boards.createBoard,
+        data: boardData,
+      });
+    },
+    deleteBoard: (boardID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.boards.deleteBoard,
+        data: {
+          boardID: boardID,
+        },
+      });
+    },
+    loadBoardsFeed: (boardsNum) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.boards.loadBoardsFeed,
+        data: {
+          boardsNum: boardsNum,
+        },
+      });
+    },
+  },
+  common: {
+    loadForeignProfile: (profileID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.common.loadForeignProfile,
+        data: {
+          profileID: profileID,
+        },
+      });
+    },
+    loadPin: (pinID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.common.loadPin,
+        data: {
+          pinID: pinID,
+        },
+      });
+    },
+    loadBoard: (boardID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.common.loadBoard,
+        data: {
+          boardID: boardID,
+        },
       });
     },
   },

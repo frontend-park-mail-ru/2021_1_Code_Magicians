@@ -14,7 +14,7 @@ export class Board extends Model {
    *   avatarLink,
    * }
    */
-  constructor(props) {
+  constructor(props = {}) {
     super(props);
 
     this.pins = [];
