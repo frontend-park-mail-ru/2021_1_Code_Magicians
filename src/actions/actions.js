@@ -85,4 +85,30 @@ export const actions = {
       });
     },
   },
+  common: {
+    loadForeignProfile: (profileID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.common.loadForeignProfile,
+        data: {
+          profileID: profileID,
+        },
+      });
+    },
+    loadPin: (pinID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.common.loadPin,
+        data: {
+          pinID: pinID,
+        },
+      });
+    },
+    loadBoard: (boardID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.common.loadBoard,
+        data: {
+          boardID: boardID,
+        },
+      });
+    },
+  },
 };
