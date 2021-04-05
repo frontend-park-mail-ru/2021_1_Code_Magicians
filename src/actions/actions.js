@@ -13,6 +13,15 @@ export const actionTypes = {
 
     statusProcessed: 'error-processed',
   },
+  profiles: {
+    follow: 'follow-profile',
+    unfollow: 'unfollow-profile',
+  },
+  common: {
+    loadForeignProfile: 'load-profile',
+    loadPin: 'load-pin', // load pin for pin's page. It contains messages, author's profile and so on
+    loadBoard: 'load-board',
+  },
 };
 
 export const actions = {
