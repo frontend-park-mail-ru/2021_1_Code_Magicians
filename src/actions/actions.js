@@ -85,6 +85,24 @@ export const actions = {
       });
     },
   },
+  profiles: {
+    follow: (profileID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.profiles.follow,
+        data: {
+          profileID: profileID,
+        },
+      });
+    },
+    unfollow: (profileID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.profiles.unfollow,
+        data: {
+          profileID: profileID,
+        },
+      });
+    },
+  },
   common: {
     loadForeignProfile: (profileID) => {
       appDispatcher.dispatch({
