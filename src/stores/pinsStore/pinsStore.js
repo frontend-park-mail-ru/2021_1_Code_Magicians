@@ -9,19 +9,14 @@ import {Pin} from '../../models/pin/Pin.js';
 const storeStatuses = constants.store.statuses.pinsStore;
 
 // temporary mock instead of backend call
-const pinsGenerator = function* () {
-  for (let i = 1; i <= 10; i++) {
-    yield new Pin({
-      ID: i,
-      boardID: 100 + i % 3,
-      title: `title${i}`,
-      description: 'blah blah blah',
-      tags: [],
-      imageLink: 'assets/img/default-avatar.jpg',
-    });
-  }
-};
-const pinsFeed = [...pinsGenerator()];
+const pinsFeed = Array(10).fill(0).map((pin, i) => new Pin({
+  ID: i,
+  boardID: 100 + i % 3,
+  title: `title${i}`,
+  description: 'blah blah blah',
+  tags: [],
+  imageLink: 'assets/img/default-avatar.jpg',
+}));
 
 /**
  * PinsStore
@@ -110,11 +105,9 @@ class PinsStore extends Store {
           break;
         case 400:
         case 404:
-          console.log('Pin creating error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }
@@ -137,7 +130,7 @@ class PinsStore extends Store {
       switch (response.status) {
         case 204:
         case 200:
-          this._pin = this._pin ? this._pin.ID === pinID ? null : this._pin : null;
+          this._pin = this._pin.ID === pinID ? null : this._pin;
           this._pins = this._pins.filter((pin) => pin.ID !== pinID);
           this._status = storeStatuses.pinDeleted;
           this._trigger('change');
@@ -147,11 +140,9 @@ class PinsStore extends Store {
         case 403:
         case 404:
         case 409:
-          console.log('Pin deleting error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }
@@ -172,12 +163,10 @@ class PinsStore extends Store {
           break;
         case 400:
         case 404:
-          console.log('Pin fetching error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           this._pin = null;
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }
@@ -210,12 +199,10 @@ class PinsStore extends Store {
           break;
         case 400:
         case 404:
-          console.log('Pins by profile fetching error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           this._pins = [];
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }
@@ -237,12 +224,10 @@ class PinsStore extends Store {
           break;
         case 400:
         case 404:
-          console.log('Pins by board fetching error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           this._pins = [];
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }

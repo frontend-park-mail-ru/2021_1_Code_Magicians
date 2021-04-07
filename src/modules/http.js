@@ -38,19 +38,16 @@ export class HTTPModule {
     let responseBody = {};
 
     if (body) {
-      if (serialize) {
-        options = {...options, body: JSON.stringify(body)};
-        options.headers = {
+      const requestBody = serialize ? JSON.stringify(body) : body;
+      const contentType = serialize ? 'application/json;charset=utf-8' : 'multipart/form-data';
+      options = {
+        ...options,
+        body: requestBody,
+        headers: {
           ...options.headers,
-          'Content-Type': 'application/json;charset=utf-8',
-        };
-      } else {
-        options = {...options, body: body};
-        options.headers = {
-          ...options.headers,
-          'Content-Type': 'multipart/form-data',
-        };
-      }
+          'Content-Type': contentType,
+        },
+      };
     }
 
     try {
@@ -74,7 +71,6 @@ export class HTTPModule {
       headers = response.headers;
       status = response.status;
     } catch (e) {
-      console.log('Network or unknown error');
     }
 
     return {
