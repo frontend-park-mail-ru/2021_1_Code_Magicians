@@ -120,6 +120,15 @@ export class API {
   }
 
   /**
+   * Delete it
+   * @param {String} boardID
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static deleteBoardByID(boardID) {
+    return HTTPModule.delete(`${paths.board}/${boardID}`);
+  }
+
+  /**
    * Get boards by author ID
    * @param {String} authorID
    * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}

@@ -50,6 +50,7 @@ export const constants = {
         userUnauthorized: 'unauthorized',
 
         clientSidedError: 'client-error',
+
         internalError: 'internal-error',
       },
     },
