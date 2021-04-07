@@ -85,7 +85,11 @@ class ProfilesStore extends Store {
         case 200:
         case 204:
           if (this._profile['ID'] === data.profileID) {
-            follow ? this._profile.follow() : this._profile.unfollow();
+            if (follow) {
+              this._profile.follow();
+            } else {
+              this._profile.unfollow();
+            }
           }
 
           this._status = follow ? storeStatuses.followed : storeStatuses.unfollowed;
@@ -97,11 +101,9 @@ class ProfilesStore extends Store {
         case 400:
         case 404:
         case 409:
-          console.log(`Profile ${follow ? '' : 'un'}following error. Status: `, response.status);
           this._status = storeStatuses.clientSidedError;
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }
@@ -122,11 +124,9 @@ class ProfilesStore extends Store {
           break;
         case 400:
         case 404:
-          console.log('Profile fetching error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }
