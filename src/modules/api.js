@@ -12,7 +12,7 @@ export class API {
    * @param {String} username
    * @param {String} email
    * @param {String} password
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static signupUser({username, email, password}) {
     return HTTPModule.post(
@@ -29,7 +29,7 @@ export class API {
    * Log in user into the app
    * @param {String} username
    * @param {String} password
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static loginUser({username, password}) {
     return HTTPModule.post(
@@ -43,7 +43,7 @@ export class API {
 
   /**
    * Log out from current session
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static logoutUser() {
     return HTTPModule.post(paths.logout);
@@ -51,7 +51,7 @@ export class API {
 
   /**
    * Check if user is authenticated
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static checkUserAuth() {
     return HTTPModule.get(paths.authCheck);
@@ -59,7 +59,7 @@ export class API {
 
   /**
    * Get profile of the current user
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static getSelfProfile() {
     return HTTPModule.get(paths.selfProfile);
@@ -68,7 +68,7 @@ export class API {
   /**
    * Get profile by username OR ID
    * @param {String} usernameOrID
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static getProfileByUsernameOrID(usernameOrID) {
     return HTTPModule.get(`${paths.profile}/${usernameOrID}`);
@@ -77,7 +77,7 @@ export class API {
   /**
    * Update profile
    * @param {Object} changes
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static editProfile(changes) {
     return HTTPModule.put(paths.editProfile, changes);
@@ -86,7 +86,7 @@ export class API {
   /**
    * Update user password
    * @param {String} newPassword
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static changeUserPassword(newPassword) {
     return HTTPModule.put(paths.changePassword, {password: newPassword});
@@ -94,7 +94,7 @@ export class API {
 
   /**
    * Delete profile
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static deleteSelfProfile() {
     return HTTPModule.delete(paths.deleteProfile);
@@ -104,7 +104,7 @@ export class API {
    * Create new board
    * @param {String} title
    * @param {String} description
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static createBoard({title, description}) {
     return HTTPModule.post(paths.board, {title: title, description: description});
@@ -113,16 +113,25 @@ export class API {
   /**
    * Get board by ID
    * @param {String} boardID
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static getBoardByID(boardID) {
     return HTTPModule.get(`${paths.board}/${boardID}`);
   }
 
   /**
+   * Delete it
+   * @param {String} boardID
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static deleteBoardByID(boardID) {
+    return HTTPModule.delete(`${paths.board}/${boardID}`);
+  }
+
+  /**
    * Get boards by author ID
    * @param {String} authorID
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static getProfileBoards(authorID) {
     return HTTPModule.get(`${paths.boards}/${authorID}`);
@@ -131,7 +140,7 @@ export class API {
   /**
    * Create new pin
    * @param {Object} pinInfo
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static createPin(pinInfo) {
     return HTTPModule.post(paths.pin, pinInfo);
@@ -140,7 +149,7 @@ export class API {
   /**
    * Get pin by ID
    * @param {String} pinID
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static getPinByID(pinID) {
     return HTTPModule.get(`${paths.pin}/${pinID}`);
@@ -149,7 +158,7 @@ export class API {
   /**
    * Delete pin by ID
    * @param {String} pinID
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static deletePinByID(pinID) {
     return HTTPModule.delete(`${paths.pin}/${pinID}`);
@@ -158,7 +167,7 @@ export class API {
   /**
    * Get pins by board id of their board
    * @param {String} boardID
-   * @return {Object}
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static getPinsByBoardID(boardID) {
     return HTTPModule.get(`${paths.pins}${boardID}`);

@@ -40,6 +40,18 @@ export const constants = {
 
         internalError: 'internal error',
       },
+      boardsStore: {
+        ok: 'boards-ok',
+        statusProcessed: 'status-processed',
+
+        userUnauthorized: 'unauthorized',
+
+        boardCreated: 'board-created',
+        boardDeleted: 'board-deleted',
+
+        clientSidedError: 'client-sided-error',
+        internalError: 'internal-error',
+      },
     },
   },
 };
