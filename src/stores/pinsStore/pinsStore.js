@@ -5,6 +5,8 @@ import {appDispatcher} from '../../appManagers/dispatcher.js';
 import {userStore} from '../userStore/UserStore.js';
 import {API} from '../../modules/api.js';
 import {Pin} from '../../models/pin/Pin.js';
+import {profilesStore} from '../profilesStore/profilesStore.js';
+import {boardsStore} from '../boardsStore/boardsStore.js';
 
 const storeStatuses = constants.store.statuses.pinsStore;
 
@@ -67,14 +69,14 @@ class PinsStore extends Store {
         this._postComment(action.data);
         break;
       case actionTypes.common.loadForeignProfile:
-        appDispatcher.waitFor(['profilesStore.dispatcherToken']);
+        appDispatcher.waitFor([profilesStore.dispatcherToken]);
         this._fetchProfilePins(action.data);
         break;
       case actionTypes.common.loadPin:
         this._fetchPin(action.data);
         break;
       case actionTypes.common.loadBoard:
-        appDispatcher.waitFor(['boardsStore.dispatcherToken']);
+        appDispatcher.waitFor([boardsStore.dispatcherToken]);
         this._fetchBoardPins(action.data);
         break;
       case actionTypes.pins.statusProcessed:
@@ -129,7 +131,7 @@ class PinsStore extends Store {
       return;
     }
 
-    const pinID = pinData['pinID'];
+    const pinID = pinData.pinID;
     API.deletePinByID(pinID).then((response) => {
       switch (response.status) {
         case 204:
@@ -159,7 +161,7 @@ class PinsStore extends Store {
    * @private
    */
   _fetchPin(data) {
-    const pinID = data['pinID'];
+    const pinID = data.pinID;
     API.getPinByID(pinID).then((response) => {
       switch (response.status) {
         case 200:
@@ -222,7 +224,7 @@ class PinsStore extends Store {
    * @private
    */
   _fetchProfilePins(data) {
-    API.getPinsByProfileID(data['profileID'], data['pinsNumber'] || 0).then((response) => {
+    API.getPinsByProfileID(data.profileID, data.pinsNumber || 0).then((response) => {
       switch (response.status) {
         case 200:
           this._pins = response.responseBody.pins;

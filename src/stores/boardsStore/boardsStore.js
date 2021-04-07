@@ -189,6 +189,22 @@ class BoardsStore extends Store {
     this._boards = boardsFeed; // later will go to the server for data
     this._trigger('change');
   }
+
+  /**
+   * Returns boards
+   * @return {[]}
+   */
+  getBoards() {
+    return this._boards;
+  }
+
+  /**
+   * Returns board
+   * @return {Board}
+   */
+  getBoard() {
+    return this._board;
+  }
 }
 
 export const boardsStore = new BoardsStore();

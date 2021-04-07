@@ -19,6 +19,12 @@ export const actionTypes = {
     loadPinsFeed: 'load-pins-feed',
 
     statusProcessed: 'pins-status-processed',
+  },
+  boards: {
+    createBoard: 'create-board',
+    deleteBoard: 'delete-board',
+    loadBoardsFeed: 'load-boards-feed',
+  },
   profiles: {
     follow: 'follow-profile',
     unfollow: 'unfollow-profile',
@@ -116,6 +122,30 @@ export const actions = {
         actionType: actionTypes.pins.loadPinsFeed,
         data: {
           pinsNumber: pinsNumber,
+        },
+      });
+    },
+  },
+  boards: {
+    createBoard: (boardData) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.boards.createBoard,
+        data: boardData,
+      });
+    },
+    deleteBoard: (boardID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.boards.deleteBoard,
+        data: {
+          boardID: boardID,
+        },
+      });
+    },
+    loadBoardsFeed: (boardsNum) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.boards.loadBoardsFeed,
+        data: {
+          boardsNum: boardsNum,
         },
       });
     },

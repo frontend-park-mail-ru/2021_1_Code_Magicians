@@ -52,7 +52,18 @@ export const constants = {
         triedToDeleteForeignPin: 'foreign-pin-delete',
         userUnauthorized: 'unauthorized',
 
-        clientSidedError: 'client-sided-error',
+        clientSidedError: 'client-error',
+
+        internalError: 'internal-error',
+      },
+      boardsStore: {
+        ok: 'ok',
+
+        boardCreated: 'board-created',
+        boardDeleted: 'board-deleted',
+        userUnauthorized: 'unauthorized',
+
+        clientSidedError: 'client-error',
 
         internalError: 'internal-error',
       },
