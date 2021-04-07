@@ -8,18 +8,13 @@ import {API} from '../../modules/api.js';
 
 const storeStatuses = constants.store.statuses.boardsStore;
 
-const boardsGenerator = function* () {
-  for (let i = 1; i <= 10; i++) {
-    yield new Board({
-      ID: i,
-      authorID: 100 + i % 3,
-      title: `title${i}`,
-      description: 'blah blah blah',
-      avatarLink: 'assets/img/default-avatar.jpg',
-    });
-  }
-};
-const boardsFeed = [...boardsGenerator()]; // temporary mock
+const boardsFeed = Array(10).fill(0).map((board, i) => new Board({
+  ID: i,
+  authorID: 100 + i % 3,
+  title: `title${i}`,
+  description: 'blah blah blah',
+  avatarLink: 'assets/img/default-avatar.jpg',
+}));
 
 /**
  * BoardsStore
@@ -96,11 +91,9 @@ class BoardsStore extends Store {
           this._status = storeStatuses.userUnauthorized;
           break;
         case 400:
-          console.log('Board creating error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }
@@ -132,11 +125,9 @@ class BoardsStore extends Store {
         case 403:
         case 404:
         case 409:
-          console.log('Board deleting error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }
@@ -157,11 +148,9 @@ class BoardsStore extends Store {
           break;
         case 400:
         case 404:
-          console.log('Board fetching error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }
@@ -182,11 +171,9 @@ class BoardsStore extends Store {
           break;
         case 400:
         case 404:
-          console.log('Boards by profile fetching error. Status: ', response.status);
           this._status = storeStatuses.clientSidedError;
           break;
         default:
-          console.log('Internal error');
           this._status = storeStatuses.internalError;
           break;
       }

@@ -64,9 +64,7 @@ export class HTTPModule {
 
       headers = response.headers;
       status = response.status;
-    } catch (e) {
-      console.log('Network or unknown error');
-    }
+    } catch (e) {}
 
     return {
       status: status,
