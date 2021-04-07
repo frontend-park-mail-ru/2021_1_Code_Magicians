@@ -113,7 +113,8 @@ class Router {
           targetURL = parentAnchor.href;
         }
       }
-      if (targetURL) {
+
+      if (targetURL.startsWith(window.location.origin)) {
         ev.preventDefault();
         this.go(targetURL.replace(urlRegexp, ''));
       }

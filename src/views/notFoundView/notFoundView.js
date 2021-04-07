@@ -1,4 +1,5 @@
 import {View} from '../view.js';
+import {appRouter} from '../../appManagers/router.js';
 
 /**
  * Page not found view
@@ -10,6 +11,8 @@ export class NotFoundView extends View {
    */
   constructor(props = {}) {
     super(props, document.getElementById('app'));
+
+    this.back = (ev) => appRouter.back();
   }
 
   /**
@@ -20,5 +23,19 @@ export class NotFoundView extends View {
     const tmpl = Handlebars.templates['notFoundView.hbs'];
 
     return tmpl({});
+  }
+
+  /**
+   * Did
+   */
+  didMount() {
+    document.querySelector('.page-error__back-button').addEventListener('click', this.back);
+  }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    document.querySelector('.page-error__back-button').removeEventListener('click', this.back);
   }
 }
