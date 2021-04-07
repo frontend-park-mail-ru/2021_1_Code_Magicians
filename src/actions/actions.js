@@ -25,6 +25,9 @@ export const actionTypes = {
     loadPin: 'load-pin', // load pin for pin's page. It contains messages, author's profile and so on
     loadBoard: 'load-board',
   },
+  comments: {
+    postComment: 'post-comment',
+  },
 };
 
 export const actions = {
@@ -110,6 +113,16 @@ export const actions = {
         actionType: actionTypes.pins.loadPinsFeed,
         data: {
           pinsNumber: pinsNumber,
+        },
+      });
+    },
+  },
+  comments: {
+    postComment: (commentText, pinID) => {
+      appDispatcher.dispatch({
+        data: {
+          commentText: commentText,
+          pinID: pinID,
         },
       });
     },

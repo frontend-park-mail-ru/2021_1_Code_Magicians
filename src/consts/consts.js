@@ -18,6 +18,8 @@ export const constants = {
 
       board: '/board',
       boards: '/boards',
+      comment: '/comment',
+      comments: '/comments',
 
       pin: '/pin',
       pins: '/pins',

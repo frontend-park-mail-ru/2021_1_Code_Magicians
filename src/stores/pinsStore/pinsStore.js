@@ -28,8 +28,9 @@ class PinsStore extends Store {
   constructor() {
     super();
 
-    this._pins = []; // []Pins
+    this._pins = []; // []Pin
     this._pin = new Pin();
+    this._comments = []; // []Comment
 
     this._status = storeStatuses.ok;
 
@@ -61,6 +62,9 @@ class PinsStore extends Store {
         break;
       case actionTypes.pins.loadPinsFeed:
         this._fetchFeed(action.data);
+        break;
+      case actionTypes.comments.postComment:
+        this._postComment(action.data);
         break;
       case actionTypes.common.loadForeignProfile:
         appDispatcher.waitFor(['profilesStore.dispatcherToken']);
@@ -160,11 +164,37 @@ class PinsStore extends Store {
       switch (response.status) {
         case 200:
           this._pin = new Pin(response.responseBody);
+          this._fetchComments({pinID: this._pin.ID});
           break;
         case 400:
         case 404:
           this._status = storeStatuses.clientSidedError;
           this._pin = null;
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+          break;
+      }
+
+      this._trigger('change');
+    });
+  }
+
+  /**
+   * Fetch pin's comments
+   * @param {Object} data
+   * @private
+   */
+  _fetchComments(data) {
+    API.getComments(data.pinID).then((response) => {
+      switch (response) {
+        case 200:
+          this._comments = response.responseBody.comments.map((commendData) => new Comment(commendData));
+          break;
+        case 400:
+        case 404:
+          this._status = storeStatuses.clientSidedError;
+          this._comments = null;
           break;
         default:
           this._status = storeStatuses.internalError;
@@ -237,6 +267,33 @@ class PinsStore extends Store {
   }
 
   /**
+   * Post new comment
+   * @param {Object} data
+   * @private
+   */
+  _postComment(data) {
+    API.postComment(data.text, data.pinID).then((response) => {
+      switch (response) {
+        case 201:
+          this._fetchComments({pinID: data.pinID});
+          break;
+        case 401:
+          this._status = storeStatuses.userUnauthorized;
+          break;
+        case 400:
+        case 404:
+          this._status = storeStatuses.clientSidedError;
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+          break;
+      }
+
+      this._trigger('change');
+    });
+  }
+
+  /**
    * Get Pins
    * @return {[]}
    */
@@ -258,6 +315,14 @@ class PinsStore extends Store {
    */
   getStatus() {
     return this._status;
+  }
+
+  /**
+   * Get pin's comments
+   * @return {[]}
+   */
+  getComments() {
+    return this._comments;
   }
 }
 

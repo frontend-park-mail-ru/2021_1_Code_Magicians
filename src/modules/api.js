@@ -162,7 +162,7 @@ export class API {
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static getPinsByBoardID(boardID) {
-    return HTTPModule.get(`${paths.pins}${boardID}`);
+    return HTTPModule.get(`${paths.pins}/${boardID}`);
   }
 
   /**
@@ -173,6 +173,25 @@ export class API {
    */
   static getPinsByProfileID(profileID, pinsNumber = 0) {
     const queries = pinsNumber ? `?pinsNumber=${pinsNumber}` : '';
-    return HTTPModule.get(`${paths.pins}${profileID}${queries}`);
+    return HTTPModule.get(`${paths.pins}/${profileID}${queries}`);
+  }
+
+  /**
+   * Get Comments gy pin id
+   * @param {Number} pinID
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static getComments(pinID) {
+    return HTTPModule.get(`${paths.comments}/${pinID}`);
+  }
+
+  /**
+   * Post new comment
+   * @param {String} commentText
+   * @param {Number} pinID
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static postComment(commentText, pinID) {
+    return HTTPModule.post(`${paths.comment}/${pinID}`, {text: commentText});
   }
 }
