@@ -1,0 +1,21 @@
+.pins-feed {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  &__pin {
+    width: 280px;
+    height: 280px;
+
+    margin: 15px 10px;
+  }
+
+  &__pin-image {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 7px;
+
+    object-fit: cover;
+  }
+}

@@ -51,7 +51,9 @@ export class Sidebar extends Component {
         .querySelectorAll('.sidebar__view-option')
         .forEach((item) => {
           const link = item.querySelector('.sidebar__view-link');
-          if (window.location.pathname.startsWith(link.href.replace(urlRegexp, ''))) {
+          const currLocation = window.location.pathname === '/' ? '/home' : window.location.pathname;
+
+          if (currLocation.startsWith(link.href.replace(urlRegexp, ''))) {
             item.classList.add('sidebar__view-option_selected');
           }
         });

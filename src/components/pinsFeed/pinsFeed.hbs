@@ -1,0 +1,7 @@
+<div class="pins-feed">
+    {{#each pins}}
+        <a href="/pin/{{this.ID}}" class="pins-feed__pin">
+            <img src="{{this.imageLink}}" alt="pin's image" class="pins-feed__pin-image">
+        </a>
+    {{/each}}
+</div>
