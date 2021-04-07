@@ -1,0 +1,23 @@
+<div name="{{sliderType}}Slider" class="slider-wrapper">
+    <div class="slider">
+        <div class="slider__header">
+            <h2 class="slider__header-text">{{sliderType}}</h2>
+        </div>
+        <div class="slider__items">
+            {{#each items}}
+                <div class="slider__item">
+                    <img src="{{this.imageLink}}" alt="image" class="slider__item-image">
+                    <div class="slider__item-content">
+                        <div class="slider__item-header">{{this.header}}</div>
+                        <span class="slider__item-text">{{this.text}}</span>
+                    </div>
+                    <i class="fas fa-circle slider__item-indicator {{#if this.isNew}}slider__item-indicator_new{{/if}}"></i>
+                </div>
+            {{/each}}
+        </div>
+        {{#if typeIsMessages}}
+            <button class="slider__message-button">New message</button>
+        {{/if}}
+    </div>
+    <div class="page-shader"></div>
+</div>

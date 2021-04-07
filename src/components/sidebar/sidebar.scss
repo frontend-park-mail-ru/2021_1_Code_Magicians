@@ -119,6 +119,10 @@
 
     cursor: pointer;
 
+    &_active #{$root}__toggle-icon {
+      color: var(--red);
+    }
+
     &-icon {
       font-size: 25px;
 

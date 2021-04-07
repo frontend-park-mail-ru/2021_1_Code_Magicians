@@ -80,6 +80,9 @@
   background-color: transparent;
   cursor: pointer;
 }
+.sidebar__toggle_active .sidebar__toggle-icon {
+  color: var(--red);
+}
 .sidebar__toggle-icon {
   font-size: 25px;
   color: var(--gray);
