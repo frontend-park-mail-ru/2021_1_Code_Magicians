@@ -1,3 +1,4 @@
+/* eslint-disable valid-jsdoc */
 import {HTTPModule} from './http.js';
 import {constants} from '../consts/consts.js';
 
@@ -12,7 +13,7 @@ export class API {
    * @param {String} username
    * @param {String} email
    * @param {String} password
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static signupUser({username, email, password}) {
     return HTTPModule.post(
@@ -29,7 +30,7 @@ export class API {
    * Log in user into the app
    * @param {String} username
    * @param {String} password
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static loginUser({username, password}) {
     return HTTPModule.post(
@@ -43,7 +44,7 @@ export class API {
 
   /**
    * Log out from current session
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static logoutUser() {
     return HTTPModule.post(paths.logout);
@@ -51,7 +52,7 @@ export class API {
 
   /**
    * Check if user is authenticated
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static checkUserAuth() {
     return HTTPModule.get(paths.authCheck);
@@ -59,7 +60,7 @@ export class API {
 
   /**
    * Get profile of the current user
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static getSelfProfile() {
     return HTTPModule.get(paths.selfProfile);
@@ -68,7 +69,7 @@ export class API {
   /**
    * Get profile by username OR ID
    * @param {String} usernameOrID
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static getProfileByUsernameOrID(usernameOrID) {
     return HTTPModule.get(`${paths.profile}/${usernameOrID}`);
@@ -77,7 +78,7 @@ export class API {
   /**
    * Update profile
    * @param {Object} changes
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static editProfile(changes) {
     return HTTPModule.put(paths.editProfile, changes);
@@ -86,7 +87,7 @@ export class API {
   /**
    * Update user password
    * @param {String} newPassword
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static changeUserPassword(newPassword) {
     return HTTPModule.put(paths.changePassword, {password: newPassword});
@@ -94,7 +95,7 @@ export class API {
 
   /**
    * Delete profile
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static deleteSelfProfile() {
     return HTTPModule.delete(paths.deleteProfile);
@@ -104,7 +105,7 @@ export class API {
    * Create new board
    * @param {String} title
    * @param {String} description
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static createBoard({title, description}) {
     return HTTPModule.post(paths.board, {title: title, description: description});
@@ -113,7 +114,7 @@ export class API {
   /**
    * Get board by ID
    * @param {String} boardID
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static getBoardByID(boardID) {
     return HTTPModule.get(`${paths.board}/${boardID}`);
@@ -131,7 +132,7 @@ export class API {
   /**
    * Get boards by author ID
    * @param {String} authorID
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static getProfileBoards(authorID) {
     return HTTPModule.get(`${paths.boards}/${authorID}`);
@@ -140,15 +141,15 @@ export class API {
   /**
    * Create new pin
    * @param {Object} pinInfo
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static createPin(pinInfo) {
-    return HTTPModule.post(paths.pin, pinInfo);
+    return HTTPModule.post(paths.pin, pinInfo, true);
   }
 
   /**
    * @param {String} pinID
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static getPinByID(pinID) {
     return HTTPModule.get(`${paths.pin}/${pinID}`);
@@ -157,7 +158,7 @@ export class API {
   /**
    * Delete pin by ID
    * @param {String} pinID
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static deletePinByID(pinID) {
     return HTTPModule.delete(`${paths.pin}/${pinID}`);
@@ -166,17 +167,47 @@ export class API {
   /**
    * Get pins by board id of their board
    * @param {String} boardID
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static getPinsByBoardID(boardID) {
-    return HTTPModule.get(`${paths.pins}${boardID}`);
+    return HTTPModule.get(`${paths.pins}/${boardID}`);
+  }
+
+  /**
+   * Get pins by profile id
+   * @param {Number} profileID
+   * @param {Number} pinsNumber
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static getPinsByProfileID(profileID, pinsNumber = 0) {
+    const queries = pinsNumber ? `?pinsNumber=${pinsNumber}` : '';
+    return HTTPModule.get(`${paths.pins}/${profileID}${queries}`);
+  }
+
+  /**
+   * Get Comments gy pin id
+   * @param {Number} pinID
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static getComments(pinID) {
+    return HTTPModule.get(`${paths.comments}/${pinID}`);
+  }
+
+  /**
+   * Post new comment
+   * @param {String} commentText
+   * @param {Number} pinID
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static postComment(commentText, pinID) {
+    return HTTPModule.post(`${paths.comment}/${pinID}`, {text: commentText});
   }
 
   /**
    * Follow profile
    * @param {String} profileID
    * @param {Boolean} follow
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static followProfile(profileID, follow = true) {
     return follow ? HTTPModule.post(`${paths.follow}/${profileID}`) :

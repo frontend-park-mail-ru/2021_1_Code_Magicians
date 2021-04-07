@@ -18,6 +18,8 @@ export const constants = {
 
       board: '/board',
       boards: '/boards',
+      comment: '/comment',
+      comments: '/comments',
 
       pin: '/pin',
       pins: '/pins',
@@ -41,6 +43,18 @@ export const constants = {
         profileEdited: 'profile edited',
 
         internalError: 'internal error',
+      },
+      pinsStore: {
+        ok: 'ok',
+        pinCreated: 'pin-created',
+        pinDeleted: 'pin-deleted',
+
+        triedToDeleteForeignPin: 'foreign-pin-delete',
+        userUnauthorized: 'unauthorized',
+
+        clientSidedError: 'client-sided-error',
+
+        internalError: 'internal-error',
       },
       profilesStore: {
         ok: 'profiles-ok',

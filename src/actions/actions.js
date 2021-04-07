@@ -13,9 +13,18 @@ export const actionTypes = {
 
     statusProcessed: 'error-processed',
   },
+  pins: {
+    createPin: 'create-pin',
+    deletePin: 'delete-pin',
+    loadPinsFeed: 'load-pins-feed',
+
+    statusProcessed: 'pins-status-processed',
   profiles: {
     follow: 'follow-profile',
     unfollow: 'unfollow-profile',
+  },
+  comments: {
+    postComment: 'post-comment',
   },
   common: {
     loadForeignProfile: 'load-profile',
@@ -82,6 +91,42 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.user.statusProcessed,
         data: {},
+      });
+    },
+  },
+  pins: {
+    createPin: (formData) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.pins.createPin,
+        data: {
+          formData: formData,
+        },
+      });
+    },
+    deletePin: (pinID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.pins.deletePin,
+        data: {
+          pinID: pinID,
+        },
+      });
+    },
+    loadPinsFeed: (pinsNumber) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.pins.loadPinsFeed,
+        data: {
+          pinsNumber: pinsNumber,
+        },
+      });
+    },
+  },
+  comments: {
+    postComment: (commentText, pinID) => {
+      appDispatcher.dispatch({
+        data: {
+          commentText: commentText,
+          pinID: pinID,
+        },
       });
     },
   },
