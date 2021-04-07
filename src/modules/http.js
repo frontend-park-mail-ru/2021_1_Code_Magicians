@@ -70,8 +70,7 @@ export class HTTPModule {
 
       headers = response.headers;
       status = response.status;
-    } catch (e) {
-    }
+    } catch (e) {}
 
     return {
       status: status,

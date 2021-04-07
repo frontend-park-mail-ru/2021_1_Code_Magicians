@@ -121,6 +121,15 @@ export class API {
   }
 
   /**
+   * Delete it
+   * @param {String} boardID
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static deleteBoardByID(boardID) {
+    return HTTPModule.delete(`${paths.board}/${boardID}`);
+  }
+
+  /**
    * Get boards by author ID
    * @param {String} authorID
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
@@ -139,7 +148,6 @@ export class API {
   }
 
   /**
-   * Get pin by ID
    * @param {String} pinID
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
@@ -179,7 +187,7 @@ export class API {
   /**
    * Get Comments gy pin id
    * @param {Number} pinID
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static getComments(pinID) {
     return HTTPModule.get(`${paths.comments}/${pinID}`);
@@ -189,9 +197,20 @@ export class API {
    * Post new comment
    * @param {String} commentText
    * @param {Number} pinID
-   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static postComment(commentText, pinID) {
     return HTTPModule.post(`${paths.comment}/${pinID}`, {text: commentText});
+  }
+
+  /**
+   * Follow profile
+   * @param {String} profileID
+   * @param {Boolean} follow
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static followProfile(profileID, follow = true) {
+    return follow ? HTTPModule.post(`${paths.follow}/${profileID}`) :
+      HTTPModule.delete(`${paths.follow}/${profileID}`);
   }
 }

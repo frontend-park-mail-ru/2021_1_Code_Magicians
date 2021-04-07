@@ -23,6 +23,8 @@ export const constants = {
 
       pin: '/pin',
       pins: '/pins',
+
+      follow: '/follow',
     },
   },
   store: {
@@ -51,6 +53,18 @@ export const constants = {
         userUnauthorized: 'unauthorized',
 
         clientSidedError: 'client-sided-error',
+
+        internalError: 'internal-error',
+      },
+      profilesStore: {
+        ok: 'profiles-ok',
+        followed: 'followed',
+        unfollowed: 'unfollowed',
+
+        userUnauthorized: 'unauthorized',
+
+        clientSidedError: 'client-error',
+
         internalError: 'internal-error',
       },
     },

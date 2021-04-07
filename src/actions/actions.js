@@ -19,14 +19,17 @@ export const actionTypes = {
     loadPinsFeed: 'load-pins-feed',
 
     statusProcessed: 'pins-status-processed',
+  profiles: {
+    follow: 'follow-profile',
+    unfollow: 'unfollow-profile',
+  },
+  comments: {
+    postComment: 'post-comment',
   },
   common: {
     loadForeignProfile: 'load-profile',
     loadPin: 'load-pin', // load pin for pin's page. It contains messages, author's profile and so on
     loadBoard: 'load-board',
-  },
-  comments: {
-    postComment: 'post-comment',
   },
 };
 
@@ -123,6 +126,24 @@ export const actions = {
         data: {
           commentText: commentText,
           pinID: pinID,
+        },
+      });
+    },
+  },
+  profiles: {
+    follow: (profileID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.profiles.follow,
+        data: {
+          profileID: profileID,
+        },
+      });
+    },
+    unfollow: (profileID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.profiles.unfollow,
+        data: {
+          profileID: profileID,
         },
       });
     },
