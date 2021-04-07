@@ -21,6 +21,8 @@ export const constants = {
 
       pin: '/pin',
       pins: '/pins',
+
+      follow: '/follow',
     },
   },
   store: {
@@ -40,16 +42,15 @@ export const constants = {
 
         internalError: 'internal error',
       },
-      boardsStore: {
-        ok: 'boards-ok',
-        statusProcessed: 'status-processed',
+      profilesStore: {
+        ok: 'profiles-ok',
+        followed: 'followed',
+        unfollowed: 'unfollowed',
 
         userUnauthorized: 'unauthorized',
 
-        boardCreated: 'board-created',
-        boardDeleted: 'board-deleted',
+        clientSidedError: 'client-error',
 
-        clientSidedError: 'client-sided-error',
         internalError: 'internal-error',
       },
     },

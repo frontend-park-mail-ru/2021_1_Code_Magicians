@@ -147,7 +147,6 @@ export class API {
   }
 
   /**
-   * Get pin by ID
    * @param {String} pinID
    * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
@@ -171,5 +170,16 @@ export class API {
    */
   static getPinsByBoardID(boardID) {
     return HTTPModule.get(`${paths.pins}${boardID}`);
+  }
+
+  /**
+   * Follow profile
+   * @param {String} profileID
+   * @param {Boolean} follow
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static followProfile(profileID, follow = true) {
+    return follow ? HTTPModule.post(`${paths.follow}/${profileID}`) :
+      HTTPModule.delete(`${paths.follow}/${profileID}`);
   }
 }

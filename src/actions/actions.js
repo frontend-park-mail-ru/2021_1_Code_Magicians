@@ -13,10 +13,9 @@ export const actionTypes = {
 
     statusProcessed: 'error-processed',
   },
-  boards: {
-    createBoard: 'create-board',
-    deleteBoard: 'delete-board',
-    loadBoardsFeed: 'load-boards-feed',
+  profiles: {
+    follow: 'follow-profile',
+    unfollow: 'unfollow-profile',
   },
   common: {
     loadForeignProfile: 'load-profile',
@@ -86,26 +85,20 @@ export const actions = {
       });
     },
   },
-  boards: {
-    createBoard: (boardData) => {
+  profiles: {
+    follow: (profileID) => {
       appDispatcher.dispatch({
-        actionType: actionTypes.boards.createBoard,
-        data: boardData,
-      });
-    },
-    deleteBoard: (boardID) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.boards.deleteBoard,
+        actionType: actionTypes.profiles.follow,
         data: {
-          boardID: boardID,
+          profileID: profileID,
         },
       });
     },
-    loadBoardsFeed: (boardsNum) => {
+    unfollow: (profileID) => {
       appDispatcher.dispatch({
-        actionType: actionTypes.boards.loadBoardsFeed,
+        actionType: actionTypes.profiles.unfollow,
         data: {
-          boardsNum: boardsNum,
+          profileID: profileID,
         },
       });
     },
