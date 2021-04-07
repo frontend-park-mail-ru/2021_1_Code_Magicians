@@ -35,7 +35,7 @@ const boards = [
 
 
 /**
- * Base profile view
+ * Profile boards view
  */
 export class ProfileBoardsView extends ProfileView {
   /**

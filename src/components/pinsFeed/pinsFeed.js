@@ -7,7 +7,7 @@ const pins = Array(50).fill(0).map((pin, i) => new Pin({
   title: `title${i}`,
   description: 'blah blah blah',
   tags: [],
-  imageLink: 'assets/img/default-avatar.jpg',
+  imageLink: '/assets/img/default-avatar.jpg',
 }));
 
 /**
