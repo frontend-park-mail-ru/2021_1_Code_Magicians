@@ -8,14 +8,6 @@ import {API} from '../../modules/api.js';
 
 const storeStatuses = constants.store.statuses.boardsStore;
 
-const boardsFeed = Array(10).fill(0).map((board, i) => new Board({
-  ID: i,
-  authorID: 100 + i % 3,
-  title: `title${i}`,
-  description: 'blah blah blah',
-  avatarLink: 'assets/img/default-avatar.jpg',
-}));
-
 /**
  * BoardsStore
  */
@@ -186,7 +178,7 @@ class BoardsStore extends Store {
    * @private
    */
   _fetchBoardsFeed(data) {
-    this._boards = boardsFeed; // later will go to the server for data
+    this._boards = constants.mock.boards; // later will go to the server for data
     this._trigger('change');
   }
 

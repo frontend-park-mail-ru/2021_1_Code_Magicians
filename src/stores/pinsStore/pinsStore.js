@@ -10,16 +10,6 @@ import {boardsStore} from '../boardsStore/boardsStore.js';
 
 const storeStatuses = constants.store.statuses.pinsStore;
 
-// temporary mock instead of backend call
-const pinsFeed = Array(10).fill(0).map((pin, i) => new Pin({
-  ID: i,
-  boardID: 100 + i % 3,
-  title: `title${i}`,
-  description: 'blah blah blah',
-  tags: [],
-  imageLink: 'assets/img/default-avatar.jpg',
-}));
-
 /**
  * PinsStore
  */
@@ -214,7 +204,7 @@ class PinsStore extends Store {
    */
   _fetchFeed(data) {
     // later will be API function for this. Now only that mock
-    this._pins = pinsFeed;
+    this._pins = constants.mock.pins;
     this._trigger('change');
   }
 
