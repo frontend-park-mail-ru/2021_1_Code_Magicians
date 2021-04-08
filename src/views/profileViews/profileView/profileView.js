@@ -2,6 +2,7 @@ import {View} from '../../view.js';
 import {Page} from '../../../components/page/page.js';
 import {ProfileHeader} from '../../../components/profileHeader/profileHeader.js';
 import {userStore} from '../../../stores/userStore/UserStore.js';
+import {appRouter} from '../../../appManagers/router.js';
 
 /**
  * Base profile view
@@ -23,6 +24,11 @@ export class ProfileView extends View {
    * @return {String}
    */
   render() {
+    if (!userStore.getUser().authorized() && !this.props.pathArgs['profileID']) {
+      appRouter.go('/');
+      return '';
+    }
+
     const tmpl = Handlebars.templates['profileView.hbs'];
 
     this._nestedComponents.set('profileHeader', new ProfileHeader({...this.props}));

@@ -8,16 +8,18 @@
                 <i class="fas fa-home sidebar__view-icon"></i>
             </a>
         </div>
-        <div data-view="boards" class="sidebar__view-option">
-            <a class="sidebar__view-link" href="/profile/boards">
-                <i class="fas fa-layer-group sidebar__view-icon"></i>
-            </a>
-        </div>
-        <div data-view="settings" class="sidebar__view-option">
-            <a class="sidebar__view-link" href="/settings">
-                <i class="fas fa-cog sidebar__view-icon"></i>
-            </a>
-        </div>
+        {{#if userIsAuthorized}}
+            <div data-view="boards" class="sidebar__view-option">
+                <a class="sidebar__view-link" href="/profile/boards">
+                    <i class="fas fa-layer-group sidebar__view-icon"></i>
+                </a>
+            </div>
+            <div data-view="settings" class="sidebar__view-option">
+                <a class="sidebar__view-link" href="/settings">
+                    <i class="fas fa-cog sidebar__view-icon"></i>
+                </a>
+            </div>
+        {{/if}}
     </div>
     <div class="sidebar__toggles">
         <button class="sidebar__toggle slider-toggle">
