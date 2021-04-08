@@ -51,12 +51,12 @@ export class Sidebar extends Component {
    * @return {(function(*=): void)|*}
    */
   toggleSlider(sliderName) {
-    return (ev) => {
-      ev.preventDefault();
+    return (event) => {
+      event.preventDefault();
 
       const display = document.querySelector(`[name="${sliderName}Slider"]`).style.display || 'none';
 
-      this.hideSliders(ev);
+      this.hideSliders(event);
 
       document
           .querySelector(`[name="${sliderName}Slider"]`)
@@ -81,10 +81,10 @@ export class Sidebar extends Component {
 
   /**
    * Hides slider
-   * @param {Event} ev
+   * @param {Event} event
    */
-  hideSliders(ev) {
-    ev.preventDefault();
+  hideSliders(event) {
+    event.preventDefault();
 
     document
         .querySelectorAll('.slider-wrapper')

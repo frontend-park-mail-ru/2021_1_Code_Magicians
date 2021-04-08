@@ -42,4 +42,18 @@ export const constants = {
       },
     },
   },
+  mocks: {
+    messages: Array(10).fill(0).map((item, i) => ({
+      imageLink: '/assets/img/Logo.png',
+      header: 'Pinterbest',
+      text: 'Welcome to Pinterbest! Welcome to Pinterbest Welcome to Pinterbest Welcome to Pinterbest',
+      isNew: i % 2 === 0,
+    })),
+    notifications: Array(5).fill(0).map((item, i) => ({
+      imageLink: '/assets/img/Logo.png',
+      header: 'Pinterbest',
+      text: 'Welcome to Pinterbest! Welcome to Pinterbest Welcome to Pinterbest Welcome to Pinterbest',
+      isNew: i % 2 !== 0,
+    })),
+  },
 };

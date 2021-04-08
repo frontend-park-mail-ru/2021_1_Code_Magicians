@@ -27,10 +27,10 @@ export class Slider extends Component {
 
   /**
    * Toggle it
-   * @param {Event} ev
+   * @param {Event} event
    */
-  toggleMessageForm(ev) {
-    ev.preventDefault();
+  toggleMessageForm(event) {
+    event.preventDefault();
 
     const messageButton = document.querySelector('.slider__message-button');
     if (messageButton.innerHTML === 'Send') {
@@ -47,10 +47,10 @@ export class Slider extends Component {
 
   /**
    * Send new message
-   * @param {Event} ev
+   * @param {Event} event
    */
-  submitMessageForm(ev) {
-    ev.preventDefault();
+  submitMessageForm(event) {
+    event.preventDefault();
   }
 
   /**

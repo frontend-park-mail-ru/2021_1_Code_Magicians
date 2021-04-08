@@ -2,6 +2,7 @@ import {Navbar} from '../navbar/navbar.js';
 import {Sidebar} from '../sidebar/sidebar.js';
 import {Component} from '../component.js';
 import {Slider} from '../slider/slider.js';
+import {constants} from '../../consts/consts.js';
 
 /**
  * Base page component
@@ -20,23 +21,13 @@ export class Page extends Component {
       ...props,
       sliderType: 'Messages',
       typeIsMessages: true,
-      items: Array(10).fill(0).map((item, i) => ({
-        imageLink: '/assets/img/Logo.png',
-        header: 'Pinterbest',
-        text: 'Welcome to Pinterbest! Welcome to Pinterbest Welcome to Pinterbest Welcome to Pinterbest',
-        isNew: i % 2 === 0,
-      })),
+      items: constants.mocks.messages,
     }));
     this._nestedComponents.set('_notificationsSlider', new Slider({
       ...props,
       sliderType: 'Notifications',
       typeIsMessages: false,
-      items: Array(5).fill(0).map((item, i) => ({
-        imageLink: '/assets/img/Logo.png',
-        header: 'Pinterbest',
-        text: 'Welcome to Pinterbest! Welcome to Pinterbest Welcome to Pinterbest Welcome to Pinterbest',
-        isNew: i % 2 !== 0,
-      })),
+      items: constants.mocks.notifications,
     }));
   }
 
