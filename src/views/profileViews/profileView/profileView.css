@@ -1,10 +1,12 @@
 .profile-header-wrapper {
   display: flex;
   flex-direction: column;
+  box-shadow: 0 3px 3px -3px var(--main-elements-shadow);
 }
 
 .profile-content-wrapper {
   display: flex;
+  margin-top: 3px;
   background-color: var(--almost-white);
   transition: var(--theme-transition);
 }

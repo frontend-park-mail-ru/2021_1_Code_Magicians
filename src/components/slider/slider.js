@@ -10,6 +10,8 @@ export class Slider extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.toggleMessageForm = this.toggleMessageForm.bind(this);
   }
 
   /**
@@ -21,5 +23,74 @@ export class Slider extends Component {
     return tmpl({
       ...this.props,
     });
+  }
+
+  /**
+   * Toggle it
+   * @param {Event} ev
+   */
+  toggleMessageForm(ev) {
+    ev.preventDefault();
+
+    const messageButton = document.querySelector('.slider__message-button');
+    if (messageButton.innerHTML === 'Send') {
+      messageButton.removeEventListener('click', this.submitMessageForm);
+    } else {
+      messageButton.addEventListener('click', this.submitMessageForm);
+    }
+
+    messageButton.classList.toggle('slider__message-button_primary');
+    messageButton.innerHTML = messageButton.innerHTML === 'Send' ? 'New message' : 'Send';
+
+    document.querySelector('.message-form').classList.toggle('message-form_hidden');
+  }
+
+  /**
+   * Send new message
+   * @param {Event} ev
+   */
+  submitMessageForm(ev) {
+    ev.preventDefault();
+  }
+
+  /**
+   * Did
+   */
+  didMount() {
+    if (this.props.typeIsMessages) {
+      return;
+    }
+
+    document
+        .querySelector('.slider__message-button')
+        .addEventListener('click', this.toggleMessageForm);
+    document
+        .querySelector('.message-form__close-button')
+        .addEventListener('click', this.toggleMessageForm);
+    document
+        .querySelector('.message-form')
+        .addEventListener('submit', this.submitMessageForm);
+  }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    if (!this.props.typeIsMessages) {
+      return;
+    }
+
+    document
+        .querySelector('.slider__message-button')
+        .removeEventListener('click', this.toggleMessageForm);
+    document
+        .querySelector('.slider__message-button')
+        .removeEventListener('click', this.submitMessageForm);
+    document
+        .querySelector('.message-form__close-button')
+        .removeEventListener('click', this.toggleMessageForm);
+    document
+        .querySelector('.message-form')
+        .removeEventListener('submit', this.submitMessageForm);
   }
 }

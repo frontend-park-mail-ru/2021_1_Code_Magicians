@@ -20,7 +20,7 @@ export class Page extends Component {
       ...props,
       sliderType: 'Messages',
       typeIsMessages: true,
-      items: Array(5).fill(0).map((item, i) => ({
+      items: Array(10).fill(0).map((item, i) => ({
         imageLink: '/assets/img/Logo.png',
         header: 'Pinterbest',
         text: 'Welcome to Pinterbest! Welcome to Pinterbest Welcome to Pinterbest Welcome to Pinterbest',

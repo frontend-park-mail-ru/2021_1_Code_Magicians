@@ -62,6 +62,7 @@ export class Sidebar extends Component {
           .querySelector(`[name="${sliderName}Slider"]`)
           .style
           .display = display === 'none' ? 'block' : 'none';
+
       if (display === 'none') {
         document
             .querySelector(`[name="${sliderName.toLowerCase()}-toggle"]`)
@@ -73,6 +74,8 @@ export class Sidebar extends Component {
             .classList
             .remove('sidebar__toggle_active');
       }
+
+      document.querySelector('.page__wrap').style.overflow = 'hidden';
     };
   }
 
@@ -89,6 +92,8 @@ export class Sidebar extends Component {
     document
         .querySelectorAll('.slider-toggle')
         .forEach((toggle) => toggle.classList.remove('sidebar__toggle_active'));
+
+    document.querySelector('.page__wrap').style.overflow = 'auto';
   }
 
   /**
