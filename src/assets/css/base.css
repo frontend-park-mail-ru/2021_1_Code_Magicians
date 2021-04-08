@@ -34,6 +34,4 @@ body {
     --red: rgba(203, 7, 15, 1);
     --gray: rgba(169, 169, 169, 1);
     --black: rgba(230, 230, 230, 1);
-
-    --main-elements-shadow: rgba(230, 230, 230, 0.05);
 }

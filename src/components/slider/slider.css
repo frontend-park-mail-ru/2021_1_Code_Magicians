@@ -17,8 +17,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70px;
-  border-bottom: 2px solid var(--almost-white);
+  min-height: 70px;
+  border-bottom: 4px solid var(--almost-white);
 }
 .slider__header-text {
   color: var(--black);
@@ -28,6 +28,9 @@
   flex-direction: column;
   flex-grow: 1;
   overflow: auto;
+}
+.slider__items::-webkit-scrollbar {
+  display: none;
 }
 .slider__item {
   display: flex;
