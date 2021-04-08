@@ -12,7 +12,7 @@ export class NotFoundView extends View {
   constructor(props = {}) {
     super(props, document.getElementById('app'));
 
-    this.back = (ev) => appRouter.back();
+    this.back = (event) => appRouter.back();
   }
 
   /**

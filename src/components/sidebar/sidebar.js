@@ -26,9 +26,9 @@ export class Sidebar extends Component {
 
   /**
    * Toggles theme
-   * @param {Event} ev
+   * @param {Event} event
    */
-  toggleTheme(ev) {
+  toggleTheme(event) {
     const htmlTag = document.documentElement;
     const newTheme = htmlTag.getAttribute('theme') === 'dark' ? 'light' : 'dark';
 

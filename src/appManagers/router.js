@@ -55,6 +55,10 @@ class Router {
    * @param {String} path
    */
   go(path) {
+    if (path !== '/' && path.endsWith('/')) {
+      path = path.slice(0, -1);
+    }
+
     if (path === '/home') {
       path = '/';
     }
@@ -103,19 +107,19 @@ class Router {
    */
   start() {
     window.addEventListener('popstate', () => this.go(window.location.pathname));
-    window.addEventListener('click', (ev) => {
+    window.addEventListener('click', (event) => {
       let targetURL = '';
-      if (ev.target instanceof HTMLAnchorElement) {
-        targetURL = ev.target.href;
+      if (event.target instanceof HTMLAnchorElement) {
+        targetURL = event.target.href;
       } else {
-        const parentAnchor = ev.target.closest('a');
+        const parentAnchor = event.target.closest('a');
         if (parentAnchor) {
           targetURL = parentAnchor.href;
         }
       }
 
       if (targetURL.startsWith(window.location.origin)) {
-        ev.preventDefault();
+        event.preventDefault();
         this.go(targetURL.replace(urlRegexp, ''));
       }
     });

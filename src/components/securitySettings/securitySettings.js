@@ -47,10 +47,10 @@ export class SecuritySettings extends Component {
 
   /**
    * Submit
-   * @param {Event} ev
+   * @param {Event} event
    */
-  submit(ev) {
-    ev.preventDefault();
+  submit(event) {
+    event.preventDefault();
 
     const newPassword = document.querySelector('[name="new-password"]');
     const confirmPassword = document.querySelector('[name="confirm-password"]');

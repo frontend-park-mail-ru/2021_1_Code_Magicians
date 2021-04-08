@@ -47,11 +47,11 @@ export class ProfileChanges extends Component {
 
   /**
    * Submit callback
-   * @param {Event} ev
+   * @param {Event} event
    */
-  submit(ev) {
-    ev.preventDefault();
-    const target = ev.target;
+  submit(event) {
+    event.preventDefault();
+    const target = event.target;
 
     const changes = {};
 
