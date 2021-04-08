@@ -9,9 +9,9 @@
   height: 60px;
   padding: 5px 70px;
   border-bottom: 2px solid var(--almost-white);
-  box-shadow: 0 2px 2px -2px var(--main-elements-shadow);
   background-color: var(--white);
   transition: var(--theme-transition);
+  z-index: 1;
 }
 .navbar__search-form {
   display: flex;

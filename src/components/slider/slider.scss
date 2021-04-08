@@ -12,7 +12,7 @@
 
   box-shadow: 6px 0 6px 0 var(--main-elements-shadow);
 
-  z-index: 2;
+  z-index: 3;
 
   &-wrapper {
     display: none;
@@ -24,7 +24,7 @@
     align-items: center;
 
     min-height: 70px;
-    border-bottom: 4px solid var(--almost-white);
+    border-bottom: 2px solid var(--almost-white);
 
     &-text {
       color: var(--black);
@@ -230,5 +230,5 @@
   background-color: black;
   opacity: 0.25;
 
-  z-index: 1;
+  z-index: 2;
 }

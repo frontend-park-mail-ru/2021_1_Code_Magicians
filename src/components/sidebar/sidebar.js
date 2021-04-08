@@ -1,5 +1,6 @@
 import {Component} from '../component.js';
 import {urlRegexp} from '../../consts/regexp.js';
+import {userStore} from '../../stores/userStore/UserStore.js';
 
 /**
  * Side bar (page__sidebar)
@@ -23,6 +24,7 @@ export class Sidebar extends Component {
     const tmpl = Handlebars.templates['sidebar.hbs'];
     return tmpl({
       ...this.props,
+      userIsAuthorised: userStore.getUser().authorized(),
     });
   }
 

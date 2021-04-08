@@ -70,7 +70,6 @@
 .sidebar__toggles {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   height: 120px;
 }
@@ -96,7 +95,11 @@
 }
 
 .theme-toggle {
-  margin-top: 15px;
+  margin-top: auto;
+}
+
+.slider-toggle {
+  margin-bottom: 10px;
 }
 
 /*# sourceMappingURL=sidebar.css.map */
