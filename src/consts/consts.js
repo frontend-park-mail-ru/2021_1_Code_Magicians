@@ -13,11 +13,12 @@ export const constants = {
       logout: '/auth/logout',
       authCheck: '/auth/check',
 
-      profile: 'profile',
+      profile: '/profile',
       selfProfile: '/profile',
       editProfile: '/profile/edit',
       changePassword: '/profile/password',
-      deleteProfile: 'profile/delete',
+      deleteProfile: '/profile/delete',
+      changeAvatar: '/profile/avatar',
 
       board: '/board',
       boards: '/boards',
@@ -45,6 +46,7 @@ export const constants = {
         passwordChanged: 'password changed',
         profileEdited: 'profile edited',
 
+        badData: 'bad data',
         internalError: 'internal error',
       },
       pinsStore: {

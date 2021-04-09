@@ -47,6 +47,9 @@ class UserStore extends Store {
       case actionTypes.user.changePassword:
         this._changePassword(action.data);
         break;
+      case actionTypes.user.changeAvatar:
+        this._changeAvatar(action.data);
+        break;
       case actionTypes.user.statusProcessed:
         this._status = storeStatuses.ok;
         break;
@@ -234,6 +237,33 @@ class UserStore extends Store {
     });
   }
 
+  /**
+   * Change it
+   * @param {FormData} avatarFormData
+   * @private
+   */
+  _changeAvatar(avatarFormData) {
+    if (!this._user.authorized()) {
+      this._status = storeStatuses.unauthorized;
+      return;
+    }
+
+    API.changeAvatar(avatarFormData).then((response) => {
+      switch (response.status) {
+        case 204:
+          this._fetchUserData();
+          break;
+        case 400:
+          this._status = storeStatuses.badData;
+          break;
+        case 401:
+          this._status = storeStatuses.unauthorized;
+          break;
+      }
+
+      this._trigger('change');
+    });
+  }
 
   /**
    * Fetch it

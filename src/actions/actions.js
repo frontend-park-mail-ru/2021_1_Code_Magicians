@@ -10,6 +10,7 @@ export const actionTypes = {
     editProfile: 'edit-profile',
     deleteProfile: 'delete-profile',
     changePassword: 'change-password',
+    changeAvatar: 'change-avatar',
 
     statusProcessed: 'error-processed',
   },
@@ -90,6 +91,12 @@ export const actions = {
         data: {
           password: password,
         },
+      });
+    },
+    changeAvatar: (avatarFormData) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.user.changeAvatar,
+        data: avatarFormData,
       });
     },
 

@@ -30,7 +30,21 @@ export class ProfileChanges extends Component {
    * Did
    */
   didMount() {
-    document.querySelector('.profile-changes').addEventListener('submit', this.submit);
+    document
+        .querySelector('.profile-changes__fields')
+        .addEventListener('submit', this.submit);
+
+    document
+        .querySelector('.profile-changes__avatar-form')
+        .addEventListener('change', this.changeAvatar);
+
+    document
+        .querySelector('.profile-changes__avatar-change-button')
+        .addEventListener('click', this.selectAvatar);
+
+    document
+        .querySelector('.profile-changes__avatar-preview')
+        .addEventListener('click', this.selectAvatar);
 
     if (userStore.getStatus() === constants.store.statuses.userStore.profileEdited) {
       alert('profile edited successfully');
@@ -42,7 +56,21 @@ export class ProfileChanges extends Component {
    * Will
    */
   willUnmount() {
-    document.querySelector('.profile-changes').removeEventListener('submit', this.submit);
+    document
+        .querySelector('.profile-changes__fields')
+        .removeEventListener('submit', this.submit);
+
+    document
+        .querySelector('.profile-changes__avatar-form')
+        .removeEventListener('change', this.changeAvatar);
+
+    document
+        .querySelector('.profile-changes__avatar-change-button')
+        .removeEventListener('click', this.selectAvatar);
+
+    document
+        .querySelector('.profile-changes__avatar-preview')
+        .removeEventListener('click', this.selectAvatar);
   }
 
   /**
@@ -78,5 +106,30 @@ export class ProfileChanges extends Component {
     changes['email'] = email;
 
     actions.user.editProfile(changes);
+  }
+
+  /**
+   * Change it
+   * @param {Event} event
+   */
+  changeAvatar(event) {
+    event.preventDefault();
+    console.log('changeAvatar');
+    console.log(event.target);
+
+    const payload = new FormData();
+    payload.append('avatarImage', event.target.files[0]);
+
+    actions.user.changeAvatar(payload);
+  }
+
+  /**
+   * Activate file window
+   * @param {Event} event
+   */
+  selectAvatar(event) {
+    event.preventDefault();
+
+    document.querySelector('[name="avatar_upload"]').click();
   }
 }

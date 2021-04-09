@@ -1,4 +1,4 @@
-<form class="profile-changes">
+<div class="profile-changes">
     <h1 class="settings__title">
         Profile changes
     </h1>
@@ -6,12 +6,22 @@
         You can change some fields here or make them private (will be available later)
     </p>
     <div class="profile-changes__settings-form">
-        <div class="profile-changes__avatar-zone">
+        <form class="profile-changes__avatar-form">
             <span class="profile-changes__avatar-title">Avatar</span>
-            <img src="{{user.avatarLink}}" alt="avatar" class="profile-changes__avatar-preview">
+            <img
+                    src="{{user.avatarLink}}"
+                    alt="avatar"
+                    class="profile-changes__avatar-preview"
+            >
             <button class="profile-changes__avatar-change-button">Change</button>
-        </div>
-        <div class="profile-changes__fields">
+            <input
+                    type="file"
+                    class="profile-changes__avatar-input"
+                    name="avatar_upload"
+                    accept="image/jpeg,image/png,image/jpg"
+            >
+        </form>
+        <form class="profile-changes__fields">
             <div class="settings__field">
                 <span class="settings__field-name">Name</span>
                 <input
@@ -44,6 +54,6 @@
                 >
             </div>
             <input type="submit" class="settings__submit-button">
-        </div>
+        </form>
     </div>
-</form>
+</div>
