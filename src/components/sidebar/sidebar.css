@@ -9,7 +9,7 @@
   justify-content: space-between;
   width: 70px;
   padding: 12px 0 25px;
-  border-right: 5px solid var(--almost-white);
+  box-shadow: 5px 0 5px 0 var(--main-elements-shadow);
   background-color: var(--white);
   transition: var(--theme-transition);
 }
@@ -70,7 +70,6 @@
 .sidebar__toggles {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   height: 120px;
 }
@@ -79,6 +78,9 @@
   outline: none;
   background-color: transparent;
   cursor: pointer;
+}
+.sidebar__toggle_active .sidebar__toggle-icon {
+  color: var(--red);
 }
 .sidebar__toggle-icon {
   font-size: 25px;
@@ -93,7 +95,11 @@
 }
 
 .theme-toggle {
-  margin-top: 15px;
+  margin-top: auto;
+}
+
+.slider-toggle {
+  margin-bottom: 10px;
 }
 
 /*# sourceMappingURL=sidebar.css.map */

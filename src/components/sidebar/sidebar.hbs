@@ -22,12 +22,14 @@
         {{/if}}
     </div>
     <div class="sidebar__toggles">
-        <button class="sidebar__toggle slider-toggle">
-            <i class="fas fa-comment-dots sidebar__toggle-icon"></i>
-        </button>
-        <button class="sidebar__toggle slider-toggle">
-            <i class="fas fa-bell sidebar__toggle-icon"></i>
-        </button>
+        {{#if userIsAuthorized}}
+            <button name="messages-toggle" class="sidebar__toggle slider-toggle">
+                <i class="fas fa-comment-dots sidebar__toggle-icon"></i>
+            </button>
+            <button name="notifications-toggle" class="sidebar__toggle slider-toggle">
+                <i class="fas fa-bell sidebar__toggle-icon"></i>
+            </button>
+        {{/if}}
         <button class="sidebar__toggle theme-toggle">
             <i class="fas fa-moon sidebar__toggle-icon theme-toggle-icon"></i>
         </button>

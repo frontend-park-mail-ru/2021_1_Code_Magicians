@@ -1,6 +1,8 @@
 import {Navbar} from '../navbar/navbar.js';
 import {Sidebar} from '../sidebar/sidebar.js';
 import {Component} from '../component.js';
+import {Slider} from '../slider/slider.js';
+import {constants} from '../../consts/consts.js';
 
 /**
  * Base page component
@@ -13,20 +15,34 @@ export class Page extends Component {
   constructor(props) {
     super(props);
 
-    this._nestedComponents.set('pageNavbar', new Navbar(props));
-    this._nestedComponents.set('pageSidebar', new Sidebar(props));
+    this._nestedComponents.set('_pageNavbar', new Navbar(props));
+    this._nestedComponents.set('_pageSidebar', new Sidebar(props));
+    this._nestedComponents.set('_messagesSlider', new Slider({
+      ...props,
+      sliderType: 'Messages',
+      typeIsMessages: true,
+      items: constants.mocks.messages,
+    }));
+    this._nestedComponents.set('_notificationsSlider', new Slider({
+      ...props,
+      sliderType: 'Notifications',
+      typeIsMessages: false,
+      items: constants.mocks.notifications,
+    }));
   }
 
   /**
    * Returns base page layout html
-   * @return {string} final html
+   * @return {String} final html
    */
   render() {
     const tmpl = Handlebars.templates['page.hbs'];
     return tmpl({
-      page__navbar: this._nestedComponents.get('pageNavbar').render(),
-      page__sidebar: this._nestedComponents.get('pageSidebar').render(),
       ...this.props,
+      page__navbar: this._nestedComponents.get('_pageNavbar').render(),
+      page__sidebar: this._nestedComponents.get('_pageSidebar').render(),
+      page__messagesSlider: this._nestedComponents.get('_messagesSlider').render(),
+      page__notificationsSlider: this._nestedComponents.get('_notificationsSlider').render(),
     });
   }
 }
