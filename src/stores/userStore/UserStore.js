@@ -267,14 +267,6 @@ class UserStore extends Store {
   getUser() {
     return this._user;
   }
-
-  /**
-   * Get current store status
-   * @return {String} status
-   */
-  getStatus() {
-    return this._status;
-  }
 }
 
 export const userStore = new UserStore();

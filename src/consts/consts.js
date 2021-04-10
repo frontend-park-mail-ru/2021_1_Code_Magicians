@@ -1,3 +1,4 @@
+import {Board} from '../models/board/Board.js';
 import {Pin} from '../models/pin/Pin.js';
 
 export const constants = {
@@ -20,9 +21,13 @@ export const constants = {
 
       board: '/board',
       boards: '/boards',
+      comment: '/comment',
+      comments: '/comments',
 
       pin: '/pin',
       pins: '/pins',
+
+      follow: '/follow',
     },
   },
   store: {
@@ -42,6 +47,40 @@ export const constants = {
 
         internalError: 'internal error',
       },
+      pinsStore: {
+        ok: 'ok',
+        pinCreated: 'pin-created',
+        pinDeleted: 'pin-deleted',
+
+        triedToDeleteForeignPin: 'foreign-pin-delete',
+        userUnauthorized: 'unauthorized',
+
+        clientSidedError: 'client-error',
+
+        internalError: 'internal-error',
+      },
+      boardsStore: {
+        ok: 'ok',
+
+        boardCreated: 'board-created',
+        boardDeleted: 'board-deleted',
+        userUnauthorized: 'unauthorized',
+
+        clientSidedError: 'client-error',
+
+        internalError: 'internal-error',
+      },
+      profilesStore: {
+        ok: 'profiles-ok',
+        followed: 'followed',
+        unfollowed: 'unfollowed',
+
+        userUnauthorized: 'unauthorized',
+
+        clientSidedError: 'client-error',
+
+        internalError: 'internal-error',
+      },
     },
   },
   mocks: {
@@ -51,7 +90,14 @@ export const constants = {
       title: `title${i}`,
       description: 'blah blah blah',
       tags: [],
-      imageLink: '/assets/img/default-avatar.jpg',
+      imageLink: 'assets/img/default-avatar.jpg',
+    })),
+    boards: Array(10).fill(0).map((board, i) => new Board({
+      ID: i,
+      authorID: 100 + i % 3,
+      title: `title${i}`,
+      description: 'blah blah blah',
+      avatarLink: 'assets/img/default-avatar.jpg',
     })),
   },
 };

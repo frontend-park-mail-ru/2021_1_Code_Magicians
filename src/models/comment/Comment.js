@@ -1,18 +1,17 @@
 import {Model} from '../Model.js';
 
 /**
- * Pin model
+ * Message model
  */
-export class Pin extends Model {
+export class Comment extends Model {
   /**
    * Constructor
    * @param {Object} props : {
    *   ID,
-   *   boardID,
-   *   title,
-   *   description,
-   *   tags,
-   *   imageLink,
+   *   userID,
+   *   pinID,
+   *   addingTime,
+   *   text,
    * }
    */
   constructor(props = {}) {
