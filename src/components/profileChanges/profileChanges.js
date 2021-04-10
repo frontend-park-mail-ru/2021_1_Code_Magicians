@@ -114,8 +114,6 @@ export class ProfileChanges extends Component {
    */
   changeAvatar(event) {
     event.preventDefault();
-    console.log('changeAvatar');
-    console.log(event.target);
 
     const payload = new FormData();
     payload.append('avatarImage', event.target.files[0]);

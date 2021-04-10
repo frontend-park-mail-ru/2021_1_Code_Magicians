@@ -144,7 +144,6 @@ class ProfilesStore extends Store {
     Promise
         .all(data.profileIDs.map((profileID) => API.getProfileByUsernameOrID(profileID)))
         .then((responses) => {
-          const errorsLog = [];
           responses.forEach((response) => {
             switch (response.status) {
               case 200:
@@ -152,21 +151,15 @@ class ProfilesStore extends Store {
                 break;
               case 400:
               case 404:
-                errorsLog.push(`Profile fetching error. Status: ${response.status}`);
                 this._status = storeStatuses.clientSidedError;
                 break;
               default:
-                errorsLog.push('Internal error');
                 this._status = storeStatuses.internalError;
                 break;
             }
           });
 
           this._trigger('change');
-
-          if (errorsLog.length !== 0) {
-            errorsLog.forEach((str) => console.log(str));
-          }
         });
   }
 
