@@ -21,10 +21,11 @@ export class Sidebar extends Component {
    * @return {string} final html
    */
   render() {
+    this._userIsAuthorized = userStore.getUser().authorized();
     const tmpl = Handlebars.templates['sidebar.hbs'];
     return tmpl({
       ...this.props,
-      userIsAuthorized: userStore.getUser().authorized(),
+      userIsAuthorized: this._userIsAuthorized,
     });
   }
 
@@ -115,7 +116,7 @@ export class Sidebar extends Component {
 
     document.querySelector('.theme-toggle').addEventListener('click', this.toggleTheme);
 
-    if (userStore.getUser().authorized()) {
+    if (this._userIsAuthorized) {
       document
           .querySelectorAll('.page-shader')
           .forEach((button) => button.addEventListener('click', this.hideSliders));
@@ -125,8 +126,6 @@ export class Sidebar extends Component {
       document
           .querySelector('[name="notifications-toggle"]')
           .addEventListener('click', this.toggleSlider('Notifications'));
-
-      this._authorizedRender = true;
     }
   }
 
@@ -136,7 +135,7 @@ export class Sidebar extends Component {
   willUnmount() {
     document.querySelector('.theme-toggle').removeEventListener('click', this.toggleTheme);
 
-    if (this._authorizedRender) {
+    if (this._userIsAuthorized) {
       document
           .querySelectorAll('.page-shader')
           .forEach((button) => button.removeEventListener('click', this.hideSliders));
@@ -147,7 +146,7 @@ export class Sidebar extends Component {
           .querySelector('[name="notifications-toggle"]')
           .removeEventListener('click', this.toggleSlider('Notifications'));
 
-      this._authorizedRender = false;
+      this._userIsAuthorized = false;
     }
   }
 }

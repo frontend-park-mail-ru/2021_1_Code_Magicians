@@ -37,16 +37,14 @@ export const constants = {
         ok: 'ok',
 
         alreadyAuthorized: 'already authorized',
-        invalidCreds: 'invalid credentials',
-        userNotFound: 'user not found',
-        userAlreadyExists: 'user already exists',
         unauthorized: 'unauthorized',
-        editConflict: 'edit conflict',
 
         passwordChanged: 'password changed',
         profileEdited: 'profile edited',
+        editConflict: 'edit conflict',
+        badAvatarImage: 'bad avatar',
 
-        badData: 'bad data',
+        clientError: 'client error',
         internalError: 'internal error',
       },
       pinsStore: {

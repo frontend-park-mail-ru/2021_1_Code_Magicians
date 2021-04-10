@@ -3,6 +3,7 @@ import {Page} from '../../../components/page/page.js';
 import {ProfileHeader} from '../../../components/profileHeader/profileHeader.js';
 import {userStore} from '../../../stores/userStore/UserStore.js';
 import {appRouter} from '../../../appManagers/router.js';
+import {constants} from '../../../consts/consts.js';
 
 /**
  * Base profile view
@@ -42,11 +43,11 @@ export class ProfileView extends View {
    * Did.
    */
   didMount() {
-    console.log('profile did mount');
-    if (!userStore.getUser().authorized() && Object.keys(this.props.pathArgs).length === 0) {
+    super.didMount();
+    if (!userStore.getUser().authorized() &&
+        Object.keys(this.props.pathArgs).length === 0 &&
+        userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       appRouter.go('/');
     }
-
-    super.didMount();
   }
 }

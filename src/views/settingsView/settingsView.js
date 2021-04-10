@@ -7,6 +7,7 @@ import {userStore} from '../../stores/userStore/UserStore.js';
 import {urlRegexp} from '../../consts/regexp.js';
 import {actions} from '../../actions/actions.js';
 import {appRouter} from '../../appManagers/router.js';
+import {constants} from '../../consts/consts.js';
 
 /**
  * Profile settings view
@@ -80,7 +81,6 @@ export class SettingsView extends View {
    */
   logout() {
     actions.user.logout();
-    appRouter.go('/');
   }
 
   /**
@@ -92,7 +92,8 @@ export class SettingsView extends View {
     document.querySelector('.settings__logout-button').addEventListener('click', this.logout);
 
     super.didMount();
-    if (!userStore.getUser().authorized()) {
+    if (!userStore.getUser().authorized() &&
+        userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       appRouter.go('/');
     }
   }
