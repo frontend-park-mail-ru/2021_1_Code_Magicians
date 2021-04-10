@@ -21,7 +21,7 @@ class ProfilesStore extends Store {
     super();
 
     this._profiles = [];
-    this._profile = new Profile();
+    this._profile = new Profile({ID: 0});
 
     this._lastAction = {
       actionType: null,
@@ -118,6 +118,11 @@ class ProfilesStore extends Store {
    * @private
    */
   _fetchProfile(data) {
+    console.log(this._profile, data.profileID);
+    if (this._profile.ID === data.profileID) {
+      return;
+    }
+
     API.getProfileByUsernameOrID(data.profileID).then((response) => {
       switch (response.status) {
         case 200:

@@ -1,6 +1,6 @@
 import {Component} from '../component.js';
 import {userStore} from '../../stores/userStore/UserStore.js';
-import {Profile} from '../../models/profile/Profile.js';
+import {profilesStore} from '../../stores/profilesStore/profilesStore.js';
 
 /**
  * Profile header
@@ -21,7 +21,7 @@ export class ProfileHeader extends Component {
   render() {
     const tmpl = Handlebars.templates['profileHeader.hbs'];
     const selfProfile = Object.keys(this.props.pathArgs).length === 0;
-    const profile = selfProfile ? userStore.getUser().profile : new Profile(); // will find real foreign profile
+    const profile = selfProfile ? userStore.getUser().profile : profilesStore.getProfile(); // will find real foreign profile
     return tmpl({
       ...this.props,
       selfProfile: Object.keys(this.props.pathArgs).length === 0,
