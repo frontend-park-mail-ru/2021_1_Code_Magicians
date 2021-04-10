@@ -4,7 +4,7 @@ import {Pin} from '../models/pin/Pin.js';
 export const constants = {
   network: {
     backendURL: 'http://52.59.228.167:8080',
-    // backendURL: 'http://localhost:8080',
+    // backendURL: 'http://127.0.0.1:8080',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
 
     paths: {
@@ -83,8 +83,8 @@ export const constants = {
       },
     },
   },
-  mock: {
-    pins: Array(10).fill(0).map((pin, i) => new Pin({
+  mocks: {
+    pins: Array(50).fill(0).map((pin, i) => new Pin({
       ID: i,
       boardID: 100 + i % 3,
       title: `title${i}`,

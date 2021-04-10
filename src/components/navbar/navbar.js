@@ -28,9 +28,9 @@ export class Navbar extends Component {
 
   /**
    * On wiper
-   * @param {Event} ev
+   * @param {Event} event
    */
-  wipeSearchField(ev) {
+  wipeSearchField(event) {
     document.querySelector('.navbar__search-input').value = '';
   }
 

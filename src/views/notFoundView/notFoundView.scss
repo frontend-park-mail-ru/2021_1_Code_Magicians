@@ -24,26 +24,29 @@
     margin-left: 15px;
   }
 
-  &__back-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &__back-button {
+    margin-top: 150px;
 
     width: 120px;
     height: 60px;
 
     border-radius: 30px;
+    border: none;
+    outline: none;
 
-    text-decoration: none;
     font-size: 18px;
     font-weight: bold;
 
     color: var(--black);
     background-color: var(--almost-white);
 
-    transition: 0.1s;
+    transition: 0.2s;
+
+    cursor: pointer;
 
     &:hover {
+      text-decoration: underline;
+
       color: var(--white);
       background-color: var(--red);
     }

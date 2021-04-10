@@ -1,5 +1,6 @@
 import {Component} from '../component.js';
 import {urlRegexp} from '../../consts/regexp.js';
+import {userStore} from '../../stores/userStore/UserStore.js';
 
 /**
  * Side bar (page__sidebar)
@@ -21,14 +22,15 @@ export class Sidebar extends Component {
     const tmpl = Handlebars.templates['sidebar.hbs'];
     return tmpl({
       ...this.props,
+      userIsAuthorized: userStore.getUser().authorized(),
     });
   }
 
   /**
    * Toggles theme
-   * @param {Event} ev
+   * @param {Event} event
    */
-  toggleTheme(ev) {
+  toggleTheme(event) {
     const htmlTag = document.documentElement;
     const newTheme = htmlTag.getAttribute('theme') === 'dark' ? 'light' : 'dark';
 
@@ -51,7 +53,9 @@ export class Sidebar extends Component {
         .querySelectorAll('.sidebar__view-option')
         .forEach((item) => {
           const link = item.querySelector('.sidebar__view-link');
-          if (window.location.pathname.startsWith(link.href.replace(urlRegexp, ''))) {
+          const currLocation = window.location.pathname === '/' ? '/home' : window.location.pathname;
+
+          if (currLocation.startsWith(link.href.replace(urlRegexp, ''))) {
             item.classList.add('sidebar__view-option_selected');
           }
         });
