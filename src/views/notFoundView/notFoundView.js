@@ -6,9 +6,9 @@ import {appRouter} from '../../appManagers/router.js';
  */
 export class NotFoundView extends View {
   /**
-   * Makes new NotFoundView
-   * @param {Object} props
-   */
+     * Makes new NotFoundView
+     * @param {Object} props
+     */
   constructor(props = {}) {
     super(props, document.getElementById('app'));
 
@@ -16,9 +16,9 @@ export class NotFoundView extends View {
   }
 
   /**
-   * Rendering 404 page
-   * @return {string}
-   */
+     * Rendering 404 page
+     * @return {string}
+     */
   render() {
     const tmpl = Handlebars.templates['notFoundView.hbs'];
 

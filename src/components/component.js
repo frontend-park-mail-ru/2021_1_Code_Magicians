@@ -21,6 +21,13 @@ export class Component {
   }
 
   /**
+   * Clear previously saved state
+   */
+  clearState() {
+    this._state = {};
+  }
+
+  /**
    * Returns raw html code, ready to insert somewhere on page
    */
   render() {
