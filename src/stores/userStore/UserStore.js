@@ -285,6 +285,7 @@ class UserStore extends Store {
           this._status = storeStatuses.internalError;
       }
       this._user = new User(profile, authorized);
+      console.log('user fetched');
       this._trigger('change');
     });
   }

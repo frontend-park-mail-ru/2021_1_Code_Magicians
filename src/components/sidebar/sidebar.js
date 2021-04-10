@@ -24,7 +24,7 @@ export class Sidebar extends Component {
     const tmpl = Handlebars.templates['sidebar.hbs'];
     return tmpl({
       ...this.props,
-      userIsAuthorised: userStore.getUser().authorized(),
+      userIsAuthorized: userStore.getUser().authorized(),
     });
   }
 
@@ -115,15 +115,19 @@ export class Sidebar extends Component {
 
     document.querySelector('.theme-toggle').addEventListener('click', this.toggleTheme);
 
-    document
-        .querySelectorAll('.page-shader')
-        .forEach((button) => button.addEventListener('click', this.hideSliders));
-    document
-        .querySelector('[name="messages-toggle"]')
-        .addEventListener('click', this.toggleSlider('Messages'));
-    document
-        .querySelector('[name="notifications-toggle"]')
-        .addEventListener('click', this.toggleSlider('Notifications'));
+    if (userStore.getUser().authorized()) {
+      document
+          .querySelectorAll('.page-shader')
+          .forEach((button) => button.addEventListener('click', this.hideSliders));
+      document
+          .querySelector('[name="messages-toggle"]')
+          .addEventListener('click', this.toggleSlider('Messages'));
+      document
+          .querySelector('[name="notifications-toggle"]')
+          .addEventListener('click', this.toggleSlider('Notifications'));
+
+      this._authorizedRender = true;
+    }
   }
 
   /**
@@ -132,14 +136,18 @@ export class Sidebar extends Component {
   willUnmount() {
     document.querySelector('.theme-toggle').removeEventListener('click', this.toggleTheme);
 
-    document
-        .querySelectorAll('.page-shader')
-        .forEach((button) => button.removeEventListener('click', this.hideSliders));
-    document
-        .querySelector('[name="messages-toggle"]')
-        .removeEventListener('click', this.toggleSlider('Messages'));
-    document
-        .querySelector('[name="notifications-toggle"]')
-        .removeEventListener('click', this.toggleSlider('Notifications'));
+    if (this._authorizedRender) {
+      document
+          .querySelectorAll('.page-shader')
+          .forEach((button) => button.removeEventListener('click', this.hideSliders));
+      document
+          .querySelector('[name="messages-toggle"]')
+          .removeEventListener('click', this.toggleSlider('Messages'));
+      document
+          .querySelector('[name="notifications-toggle"]')
+          .removeEventListener('click', this.toggleSlider('Notifications'));
+
+      this._authorizedRender = false;
+    }
   }
 }

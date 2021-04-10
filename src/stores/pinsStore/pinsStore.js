@@ -204,7 +204,7 @@ class PinsStore extends Store {
    */
   _fetchFeed(data) {
     // later will be API function for this. Now only that mock
-    this._pins = constants.mock.pins;
+    this._pins = constants.mocks.pins;
     this._trigger('change');
   }
 

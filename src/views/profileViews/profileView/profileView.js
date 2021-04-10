@@ -24,11 +24,6 @@ export class ProfileView extends View {
    * @return {String}
    */
   render() {
-    if (!userStore.getUser().authorized() && !this.props.pathArgs['profileID']) {
-      appRouter.go('/');
-      return '';
-    }
-
     const tmpl = Handlebars.templates['profileView.hbs'];
 
     this._nestedComponents.set('profileHeader', new ProfileHeader({...this.props}));
@@ -41,5 +36,17 @@ export class ProfileView extends View {
     }));
 
     return this._nestedComponents.get('page').render();
+  }
+
+  /**
+   * Did.
+   */
+  didMount() {
+    console.log('profile did mount');
+    if (!userStore.getUser().authorized() && Object.keys(this.props.pathArgs).length === 0) {
+      appRouter.go('/');
+    }
+
+    super.didMount();
   }
 }

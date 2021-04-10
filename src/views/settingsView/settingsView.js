@@ -28,11 +28,6 @@ export class SettingsView extends View {
    * @return {String}
    */
   render() {
-    if (!userStore.getUser().authorized()) {
-      appRouter.go('/');
-      return '';
-    }
-
     const tmpl = Handlebars.templates['settingsView.hbs'];
 
     let settingsForm = null;
@@ -86,7 +81,6 @@ export class SettingsView extends View {
    */
   logout() {
     actions.user.logout();
-
     appRouter.go('/');
   }
 
@@ -99,6 +93,9 @@ export class SettingsView extends View {
     document.querySelector('.settings__logout-button').addEventListener('click', this.logout);
 
     super.didMount();
+    if (!userStore.getUser().authorized()) {
+      appRouter.go('/');
+    }
   }
 
   /**

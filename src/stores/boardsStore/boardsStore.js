@@ -178,7 +178,7 @@ class BoardsStore extends Store {
    * @private
    */
   _fetchBoardsFeed(data) {
-    this._boards = constants.mock.boards; // later will go to the server for data
+    this._boards = constants.mocks.boards; // later will go to the server for data
     this._trigger('change');
   }
 
