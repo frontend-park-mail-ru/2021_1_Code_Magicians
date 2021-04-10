@@ -1,6 +1,5 @@
 import {View} from '../view.js';
 import {Page} from '../../components/page/page.js';
-// eslint-disable-next-line no-unused-vars
 import {ProfileChanges} from '../../components/profileChanges/profileChanges.js';
 import {SecuritySettings} from '../../components/securitySettings/securitySettings.js';
 import {NotificationSettings} from '../../components/notificationSettings/notificationSettings.js';
@@ -30,7 +29,7 @@ export class SettingsView extends View {
   render() {
     const tmpl = Handlebars.templates['settingsView.hbs'];
 
-    let settingsForm = null;
+    let settingsForm;
     switch (this.props.pathArgs['section']) {
       case 'profile':
         settingsForm = new ProfileChanges(this.props);
