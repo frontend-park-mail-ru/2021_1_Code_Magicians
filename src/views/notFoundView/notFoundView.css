@@ -18,21 +18,22 @@
 .page-error__contact-link {
   margin-left: 15px;
 }
-.page-error__back-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.page-error__back-button {
+  margin-top: 150px;
   width: 120px;
   height: 60px;
   border-radius: 30px;
-  text-decoration: none;
+  border: none;
+  outline: none;
   font-size: 18px;
   font-weight: bold;
   color: var(--black);
   background-color: var(--almost-white);
-  transition: 0.1s;
+  transition: 0.2s;
+  cursor: pointer;
 }
-.page-error__back-link:hover {
+.page-error__back-button:hover {
+  text-decoration: underline;
   color: var(--white);
   background-color: var(--red);
 }

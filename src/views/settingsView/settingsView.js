@@ -28,6 +28,11 @@ export class SettingsView extends View {
    * @return {String}
    */
   render() {
+    if (!userStore.getUser().authorized()) {
+      appRouter.go('/');
+      return '';
+    }
+
     const tmpl = Handlebars.templates['settingsView.hbs'];
 
     let settingsForm = null;

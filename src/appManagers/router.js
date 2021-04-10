@@ -55,9 +55,12 @@ class Router {
    * @param {String} path
    */
   go(path) {
-    if (path === '/back') {
-      this.back();
-      return;
+    if (path !== '/' && path.endsWith('/')) {
+      path = path.slice(0, -1);
+    }
+
+    if (path === '/home') {
+      path = '/';
     }
 
     const prevView = this._currentView;
@@ -65,12 +68,12 @@ class Router {
       prevView.remove();
     }
 
-    const key = [...this._routes.keys()].find(key => {
+    const key = [...this._routes.keys()].find((key) => {
       return RegExp(
           `^${
             key.replaceAll(
                 pathParamRegExp,
-                substring => substring.endsWith('/') ? `${regSubstr}/` : regSubstr,
+                (substring) => substring.endsWith('/') ? `${regSubstr}/` : regSubstr,
             )
           }$`,
       ).test(path);
@@ -104,18 +107,19 @@ class Router {
    */
   start() {
     window.addEventListener('popstate', () => this.go(window.location.pathname));
-    window.addEventListener('click', ev => {
+    window.addEventListener('click', (event) => {
       let targetURL = '';
-      if (ev.target instanceof HTMLAnchorElement) {
-        targetURL = ev.target.href;
+      if (event.target instanceof HTMLAnchorElement) {
+        targetURL = event.target.href;
       } else {
-        const parentAnchor = ev.target.closest('a');
+        const parentAnchor = event.target.closest('a');
         if (parentAnchor) {
           targetURL = parentAnchor.href;
         }
       }
-      if (targetURL) {
-        ev.preventDefault();
+
+      if (targetURL.startsWith(window.location.origin)) {
+        event.preventDefault();
         this.go(targetURL.replace(urlRegexp, ''));
       }
     });

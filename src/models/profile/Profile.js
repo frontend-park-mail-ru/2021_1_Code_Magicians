@@ -13,9 +13,24 @@ export class Profile extends Model {
    *   lastName,
    *   email,
    *   avatarLink,
+   *   followed,
    * }
    */
-  constructor(props) {
+  constructor(props = {}) {
     super(props);
+  }
+
+  /**
+   * On follow
+   */
+  follow() {
+    this.followed = true;
+  }
+
+  /**
+   * On unfollow
+   */
+  unfollow() {
+    this.followed = false;
   }
 }

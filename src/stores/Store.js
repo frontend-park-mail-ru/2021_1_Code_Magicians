@@ -22,6 +22,15 @@ class Store {
    */
   processEvent(action) {
   }
+
+
+  /**
+   * Get status
+   * @return {String}
+   */
+  getStatus() {
+    return this._status;
+  }
 }
 
 Object.assign(Store.prototype, eventMixin);

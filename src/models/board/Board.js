@@ -11,10 +11,10 @@ export class Board extends Model {
    *   authorID,
    *   title,
    *   description,
-   *   avatarIndex,
+   *   avatarLink,
    * }
    */
-  constructor(props) {
+  constructor(props = {}) {
     super(props);
 
     this.pins = [];
