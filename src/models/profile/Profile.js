@@ -1,4 +1,5 @@
 import {Model} from '../Model.js';
+import {constants} from '../../consts/consts.js';
 
 /**
  * Profile model
@@ -17,7 +18,10 @@ export class Profile extends Model {
    * }
    */
   constructor(props = {}) {
-    super(props);
+    super({
+      ...props,
+      avatarLink: props.avatarLink ? `${constants.network.bucketURL}${props.avatarLink}` : '',
+    });
   }
 
   /**

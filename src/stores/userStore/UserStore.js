@@ -80,7 +80,9 @@ class UserStore extends Store {
           this._status = storeStatuses.internalError;
       }
 
-      this._trigger('change');
+      if (response.status !== 204) {
+        this._trigger('change');
+      }
     });
   }
 
@@ -109,7 +111,9 @@ class UserStore extends Store {
           this._status = storeStatuses.internalError;
       }
 
-      this._trigger('change');
+      if (response.status !== 201) {
+        this._trigger('change');
+      }
     });
   }
 
@@ -202,7 +206,10 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
-      this._trigger('change');
+
+      if (response.status !== 204) {
+        this._trigger('change');
+      }
     });
   }
 
@@ -228,6 +235,7 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
+
       this._trigger('change');
     });
   }
@@ -258,7 +266,9 @@ class UserStore extends Store {
           this._status = storeStatuses.internalError;
       }
 
-      this._trigger('change');
+      if (response.status !== 204) {
+        this._trigger('change');
+      }
     });
   }
 
