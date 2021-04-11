@@ -118,7 +118,6 @@ class ProfilesStore extends Store {
    * @private
    */
   _fetchProfile(data) {
-    console.log(this._profile, data.profileID);
     if (this._profile.ID === data.profileID) {
       return;
     }
