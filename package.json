@@ -11,11 +11,8 @@
     "handlebars": "^4.7.7",
     "husky": "^5.1.1",
     "sass": "^1.32.8",
-    "webpack": "^5.31.2",
-    "webpack-cli": "^4.6.0"
   },
   "scripts": {
-    "build": "npx webpack --config webpack.config.js",
     "start": "node server.js",
     "prestart": "npm run compile_hbs",
     "postinstall": "husky install",
