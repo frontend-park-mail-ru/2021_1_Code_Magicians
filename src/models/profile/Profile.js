@@ -20,7 +20,9 @@ export class Profile extends Model {
   constructor(props = {}) {
     super({
       ...props,
-      avatarLink: props.avatarLink ? `${constants.network.bucketURL}${props.avatarLink}` : '',
+      avatarLink: props.avatarLink ?
+        `${constants.network.bucketURL}${props.avatarLink}` :
+        constants.network.defaultAvatarLink,
     });
   }
 
