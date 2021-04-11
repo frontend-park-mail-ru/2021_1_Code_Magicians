@@ -1,5 +1,6 @@
 import {View} from '../view.js';
 import {Page} from '../../components/page/page.js';
+import {userStore} from '../../stores/userStore/UserStore.js';
 
 /**
  * Build pin view
@@ -12,8 +13,16 @@ export class PinBuilderView extends View {
   constructor(props = {}) {
     super(props, document.getElementById('app'));
 
+    const payload = {
+      name: '',
+      description: '',
+      image: '',
+      link: '',
+    };
+
+    this.setState(payload);
     this.submit = this.submit.bind(this);
-    // userStore.bind('submit', this.refresh);
+    userStore.bind('change', this.refresh);
   }
 
   /**
@@ -44,59 +53,20 @@ export class PinBuilderView extends View {
    * @return {String}
    */
   render() {
-    // if (!userStore.getUser().authorized()) {
-    // if (!userStore.getUser().authorized()) {
-    //   appRouter.go('/');
-    //   return '';
-    // }
-
     const tmpl = Handlebars.templates['pinBuilderView.hbs'];
-
-    // let pinBuilderForm;
-    // switch (this.props.pathArgs['section']) {
-    //   case 'profile':
-    //     pinBuilderForm = new ProfileChanges(this.props);
-    //     break;
-    //   case 'notifications':
-    //     pinBuilderForm = new NotificationSettings(this.props);
-    //     break;
-    //   case 'security':
-    //     pinBuilderForm = new SecuritySettings(this.props);
-    //     break;
-    //   default:
-    //     pinBuilderForm = new ProfileChanges(this.props);
-    // }
 
     //  this._nestedComponents.set('_settingsForm', pinBuilderForm);
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: tmpl({
         ...this.props,
-        // setltingsForm: this._nestedComponents.get('_settingsForm').render(),
+        // settingsForm: this._nestedComponents.get('_settingsForm').render(),
       }),
     }));
 
     // this._nestedComponents.get('page').setState({view: 'settings'});
     return this._nestedComponents.get('page').render();
   }
-
-  /**
-   * Process section settings links
-   */
-  // processSections() {
-  //   this
-  //       ._parent
-  //       .querySelectorAll('.settings__section-link')
-  //       .forEach((link) => {
-  //         if (window.location.pathname === '/settings') {
-  //           if (link.href.replace(urlRegexp, '') === '/settings/profile') {
-  //             link.classList.add('settings__section-link_active');
-  //           }
-  //         } else if (link.href.replace(urlRegexp, '').startsWith(window.location.pathname)) {
-  //           link.classList.add('settings__section-link_active');
-  //         }
-  //       });
-  // }
 
   /**
    * Submit callback
@@ -107,23 +77,22 @@ export class PinBuilderView extends View {
 
     // const userName = document.querySelector('[name="login-username"]').value.trim();
     // const userPassword = document.querySelector('[name="login-pass"]').value.trim();
-    //
-    // AuthView.clearInputs('.errors');
-    //
-    // const errors = [];
-    // errors.push(validateInput(userName, usernameRegexp));
-    // document.querySelector('.name-errors').innerHTML = errors[0];
-    // errors.push(validateInput(userPassword, passwordRegexp));
-    // document.querySelector('.password-errors').innerHTML = errors[1];
-    //
-    // if ([...errors].find((el) => el !== '')) return;
-    //
-    // const payload = {
-    //   name: userName,
-    //   password: userPassword,
-    // };
-    //
-    // this.setState(payload);
+    const name = document.querySelector('[name="name"]').value.trim();
+    const description = document.querySelector('[name="description"]').value.trim();
+    const pinImage = document.querySelector('[name="pin-image"]').value.trim();
+    const link = document.querySelector('[name="link"]').value.trim();
+
+
+    // add validation
+
+    const payload = {
+      name: name,
+      description: description,
+      image: pinImage,
+      link: link,
+    };
+
+    this.setState(payload);
     // actions.user.login(userName, userPassword);
     // appRouter.go('/profile');
   }
