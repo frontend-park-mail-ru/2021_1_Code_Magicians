@@ -53,7 +53,7 @@ export class PinView extends View {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['pinBuilderView.hbs'];
+    const tmpl = Handlebars.templates['pinView.hbs'];
 
     this._nestedComponents.set('page', new Page({
       ...this.props,
