@@ -18,18 +18,9 @@ export class Profile extends Model {
    * }
    */
   constructor(props = {}) {
-    const avatarPath = props.avatarLink || '';
-    let avatarLink = '';
-
-    if (avatarPath) {
-      avatarLink = avatarPath.endsWith(constants.network.defaultAvatarLink) ? // Misha, I love you <3
-                              constants.network.defaultAvatarLink :
-                              `${constants.network.bucketURL}${avatarPath}`;
-    }
-
     super({
       ...props,
-      avatarLink: avatarLink,
+      avatarLink: `${constants.network.bucketURL}${props.avatarLink || constants.network.defaultAvatarLink.slice(1)}`,
     });
   }
 
