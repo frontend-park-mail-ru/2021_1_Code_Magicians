@@ -27,6 +27,7 @@ export class User extends Model {
    * unauthorize
    */
   onLogout() {
+    this.profile = new Profile();
     this._isAuthorized = false;
   }
 
