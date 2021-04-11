@@ -5,7 +5,7 @@ import {ProfileBoardsView} from './views/profileViews/profileBoardsView/profileB
 import {SignupView} from './views/authViews/signupView/signupView.js';
 import {LoginView} from './views/authViews/loginView/loginView.js';
 import {FeedView} from './views/feedView/feedView.js';
-import {ProfilePinsView} from 'assets/src/views/profileViews/profilePinsView/profilePinsView.js';
+import {ProfilePinsView} from './views/profileViews/profilePinsView/profilePinsView.js';
 
 appRouter
     .register('/', new FeedView({}))
