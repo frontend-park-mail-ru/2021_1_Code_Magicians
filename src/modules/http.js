@@ -25,7 +25,7 @@ export class HTTPModule {
   static async _requestBackend(path, options = {}, body = null, serialize = true) {
     if (['POST', 'PUT', 'DELETE'].includes(options.method)) {
       if (this._getCSRFToken()) {
-        options.headers = options.headers || {};
+        options.headers = options.headers || new Headers();
         options.headers = {
           ...options.headers,
           'X-CSRF-Token': this._getCSRFToken(),
@@ -38,16 +38,11 @@ export class HTTPModule {
     let responseBody = {};
 
     if (body) {
-      const requestBody = serialize ? JSON.stringify(body) : body;
-      const contentType = serialize ? 'application/json;charset=utf-8' : 'multipart/form-data';
-      options = {
-        ...options,
-        body: requestBody,
-        headers: {
-          ...options.headers,
-          'Content-Type': contentType,
-        },
-      };
+      options.body = serialize ? JSON.stringify(body) : body;
+      if (serialize) {
+        options.headers = options.headers || new Headers();
+        options.headers = {...options.headers, 'Content-Type': 'application/json;charset=utf-8'};
+      }
     }
 
     try {
@@ -103,10 +98,11 @@ export class HTTPModule {
    * PUT
    * @param {String} path
    * @param {Object} body
+   * @param {Boolean} serialize
    * @return {Object}
    */
-  static put(path, body) {
-    return this._requestBackend(path, {method: 'PUT'}, body);
+  static put(path, body, serialize = true) {
+    return this._requestBackend(path, {method: 'PUT'}, body, serialize);
   }
 
   /**

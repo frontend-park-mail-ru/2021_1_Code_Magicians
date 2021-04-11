@@ -13,7 +13,6 @@
 
   &__settings-form {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 
     max-width: 800px;
@@ -25,10 +24,9 @@
   }
 
   &__avatar {
-    &-zone {
+    &-form {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
 
       width: 150px;
@@ -50,9 +48,15 @@
       border-radius: 50%;
 
       object-fit: cover;
+
+      cursor: pointer;
     }
 
     &-change-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       width: 110px;
       height: 40px;
 
@@ -62,7 +66,7 @@
       border: none;
       border-radius: 20px;
 
-      font-size: 14px;
+      font-size: 16px;
 
       color: var(--white);
       background-color: var(--gray);
@@ -74,6 +78,10 @@
       &:hover {
         opacity: 0.9;
       }
+    }
+
+    &-input {
+      display: none;
     }
   }
 

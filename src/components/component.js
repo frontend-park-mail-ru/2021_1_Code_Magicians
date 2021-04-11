@@ -10,6 +10,7 @@ export class Component {
     this.props = {...props};
     this._nestedComponents = new Map();
     this._state = {};
+    this._mounted = false;
   }
 
   /**
@@ -37,6 +38,7 @@ export class Component {
    * Called right after showing the view
    */
   didMount() {
+    this._mounted = true;
     if (this._nestedComponents.size) {
       this._nestedComponents.forEach((component) => component.didMount());
     }
@@ -46,8 +48,14 @@ export class Component {
    * Called before removing the view
    */
   willUnmount() {
+    if (!this._mounted) {
+      return;
+    }
+
     if (this._nestedComponents.size) {
       this._nestedComponents.forEach((component) => component.willUnmount());
     }
+
+    this._mounted = false;
   }
 }

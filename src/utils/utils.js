@@ -25,7 +25,7 @@ export const validateInput = (data, expr) => {
       error = 'Username must be 2-42 letters. a-Z, 0-9';
       break;
     case passwordRegexp:
-      error = 'Password must be 8 to 30 letters long';
+      error = 'Password must be 8 to 30 letters long and contains numbers';
       break;
     case firstNameRegexp:
       error = 'Wrong urlRegexp text';

@@ -47,6 +47,9 @@ class UserStore extends Store {
       case actionTypes.user.changePassword:
         this._changePassword(action.data);
         break;
+      case actionTypes.user.changeAvatar:
+        this._changeAvatar(action.data);
+        break;
       case actionTypes.user.statusProcessed:
         this._status = storeStatuses.ok;
         break;
@@ -60,29 +63,26 @@ class UserStore extends Store {
    */
   _login(credentials) {
     if (this._user.authorized()) {
-      this._status = storeStatuses.alreadyAuthorized;
       return;
     }
 
     API.loginUser(credentials).then((response) => {
       switch (response.status) {
-        case 403:
-          this._user.onLogin();
-          this._status = storeStatuses.alreadyAuthorized;
-          break;
-        case 200:
+        case 204:
           this._fetchUserData();
           break;
+        case 403:
         case 400:
-          this._status = storeStatuses.invalidCreds;
-          break;
         case 404:
-          this._status = 'user not found';
+          this._status = storeStatuses.clientError;
           break;
         default:
           this._status = storeStatuses.internalError;
       }
-      this._trigger('change');
+
+      if (response.status !== 204) {
+        this._trigger('change');
+      }
     });
   }
 
@@ -103,19 +103,17 @@ class UserStore extends Store {
           this._fetchUserData();
           break;
         case 403:
-          this._user.onLogin();
-          this._status = storeStatuses.alreadyAuthorized;
-          break;
         case 400:
-          this._status = storeStatuses.invalidCreds;
-          break;
         case 409:
-          this._status = storeStatuses.userAlreadyExists;
+          this._status = storeStatuses.clientError;
           break;
         default:
           this._status = storeStatuses.internalError;
       }
-      this._trigger('change');
+
+      if (response.status !== 201) {
+        this._trigger('change');
+      }
     });
   }
 
@@ -131,15 +129,17 @@ class UserStore extends Store {
 
     API.logoutUser().then((response) => {
       switch (response.status) {
-        case 200:
+        case 204:
           this._user.onLogout();
+          this._status = storeStatuses.unauthorized;
           break;
         case 401:
-          this._status = storeStatuses.unauthorized;
+          this._status = storeStatuses.clientError;
           break;
         default:
           this._status = storeStatuses.internalError;
       }
+
       this._trigger('change');
     });
   }
@@ -156,15 +156,17 @@ class UserStore extends Store {
 
     API.deleteSelfProfile().then((response) => {
       switch (response.status) {
-        case 200:
+        case 204:
           this._user.onLogout();
+          this._status = storeStatuses.unauthorized;
           break;
         case 401:
-          this._status = storeStatuses.unauthorized;
+          this._status = storeStatuses.clientError;
           break;
         default:
           this._status = storeStatuses.internalError;
       }
+
       this._trigger('change');
     });
   }
@@ -191,12 +193,12 @@ class UserStore extends Store {
 
     API.editProfile(changes).then((response) => {
       switch (response.status) {
-        case 200:
+        case 204:
           this._fetchUserData();
           this._status = storeStatuses.profileEdited;
           break;
         case 401:
-          this._status = storeStatuses.unauthorized;
+          this._status = storeStatuses.clientError;
           break;
         case 409:
           this._status = storeStatuses.editConflict;
@@ -204,7 +206,10 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
-      this._trigger('change');
+
+      if (response.status !== 204) {
+        this._trigger('change');
+      }
     });
   }
 
@@ -221,19 +226,51 @@ class UserStore extends Store {
 
     API.changeUserPassword(data.password).then((response) => {
       switch (response.status) {
-        case 200:
+        case 204:
           this._status = storeStatuses.passwordChanged;
           break;
         case 401:
-          this._status = storeStatuses.unauthorized;
+          this._status = storeStatuses.clientError;
           break;
         default:
           this._status = storeStatuses.internalError;
       }
+
       this._trigger('change');
     });
   }
 
+  /**
+   * Change it
+   * @param {FormData} avatarFormData
+   * @private
+   */
+  _changeAvatar(avatarFormData) {
+    if (!this._user.authorized()) {
+      this._status = storeStatuses.unauthorized;
+      return;
+    }
+
+    API.changeAvatar(avatarFormData).then((response) => {
+      switch (response.status) {
+        case 204:
+          this._fetchUserData();
+          break;
+        case 400:
+          this._status = storeStatuses.badAvatarImage;
+          break;
+        case 401:
+          this._status = storeStatuses.clientError;
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+
+      if (response.status !== 204) {
+        this._trigger('change');
+      }
+    });
+  }
 
   /**
    * Fetch it
@@ -245,15 +282,18 @@ class UserStore extends Store {
 
     API.getSelfProfile().then((response) => {
       switch (response.status) {
-        case 401:
-          break;
         case 200:
           authorized = true;
           profile = new Profile(response.responseBody);
+          this._status = storeStatuses.ok;
+          break;
+        case 401:
+          this._status = storeStatuses.unauthorized;
           break;
         default:
           this._status = storeStatuses.internalError;
       }
+
       this._user = new User(profile, authorized);
       this._trigger('change');
     });

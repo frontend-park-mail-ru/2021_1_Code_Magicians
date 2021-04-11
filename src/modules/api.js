@@ -213,4 +213,13 @@ export class API {
     return follow ? HTTPModule.post(`${paths.follow}/${profileID}`) :
       HTTPModule.delete(`${paths.follow}/${profileID}`);
   }
+
+  /**
+   * Change avatar
+   * @param {FormData} avatarFormData
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static changeAvatar(avatarFormData) {
+    return HTTPModule.put(paths.changeAvatar, avatarFormData, false);
+  }
 }
