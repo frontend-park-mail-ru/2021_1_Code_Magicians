@@ -103,14 +103,14 @@ export const constants = {
       title: `title${i}`,
       description: 'blah blah blah',
       tags: [],
-      imageLink: constants.network.defaultAvatarLink,
+      imageLink: '/assets/img/default-avatar.jpg',
     })),
     boards: Array(10).fill(0).map((board, i) => new Board({
       ID: i,
       authorID: 100 + i % 3,
       title: `title${i}`,
       description: 'blah blah blah',
-      avatarLink: constants.network.defaultAvatarLink,
+      avatarLink: '/assets/img/default-avatar.jpg',
     })),
   },
 };
