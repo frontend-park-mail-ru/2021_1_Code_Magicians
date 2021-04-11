@@ -153,17 +153,17 @@
     text-decoration: none;
     font-size: 18px;
 
-    color: white;
+    color: var(--black);
 
     transition: 0.2s;
 
     &:hover {
-      color: var(--white);
+      color: var(--perm-white);
       background-color: var(--red);
     }
 
     &_active {
-      color: var(--white);
+      color: var(--perm-white);
       background-color: var(--red);
     }
   }

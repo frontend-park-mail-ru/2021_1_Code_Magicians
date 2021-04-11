@@ -104,15 +104,15 @@
   width: 150px;
   text-decoration: none;
   font-size: 18px;
-  color: white;
+  color: var(--black);
   transition: 0.2s;
 }
 .profile-links__link:hover {
-  color: var(--white);
+  color: var(--perm-white);
   background-color: var(--red);
 }
 .profile-links__link_active {
-  color: var(--white);
+  color: var(--perm-white);
   background-color: var(--red);
 }
 
