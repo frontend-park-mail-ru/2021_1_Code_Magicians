@@ -15,6 +15,7 @@ appRouter
     .register('/settings', new SettingsView({}))
     .register('/settings/:section', new SettingsView({}))
     .register('/signup', new SignupView({}))
-    .register('/login', new LoginView({}));
+    .register('/login', new LoginView({}))
+    .register('/pin/:id', new PinView({}));
 
 appRouter.start();
