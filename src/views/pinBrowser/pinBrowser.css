@@ -1,0 +1,16 @@
+.profile-changes {
+  display: flex;
+  flex-direction: row;
+}
+.profile-changes__info-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.profile-changes__tags-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/*# sourceMappingURL=pinBrowser.css.map */

@@ -6,6 +6,7 @@ import {SignupView} from './views/authViews/signupView/signupView.js';
 import {LoginView} from './views/authViews/loginView/loginView.js';
 import {FeedView} from './views/feedView/feedView.js';
 import {ProfilePinsView} from './views/profileViews/profilePinsView/profilePinsView.js';
+import {PinView} from './views/pinBrowser/pinView.js';
 
 appRouter
     .register('/', new FeedView({}))
@@ -16,6 +17,7 @@ appRouter
     .register('/settings/:section', new SettingsView({}))
     .register('/signup', new SignupView({}))
     .register('/login', new LoginView({}))
+    .register('/pin', new PinView({}))
     .register('/pin/:id', new PinView({}));
 
 appRouter.start();

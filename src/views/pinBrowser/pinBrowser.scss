@@ -1,0 +1,22 @@
+.profile-changes {
+  display: flex;
+  flex-direction: row;
+  //justify-content:
+
+  &__image-panel {
+
+  }
+
+  &__info-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+  }
+
+  &__tags-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
