@@ -2,12 +2,12 @@ import {Pin} from '../models/pin/Pin.js';
 
 export const constants = {
   network: {
-    backendURL: 'http://www.pinter-best.com:8080',
-    // backendURL: 'http://127.0.0.1:8080',
+    // backendURL: 'http://www.pinter-best.com:8080',
+    backendURL: 'http://127.0.0.1:8080',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
     bucketURL: 'https://pinterbestbucket.s3.eu-central-1.amazonaws.com/',
 
-    paths: {
+    pathsAPI: {
       signup: '/auth/signup',
       login: '/auth/login',
       logout: '/auth/logout',
@@ -29,6 +29,22 @@ export const constants = {
       pins: '/pins',
 
       follow: '/follow',
+    },
+
+    routerPaths: {
+      notFound: '/404',
+      index: '/',
+      home: '/home',
+      profile: '/profile',
+      profileBoards: '/profile/boards',
+      profilePins: '/profile/pins',
+      otherProfile: '/profile/:profileID',
+      otherProfileBoards: '/profile/:profileID/boards',
+      otherProfilePins: '/profile/:profileID/pins',
+      settings: '/settings',
+      settingsSection: '/settings/:section',
+      signup: '/signup',
+      login: '/login',
     },
   },
   store: {

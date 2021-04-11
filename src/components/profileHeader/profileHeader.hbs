@@ -4,7 +4,7 @@
         <div class="profile-info__username-zone">
             <span class="profile-info__username">{{profile.username}}</span>
             {{#if selfProfile}}
-                <a href="/settings" class="profile-info__settings">
+                <a href="{{paths.settings}}" class="profile-info__settings">
                     <i class="fas fa-cog profile-info__settings-icon"></i>
                 </a>
             {{else}}
@@ -33,9 +33,9 @@
     </div>
 </div>
 <div class="profile-links">
-    <a href="/profile{{#unless selfProfile}}/{{profile.ID}}{{/unless}}" class="profile-links__link">Overview</a>
-    <a href="/profile/{{#unless selfProfile}}{{profile.ID}}/{{/unless}}boards" class="profile-links__link">Boards</a>
-    <a href="/profile/{{#unless selfProfile}}{{profile.ID}}/{{/unless}}pins" class="profile-links__link">Pins</a>
-    <a href="/profile/{{#unless selfProfile}}{{profile.ID}}/{{/unless}}followers" class="profile-links__link">Followers</a>
-    <a href="/profile/{{#unless selfProfile}}{{profile.ID}}/{{/unless}}following" class="profile-links__link">Following</a>
+    <a href="{{paths.profile}}{{#unless selfProfile}}/{{profile.ID}}{{/unless}}" class="profile-links__link">Overview</a>
+    <a href="{{paths.profile}}/{{#unless selfProfile}}{{profile.ID}}/{{/unless}}boards" class="profile-links__link">Boards</a>
+    <a href="{{paths.profile}}/{{#unless selfProfile}}{{profile.ID}}/{{/unless}}pins" class="profile-links__link">Pins</a>
+    <a href="{{paths.profile}}/{{#unless selfProfile}}{{profile.ID}}/{{/unless}}followers" class="profile-links__link">Followers</a>
+    <a href="{{paths.profile}}/{{#unless selfProfile}}{{profile.ID}}/{{/unless}}following" class="profile-links__link">Following</a>
 </div>

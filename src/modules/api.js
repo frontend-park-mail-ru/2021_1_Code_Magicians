@@ -2,7 +2,7 @@
 import {HTTPModule} from './http.js';
 import {constants} from '../consts/consts.js';
 
-const paths = constants.network.paths;
+const paths = constants.network.pathsAPI;
 
 /**
  * Module that provides abstraction to communicate with server via standard API

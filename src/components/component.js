@@ -1,3 +1,6 @@
+import {constants} from '../consts/consts.js';
+
+
 /**
  * Base Component class (abstract)
  */
@@ -7,7 +10,10 @@ export class Component {
    * @param {Object} props Properties, for utility usage and for inner templates rendering
    */
   constructor(props = {}) {
-    this.props = {...props};
+    this.props = {
+      ...props,
+      paths: constants.network.routerPaths,
+    };
     this._nestedComponents = new Map();
     this._state = {};
     this._mounted = false;

@@ -1,21 +1,21 @@
 <div class="sidebar">
-    <a href="/home" class="sidebar__home-link">
+    <a href="{{paths.home}}" class="sidebar__home-link">
         <img src="/assets/img/Logo.png" alt="logo" class="sidebar__logo-image">
     </a>
     <div class="sidebar__view-selector">
         <div data-view="home" class="sidebar__view-option">
-            <a class="sidebar__view-link" href="/home">
+            <a class="sidebar__view-link" href="{{paths.home}}">
                 <i class="fas fa-home sidebar__view-icon"></i>
             </a>
         </div>
         {{#if userIsAuthorized}}
             <div data-view="boards" class="sidebar__view-option">
-                <a class="sidebar__view-link" href="/profile/boards">
+                <a class="sidebar__view-link" href="{{paths.profileBoards}}">
                     <i class="fas fa-layer-group sidebar__view-icon"></i>
                 </a>
             </div>
             <div data-view="settings" class="sidebar__view-option">
-                <a class="sidebar__view-link" href="/settings">
+                <a class="sidebar__view-link" href="{{paths.settings}}">
                     <i class="fas fa-cog sidebar__view-icon"></i>
                 </a>
             </div>

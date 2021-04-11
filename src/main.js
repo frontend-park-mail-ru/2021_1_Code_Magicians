@@ -6,18 +6,21 @@ import {SignupView} from './views/authViews/signupView/signupView.js';
 import {LoginView} from './views/authViews/loginView/loginView.js';
 import {FeedView} from './views/feedView/feedView.js';
 import {ProfilePinsView} from './views/profileViews/profilePinsView/profilePinsView.js';
+import {constants} from './consts/consts.js';
+
+const paths = constants.network.routerPaths;
 
 appRouter
-    .register('/', new FeedView({}))
-    .register('/profile', new ProfileView({}))
-    .register('/profile/boards', new ProfileBoardsView({}))
-    .register('/profile/pins', new ProfilePinsView({}))
-    .register('/profile/:profileID', new ProfileView({}))
-    .register('/profile/:profileID/boards', new ProfileBoardsView({}))
-    .register('/profile/:profileID/pins', new ProfilePinsView({}))
-    .register('/settings', new SettingsView({}))
-    .register('/settings/:section', new SettingsView({}))
-    .register('/signup', new SignupView({}))
-    .register('/login', new LoginView({}));
+    .register(paths.index, new FeedView({}))
+    .register(paths.profile, new ProfileView({}))
+    .register(paths.profileBoards, new ProfileBoardsView({}))
+    .register(paths.profilePins, new ProfilePinsView({}))
+    .register(paths.otherProfile, new ProfileView({}))
+    .register(paths.otherProfileBoards, new ProfileBoardsView({}))
+    .register(paths.otherProfilePins, new ProfilePinsView({}))
+    .register(paths.settings, new SettingsView({}))
+    .register(paths.settingsSection, new SettingsView({}))
+    .register(paths.signup, new SignupView({}))
+    .register(paths.login, new LoginView({}));
 
 appRouter.start();

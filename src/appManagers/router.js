@@ -1,7 +1,7 @@
 import {NotFoundView} from '../views/notFoundView/notFoundView.js';
 
 import {pathParamRegExp, regSubstr, urlRegexp} from '../consts/regexp.js';
-import {pathTemplates} from '../consts/pathTemplates.js';
+import {constants} from '../consts/consts.js';
 
 /**
  * Extracts keys from the path, using the template
@@ -79,7 +79,7 @@ class Router {
       ).test(path);
     });
 
-    this._currentView = key ? this._routes.get(key) : this._routes.get(pathTemplates.notFound);
+    this._currentView = key ? this._routes.get(key) : this._routes.get(constants.network.routerPaths.notFound);
 
     if (window.location.pathname !== path) {
       window.history.pushState(null, null, path);
