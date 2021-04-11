@@ -31,6 +31,7 @@ export class Navbar extends Component {
    * @param {Event} event
    */
   wipeSearchField(event) {
+    event.preventDefault();
     document.querySelector('.navbar__search-input').value = '';
   }
 
