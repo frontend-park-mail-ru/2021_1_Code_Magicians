@@ -38,7 +38,7 @@ class Dispatcher {
    * @param {Array} IDs array of dispatchToken strings
    */
   waitFor(IDs) {
-    IDs.forEach(ID => this._isPending.get(ID) ? false : this._invokeCallback(ID));
+    IDs.forEach((ID) => this._isPending.get(ID) ? false : this._invokeCallback(ID));
   }
 
   /**
@@ -48,7 +48,9 @@ class Dispatcher {
    */
   _invokeCallback(id) {
     this._isPending.set(id, true);
-    this._callbacks.get(id)(this._pendingPayload);
+    const callback = this._callbacks.get(id);
+    // console.log(typeof callback);
+    callback(this._pendingPayload);
   }
 
   /**
@@ -57,7 +59,7 @@ class Dispatcher {
    */
   dispatch(payload) {
     this._startDispatching(payload);
-    [...this._callbacks.keys()].forEach(ID => this._invokeCallback(ID));
+    [...this._callbacks.keys()].forEach((ID) => this._invokeCallback((ID)));
     this._stopDispatching();
   }
 
@@ -67,7 +69,7 @@ class Dispatcher {
    * @private
    */
   _startDispatching(payload) {
-    [...this._callbacks.keys()].forEach(ID => this._isPending.set(ID, false));
+    [...this._callbacks.keys()].forEach((ID) => this._isPending.set(ID, false));
     this._pendingPayload = payload;
   }
 

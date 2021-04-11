@@ -52,16 +52,16 @@
   outline: none;
   background-color: transparent;
 }
-.profile-info__follow-toggle:hover {
-  color: var(--red);
-}
 .profile-info__follow-icon {
   font-size: 16px;
   color: var(--gray);
   cursor: pointer;
 }
 .profile-info__follow-icon:hover {
-  background-color: var(--red);
+  color: var(--red);
+}
+.profile-info__follow-icon_active {
+  color: var(--red);
 }
 .profile-info__user-real-name {
   font-size: 15px;
@@ -104,8 +104,7 @@
   width: 150px;
   text-decoration: none;
   font-size: 18px;
-  border-right: 2px solid var(--almost-white);
-  color: var(--black);
+  color: white;
   transition: 0.2s;
 }
 .profile-links__link:hover {

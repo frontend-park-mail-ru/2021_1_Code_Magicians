@@ -2,9 +2,9 @@ import {constants} from '../../consts/consts.js';
 import Store from '../Store.js';
 import {Board} from '../../models/board/Board.js';
 import {actionTypes} from '../../actions/actions.js';
-import {appDispatcher} from '../../appManagers/dispatcher.js';
 import {userStore} from '../userStore/UserStore.js';
 import {API} from '../../modules/api.js';
+import {profilesStore} from '../profilesStore/profilesStore.js';
 
 const storeStatuses = constants.store.statuses.boardsStore;
 
@@ -35,11 +35,9 @@ class BoardsStore extends Store {
 
     switch (action.actionType) {
       case actionTypes.boards.createBoard:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
         this._createBoard(action.data);
         break;
       case actionTypes.boards.deleteBoard:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
         this._deleteBoard(action.data);
         break;
       case actionTypes.boards.loadBoardsFeed:
@@ -49,8 +47,7 @@ class BoardsStore extends Store {
         this._fetchBoard(action.data);
         break;
       case actionTypes.common.loadForeignProfile:
-        appDispatcher.waitFor(['profilesStore.dispatcherToken']);
-        this._fetchProfileBoards({authorID: 'profilesStore.getProfile().ID'});
+        this._fetchProfileBoards({authorID: profilesStore.getProfile()['ID']});
         break;
       case actionTypes.boards.statusProcessed:
         this._status = storeStatuses.ok;
@@ -155,21 +152,23 @@ class BoardsStore extends Store {
    * @private
    */
   _fetchProfileBoards(data) {
-    API.getProfileBoards(data.authorID).then((response) => {
-      switch (response.status) {
-        case 200:
-          this._boards = response.responseBody.boards;
-          this._trigger('change');
-          break;
-        case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
-      }
-    });
+    this._boards = constants.mocks.boards;
+    this._trigger('change');
+    // API.getProfileBoards(data.authorID).then((response) => {
+    //   switch (response.status) {
+    //     case 200:
+    //       this._boards = response.responseBody.boards;
+    //       this._trigger('change');
+    //       break;
+    //     case 400:
+    //     case 404:
+    //       this._status = storeStatuses.clientSidedError;
+    //       break;
+    //     default:
+    //       this._status = storeStatuses.internalError;
+    //       break;
+    //   }
+    // });
   }
 
   /**

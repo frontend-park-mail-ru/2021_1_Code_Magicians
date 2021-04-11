@@ -40,15 +40,12 @@ class ProfilesStore extends Store {
 
     switch (action.actionType) {
       case actionTypes.profiles.follow:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
         this._follow(action.data, true);
         break;
       case actionTypes.profiles.unfollow:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
         this._follow(action.data, false);
         break;
       case actionTypes.common.loadForeignProfile:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
         this._fetchProfile(action.data);
         break;
       case actionTypes.common.loadPin:
@@ -118,7 +115,7 @@ class ProfilesStore extends Store {
    * @private
    */
   _fetchProfile(data) {
-    if (this._profile.ID === data.profileID) {
+    if (this._profile.ID === Number(data.profileID)) {
       return;
     }
 

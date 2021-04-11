@@ -169,4 +169,11 @@
   position: relative;
 }
 
+.disabled {
+  cursor: default;
+}
+.disabled:hover .navbar__action-icon {
+  color: var(--gray);
+}
+
 /*# sourceMappingURL=navbar.css.map */

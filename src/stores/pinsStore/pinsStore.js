@@ -1,12 +1,9 @@
 import Store from '../Store.js';
 import {constants} from '../../consts/consts.js';
 import {actionTypes} from '../../actions/actions.js';
-import {appDispatcher} from '../../appManagers/dispatcher.js';
 import {userStore} from '../userStore/UserStore.js';
 import {API} from '../../modules/api.js';
 import {Pin} from '../../models/pin/Pin.js';
-import {profilesStore} from '../profilesStore/profilesStore.js';
-import {boardsStore} from '../boardsStore/boardsStore.js';
 
 const storeStatuses = constants.store.statuses.pinsStore;
 
@@ -45,11 +42,9 @@ class PinsStore extends Store {
 
     switch (action.actionType) {
       case actionTypes.pins.createPin:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
         this._createPin(action.data);
         break;
       case actionTypes.pins.deletePin:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
         this._deletePin(action.data);
         break;
       case actionTypes.pins.loadPinsFeed:
@@ -59,14 +54,12 @@ class PinsStore extends Store {
         this._postComment(action.data);
         break;
       case actionTypes.common.loadForeignProfile:
-        appDispatcher.waitFor([profilesStore.dispatcherToken]);
         this._fetchProfilePins(action.data);
         break;
       case actionTypes.common.loadPin:
         this._fetchPin(action.data);
         break;
       case actionTypes.common.loadBoard:
-        appDispatcher.waitFor([boardsStore.dispatcherToken]);
         this._fetchBoardPins(action.data);
         break;
       case actionTypes.pins.statusProcessed:
@@ -214,23 +207,25 @@ class PinsStore extends Store {
    * @private
    */
   _fetchProfilePins(data) {
-    API.getPinsByProfileID(data.profileID, data.pinsNumber || 0).then((response) => {
-      switch (response.status) {
-        case 200:
-          this._pins = response.responseBody.pins;
-          break;
-        case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
-          this._pins = [];
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
-      }
-
-      this._trigger('change');
-    });
+    this._pins = constants.mocks.pins;
+    this._trigger('change');
+    // API.getPinsByProfileID(data.profileID, data.pinsNumber || 0).then((response) => {
+    //   switch (response.status) {
+    //     case 200:
+    //       this._pins = response.responseBody.pins;
+    //       break;
+    //     case 400:
+    //     case 404:
+    //       this._status = storeStatuses.clientSidedError;
+    //       this._pins = [];
+    //       break;
+    //     default:
+    //       this._status = storeStatuses.internalError;
+    //       break;
+    //   }
+    //
+    //   this._trigger('change');
+    // });
   }
 
   /**

@@ -247,3 +247,10 @@
     position: relative;
   }
 }
+
+.disabled {
+  cursor: default;
+  &:hover .navbar__action-icon {
+    color: var(--gray);
+  }
+}

@@ -79,10 +79,6 @@
     outline: none;
 
     background-color: transparent;
-
-    &:hover {
-        color: var(--red);
-      }
   }
 
   &__follow-icon {
@@ -93,7 +89,11 @@
     cursor: pointer;
 
     &:hover {
-      background-color: var(--red);
+      color: var(--red);
+    }
+
+    &_active {
+      color: var(--red);
     }
   }
 
@@ -139,7 +139,7 @@
   height: 54px;
 
   background-color: var(--white);
-  
+
   transition: var(--theme-transition);
 
   &__link {
@@ -153,9 +153,7 @@
     text-decoration: none;
     font-size: 18px;
 
-    border-right: 2px solid var(--almost-white);
-
-    color: var(--black);
+    color: white;
 
     transition: 0.2s;
 
