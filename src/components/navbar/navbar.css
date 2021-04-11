@@ -133,8 +133,8 @@
   justify-content: center;
   width: 80px;
   padding: 10px;
-  border: 1px solid var(--red);
-  border-radius: 2px;
+  border: 2px solid var(--red);
+  border-radius: 3px;
   text-decoration: none;
   background-color: var(--white);
   cursor: pointer;
@@ -163,7 +163,7 @@
   color: var(--black);
 }
 .navbar__auth-link_secondary::before {
-  background-color: var(--almost-white);
+  background-color: var(--white);
 }
 .navbar__auth-text {
   position: relative;

@@ -1,6 +1,6 @@
 import {ProfileView} from '../profileView/profileView.js';
 import {PinsFeed} from '../../../components/pinsFeed/pinsFeed.js';
-import {constants} from '../../../consts/consts.js';
+import {pinsStore} from '../../../stores/pinsStore/pinsStore.js';
 
 
 /**
@@ -20,7 +20,10 @@ export class ProfilePinsView extends ProfileView {
    * @return {String}
    */
   render() {
-    this._nestedComponents.set('_pinsFeed', new PinsFeed({...this.props, pins: constants.mocks.pins}));
+    this._nestedComponents.set('_pinsFeed', new PinsFeed({
+      ...this.props,
+      pins: pinsStore.getPinsByProfileID(this.props.pathArgs.profileID),
+    }));
     this._profileMainContent = this._nestedComponents.get('_pinsFeed').render();
 
     return super.render();

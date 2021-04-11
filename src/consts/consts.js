@@ -1,10 +1,9 @@
-import {Board} from '../models/board/Board.js';
 import {Pin} from '../models/pin/Pin.js';
 
 export const constants = {
   network: {
-    // backendURL: 'http://www.pinter-best.com:8080',
-    backendURL: 'http://127.0.0.1:8080',
+    backendURL: 'http://www.pinter-best.com:8080',
+    // backendURL: 'http://127.0.0.1:8080',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
     bucketURL: 'https://pinterbestbucket.s3.eu-central-1.amazonaws.com/',
 
@@ -85,6 +84,11 @@ export const constants = {
     },
   },
   mocks: {
+    defaultProfile: {
+      ID: 1,
+      username: 'username',
+      avatarLink: '/assets/img/default-avatar.jpg',
+    },
     messages: Array(10).fill(0).map((item, i) => ({
       imageLink: '/assets/img/Logo.png',
       header: 'Pinterbest',
@@ -105,12 +109,37 @@ export const constants = {
       tags: [],
       imageLink: '/assets/img/default-avatar.jpg',
     })),
-    boards: Array(10).fill(0).map((board, i) => new Board({
-      ID: i,
-      authorID: 100 + i % 3,
-      title: `title${i}`,
-      description: 'blah blah blah',
-      avatarLink: '/assets/img/default-avatar.jpg',
-    })),
+    boards: [
+      {
+        ID: 1,
+        avatarLink: '/assets/img/boards/1.jpg',
+        title: 'title1',
+      },
+      {
+        ID: 2,
+        avatarLink: '/assets/img/boards/2.jpg',
+        title: 'title2',
+      },
+      {
+        ID: 3,
+        avatarLink: '/assets/img/boards/3.jpg',
+        title: 'title3',
+      },
+      {
+        ID: 4,
+        avatarLink: '/assets/img/boards/4.jpg',
+        title: 'title4',
+      },
+      {
+        ID: 5,
+        avatarLink: '/assets/img/boards/5.jpg',
+        title: 'title5',
+      },
+      {
+        ID: 6,
+        avatarLink: '/assets/img/boards/6.jpg',
+        title: 'title6',
+      },
+    ],
   },
 };

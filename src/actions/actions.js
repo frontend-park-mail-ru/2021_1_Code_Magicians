@@ -34,7 +34,6 @@ export const actionTypes = {
     postComment: 'post-comment',
   },
   common: {
-    loadForeignProfile: 'load-profile',
     loadPin: 'load-pin', // load pin for pin's page. It contains messages, author's profile and so on
     loadBoard: 'load-board',
   },
@@ -186,14 +185,6 @@ export const actions = {
     },
   },
   common: {
-    loadForeignProfile: (profileID) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.common.loadForeignProfile,
-        data: {
-          profileID: profileID,
-        },
-      });
-    },
     loadPin: (pinID) => {
       appDispatcher.dispatch({
         actionType: actionTypes.common.loadPin,

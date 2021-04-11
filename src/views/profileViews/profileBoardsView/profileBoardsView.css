@@ -1,7 +1,9 @@
 .profile-boards {
   display: flex;
   flex-wrap: wrap;
-  margin: 40px 0 30px 40px;
+  padding-top: 40px;
+  padding-left: 50px;
+  background-color: var(--white);
 }
 .profile-boards__board {
   display: flex;
@@ -21,6 +23,7 @@
   margin-top: 4px;
   color: var(--gray);
   text-decoration: underline;
+  font-size: 18px;
   transition: 0.3s;
 }
 .profile-boards__title:hover {

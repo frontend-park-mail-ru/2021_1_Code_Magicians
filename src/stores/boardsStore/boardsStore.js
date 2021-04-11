@@ -4,7 +4,6 @@ import {Board} from '../../models/board/Board.js';
 import {actionTypes} from '../../actions/actions.js';
 import {userStore} from '../userStore/UserStore.js';
 import {API} from '../../modules/api.js';
-import {profilesStore} from '../profilesStore/profilesStore.js';
 
 const storeStatuses = constants.store.statuses.boardsStore;
 
@@ -18,6 +17,10 @@ class BoardsStore extends Store {
   constructor() {
     super();
 
+    this._boardsSource = {
+      sourceType: null,
+      sourceID: null,
+    };
     this._boards = [];
     this._board = new Board();
 
@@ -39,15 +42,6 @@ class BoardsStore extends Store {
         break;
       case actionTypes.boards.deleteBoard:
         this._deleteBoard(action.data);
-        break;
-      case actionTypes.boards.loadBoardsFeed:
-        this._fetchBoardsFeed(action.data);
-        break;
-      case actionTypes.common.loadBoard:
-        this._fetchBoard(action.data);
-        break;
-      case actionTypes.common.loadForeignProfile:
-        this._fetchProfileBoards({authorID: profilesStore.getProfile()['ID']});
         break;
       case actionTypes.boards.statusProcessed:
         this._status = storeStatuses.ok;
@@ -74,7 +68,6 @@ class BoardsStore extends Store {
       switch (response.status) {
         case 201:
           this._status = storeStatuses.boardCreated;
-          this._trigger('change');
           break;
         case 401:
           this._status = storeStatuses.userUnauthorized;
@@ -86,6 +79,8 @@ class BoardsStore extends Store {
           this._status = storeStatuses.internalError;
           break;
       }
+
+      this._trigger('change');
     });
   }
 
@@ -105,6 +100,8 @@ class BoardsStore extends Store {
         case 200:
         case 204:
           this._status = storeStatuses.boardDeleted;
+          this._board = this._board.ID !== data.boardID ? this._board : new Board({});
+          this._boards = this._boards.filter((board) => board.ID !== data.boardID);
           this._trigger('change');
           break;
         case 401:
@@ -152,7 +149,14 @@ class BoardsStore extends Store {
    * @private
    */
   _fetchProfileBoards(data) {
+    this._fetchingBoards = true;
+
+    this._boardsSource.sourceType = 'profile';
+    this._boardsSource.sourceID = data.authorID;
+
     this._boards = constants.mocks.boards;
+    this._fetchingBoards = false;
+
     this._trigger('change');
     // API.getProfileBoards(data.authorID).then((response) => {
     //   switch (response.status) {
@@ -177,24 +181,62 @@ class BoardsStore extends Store {
    * @private
    */
   _fetchBoardsFeed(data) {
+    this._fetchingBoards = true;
+
+    this._boardsSource.sourceType = 'feed';
+    this._boardsSource.sourceID = null;
+
     this._boards = constants.mocks.boards; // later will go to the server for data
+    this._fetchingBoards = true;
     this._trigger('change');
   }
 
   /**
-   * Returns boards
+   * Get them
+   * @param {String} profileID
    * @return {[]}
    */
-  getBoards() {
-    return this._boards;
+  getBoardsByProfileID(profileID) {
+    if (this._boardsSource.sourceType === 'profile' &&
+      this._boardsSource.sourceID === profileID) {
+      return this._boards;
+    }
+
+    if (!this._fetchingBoards) {
+      this._fetchProfileBoards({authorID: profileID});
+    }
+
+    return this._fetchingBoards ? null : this._boards;
   }
 
   /**
    * Returns board
+   * @param {String} ID
    * @return {Board}
    */
-  getBoard() {
-    return this._board;
+  getBoardByID(ID) {
+    if (this._board.ID === ID) {
+      return this._board;
+    } else {
+      this._fetchBoard({boardID: ID});
+      return null;
+    }
+  }
+
+  /**
+   * Get them
+   * @return {null|[]}
+   */
+  getBoardsFeed() {
+    if (this._boardsSource.sourceType === 'feed') {
+      return this._boards;
+    }
+
+    if (!this._fetchingBoards) {
+      this._fetchBoardsFeed({});
+    }
+
+    return null;
   }
 }
 

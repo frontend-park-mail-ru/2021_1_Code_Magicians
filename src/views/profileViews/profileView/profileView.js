@@ -5,7 +5,8 @@ import {userStore} from '../../../stores/userStore/UserStore.js';
 import {appRouter} from '../../../appManagers/router.js';
 import {constants} from '../../../consts/consts.js';
 import {profilesStore} from '../../../stores/profilesStore/profilesStore.js';
-import {actions} from '../../../actions/actions.js';
+import {boardsStore} from '../../../stores/boardsStore/boardsStore.js';
+import {pinsStore} from '../../../stores/pinsStore/pinsStore.js';
 
 /**
  * Base profile view
@@ -22,6 +23,8 @@ export class ProfileView extends View {
 
     userStore.bind('change', this.refresh);
     profilesStore.bind('change', this.refresh);
+    boardsStore.bind('change', this.refresh);
+    pinsStore.bind('change', this.refresh);
   }
 
   /**
@@ -37,11 +40,6 @@ export class ProfileView extends View {
       Object.keys(this.props.pathArgs).length === 0) ||
       this.props.userID === this.props.profileID) {
       return '';
-    }
-
-    const profileID = this.props.profileID;
-    if (profileID && profileID !== profilesStore.getProfile()['ID']) {
-      actions.common.loadForeignProfile(profileID);
     }
 
     const tmpl = Handlebars.templates['profileView.hbs'];

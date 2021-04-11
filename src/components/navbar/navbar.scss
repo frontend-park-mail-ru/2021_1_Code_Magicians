@@ -199,8 +199,8 @@
 
     padding: 10px;
 
-    border: 1px solid var(--red);
-    border-radius: 2px;
+    border: 2px solid var(--red);
+    border-radius: 3px;
 
     text-decoration: none;
 
@@ -238,7 +238,7 @@
       color: var(--black);
 
       &::before {
-        background-color: var(--almost-white);
+        background-color: var(--white);
       }
     }
   }

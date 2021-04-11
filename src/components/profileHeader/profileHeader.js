@@ -1,6 +1,7 @@
 import {Component} from '../component.js';
 import {userStore} from '../../stores/userStore/UserStore.js';
 import {profilesStore} from '../../stores/profilesStore/profilesStore.js';
+import {constants} from '../../consts/consts.js';
 
 /**
  * Profile header
@@ -21,10 +22,11 @@ export class ProfileHeader extends Component {
   render() {
     const tmpl = Handlebars.templates['profileHeader.hbs'];
     const selfProfile = Object.keys(this.props.pathArgs).length === 0;
-    const profile = selfProfile ? userStore.getUser().profile : profilesStore.getProfile(); // will find real foreign profile
+    let profile = selfProfile ? userStore.getUser().profile : null;
+    profile = profile || profilesStore.getProfileByID(this.props.pathArgs.profileID) || constants.mocks.defaultProfile;
     return tmpl({
       ...this.props,
-      selfProfile: Object.keys(this.props.pathArgs).length === 0,
+      selfProfile: selfProfile,
       profile: profile,
     });
   }
