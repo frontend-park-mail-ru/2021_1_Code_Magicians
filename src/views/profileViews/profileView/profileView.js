@@ -1,12 +1,12 @@
-import {View} from '../../view.js';
-import {Page} from 'components/page/page.js';
-import {ProfileHeader} from 'components/profileHeader/profileHeader.js';
-import {userStore} from 'stores/userStore/UserStore.js';
-import {appRouter} from 'appManagers/router.js';
-import {constants} from 'consts/consts.js';
-import {profilesStore} from 'stores/profilesStore/profilesStore.js';
-import {boardsStore} from 'stores/boardsStore/boardsStore.js';
-import {pinsStore} from 'stores/pinsStore/pinsStore.js';
+import {View} from '../../view';
+import {Page} from 'components/page/page';
+import {ProfileHeader} from 'components/profileHeader/profileHeader';
+import {userStore} from 'stores/userStore/UserStore';
+import {appRouter} from 'appManagers/router';
+import {constants} from 'consts/consts';
+import {profilesStore} from 'stores/profilesStore/profilesStore';
+import {boardsStore} from 'stores/boardsStore/boardsStore';
+import {pinsStore} from 'stores/pinsStore/pinsStore';
 
 import ProfileViewTemplate from './profileView.hbs';
 import './profileView.scss';

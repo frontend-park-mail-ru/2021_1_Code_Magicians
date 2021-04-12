@@ -1,4 +1,4 @@
-import {appDispatcher} from '../appManagers/dispatcher.js';
+import {appDispatcher} from '../appManagers/dispatcher';
 
 export const actionTypes = {
   user: {

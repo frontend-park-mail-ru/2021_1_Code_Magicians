@@ -1,5 +1,5 @@
-import {Component} from '../component.js';
-import {userStore} from 'stores/userStore/UserStore.js';
+import {Component} from '../component';
+import {userStore} from 'stores/userStore/UserStore';
 import NavbarTemplate from './navbar.hbs';
 import './navbar.scss';
 

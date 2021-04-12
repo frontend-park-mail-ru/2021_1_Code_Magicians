@@ -1,5 +1,5 @@
-import {Model} from '../Model.js';
-import {constants} from '../../consts/consts.js';
+import {Model} from '../Model';
+import {constants} from '../../consts/consts';
 
 /**
  * Profile model

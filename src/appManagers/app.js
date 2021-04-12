@@ -1,12 +1,12 @@
-import {constants} from 'consts/consts.js';
-import {appRouter} from 'appManagers/router.js';
-import {FeedView} from 'views/feedView/feedView.js';
-import {ProfileView} from 'views/profileViews/profileView/profileView.js';
-import {ProfileBoardsView} from 'views/profileViews/profileBoardsView/profileBoardsView.js';
-import {ProfilePinsView} from 'views/profileViews/profilePinsView/profilePinsView.js';
-import {SettingsView} from 'views/settingsView/settingsView.js';
-import {SignupView} from 'views/authViews/signupView/signupView.js';
-import {LoginView} from 'views/authViews/loginView/loginView.js';
+import {constants} from 'consts/consts';
+import {appRouter} from 'appManagers/router';
+import {FeedView} from 'views/feedView/feedView';
+import {ProfileView} from 'views/profileViews/profileView/profileView';
+import {ProfileBoardsView} from 'views/profileViews/profileBoardsView/profileBoardsView';
+import {ProfilePinsView} from 'views/profileViews/profilePinsView/profilePinsView';
+import {SettingsView} from 'views/settingsView/settingsView';
+import {SignupView} from 'views/authViews/signupView/signupView';
+import {LoginView} from 'views/authViews/loginView/loginView';
 
 import 'assets/css/base.scss';
 

@@ -6,7 +6,7 @@ import {
   usernameRegexp,
   passwordRegexp,
   firstNameRegexp,
-} from '../consts/regexp.js';
+} from '../consts/regexp';
 
 /**
    * Validate data with regExp

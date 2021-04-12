@@ -1,5 +1,5 @@
-import {ProfileView} from '../profileView/profileView.js';
-import {boardsStore} from 'stores/boardsStore/boardsStore.js';
+import {ProfileView} from '../profileView/profileView';
+import {boardsStore} from 'stores/boardsStore/boardsStore';
 
 import ProfileBoardsViewTemplate from './profileBoardsView.hbs';
 import './profileBoardsView.scss';

@@ -1,8 +1,8 @@
-import {Component} from '../component.js';
-import {userStore} from 'stores/userStore/UserStore.js';
-import {actions} from 'actions/actions.js';
-import {firstNameRegexp, usernameRegexp} from 'consts/regexp.js';
-import {constants} from 'consts/consts.js';
+import {Component} from '../component';
+import {userStore} from 'stores/userStore/UserStore';
+import {actions} from 'actions/actions';
+import {firstNameRegexp, usernameRegexp} from 'consts/regexp';
+import {constants} from 'consts/consts';
 
 import ProfileChangesTemplate from './profileChanges.hbs';
 import './profileChanges.scss';

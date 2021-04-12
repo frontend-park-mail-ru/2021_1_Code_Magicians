@@ -1,13 +1,13 @@
-import {View} from '../view.js';
-import {Page} from 'components/page/page.js';
-import {ProfileChanges} from 'components/profileChanges/profileChanges.js';
-import {SecuritySettings} from 'components/securitySettings/securitySettings.js';
-import {NotificationSettings} from 'components/notificationSettings/notificationSettings.js';
-import {userStore} from 'stores/userStore/UserStore.js';
-import {urlRegexp} from 'consts/regexp.js';
-import {actions} from 'actions/actions.js';
-import {appRouter} from 'appManagers/router.js';
-import {constants} from 'consts/consts.js';
+import {View} from '../view';
+import {Page} from 'components/page/page';
+import {ProfileChanges} from 'components/profileChanges/profileChanges';
+import {SecuritySettings} from 'components/securitySettings/securitySettings';
+import {NotificationSettings} from 'components/notificationSettings/notificationSettings';
+import {userStore} from 'stores/userStore/UserStore';
+import {urlRegexp} from 'consts/regexp';
+import {actions} from 'actions/actions';
+import {appRouter} from 'appManagers/router';
+import {constants} from 'consts/consts';
 
 import SettingsViewTemplate from './settingsView.hbs';
 import './settingsView.scss';

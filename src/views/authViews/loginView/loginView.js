@@ -1,8 +1,8 @@
-import {actions} from 'actions/actions.js';
-import {appRouter} from 'appManagers/router.js';
-import {usernameRegexp, passwordRegexp} from 'consts/regexp.js';
-import {validateInput} from 'utils/utils.js';
-import {AuthView} from '../authView.js';
+import {actions} from 'actions/actions';
+import {appRouter} from 'appManagers/router';
+import {usernameRegexp, passwordRegexp} from 'consts/regexp';
+import {validateInput} from 'utils/utils';
+import {AuthView} from '../authView';
 
 import LoginViewTemplate from './loginView.hbs';
 import './loginView.scss';

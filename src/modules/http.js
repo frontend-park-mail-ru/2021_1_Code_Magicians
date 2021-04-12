@@ -1,4 +1,4 @@
-import {constants} from '../consts/consts.js';
+import {constants} from '../consts/consts';
 
 /**
  * Basic HTTP-module to communicate with the great server itself

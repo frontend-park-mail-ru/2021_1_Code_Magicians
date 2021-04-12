@@ -1,4 +1,4 @@
-import {Component} from '../component.js';
+import {Component} from '../component';
 
 import NotificationSettingsTemplate from './notificationSettings.hbs';
 import './notificationSettings.scss';

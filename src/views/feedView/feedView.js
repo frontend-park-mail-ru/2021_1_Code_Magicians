@@ -1,8 +1,8 @@
-import {View} from '../view.js';
-import {userStore} from 'stores/userStore/UserStore.js';
-import {PinsFeed} from 'components/pinsFeed/pinsFeed.js';
-import {Page} from 'components/page/page.js';
-import {constants} from 'consts/consts.js';
+import {View} from '../view';
+import {userStore} from 'stores/userStore/UserStore';
+import {PinsFeed} from 'components/pinsFeed/pinsFeed';
+import {Page} from 'components/page/page';
+import {constants} from 'consts/consts';
 
 import FeedViewTemplate from './feedView.hbs';
 import './feedView.scss';

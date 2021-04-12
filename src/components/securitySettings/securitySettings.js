@@ -1,8 +1,8 @@
-import {Component} from '../component.js';
-import {actions} from 'actions/actions.js';
-import {userStore} from 'stores/userStore/UserStore.js';
-import {constants} from 'consts/consts.js';
-import {passwordRegexp} from 'consts/regexp.js';
+import {Component} from '../component';
+import {actions} from 'actions/actions';
+import {userStore} from 'stores/userStore/UserStore';
+import {constants} from 'consts/consts';
+import {passwordRegexp} from 'consts/regexp';
 
 import SecuritySettingsTemplate from './securitySettings.hbs';
 import './securitySettings.scss';

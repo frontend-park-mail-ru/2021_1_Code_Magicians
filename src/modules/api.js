@@ -1,6 +1,6 @@
 /* eslint-disable valid-jsdoc */
-import {HTTPModule} from './http.js';
-import {constants} from '../consts/consts.js';
+import {HTTPModule} from './http';
+import {constants} from '../consts/consts';
 
 const paths = constants.network.pathsAPI;
 

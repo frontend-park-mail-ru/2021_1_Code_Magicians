@@ -1,5 +1,5 @@
-import {View} from '../view.js';
-import {appRouter} from 'appManagers/router.js';
+import {View} from '../view';
+import {appRouter} from 'appManagers/router';
 
 import NotFoundViewTemplate from './notFoundView.hbs';
 import './notFoundView.scss';

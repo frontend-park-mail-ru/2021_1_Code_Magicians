@@ -1,4 +1,4 @@
-import {Component} from '../component.js';
+import {Component} from '../component';
 
 import PinsFeedTemplate from './pinsFeed.hbs';
 import './pinsFeed.scss';

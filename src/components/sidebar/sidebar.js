@@ -1,6 +1,6 @@
-import {Component} from '../component.js';
-import {urlRegexp} from 'consts/regexp.js';
-import {userStore} from 'stores/userStore/UserStore.js';
+import {Component} from '../component';
+import {urlRegexp} from 'consts/regexp';
+import {userStore} from 'stores/userStore/UserStore';
 
 import SidebarTemplate from './sidebar.hbs';
 import './sidebar.scss';

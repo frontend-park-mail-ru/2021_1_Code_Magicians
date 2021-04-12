@@ -6,6 +6,11 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
   entry: path.resolve('src/main.js'),
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    filename: 'index_bundle.js',
+  },
   module: {
     rules: [
       {
@@ -23,11 +28,6 @@ module.exports = {
       },
     ],
   },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-    filename: 'index_bundle.js',
-  },
   plugins: [
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
@@ -37,7 +37,6 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
   ],
-
   resolve: {
     alias: {
       assets: path.resolve('src/assets'),
@@ -53,7 +52,7 @@ module.exports = {
     },
     extensions: ['.js'],
   },
-  mode: 'development',
+
   devServer: {
     publicPath: '/',
     contentBase: path.resolve('src'),
@@ -62,4 +61,5 @@ module.exports = {
     historyApiFallback: true,
   },
   devtool: 'eval-source-map',
+  mode: 'development',
 };

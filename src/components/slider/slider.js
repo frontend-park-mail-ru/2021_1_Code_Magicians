@@ -1,4 +1,4 @@
-import {Component} from '../component.js';
+import {Component} from '../component';
 
 import SliderTemplate from './slider.hbs';
 import './slider.scss';

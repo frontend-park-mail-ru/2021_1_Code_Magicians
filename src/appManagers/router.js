@@ -1,7 +1,7 @@
-import {NotFoundView} from '../views/notFoundView/notFoundView.js';
+import {NotFoundView} from '../views/notFoundView/notFoundView';
 
-import {pathParamRegExp, pathPropTypeRegexp, regSubstr, urlRegexp} from '../consts/regexp.js';
-import {constants} from '../consts/consts.js';
+import {pathParamRegExp, pathPropTypeRegexp, regSubstr, urlRegexp} from '../consts/regexp';
+import {constants} from '../consts/consts';
 
 /**
  * Extracts keys from the path, using the template

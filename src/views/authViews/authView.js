@@ -1,8 +1,8 @@
-import {View} from '../view.js';
-import {actions} from 'actions/actions.js';
-import {appRouter} from 'appManagers/router.js';
-import {userStore} from 'stores/userStore/UserStore.js';
-import {constants} from 'consts/consts.js';
+import {View} from '../view';
+import {actions} from 'actions/actions';
+import {appRouter} from 'appManagers/router';
+import {userStore} from 'stores/userStore/UserStore';
+import {constants} from 'consts/consts';
 
 import './authView.scss';
 

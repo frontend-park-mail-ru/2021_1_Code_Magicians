@@ -1,8 +1,8 @@
-import {Navbar} from '../navbar/navbar.js';
-import {Sidebar} from '../sidebar/sidebar.js';
-import {Component} from '../component.js';
-import {Slider} from '../slider/slider.js';
-import {constants} from 'consts/consts.js';
+import {Navbar} from '../navbar/navbar';
+import {Sidebar} from '../sidebar/sidebar';
+import {Component} from '../component';
+import {Slider} from '../slider/slider';
+import {constants} from 'consts/consts';
 
 import PageTemplate from './page.hbs';
 import './page.scss';

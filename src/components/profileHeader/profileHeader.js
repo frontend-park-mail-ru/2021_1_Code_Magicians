@@ -1,7 +1,7 @@
-import {Component} from '../component.js';
-import {userStore} from 'stores/userStore/UserStore.js';
-import {profilesStore} from 'stores/profilesStore/profilesStore.js';
-import {constants} from 'consts/consts.js';
+import {Component} from '../component';
+import {userStore} from 'stores/userStore/UserStore';
+import {profilesStore} from 'stores/profilesStore/profilesStore';
+import {constants} from 'consts/consts';
 
 import ProfileHeaderTemplate from './profileHeader.hbs';
 import './profileHeader.scss';
