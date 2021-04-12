@@ -1,6 +1,6 @@
 import {ProfileView} from '../profileView/profileView.js';
-import {PinsFeed} from '../../../components/pinsFeed/pinsFeed.js';
-import {pinsStore} from '../../../stores/pinsStore/pinsStore.js';
+import {PinsFeed} from 'components/pinsFeed/pinsFeed.js';
+import {pinsStore} from 'stores/pinsStore/pinsStore.js';
 
 
 /**

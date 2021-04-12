@@ -1,9 +1,9 @@
 import Store from '../Store.js';
-import {constants} from '../../consts/consts.js';
-import {actionTypes} from '../../actions/actions.js';
+import {constants} from 'consts/consts.js';
+import {actionTypes} from 'actions/actions.js';
 import {userStore} from '../userStore/UserStore.js';
-import {API} from '../../modules/api.js';
-import {Pin} from '../../models/pin/Pin.js';
+import {API} from 'modules/api.js';
+import {Pin} from 'models/pin/Pin.js';
 
 const storeStatuses = constants.store.statuses.pinsStore;
 

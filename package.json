@@ -2,21 +2,31 @@
   "name": "pinterest",
   "version": "1.0.0",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "css-loader": "^5.2.1",
     "eslint": "^7.23.0",
     "eslint-config-google": "^0.14.0",
+    "file-loader": "^6.2.0",
     "globstar": "^1.0.0",
-    "handlebars": "^4.7.7",
+    "handlebars-loader": "^1.7.1",
+    "html-webpack-plugin": "^5.3.1",
     "husky": "^5.1.1",
-    "sass": "^1.32.8"
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "start": "node server.js",
-    "prestart": "npm run compile_hbs",
+    "build": "webpack",
+    "start": "webpack serve --hot --host 127.0.0.1",
+    "server": "node server.js",
     "postinstall": "husky install",
-    "lint": "npx eslint src/",
-    "compile_hbs": "globstar -- npx handlebars src/**/*.hbs -f src/assets/js/handlebars.precompiled.js"
+    "lint": "eslint src/"
   }
 }

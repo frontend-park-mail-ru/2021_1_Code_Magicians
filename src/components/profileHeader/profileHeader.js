@@ -1,7 +1,10 @@
 import {Component} from '../component.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {profilesStore} from '../../stores/profilesStore/profilesStore.js';
-import {constants} from '../../consts/consts.js';
+import {userStore} from 'stores/userStore/UserStore.js';
+import {profilesStore} from 'stores/profilesStore/profilesStore.js';
+import {constants} from 'consts/consts.js';
+
+import ProfileHeaderTemplate from './profileHeader.hbs';
+import './profileHeader.scss';
 
 /**
  * Profile header
@@ -13,6 +16,8 @@ export class ProfileHeader extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = ProfileHeaderTemplate;
   }
 
   /**
@@ -20,11 +25,13 @@ export class ProfileHeader extends Component {
    * @return {string} final html
    */
   render() {
-    const tmpl = Handlebars.templates['profileHeader.hbs'];
     const selfProfile = Object.keys(this.props.pathArgs).length === 0;
     let profile = selfProfile ? userStore.getUser().profile : null;
-    profile = profile || profilesStore.getProfileByID(this.props.pathArgs.profileID) || constants.mocks.defaultProfile;
-    return tmpl({
+    profile = profile ||
+      profilesStore.getProfileByID(this.props.pathArgs.profileID) ||
+      constants.mocks.defaultProfile;
+
+    return this.tmpl({
       ...this.props,
       selfProfile: selfProfile,
       profile: profile,

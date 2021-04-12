@@ -1,6 +1,9 @@
 import {Component} from '../component.js';
-import {urlRegexp} from '../../consts/regexp.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
+import {urlRegexp} from 'consts/regexp.js';
+import {userStore} from 'stores/userStore/UserStore.js';
+
+import SidebarTemplate from './sidebar.hbs';
+import './sidebar.scss';
 
 /**
  * Side bar (page__sidebar)
@@ -13,6 +16,7 @@ export class Sidebar extends Component {
   constructor(props) {
     super(props);
 
+    this.tmpl = SidebarTemplate;
     this.hideSliders = this.hideSliders.bind(this);
   }
 
@@ -22,8 +26,8 @@ export class Sidebar extends Component {
    */
   render() {
     this._userIsAuthorized = userStore.getUser().authorized();
-    const tmpl = Handlebars.templates['sidebar.hbs'];
-    return tmpl({
+
+    return this.tmpl({
       ...this.props,
       userIsAuthorized: this._userIsAuthorized,
     });

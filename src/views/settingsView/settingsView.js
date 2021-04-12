@@ -1,13 +1,16 @@
 import {View} from '../view.js';
-import {Page} from '../../components/page/page.js';
-import {ProfileChanges} from '../../components/profileChanges/profileChanges.js';
-import {SecuritySettings} from '../../components/securitySettings/securitySettings.js';
-import {NotificationSettings} from '../../components/notificationSettings/notificationSettings.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {urlRegexp} from '../../consts/regexp.js';
-import {actions} from '../../actions/actions.js';
-import {appRouter} from '../../appManagers/router.js';
-import {constants} from '../../consts/consts.js';
+import {Page} from 'components/page/page.js';
+import {ProfileChanges} from 'components/profileChanges/profileChanges.js';
+import {SecuritySettings} from 'components/securitySettings/securitySettings.js';
+import {NotificationSettings} from 'components/notificationSettings/notificationSettings.js';
+import {userStore} from 'stores/userStore/UserStore.js';
+import {urlRegexp} from 'consts/regexp.js';
+import {actions} from 'actions/actions.js';
+import {appRouter} from 'appManagers/router.js';
+import {constants} from 'consts/consts.js';
+
+import SettingsViewTemplate from './settingsView.hbs';
+import './settingsView.scss';
 
 /**
  * Profile settings view
@@ -20,6 +23,8 @@ export class SettingsView extends View {
   constructor(props = {}) {
     super(props, document.getElementById('app'));
 
+    this.tmpl = SettingsViewTemplate;
+
     userStore.bind('change', this.refresh);
   }
 
@@ -28,8 +33,6 @@ export class SettingsView extends View {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['settingsView.hbs'];
-
     let settingsForm;
     switch (this.props.pathArgs['section']) {
       case 'profile':
@@ -48,7 +51,7 @@ export class SettingsView extends View {
     this._nestedComponents.set('_settingsForm', settingsForm);
     this._nestedComponents.set('page', new Page({
       ...this.props,
-      page__content: tmpl({
+      page__content: this.tmpl({
         ...this.props,
         settingsForm: this._nestedComponents.get('_settingsForm').render(),
       }),

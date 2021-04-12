@@ -1,6 +1,8 @@
 import {ProfileView} from '../profileView/profileView.js';
-import {boardsStore} from '../../../stores/boardsStore/boardsStore.js';
+import {boardsStore} from 'stores/boardsStore/boardsStore.js';
 
+import ProfileBoardsViewTemplate from './profileBoardsView.hbs';
+import './profileBoardsView.scss';
 
 /**
  * Profile boards view
@@ -12,6 +14,8 @@ export class ProfileBoardsView extends ProfileView {
    */
   constructor(props = {}) {
     super(props);
+
+    this.tmpl = ProfileBoardsViewTemplate;
   }
 
   /**
@@ -19,8 +23,7 @@ export class ProfileBoardsView extends ProfileView {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['profileBoardsView.hbs'];
-    this._profileMainContent = tmpl({
+    this._profileMainContent = this.tmpl({
       ...this.props,
       boards: boardsStore.getBoardsByProfileID(this.props.pathArgs.profileID),
     });

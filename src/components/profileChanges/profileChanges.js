@@ -1,8 +1,11 @@
 import {Component} from '../component.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {actions} from '../../actions/actions.js';
-import {firstNameRegexp, usernameRegexp} from '../../consts/regexp.js';
-import {constants} from '../../consts/consts.js';
+import {userStore} from 'stores/userStore/UserStore.js';
+import {actions} from 'actions/actions.js';
+import {firstNameRegexp, usernameRegexp} from 'consts/regexp.js';
+import {constants} from 'consts/consts.js';
+
+import ProfileChangesTemplate from './profileChanges.hbs';
+import './profileChanges.scss';
 
 /**
  * Profile changes form
@@ -14,6 +17,8 @@ export class ProfileChanges extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = ProfileChangesTemplate;
   }
 
   /**
@@ -21,9 +26,7 @@ export class ProfileChanges extends Component {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['profileChanges.hbs'];
-
-    return tmpl({...this.props, user: userStore.getUser().profile});
+    return this.tmpl({...this.props, user: userStore.getUser().profile});
   }
 
   /**

@@ -1,9 +1,9 @@
-import {constants} from '../../consts/consts.js';
+import {constants} from 'consts/consts.js';
 import Store from '../Store.js';
-import {Board} from '../../models/board/Board.js';
-import {actionTypes} from '../../actions/actions.js';
+import {Board} from 'models/board/Board.js';
+import {actionTypes} from 'actions/actions.js';
 import {userStore} from '../userStore/UserStore.js';
-import {API} from '../../modules/api.js';
+import {API} from 'modules/api.js';
 
 const storeStatuses = constants.store.statuses.boardsStore;
 

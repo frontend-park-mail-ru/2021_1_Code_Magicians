@@ -1,8 +1,10 @@
 import {View} from '../view.js';
-import {actions} from '../../actions/actions.js';
-import {appRouter} from '../../appManagers/router.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {constants} from '../../consts/consts.js';
+import {actions} from 'actions/actions.js';
+import {appRouter} from 'appManagers/router.js';
+import {userStore} from 'stores/userStore/UserStore.js';
+import {constants} from 'consts/consts.js';
+
+import './authView.scss';
 
 /**
  * Parent Authentication view

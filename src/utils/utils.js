@@ -1,4 +1,12 @@
-import {pathParamRegExp, regSubstr, urlRegexp, emailRegexp, usernameRegexp, passwordRegexp, firstNameRegexp} from '../consts/regexp.js';
+import {
+  pathParamRegExp,
+  regSubstr,
+  urlRegexp,
+  emailRegexp,
+  usernameRegexp,
+  passwordRegexp,
+  firstNameRegexp,
+} from '../consts/regexp.js';
 
 /**
    * Validate data with regExp

@@ -1,5 +1,7 @@
 import {Component} from '../component.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
+import {userStore} from 'stores/userStore/UserStore.js';
+import NavbarTemplate from './navbar.hbs';
+import './navbar.scss';
 
 /**
  * Navigation bar (page__navbar)
@@ -11,6 +13,8 @@ export class Navbar extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = NavbarTemplate;
   }
 
   /**
@@ -18,8 +22,7 @@ export class Navbar extends Component {
    * @return {string} final html
    */
   render() {
-    const tmpl = Handlebars.templates['navbar.hbs'];
-    return tmpl({
+    return this.tmpl({
       ...this.props,
       userIsAuthorised: userStore.getUser().authorized(),
       user: userStore.getUser().profile,

@@ -1,8 +1,11 @@
 import {Component} from '../component.js';
-import {actions} from '../../actions/actions.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {constants} from '../../consts/consts.js';
-import {passwordRegexp} from '../../consts/regexp.js';
+import {actions} from 'actions/actions.js';
+import {userStore} from 'stores/userStore/UserStore.js';
+import {constants} from 'consts/consts.js';
+import {passwordRegexp} from 'consts/regexp.js';
+
+import SecuritySettingsTemplate from './securitySettings.hbs';
+import './securitySettings.scss';
 
 /**
  * Security settings form
@@ -14,6 +17,8 @@ export class SecuritySettings extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = SecuritySettingsTemplate;
   }
 
   /**
@@ -21,9 +26,7 @@ export class SecuritySettings extends Component {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['securitySettings.hbs'];
-
-    return tmpl({...this.props});
+    return this.tmpl({...this.props});
   }
 
   /**

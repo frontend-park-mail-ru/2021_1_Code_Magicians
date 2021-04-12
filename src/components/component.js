@@ -14,6 +14,7 @@ export class Component {
       ...props,
       paths: constants.network.routerPaths,
     };
+
     this._nestedComponents = new Map();
     this._state = {};
     this._mounted = false;

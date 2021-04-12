@@ -1,8 +1,8 @@
 import Store from '../Store.js';
-import {Profile} from '../../models/profile/Profile.js';
-import {constants} from '../../consts/consts.js';
-import {actionTypes} from '../../actions/actions.js';
-import {API} from '../../modules/api.js';
+import {Profile} from 'models/profile/Profile.js';
+import {constants} from 'consts/consts.js';
+import {actionTypes} from 'actions/actions.js';
+import {API} from 'modules/api.js';
 import {userStore} from '../userStore/UserStore.js';
 
 const storeStatuses = constants.store.statuses.profilesStore;

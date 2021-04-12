@@ -1,5 +1,8 @@
 import {Component} from '../component.js';
 
+import PinsFeedTemplate from './pinsFeed.hbs';
+import './pinsFeed.scss';
+
 /**
  * Standard pins feed component
  */
@@ -10,6 +13,8 @@ export class PinsFeed extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = PinsFeedTemplate;
   }
 
   /**
@@ -17,8 +22,6 @@ export class PinsFeed extends Component {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['pinsFeed.hbs'];
-
-    return tmpl({...this.props});
+    return this.tmpl({...this.props});
   }
 }

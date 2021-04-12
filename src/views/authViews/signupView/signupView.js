@@ -1,8 +1,11 @@
-import {actions} from '../../../actions/actions.js';
-import {appRouter} from '../../../appManagers/router.js';
-import {emailRegexp, usernameRegexp, passwordRegexp} from '../../../consts/regexp.js';
-import {validateInput} from '../../../utils/utils.js';
+import {actions} from 'actions/actions.js';
+import {appRouter} from 'appManagers/router.js';
+import {emailRegexp, usernameRegexp, passwordRegexp} from 'consts/regexp.js';
+import {validateInput} from 'utils/utils.js';
 import {AuthView} from '../authView.js';
+
+import SignupViewTemplate from './signupView.hbs';
+import './signupView.scss';
 
 /**
  * Signup page view
@@ -20,6 +23,7 @@ export class SignupView extends AuthView {
       password: '',
     };
 
+    this.tmpl = SignupViewTemplate;
     this.setState(payload);
   }
 
@@ -28,8 +32,7 @@ export class SignupView extends AuthView {
      * @return {string}
      */
   render() {
-    const tmpl = Handlebars.templates['signupView.hbs'];
-    return tmpl({});
+    return this.tmpl({...this.props});
   }
 
   /**
@@ -39,9 +42,9 @@ export class SignupView extends AuthView {
   submit(event) {
     event.preventDefault();
 
-    const userName = document.querySelector('[name="signup-username"]').value.trim();
-    const userPassword = document.querySelector('[name="signup-pass"]').value.trim();
-    const userEmail = document.querySelector('[name="signup-email"]').value.trim();
+    const userName = document.querySelector('[name="username"]').value.trim();
+    const userPassword = document.querySelector('[name="password"]').value.trim();
+    const userEmail = document.querySelector('[name="email"]').value.trim();
 
     AuthView.clearInputs('.errors');
 
@@ -53,7 +56,9 @@ export class SignupView extends AuthView {
     errors.push(validateInput(userPassword, passwordRegexp));
     document.querySelector('.password-errors').innerHTML = errors[2];
 
-    if ([...errors].find((el) => el !== '')) return;
+    if ([...errors].find((el) => el !== '')) {
+      return;
+    }
 
     const payload = {
       name: userName,

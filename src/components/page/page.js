@@ -2,7 +2,10 @@ import {Navbar} from '../navbar/navbar.js';
 import {Sidebar} from '../sidebar/sidebar.js';
 import {Component} from '../component.js';
 import {Slider} from '../slider/slider.js';
-import {constants} from '../../consts/consts.js';
+import {constants} from 'consts/consts.js';
+
+import PageTemplate from './page.hbs';
+import './page.scss';
 
 /**
  * Base page component
@@ -14,6 +17,7 @@ export class Page extends Component {
    */
   constructor(props) {
     super(props);
+    this.tmpl = PageTemplate;
 
     this._nestedComponents.set('_pageNavbar', new Navbar(props));
     this._nestedComponents.set('_pageSidebar', new Sidebar(props));
@@ -36,8 +40,7 @@ export class Page extends Component {
    * @return {String} final html
    */
   render() {
-    const tmpl = Handlebars.templates['page.hbs'];
-    return tmpl({
+    return this.tmpl({
       ...this.props,
       page__navbar: this._nestedComponents.get('_pageNavbar').render(),
       page__sidebar: this._nestedComponents.get('_pageSidebar').render(),

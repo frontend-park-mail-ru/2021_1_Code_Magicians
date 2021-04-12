@@ -1,8 +1,11 @@
 import {View} from '../view.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {PinsFeed} from '../../components/pinsFeed/pinsFeed.js';
-import {Page} from '../../components/page/page.js';
-import {constants} from '../../consts/consts.js';
+import {userStore} from 'stores/userStore/UserStore.js';
+import {PinsFeed} from 'components/pinsFeed/pinsFeed.js';
+import {Page} from 'components/page/page.js';
+import {constants} from 'consts/consts.js';
+
+import FeedViewTemplate from './feedView.hbs';
+import './feedView.scss';
 
 /**
  * Main pins feed view
@@ -15,6 +18,7 @@ export class FeedView extends View {
   constructor(props = {}) {
     super(props, document.getElementById('app'));
 
+    this.tmpl = FeedViewTemplate;
     userStore.bind('change', this.refresh);
   }
 
@@ -23,12 +27,10 @@ export class FeedView extends View {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['feedView.hbs'];
-
     this._nestedComponents.set('_pinsFeed', new PinsFeed({...this.props, pins: constants.mocks.pins}));
     this._nestedComponents.set('page', new Page({
       ...this.props,
-      page__content: tmpl({
+      page__content: this.tmpl({
         pinsFeed: this._nestedComponents.get('_pinsFeed').render(),
       }),
     },

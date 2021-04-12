@@ -1,8 +1,11 @@
-import {actions} from '../../../actions/actions.js';
-import {appRouter} from '../../../appManagers/router.js';
-import {usernameRegexp, passwordRegexp} from '../../../consts/regexp.js';
-import {validateInput} from '../../../utils/utils.js';
+import {actions} from 'actions/actions.js';
+import {appRouter} from 'appManagers/router.js';
+import {usernameRegexp, passwordRegexp} from 'consts/regexp.js';
+import {validateInput} from 'utils/utils.js';
 import {AuthView} from '../authView.js';
+
+import LoginViewTemplate from './loginView.hbs';
+import './loginView.scss';
 
 /**
  * Login page view
@@ -19,6 +22,7 @@ export class LoginView extends AuthView {
       password: '',
     };
 
+    this.tmpl = LoginViewTemplate;
     this.setState(payload);
   }
 
@@ -27,8 +31,7 @@ export class LoginView extends AuthView {
      * @return {string}
      */
   render() {
-    const tmpl = Handlebars.templates['loginView.hbs'];
-    return tmpl({});
+    return this.tmpl({...this.props});
   }
 
   /**
@@ -38,8 +41,8 @@ export class LoginView extends AuthView {
   submit(event) {
     event.preventDefault();
 
-    const userName = document.querySelector('[name="login-username"]').value.trim();
-    const userPassword = document.querySelector('[name="login-pass"]').value.trim();
+    const userName = document.querySelector('[name="username"]').value.trim();
+    const userPassword = document.querySelector('[name="password"]').value.trim();
 
     AuthView.clearInputs('.errors');
 
@@ -49,7 +52,9 @@ export class LoginView extends AuthView {
     errors.push(validateInput(userPassword, passwordRegexp));
     document.querySelector('.password-errors').innerHTML = errors[1];
 
-    if ([...errors].find((el) => el !== '')) return;
+    if ([...errors].find((el) => el !== '')) {
+      return;
+    }
 
     const payload = {
       name: userName,

@@ -1,5 +1,8 @@
 import {Component} from '../component.js';
 
+import SliderTemplate from './slider.hbs';
+import './slider.scss';
+
 /**
  * Slider for notifications and messages
  */
@@ -11,6 +14,7 @@ export class Slider extends Component {
   constructor(props) {
     super(props);
 
+    this.tmpl = SliderTemplate;
     this.toggleMessageForm = this.toggleMessageForm.bind(this);
   }
 
@@ -19,10 +23,7 @@ export class Slider extends Component {
    * @return {String} final html
    */
   render() {
-    const tmpl = Handlebars.templates['slider.hbs'];
-    return tmpl({
-      ...this.props,
-    });
+    return this.tmpl({...this.props});
   }
 
   /**
