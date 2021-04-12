@@ -3,8 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
+const debug = process.env.DEBUG === 'true';
+const port = process.env.PORT || 80;
 
 module.exports = {
+  mode: debug ? 'development' : 'production',
   entry: path.resolve('src/main.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -36,6 +39,9 @@ module.exports = {
       filename: 'index.html',
     }),
     new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      DEBUG: debug,
+    }),
   ],
   resolve: {
     alias: {
@@ -57,9 +63,8 @@ module.exports = {
     publicPath: '/',
     contentBase: path.resolve('src'),
     hot: true,
-    port: 8081,
+    port: port,
     historyApiFallback: true,
   },
   devtool: 'eval-source-map',
-  mode: 'development',
 };

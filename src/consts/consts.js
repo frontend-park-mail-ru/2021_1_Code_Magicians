@@ -1,9 +1,9 @@
 import {Pin} from 'models/pin/Pin';
 
+// noinspection JSUnresolvedVariable
 export const constants = {
   network: {
-    // backendURL: 'http://www.pinter-best.com:8080',
-    backendURL: 'http://127.0.0.1:8080',
+    backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'http://www.pinter-best.com:8080',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
     bucketURL: 'https://pinterbestbucket.s3.eu-central-1.amazonaws.com/',
 
@@ -159,3 +159,5 @@ export const constants = {
     ],
   },
 };
+
+console.log(constants.network.backendURL);
