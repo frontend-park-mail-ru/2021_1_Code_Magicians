@@ -159,5 +159,3 @@ export const constants = {
     ],
   },
 };
-
-console.log(constants.network.backendURL);

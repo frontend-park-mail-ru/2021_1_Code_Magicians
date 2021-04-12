@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack",
-    "start": "PORT='8081' webpack serve --hot --host http://www.pinter-best.com",
+    "start": "PORT='3000' webpack serve --host 0.0.0.0",
     "debug": "PORT='8081' DEBUG='true' webpack serve --hot --host 127.0.0.1",
     "lint": "eslint src/",
     "postinstall": "husky install"
