@@ -104,6 +104,7 @@
   width: 150px;
   text-decoration: none;
   font-size: 18px;
+  font-family: var(--font-medium);
   color: var(--black);
   transition: 0.2s;
 }

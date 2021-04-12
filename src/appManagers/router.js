@@ -1,6 +1,6 @@
 import {NotFoundView} from '../views/notFoundView/notFoundView.js';
 
-import {pathParamRegExp, regSubstr, urlRegexp} from '../consts/regexp.js';
+import {pathParamRegExp, pathPropTypeRegexp, regSubstr, urlRegexp} from '../consts/regexp.js';
 import {constants} from '../consts/consts.js';
 
 /**
@@ -10,21 +10,33 @@ import {constants} from '../consts/consts.js';
  * @return {Object}
  */
 function getPathArgs(path, template) {
-  if (!template) return {};
+  if (!template) {
+    return {};
+  }
+
+  let argsValid = true;
   const splitPath = path.split('/');
 
-  // noinspection UnnecessaryLocalVariableJS
   const pathArgs = template
       .split('/')
-      .reduce((args, propName, index) => {
+      .reduce((args, prop, index) => {
+        const propName = prop.replace(pathPropTypeRegexp, '');
+
         if (propName.startsWith(':')) {
-          args[propName.slice(1)] = splitPath[index];
+          const propValue = splitPath[index];
+          const propType = prop.match(pathPropTypeRegexp)[2];
+          switch (propType) {
+            case 'Number':
+              argsValid = argsValid && !isNaN(Number(propValue));
+              break;
+          }
+          args[propName.slice(1)] = propValue;
         }
 
         return args;
       }, {});
 
-  return pathArgs;
+  return {argsValid: argsValid, pathArgs: pathArgs};
 }
 
 /**
@@ -55,7 +67,7 @@ class Router {
    * @param {String} path
    */
   go(path) {
-    if (path !== '/' && path.endsWith('/')) {
+    if (path.endsWith('/') && path !== '/') {
       path = path.slice(0, -1);
     }
 
@@ -68,16 +80,19 @@ class Router {
       prevView.remove();
     }
 
-    const key = [...this._routes.keys()].find((key) => {
-      return RegExp(
-          `^${
-            key.replaceAll(
-                pathParamRegExp,
-                (substring) => substring.endsWith('/') ? `${regSubstr}/` : regSubstr,
-            )
-          }$`,
-      ).test(path);
-    });
+    let key = [...this._routes.keys()].find((key) => key === path);
+    if (!key) {
+      key = [...this._routes.keys()].find((key) => {
+        return RegExp(
+            `^${
+              key.replaceAll(
+                  pathParamRegExp,
+                  (substring) => substring.endsWith('/') ? `${regSubstr}/` : regSubstr,
+              )
+            }$`,
+        ).test(path);
+      });
+    }
 
     this._currentView = key ? this._routes.get(key) : this._routes.get(constants.network.routerPaths.notFound);
 
@@ -85,7 +100,12 @@ class Router {
       window.history.pushState(null, null, path);
     }
 
-    this._currentView.show(getPathArgs(path, key));
+    const {argsValid, pathArgs} = getPathArgs(path, key);
+    if (!argsValid) {
+      this._currentView = this._routes.get(constants.network.routerPaths.notFound);
+    }
+
+    this._currentView.show(pathArgs);
   }
 
   /**

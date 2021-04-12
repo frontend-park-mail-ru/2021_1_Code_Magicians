@@ -1,20 +1,4 @@
-html {
-    height: 100%;
-    width: 100%;
-}
-
-body {
-    height: 100%;
-    width: 100%;
-
-    margin: 0;
-    background-color: var(--almost-white);
-}
-
-#app {
-    height: 100%;
-    width: 100%;
-}
+@import 'fonts.css';
 
 :root {
     --white: rgba(255, 255, 255, 1);
@@ -29,6 +13,10 @@ body {
     --perm-blur: rgba(33, 36, 40, 0.3);
 
     --theme-transition: 0.5s;
+
+    --font-regular: 'Montserrat Regular';
+    --font-medium: 'Montserrat Medium';
+    --font-bold: 'Montserrat Bold';
 }
 
 :root[theme='dark'] {
@@ -38,4 +26,24 @@ body {
     --gray: rgba(169, 169, 169, 1);
     --black: rgba(230, 230, 230, 1);
     --perm-white: rgba(255, 255, 255, 1);
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+
+    margin: 0;
+    background-color: var(--almost-white);
+
+    font-family: var(--font-regular);
+}
+
+#app {
+    height: 100%;
+    width: 100%;
 }

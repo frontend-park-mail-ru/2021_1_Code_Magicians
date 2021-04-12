@@ -13,6 +13,9 @@
   height: 340px;
   margin: 5px 12px;
 }
+.profile-boards__board:hover .profile-boards__title {
+  color: var(--black);
+}
 .profile-boards__board-avatar {
   width: 300px;
   height: 310px;
@@ -25,9 +28,6 @@
   text-decoration: underline;
   font-size: 18px;
   transition: 0.3s;
-}
-.profile-boards__title:hover {
-  color: var(--black);
 }
 
 /*# sourceMappingURL=profileBoardsView.css.map */

@@ -76,6 +76,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-family: var(--font-medium);
   color: var(--black);
 }
 .navbar__user-toggle {
