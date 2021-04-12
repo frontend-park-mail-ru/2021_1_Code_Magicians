@@ -23,7 +23,6 @@ module.exports = {
       {
         test: /\.hbs$/,
         loader: 'handlebars-loader',
-
       },
       {
         test: /\.(jpg|jpeg|png|ico|ttf)$/,
