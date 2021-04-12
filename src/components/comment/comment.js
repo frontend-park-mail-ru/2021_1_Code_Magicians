@@ -1,7 +1,7 @@
 import {Component} from '../component.js';
 
 /**
- * Comment (comment__body) //todo check
+ * Comment (comment) //todo check
  */
 export class Comment extends Component {
   /**
