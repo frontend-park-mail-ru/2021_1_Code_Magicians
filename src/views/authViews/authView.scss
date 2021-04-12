@@ -1,15 +1,19 @@
 .auth-page {
   display: flex;
   justify-content: space-between;
-  background-size: cover;
+
   width: 100%;
   height: 100%;
+
+  background-size: cover;
 
   &__wrapper {
     display: flex;
     align-items: center;
+
     width: 50%;
     height: 100%;
+
     background-color: var(--perm-blur);
     backdrop-filter: blur(30px);
   }
@@ -17,6 +21,7 @@
   &__content {
     justify-content: center;
     flex-direction: column;
+
     margin-left: 100px;
   }
 
@@ -30,12 +35,14 @@
     align-items: center;
 
     justify-self: flex-start;
+
     width: 50px;
     height: 50px;
   }
 
   &__logo-image {
     cursor: pointer;
+
     transition: 0.3s;
 
     &:hover {
@@ -45,18 +52,23 @@
 
   &__title {
     display: block;
+
     margin-top: 10px;
     margin-bottom: 10px;
+    padding-left: 5px;
+
     font-size: 30px;
     color: var(--perm-white);
-    padding-left: 5px;
   }
 
   &__side {
     display: flex;
     align-items: center;
+
     height: fit-content;
+
     margin: 20px 30px;
+
     color: var(--perm-white);
   }
 }
@@ -67,12 +79,16 @@
 
   &__input {
     width: 330px;
+
     margin: 5px;
-    outline: 0;
-    font-size: 14px;
-    color: var(--black);
     padding: 10px 15px;
+
+    outline: 0;
     border: 1px solid var(--white);
+
+    font-size: 14px;
+
+    color: var(--black);
     background-color: var(--white);
 
     &:focus::placeholder {
@@ -93,14 +109,19 @@
   &__submit {
     justify-content: space-between;
     align-items: center;
+
+    width: fit-content;
+
     margin: 5px;
     padding: 10px 15px;
-    width: fit-content;
+
     border-radius: 5px;
     border: 0;
     outline: 0;
+
     color: var(--perm-white);
     background-color: var(--red);
+
     cursor: pointer;
     user-select: none;
   }
@@ -109,13 +130,17 @@
 .auth-view__button {
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+
   width: fit-content;
-  border-radius: 5px;
-  outline: 0;
-  cursor: pointer;
+
+  padding: 10px 15px;
   margin-left: 5px;
+
+  outline: 0;
   border: 2px solid var(--red);
+  border-radius: 5px;
+
+  cursor: pointer;
 }
 
 .auth-button {
@@ -123,7 +148,9 @@
 }
 
 .input-error-text {
-  color: var(--red);
-  font-size: 14px;
   margin-left: 5px;
+
+  font-size: 14px;
+
+  color: var(--red);
 }
