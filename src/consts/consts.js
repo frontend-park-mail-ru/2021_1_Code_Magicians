@@ -46,6 +46,7 @@ export const constants = {
       signup: '/signup',
       login: '/login',
       createPin: '/create-pin',
+      pin: '/pin/:id{Number}',
     },
   },
   store: {

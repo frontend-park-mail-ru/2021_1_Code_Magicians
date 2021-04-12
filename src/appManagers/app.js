@@ -8,6 +8,7 @@ import {SettingsView} from 'views/settingsView/settingsView';
 import {SignupView} from 'views/authViews/signupView/signupView';
 import {LoginView} from 'views/authViews/loginView/loginView';
 import {PinBuilderView} from 'views/pinBuilderView/pinBuilderView';
+import {PinView} from 'views/pinView/pinView';
 
 import 'assets/css/base.scss';
 
@@ -33,7 +34,8 @@ class App {
         .register(paths.settingsSection, new SettingsView({}))
         .register(paths.signup, new SignupView({}))
         .register(paths.login, new LoginView({}))
-        .register(paths.createPin, new PinBuilderView({}));
+        .register(paths.createPin, new PinBuilderView({}))
+        .register(paths.pin, new PinView({}));
 
     appRouter.start();
   }

@@ -1,0 +1,61 @@
+<div class="pin-browser">
+    <div class="pin-browser__image-panel">
+    </div>
+    <div class="pin-browser__info-panel">
+        <div class="info-panel__title">Spectacular views</div>
+        <div class="info-panel__controls">controls</div>
+        <div class="pin-stats">
+            <div class="pin-stats__item">
+                <i class="fas fa-eye pin-icon"></i>
+                <div class="pin-stats__item_val">420</div>
+                <div class="pin-stats__item_descr">views</div>
+            </div>
+            <div class="pin-stats__item">
+                <i class="fas fa-thumbtack pin-icon"></i>
+                <div class="pin-stats__item_val">69</div>
+                <div class="pin-stats__item_descr">saves</div>
+            </div>
+            <div class="pin-stats__item">
+                <i class="fas fa-external-link-alt pin-icon"></i>
+                <div class="pin-stats__item_val">13</div>
+                <div class="pin-stats__item_descr">link clicks</div>
+            </div>
+        </div>
+        <div class="user-info">
+            <div class="user-info__avatar"></div>
+            <div class="user-info__text">
+                <div class="user-info__text_username">Username_Usernamov</div>
+                <div class="user-info__text_followers">31 follower</div>
+            </div>
+            <div class="user-info__follow-button">Thats you!</div>
+        </div>
+        <div class="pin-description"> When looking at creative photos, viewers are transported to an
+        otherworldly scene where reality and fantasy become one</div>
+        <div class="info-panel__comments">Comments
+            <div class="info-panel__bodies">
+                {{#each comments}}
+                    {{{comment}}}
+                {{/each}}
+            </div>
+            <form class="comment-form">
+                <input type="text">
+                <input type="button">
+            </form>
+        </div>
+    </div>
+    <div class="pin-browser__tags-panel">
+        <div class="pin-browser__search-title">
+            <i class="fas fa-search pin-icon pin-browser__search-title_icon"></i>
+            <div class="">
+                Ideas that may interest you
+            </div>
+        </div>
+        <div class="tags-list">
+            <div class="tags-list__tag">Photo</div>
+            <div class="tags-list__tag">Photo Editing</div>
+            <div class="tags-list__tag">Passing Reviews</div>
+            <div class="tags-list__tag">Finding hopes and dreams</div>
+            <div class="tags-list__tag">Abracadabra</div>
+        </div>
+    </div>
+</div>
