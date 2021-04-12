@@ -2,6 +2,9 @@ import {Component} from '../component';
 import {userStore} from 'stores/userStore/UserStore';
 import NavbarTemplate from './navbar.hbs';
 import './navbar.scss';
+import {User} from 'models/user/User';
+import {Profile} from 'models/profile/Profile';
+import {constants} from 'consts/consts';
 
 /**
  * Navigation bar (page__navbar)
@@ -22,10 +25,11 @@ export class Navbar extends Component {
    * @return {string} final html
    */
   render() {
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
     return this.tmpl({
       ...this.props,
-      userIsAuthorised: userStore.getUser().authorized(),
-      user: userStore.getUser().profile,
+      userIsAuthorised: user.authorized(),
+      user: user.profile,
     });
   }
 

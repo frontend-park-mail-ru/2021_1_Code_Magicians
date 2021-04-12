@@ -4,6 +4,9 @@ import {userStore} from 'stores/userStore/UserStore';
 
 import SidebarTemplate from './sidebar.hbs';
 import './sidebar.scss';
+import {User} from 'models/user/User';
+import {Profile} from 'models/profile/Profile';
+import {constants} from 'consts/consts';
 
 /**
  * Side bar (page__sidebar)
@@ -25,7 +28,8 @@ export class Sidebar extends Component {
    * @return {string} final html
    */
   render() {
-    this._userIsAuthorized = userStore.getUser().authorized();
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+    this._userIsAuthorized = user.authorized();
 
     return this.tmpl({
       ...this.props,

@@ -18,7 +18,7 @@ class UserStore extends Store {
     super();
 
     this._user = new User(new Profile());
-    this._fetchUserData();
+    this._userLoaded = false;
   }
 
   /**
@@ -140,6 +140,7 @@ class UserStore extends Store {
           this._status = storeStatuses.internalError;
       }
 
+      this._userLoaded = false;
       this._trigger('change');
     });
   }
@@ -167,6 +168,7 @@ class UserStore extends Store {
           this._status = storeStatuses.internalError;
       }
 
+      this._userLoaded = false;
       this._trigger('change');
     });
   }
@@ -277,6 +279,7 @@ class UserStore extends Store {
    * @private
    */
   _fetchUserData() {
+    this._fetchingUser = true;
     let authorized = false;
     let profile = new Profile();
 
@@ -295,6 +298,8 @@ class UserStore extends Store {
       }
 
       this._user = new User(profile, authorized);
+      this._fetchingUser = false;
+      this._userLoaded = true;
       this._trigger('change');
     });
   }
@@ -305,7 +310,15 @@ class UserStore extends Store {
    * @return {User}
    */
   getUser() {
-    return this._user;
+    if (!this._fetchingUser) {
+      if (this._userLoaded) {
+        return this._user;
+      }
+
+      this._fetchUserData();
+    }
+
+    return null;
   }
 }
 

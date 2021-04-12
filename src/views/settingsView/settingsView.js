@@ -11,6 +11,8 @@ import {constants} from 'consts/consts';
 
 import SettingsViewTemplate from './settingsView.hbs';
 import './settingsView.scss';
+import {User} from 'models/user/User';
+import {Profile} from 'models/profile/Profile';
 
 /**
  * Profile settings view
@@ -95,7 +97,9 @@ export class SettingsView extends View {
     document.querySelector('.settings__logout-button').addEventListener('click', this.logout);
 
     super.didMount();
-    if (!userStore.getUser().authorized() &&
+
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+    if (!user.authorized() &&
         userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       appRouter.go('/');
     }

@@ -63,6 +63,6 @@ export class LoginView extends AuthView {
 
     this.setState(payload);
     actions.user.login(userName, userPassword);
-    appRouter.go('/profile');
+    appRouter.go(this.props.paths.profile);
   }
 }

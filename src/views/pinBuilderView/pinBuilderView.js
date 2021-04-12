@@ -1,6 +1,9 @@
 import {View} from '../view.js';
-import {Page} from '../../components/page/page.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
+import {Page} from 'components/page/page';
+import {userStore} from 'stores/userStore/UserStore';
+
+import PinBuilderViewTemplate from './pinBuilderView.hbs';
+import './pinBuilderView.scss';
 
 /**
  * Build pin view
@@ -20,6 +23,7 @@ export class PinBuilderView extends View {
       link: '',
     };
 
+    this.tmpl = PinBuilderViewTemplate;
     this.setState(payload);
     this.submit = this.submit.bind(this);
     userStore.bind('change', this.refresh);
@@ -29,11 +33,6 @@ export class PinBuilderView extends View {
    * Did
    */
   didMount() {
-    // if (userStore.getStatus() === constants.store.statuses.userStore.alreadyAuthorized) {
-    //   appRouter.go('/');
-    //   return '';
-    // }
-
     document.querySelector('.pin-builder-form').addEventListener('submit', this.submit);
 
     super.didMount();
@@ -53,18 +52,13 @@ export class PinBuilderView extends View {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['pinBuilderView.hbs'];
-
-    //  this._nestedComponents.set('_settingsForm', pinBuilderForm);
     this._nestedComponents.set('page', new Page({
       ...this.props,
-      page__content: tmpl({
+      page__content: this.tmpl({
         ...this.props,
-        // settingsForm: this._nestedComponents.get('_settingsForm').render(),
       }),
     }));
 
-    // this._nestedComponents.get('page').setState({view: 'settings'});
     return this._nestedComponents.get('page').render();
   }
 
@@ -75,8 +69,6 @@ export class PinBuilderView extends View {
   submit(event) {
     event.preventDefault();
 
-    // const userName = document.querySelector('[name="login-username"]').value.trim();
-    // const userPassword = document.querySelector('[name="login-pass"]').value.trim();
     const name = document.querySelector('[name="name"]').value.trim();
     const description = document.querySelector('[name="description"]').value.trim();
     const pinImage = document.querySelector('[name="pin-image"]').value.trim();
@@ -93,7 +85,5 @@ export class PinBuilderView extends View {
     };
 
     this.setState(payload);
-    // actions.user.login(userName, userPassword);
-    // appRouter.go('/profile');
   }
 }

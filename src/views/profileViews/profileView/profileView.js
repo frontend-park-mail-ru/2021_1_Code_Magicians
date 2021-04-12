@@ -10,6 +10,8 @@ import {pinsStore} from 'stores/pinsStore/pinsStore';
 
 import ProfileViewTemplate from './profileView.hbs';
 import './profileView.scss';
+import {User} from 'models/user/User';
+import {Profile} from 'models/profile/Profile';
 
 /**
  * Base profile view
@@ -37,8 +39,10 @@ export class ProfileView extends View {
    * @return {String}
    */
   render() {
-    this._userIsAuthorized = userStore.getUser().authorized();
-    this.props.userID = userStore.getUser().profile['ID'];
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+
+    this._userIsAuthorized = user.authorized();
+    this.props.userID = user.profile['ID'];
     this.props.profileID = this.props.pathArgs.profileID || 0;
 
     if ((!this._userIsAuthorized &&
@@ -64,7 +68,9 @@ export class ProfileView extends View {
    */
   didMount() {
     super.didMount();
-    if (!userStore.getUser().authorized() &&
+
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+    if (!user.authorized() &&
         Object.keys(this.props.pathArgs).length === 0 &&
         userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       appRouter.go('/');

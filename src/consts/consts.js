@@ -45,6 +45,7 @@ export const constants = {
       settingsSection: '/settings/:section{String}',
       signup: '/signup',
       login: '/login',
+      createPin: '/create-pin',
     },
   },
   store: {

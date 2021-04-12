@@ -68,6 +68,6 @@ export class SignupView extends AuthView {
 
     this.setState(payload);
     actions.user.signup(userName, userEmail, userPassword);
-    appRouter.go('/profile');
+    appRouter.go(this.props.paths.profile);
   }
 }

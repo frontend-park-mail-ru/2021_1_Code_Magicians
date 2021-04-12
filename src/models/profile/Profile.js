@@ -18,6 +18,10 @@ export class Profile extends Model {
    * }
    */
   constructor(props = {}) {
+    if (props.avatarLink === constants.network.defaultAvatarLink) {
+      props.avatarLink = props.avatarLink.slice(1);
+    }
+
     super({
       ...props,
       avatarLink: `${constants.network.bucketURL}${props.avatarLink || constants.network.defaultAvatarLink.slice(1)}`,

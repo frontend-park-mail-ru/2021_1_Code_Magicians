@@ -24,10 +24,10 @@ export class View extends Component {
    */
   show(pathArgs) {
     this.props.pathArgs = pathArgs;
-    this._active = true;
 
     this._parent.insertAdjacentHTML('afterbegin', this.render());
     this.didMount();
+    this._active = true;
   }
 
   /**

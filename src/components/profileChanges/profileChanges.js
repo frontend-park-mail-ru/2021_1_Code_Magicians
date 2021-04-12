@@ -6,6 +6,8 @@ import {constants} from 'consts/consts';
 
 import ProfileChangesTemplate from './profileChanges.hbs';
 import './profileChanges.scss';
+import {User} from 'models/user/User';
+import {Profile} from 'models/profile/Profile';
 
 /**
  * Profile changes form
@@ -26,7 +28,8 @@ export class ProfileChanges extends Component {
    * @return {String}
    */
   render() {
-    return this.tmpl({...this.props, user: userStore.getUser().profile});
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+    return this.tmpl({...this.props, user: user.profile});
   }
 
   /**
