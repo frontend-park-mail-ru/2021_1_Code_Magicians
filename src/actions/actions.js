@@ -1,4 +1,4 @@
-import {appDispatcher} from '../appManagers/dispatcher';
+import {appDispatcher} from 'appManagers/dispatcher';
 
 export const actionTypes = {
   user: {
@@ -17,14 +17,12 @@ export const actionTypes = {
   pins: {
     createPin: 'create-pin',
     deletePin: 'delete-pin',
-    loadPinsFeed: 'load-pins-feed',
 
     statusProcessed: 'pins-status-processed',
   },
   boards: {
     createBoard: 'create-board',
     deleteBoard: 'delete-board',
-    loadBoardsFeed: 'load-boards-feed',
   },
   profiles: {
     follow: 'follow-profile',
@@ -32,10 +30,6 @@ export const actionTypes = {
   },
   comments: {
     postComment: 'post-comment',
-  },
-  common: {
-    loadPin: 'load-pin', // load pin for pin's page. It contains messages, author's profile and so on
-    loadBoard: 'load-board',
   },
 };
 
@@ -123,14 +117,6 @@ export const actions = {
         },
       });
     },
-    loadPinsFeed: (pinsNumber) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.pins.loadPinsFeed,
-        data: {
-          pinsNumber: pinsNumber,
-        },
-      });
-    },
   },
   boards: {
     createBoard: (boardData) => {
@@ -144,14 +130,6 @@ export const actions = {
         actionType: actionTypes.boards.deleteBoard,
         data: {
           boardID: boardID,
-        },
-      });
-    },
-    loadBoardsFeed: (boardsNum) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.boards.loadBoardsFeed,
-        data: {
-          boardsNum: boardsNum,
         },
       });
     },
@@ -180,24 +158,6 @@ export const actions = {
         actionType: actionTypes.profiles.unfollow,
         data: {
           profileID: profileID,
-        },
-      });
-    },
-  },
-  common: {
-    loadPin: (pinID) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.common.loadPin,
-        data: {
-          pinID: pinID,
-        },
-      });
-    },
-    loadBoard: (boardID) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.common.loadBoard,
-        data: {
-          boardID: boardID,
         },
       });
     },

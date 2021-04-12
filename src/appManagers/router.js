@@ -1,7 +1,7 @@
-import {NotFoundView} from '../views/notFoundView/notFoundView';
+import {NotFoundView} from 'views/notFoundView/notFoundView';
 
-import {pathParamRegExp, pathPropTypeRegexp, regSubstr, urlRegexp} from '../consts/regexp';
-import {constants} from '../consts/consts';
+import {pathParamRegExp, pathPropTypeRegexp, regSubstr, urlRegexp} from 'consts/regexp';
+import {constants} from 'consts/consts';
 
 /**
  * Extracts keys from the path, using the template

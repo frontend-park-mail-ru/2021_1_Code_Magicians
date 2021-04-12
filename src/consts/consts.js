@@ -1,4 +1,4 @@
-import {Pin} from '../models/pin/Pin';
+import {Pin} from 'models/pin/Pin';
 
 export const constants = {
   network: {
