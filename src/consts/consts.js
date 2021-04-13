@@ -47,6 +47,7 @@ export const constants = {
       login: '/login',
       createPin: '/create-pin',
       pin: '/pin/:id{Number}',
+      board: '/board/:boardID{Number}',
     },
   },
   store: {

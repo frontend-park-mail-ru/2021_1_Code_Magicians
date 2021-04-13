@@ -1,0 +1,16 @@
+.board-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 15px;
+
+  background-color: var(--white);
+
+  &__board-title {
+    color: var(--black);
+
+    font-family: var(--font-bold);
+    font-size: 26px;
+  }
+}

@@ -9,6 +9,7 @@ import {SignupView} from 'views/authViews/signupView/signupView';
 import {LoginView} from 'views/authViews/loginView/loginView';
 import {PinBuilderView} from 'views/pinBuilderView/pinBuilderView';
 import {PinView} from 'views/pinView/pinView';
+import {BoardView} from 'views/boardView/boardView';
 
 import 'assets/css/base.scss';
 
@@ -35,7 +36,8 @@ class App {
         .register(paths.signup, new SignupView({}))
         .register(paths.login, new LoginView({}))
         .register(paths.createPin, new PinBuilderView({}))
-        .register(paths.pin, new PinView({}));
+        .register(paths.pin, new PinView({}))
+        .register(paths.board, new BoardView({}));
 
     appRouter.start();
   }

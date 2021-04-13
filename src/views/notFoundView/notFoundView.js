@@ -16,7 +16,10 @@ export class NotFoundView extends View {
     super(props, document.getElementById('app'));
 
     this.tmpl = NotFoundViewTemplate;
-    this.back = (event) => appRouter.back();
+    this.back = (event) => {
+      event.preventDefault();
+      appRouter.back();
+    };
   }
 
   /**

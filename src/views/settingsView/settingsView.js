@@ -62,7 +62,6 @@ export class SettingsView extends View {
       }),
     }));
 
-    this._nestedComponents.get('page').setState({view: 'settings'});
     return this._nestedComponents.get('page').render();
   }
 
