@@ -7,6 +7,7 @@ import {constants} from 'consts/consts';
 import './authView.scss';
 import {User} from 'models/user/User';
 import {Profile} from 'models/profile/Profile';
+import {toastBox} from 'components/toast/toast';
 
 /**
  * Parent Authentication view
@@ -36,7 +37,7 @@ export class AuthView extends View {
     switch (userStore.getStatus()) {
       case constants.store.statuses.userStore.clientError:
       case constants.store.statuses.userStore.internalError:
-        alert('Something went wrong. Please, try to refresh the page or come back later.');
+        toastBox.addToast('Something went wrong. Please, try to refresh the page or come back later.');
         actions.user.statusProcessed();
         break;
     }
@@ -49,15 +50,5 @@ export class AuthView extends View {
    */
   willUnmount() {
     document.querySelector('.auth-form').removeEventListener('submit', this.submit);
-  }
-
-  /**
-   * Clears innerHTML for certain class
-   * @param {string} name - payload data
-   */
-  static clearInputs(name) {
-    document
-        .querySelectorAll(name)
-        .forEach((input) => input.value = '');
   }
 }

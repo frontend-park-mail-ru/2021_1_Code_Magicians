@@ -72,11 +72,11 @@ class UserStore extends Store {
           this._fetchUserData();
           break;
         case 403:
-          this._status = storeStatuses.invalidCredentials;
-          break;
-        case 400:
-        case 404:
           this._status = storeStatuses.clientError;
+          break;
+        case 404:
+        case 400:
+          this._status = storeStatuses.invalidCredentials;
           break;
         default:
           this._status = storeStatuses.internalError;

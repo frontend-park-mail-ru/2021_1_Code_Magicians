@@ -1,6 +1,6 @@
 import {actions} from 'actions/actions';
-import {emailRegexp, usernameRegexp, passwordRegexp} from 'consts/regexp';
-import {validateInput} from 'utils/utils';
+import {myEmailRegexp, usernameRegexp, passwordRegexp} from 'consts/regexp';
+import {validateInputs} from 'utils/validateUtils';
 import {AuthView} from '../authView';
 import {userStore} from 'stores/userStore/UserStore';
 import {constants} from 'consts/consts';
@@ -47,21 +47,17 @@ export class SignupView extends AuthView {
   submit(event) {
     event.preventDefault();
 
-    AuthView.clearInputs('.errors');
-
     const userName = document.querySelector('[name="username"]').value.trim();
     const userPassword = document.querySelector('[name="password"]').value.trim();
     const userEmail = document.querySelector('[name="email"]').value.trim();
 
-    const errors = [];
-    errors.push(validateInput(userName, usernameRegexp));
-    document.querySelector('.name-errors').innerHTML = errors[0];
-    errors.push(validateInput(userEmail, emailRegexp));
-    document.querySelector('.email-errors').innerHTML = errors[1];
-    errors.push(validateInput(userPassword, passwordRegexp));
-    document.querySelector('.password-errors').innerHTML = errors[2];
+    const inputsValid = validateInputs(
+        [userName, userEmail, userPassword],
+        ['.name-errors', '.email-errors', '.password-errors'],
+        [usernameRegexp, myEmailRegexp, passwordRegexp],
+    );
 
-    if ([...errors].find((el) => el !== '')) {
+    if (!inputsValid) {
       return;
     }
 

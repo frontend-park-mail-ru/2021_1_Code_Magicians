@@ -49,7 +49,6 @@ class Dispatcher {
   _invokeCallback(id) {
     this._isPending.set(id, true);
     const callback = this._callbacks.get(id);
-    // console.log(typeof callback);
     callback(this._pendingPayload);
   }
 

@@ -35,6 +35,8 @@
                         name="firstName"
                 >
             </div>
+            <div class="errors name-errors input-error-text"></div>
+
             <div class="settings__field">
                 <span class="settings__field-name">Username</span>
                 <input
@@ -44,15 +46,19 @@
                         name="username"
                 >
             </div>
+            <div class="errors username-errors input-error-text"></div>
+
             <div class="settings__field">
                 <span class="settings__field-name">Email</span>
                 <input
-                        type="email"
+                        type="text"
                         class="settings__field-input"
                         value="{{user.email}}"
                         name="email"
                 >
             </div>
+            <div class="errors email-errors input-error-text"></div>
+
             <input type="submit" class="settings__submit-button">
         </form>
     </div>

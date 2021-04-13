@@ -7,6 +7,7 @@ import {passwordRegexp} from 'consts/regexp';
 import SecuritySettingsTemplate from './securitySettings.hbs';
 import './securitySettings.scss';
 import {toastBox} from 'components/toast/toast';
+import {validateInput} from 'utils/validateUtils';
 
 /**
  * Security settings form
@@ -56,16 +57,18 @@ export class SecuritySettings extends Component {
   submit(event) {
     event.preventDefault();
 
+    document.querySelectorAll('.errors').forEach((errorField) => errorField.innerHTML = '');
+
     const newPassword = document.querySelector('[name="new-password"]');
     const confirmPassword = document.querySelector('[name="confirm-password"]');
 
-    if (!newPassword.value.match(passwordRegexp)) {
-      alert('Password must be 8 chars length at least');
-      return;
-    }
+    const errors = [];
+    errors.push(validateInput(newPassword.value, passwordRegexp));
+    document.querySelector('.password-errors').innerHTML = errors[0];
+    errors.push(newPassword.value === confirmPassword.value ? '' : 'Passwords do not match');
+    document.querySelector('.password-confirm-errors').innerHTML = errors[1];
 
-    if (newPassword.value !== confirmPassword.value) {
-      alert('Password must be same');
+    if ([...errors].some((error) => error)) {
       return;
     }
 

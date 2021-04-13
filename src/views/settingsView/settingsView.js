@@ -28,6 +28,8 @@ export class SettingsView extends View {
 
     this.tmpl = SettingsViewTemplate;
 
+    this.logout = this.logout.bind(this);
+
     userStore.bind('change', this.refresh);
   }
 
@@ -84,9 +86,13 @@ export class SettingsView extends View {
 
   /**
    * On logout button
+   * @param {Event} ev
    */
-  logout() {
+  logout(ev) {
+    ev.preventDefault();
+
     actions.user.logout();
+    appRouter.go(this.props.paths.home);
   }
 
   /**

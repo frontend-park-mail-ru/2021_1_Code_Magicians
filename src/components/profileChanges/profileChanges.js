@@ -1,7 +1,7 @@
 import {Component} from '../component';
 import {userStore} from 'stores/userStore/UserStore';
 import {actions} from 'actions/actions';
-import {firstNameRegexp, usernameRegexp} from 'consts/regexp';
+import {firstNameRegexp, myEmailRegexp, usernameRegexp} from 'consts/regexp';
 import {constants} from 'consts/consts';
 
 import ProfileChangesTemplate from './profileChanges.hbs';
@@ -9,6 +9,7 @@ import './profileChanges.scss';
 import {User} from 'models/user/User';
 import {Profile} from 'models/profile/Profile';
 import {toastBox} from 'components/toast/toast';
+import {validateInputs} from 'utils/validateUtils';
 
 /**
  * Profile changes form
@@ -99,32 +100,25 @@ export class ProfileChanges extends Component {
   submit(event) {
     event.preventDefault();
     const target = event.target;
-
-    const changes = {};
+    document.querySelectorAll('.errors').forEach((errorField) => errorField.innerHTML = '');
 
     const firstName = target.querySelector('[name="firstName"]').value.trim();
     const username = target.querySelector('[name="username"]').value.trim();
     const email = target.querySelector('[name="email"]').value.trim();
 
-    const usernameIsValid = username.match(usernameRegexp);
-    if (!usernameIsValid) {
-      alert('username invalid');
-      return;
+    const inputsValid = validateInputs(
+        [firstName, username, email],
+        ['.name-errors', '.username-errors', '.email-errors'],
+        [firstNameRegexp, usernameRegexp, myEmailRegexp],
+    );
+
+    if (inputsValid) {
+      actions.user.editProfile({
+        firstName: firstName,
+        username: username,
+        email: email,
+      });
     }
-
-    if (firstName) {
-      const firstNameIsValid = firstName.match(firstNameRegexp);
-      if (!firstNameIsValid) {
-        alert('name invalid');
-        return;
-      }
-    }
-
-    changes['firstName'] = firstName;
-    changes['username'] = username;
-    changes['email'] = email;
-
-    actions.user.editProfile(changes);
   }
 
   /**
