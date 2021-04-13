@@ -109,7 +109,6 @@ class ProfilesStore extends Store {
       switch (response.status) {
         case 200:
           this._profile = new Profile(response.responseBody);
-          this._fetchingProfile = false;
           this._trigger('change');
           break;
         case 400:
@@ -120,6 +119,7 @@ class ProfilesStore extends Store {
           this._status = storeStatuses.internalError;
           break;
       }
+      this._fetchingProfile = false;
     });
   }
 
