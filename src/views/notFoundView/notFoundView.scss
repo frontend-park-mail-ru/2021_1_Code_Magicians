@@ -9,11 +9,6 @@
   color: var(--black);
   background-color: var(--white);
 
-  &__back-link {
-    margin-top: auto;
-    margin-bottom: 200px;
-  }
-
   &__description {
     margin-top: 30px;
 
@@ -50,5 +45,9 @@
       color: var(--white);
       background-color: var(--red);
     }
+  }
+
+  &__home-link {
+    margin-top: 20px;
   }
 }

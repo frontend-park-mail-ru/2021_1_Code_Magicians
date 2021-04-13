@@ -75,7 +75,7 @@ class UserStore extends Store {
           this._status = storeStatuses.clientError;
           break;
         case 404:
-        case 400:
+        case 401:
           this._status = storeStatuses.invalidCredentials;
           break;
         default:
@@ -95,7 +95,7 @@ class UserStore extends Store {
    */
   _signup(credentials) {
     if (this._user.authorized()) {
-      this._status = storeStatuses.alreadyAuthorized;
+      this._status = storeStatuses.clientError;
       return;
     }
 

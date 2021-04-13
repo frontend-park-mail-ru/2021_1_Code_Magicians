@@ -9,7 +9,9 @@
                 </a>
             {{else}}
                 <button class="profile-info__follow-toggle">
-                    <i class="{{#if profile.followed}}fas{{else}}far{{/if}} fa-heart profile-info__follow-icon"></i>
+                    <i class="fa-heart profile-info__follow-icon
+                            {{#if profile.followed}}fas profile-info__follow-icon_active{{else}}far{{/if}}
+                        "></i>
                 </button>
             {{/if}}
         </div>

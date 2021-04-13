@@ -37,7 +37,6 @@ export class View extends Component {
   refresh() {
     if (this._active) {
       this.remove();
-      console.log('refreshing');
       this.show(this.props.pathArgs);
     }
   }

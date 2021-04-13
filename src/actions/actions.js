@@ -27,6 +27,7 @@ export const actionTypes = {
   profiles: {
     follow: 'follow-profile',
     unfollow: 'unfollow-profile',
+    statusProcessed: 'profile-status-processed',
   },
   comments: {
     postComment: 'post-comment',
@@ -159,6 +160,12 @@ export const actions = {
         data: {
           profileID: profileID,
         },
+      });
+    },
+    statusProcessed: () => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.profiles.statusProcessed,
+        data: {},
       });
     },
   },

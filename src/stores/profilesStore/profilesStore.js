@@ -77,7 +77,6 @@ class ProfilesStore extends Store {
           }
 
           this._status = follow ? storeStatuses.followed : storeStatuses.unfollowed;
-          this._trigger('change');
           break;
         case 401:
           this._status = storeStatuses.userUnauthorized;
@@ -85,12 +84,14 @@ class ProfilesStore extends Store {
         case 400:
         case 404:
         case 409:
-          this._status = storeStatuses.clientSidedError;
+          this._status = storeStatuses.clientError;
           break;
         default:
           this._status = storeStatuses.internalError;
           break;
       }
+
+      this._trigger('change');
     });
   }
 
@@ -109,17 +110,20 @@ class ProfilesStore extends Store {
       switch (response.status) {
         case 200:
           this._profile = new Profile(response.responseBody);
-          this._trigger('change');
+          break;
+        case 404:
+          this._status = storeStatuses.profileNotFound;
           break;
         case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
+          this._status = storeStatuses.clientError;
           break;
         default:
           this._status = storeStatuses.internalError;
           break;
       }
+
       this._fetchingProfile = false;
+      this._trigger('change');
     });
   }
 
@@ -140,7 +144,7 @@ class ProfilesStore extends Store {
                 break;
               case 400:
               case 404:
-                this._status = storeStatuses.clientSidedError;
+                this._status = storeStatuses.clientError;
                 break;
               default:
                 this._status = storeStatuses.internalError;
@@ -159,7 +163,7 @@ class ProfilesStore extends Store {
    * @return {Profile}
    */
   getProfileByID(ID) {
-    if (this._profile.ID === Number(ID)) {
+    if (this._profile.ID === Number(ID) || this._status === storeStatuses.profileNotFound) {
       return this._profile;
     }
 

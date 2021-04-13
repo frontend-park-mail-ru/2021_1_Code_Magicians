@@ -12,6 +12,8 @@ import ProfileViewTemplate from './profileView.hbs';
 import './profileView.scss';
 import {User} from 'models/user/User';
 import {Profile} from 'models/profile/Profile';
+import {actions} from 'actions/actions';
+import {toastBox} from 'components/toast/toast';
 
 /**
  * Base profile view
@@ -65,13 +67,28 @@ export class ProfileView extends View {
 
     const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
     if (!user.authorized() &&
-        Object.keys(this.props.pathArgs).length === 0 &&
-        userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
+        Object.keys(this.props.pathArgs).length === 0) {
       appRouter.go(this.props.paths.home);
+      return;
     }
 
     if (this.props.userID === Number(this.props.profileID)) {
       appRouter.go(this.props.paths.profile);
+      return;
+    }
+
+    if (this.props.pathArgs.length !== 0) {
+      switch (profilesStore.getStatus()) {
+        case constants.store.statuses.profilesStore.profileNotFound:
+          actions.profiles.statusProcessed();
+          appRouter.go(this.props.paths.notFound);
+          break;
+        case constants.store.statuses.profilesStore.clientError:
+        case constants.store.statuses.profilesStore.internalError:
+          toastBox.addToast('Something went wrong. Please, try again or refresh the page');
+          actions.profiles.statusProcessed();
+          break;
+      }
     }
   }
 }

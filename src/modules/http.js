@@ -59,7 +59,7 @@ export class HTTPModule {
         this._setCSRFToken(response.headers.get('X-CSRF-Token'));
       }
 
-      if (response.headers.has('Content-Type')) {
+      if (response.headers.has('Content-Length') && response.headers.get('Content-Length') !== '0') {
         responseBody = await response.json();
       }
 

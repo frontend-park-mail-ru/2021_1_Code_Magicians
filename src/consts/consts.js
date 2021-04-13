@@ -94,10 +94,11 @@ export const constants = {
         ok: 'profiles-ok',
         followed: 'followed',
         unfollowed: 'unfollowed',
+        profileNotFound: 'profile-not-found',
 
         userUnauthorized: 'unauthorized',
 
-        clientSidedError: 'client-error',
+        clientError: 'client-error',
 
         internalError: 'internal-error',
       },

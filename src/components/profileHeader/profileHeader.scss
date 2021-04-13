@@ -88,12 +88,17 @@
 
     cursor: pointer;
 
+    transition: 0.15s;
     &:hover {
       color: var(--red);
     }
 
     &_active {
       color: var(--red);
+    }
+
+    &_active:hover {
+      color: var(--gray);
     }
   }
 
