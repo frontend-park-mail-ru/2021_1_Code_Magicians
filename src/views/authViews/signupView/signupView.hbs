@@ -10,15 +10,27 @@
             <div class="auth-page__content-wrapper">
                 <form class="auth-form">
                     <label>
-                        <input class="auth-form__input" type="text" name="username" placeholder="Your Name" value="{{payload.name}}">
+                        <input
+                                class="auth-form__input"
+                                type="text" name="username"
+                                placeholder="Your Name"
+                                value="{{payload.name}}">
                     </label>
                     <div class="errors name-errors input-error-text"></div>
                     <label>
-                        <input class="auth-form__input" type="text" name="email" placeholder="Email" value="{{payload.email}}">
+                        <input
+                                class="auth-form__input"
+                                type="text" name="email"
+                                placeholder="Email"
+                                value="{{payload.email}}">
                     </label>
                     <div class="errors email-errors input-error-text"></div>
                     <label>
-                        <input class="auth-form__input" type="password" name="password" placeholder="Password" value="{{payload.password}}">
+                        <input
+                                class="auth-form__input"
+                                type="password" name="password"
+                                placeholder="Password"
+                                value="{{payload.password}}">
                     </label>
                     <div class="errors password-errors input-error-text"></div>
                     <input class="auth-form__submit auth-view__button" type="submit" value="Register">

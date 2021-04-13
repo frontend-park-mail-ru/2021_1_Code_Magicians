@@ -1,11 +1,14 @@
 import {actions} from 'actions/actions';
-import {appRouter} from 'appManagers/router';
 import {emailRegexp, usernameRegexp, passwordRegexp} from 'consts/regexp';
 import {validateInput} from 'utils/utils';
 import {AuthView} from '../authView';
+import {userStore} from 'stores/userStore/UserStore';
+import {constants} from 'consts/consts';
 
 import SignupViewTemplate from './signupView.hbs';
 import './signupView.scss';
+import {toastBox} from 'components/toast/toast';
+
 
 /**
  * Signup page view
@@ -24,7 +27,9 @@ export class SignupView extends AuthView {
     };
 
     this.tmpl = SignupViewTemplate;
-    this.setState(payload);
+    this.setState({payload: payload});
+
+    userStore.bind('change', this.refresh);
   }
 
   /**
@@ -32,7 +37,7 @@ export class SignupView extends AuthView {
      * @return {string}
      */
   render() {
-    return this.tmpl({...this.props});
+    return this.tmpl({...this.props, payload: this._state.payload});
   }
 
   /**
@@ -42,11 +47,11 @@ export class SignupView extends AuthView {
   submit(event) {
     event.preventDefault();
 
+    AuthView.clearInputs('.errors');
+
     const userName = document.querySelector('[name="username"]').value.trim();
     const userPassword = document.querySelector('[name="password"]').value.trim();
     const userEmail = document.querySelector('[name="email"]').value.trim();
-
-    AuthView.clearInputs('.errors');
 
     const errors = [];
     errors.push(validateInput(userName, usernameRegexp));
@@ -66,8 +71,21 @@ export class SignupView extends AuthView {
       password: userPassword,
     };
 
-    this.setState(payload);
+    this.setState({payload: payload});
     actions.user.signup(userName, userEmail, userPassword);
-    appRouter.go(this.props.paths.profile);
+  }
+
+  /**
+   * Did
+   */
+  didMount() {
+    super.didMount();
+
+    switch (userStore.getStatus()) {
+      case constants.store.statuses.userStore.signupConflict:
+        toastBox.addToast('This username or email already taken. Please, choose another one', true);
+        actions.user.statusProcessed();
+        break;
+    }
   }
 }

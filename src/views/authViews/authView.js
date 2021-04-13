@@ -5,6 +5,8 @@ import {userStore} from 'stores/userStore/UserStore';
 import {constants} from 'consts/consts';
 
 import './authView.scss';
+import {User} from 'models/user/User';
+import {Profile} from 'models/profile/Profile';
 
 /**
  * Parent Authentication view
@@ -16,6 +18,7 @@ export class AuthView extends View {
    */
   constructor(props = {}) {
     super(props, document.getElementById('app'));
+
     this.submit = this.submit.bind(this);
   }
 
@@ -23,15 +26,24 @@ export class AuthView extends View {
    * Did
    */
   didMount() {
-    if (userStore.getStatus() === constants.store.statuses.userStore.alreadyAuthorized) {
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+    if (user.authorized()) {
       this.clearState();
-      actions.user.statusProcessed();
-      appRouter.go('/');
+      appRouter.go(this.props.paths.profile);
       return;
+    }
+
+    switch (userStore.getStatus()) {
+      case constants.store.statuses.userStore.clientError:
+      case constants.store.statuses.userStore.internalError:
+        alert('Something went wrong. Please, try to refresh the page or come back later.');
+        actions.user.statusProcessed();
+        break;
     }
 
     document.querySelector('.auth-form').addEventListener('submit', this.submit);
   }
+
   /**
    * Will
    */
@@ -44,6 +56,8 @@ export class AuthView extends View {
    * @param {string} name - payload data
    */
   static clearInputs(name) {
-    document.querySelectorAll(name).forEach((input) => input.value = '');
+    document
+        .querySelectorAll(name)
+        .forEach((input) => input.value = '');
   }
 }

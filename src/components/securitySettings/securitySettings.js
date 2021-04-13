@@ -6,6 +6,7 @@ import {passwordRegexp} from 'consts/regexp';
 
 import SecuritySettingsTemplate from './securitySettings.hbs';
 import './securitySettings.scss';
+import {toastBox} from 'components/toast/toast';
 
 /**
  * Security settings form
@@ -36,7 +37,7 @@ export class SecuritySettings extends Component {
     document.querySelector('.security-settings').addEventListener('submit', this.submit);
 
     if (userStore.getStatus() === constants.store.statuses.userStore.passwordChanged) {
-      alert('password changed successfully');
+      toastBox.addToast('Password changed successfully');
       actions.user.statusProcessed();
     }
   }

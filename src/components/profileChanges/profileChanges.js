@@ -8,6 +8,7 @@ import ProfileChangesTemplate from './profileChanges.hbs';
 import './profileChanges.scss';
 import {User} from 'models/user/User';
 import {Profile} from 'models/profile/Profile';
+import {toastBox} from 'components/toast/toast';
 
 /**
  * Profile changes form
@@ -52,9 +53,21 @@ export class ProfileChanges extends Component {
         .querySelector('.profile-changes__avatar-preview')
         .addEventListener('click', this.selectAvatar);
 
-    if (userStore.getStatus() === constants.store.statuses.userStore.profileEdited) {
-      alert('profile edited successfully');
-      actions.user.statusProcessed();
+    switch (userStore.getStatus()) {
+      case constants.store.statuses.userStore.profileEdited:
+        toastBox.addToast('Profile edited successfully');
+        actions.user.statusProcessed();
+        break;
+      case constants.store.statuses.userStore.editConflict:
+        toastBox.addToast('This username or email is already taken. Please, try something else', true);
+        actions.user.statusProcessed();
+        break;
+      case constants.store.statuses.userStore.badAvatarImage:
+        toastBox.addToast('Bad avatar image. Please try again', true);
+        actions.user.statusProcessed();
+        break;
+      case constants.store.statuses.userStore.avatarUploaded:
+        toastBox.addToast('Avatar uploaded successfully');
     }
   }
 

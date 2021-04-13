@@ -1,4 +1,4 @@
-import {Component} from '../components/component';
+import {Component} from 'components/component';
 
 /**
  * Base view class (abstract)
@@ -26,6 +26,7 @@ export class View extends Component {
     this.props.pathArgs = pathArgs;
 
     this._parent.insertAdjacentHTML('afterbegin', this.render());
+
     this.didMount();
     this._active = true;
   }

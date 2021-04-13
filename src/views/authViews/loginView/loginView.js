@@ -6,6 +6,9 @@ import {AuthView} from '../authView';
 
 import LoginViewTemplate from './loginView.hbs';
 import './loginView.scss';
+import {userStore} from 'stores/userStore/UserStore';
+import {constants} from 'consts/consts';
+import {toastBox} from 'components/toast/toast';
 
 /**
  * Login page view
@@ -41,10 +44,10 @@ export class LoginView extends AuthView {
   submit(event) {
     event.preventDefault();
 
+    AuthView.clearInputs('.errors');
+
     const userName = document.querySelector('[name="username"]').value.trim();
     const userPassword = document.querySelector('[name="password"]').value.trim();
-
-    AuthView.clearInputs('.errors');
 
     const errors = [];
     errors.push(validateInput(userName, usernameRegexp));
@@ -64,5 +67,17 @@ export class LoginView extends AuthView {
     this.setState(payload);
     actions.user.login(userName, userPassword);
     appRouter.go(this.props.paths.profile);
+  }
+
+  /**
+   * Did
+   */
+  didMount() {
+    super.didMount();
+
+    if (userStore.getStatus() === constants.store.statuses.userStore.invalidCredentials) {
+      toastBox.addToast('This user doesn\'t exist or password is incorrect');
+      actions.user.statusProcessed();
+    }
   }
 }

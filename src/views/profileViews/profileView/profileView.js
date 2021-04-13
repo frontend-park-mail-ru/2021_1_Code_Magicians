@@ -45,12 +45,6 @@ export class ProfileView extends View {
     this.props.userID = user.profile['ID'];
     this.props.profileID = this.props.pathArgs.profileID || 0;
 
-    if ((!this._userIsAuthorized &&
-      Object.keys(this.props.pathArgs).length === 0) ||
-      this.props.userID === this.props.profileID) {
-      return '';
-    }
-
     this._nestedComponents.set('profileHeader', new ProfileHeader({...this.props}));
     this._nestedComponents.set('page', new Page({
       ...this.props,
@@ -73,11 +67,11 @@ export class ProfileView extends View {
     if (!user.authorized() &&
         Object.keys(this.props.pathArgs).length === 0 &&
         userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
-      appRouter.go('/');
+      appRouter.go(this.props.paths.home);
     }
 
     if (this.props.userID === Number(this.props.profileID)) {
-      appRouter.go('/profile');
+      appRouter.go(this.props.paths.profile);
     }
   }
 }

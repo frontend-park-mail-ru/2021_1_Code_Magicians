@@ -13,6 +13,7 @@ import SettingsViewTemplate from './settingsView.hbs';
 import './settingsView.scss';
 import {User} from 'models/user/User';
 import {Profile} from 'models/profile/Profile';
+import {toastBox} from 'components/toast/toast';
 
 /**
  * Profile settings view
@@ -102,6 +103,14 @@ export class SettingsView extends View {
     if (!user.authorized() &&
         userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       appRouter.go('/');
+    }
+
+    switch (userStore.getStatus()) {
+      case constants.store.statuses.userStore.clientError:
+      case constants.store.statuses.userStore.internalError:
+        toastBox.addToast('Something went wrong. Please, try to refresh the page or come back later.', true);
+        actions.user.statusProcessed();
+        break;
     }
   }
 

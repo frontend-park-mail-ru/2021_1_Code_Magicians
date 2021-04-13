@@ -53,20 +53,22 @@ export const constants = {
     statuses: {
       userStore: {
         ok: 'ok',
-
-        alreadyAuthorized: 'already authorized',
         unauthorized: 'unauthorized',
+        invalidCredentials: 'invalid credentials',
 
         passwordChanged: 'password changed',
         profileEdited: 'profile edited',
+        avatarUploaded: 'avatar uploaded',
         editConflict: 'edit conflict',
         badAvatarImage: 'bad avatar',
+        signupConflict: 'signup conflict',
 
         clientError: 'client error',
         internalError: 'internal error',
       },
       pinsStore: {
         ok: 'ok',
+
         pinCreated: 'pin-created',
         pinDeleted: 'pin-deleted',
 
