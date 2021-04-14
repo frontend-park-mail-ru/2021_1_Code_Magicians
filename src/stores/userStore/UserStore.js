@@ -298,6 +298,7 @@ class UserStore extends Store {
           break;
         case 401:
           this._user.onLogout();
+          this._status = storeStatuses.unauthorized;
           break;
         default:
           this._status = storeStatuses.internalError;
