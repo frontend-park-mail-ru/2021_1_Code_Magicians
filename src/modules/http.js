@@ -67,6 +67,10 @@ export class HTTPModule {
       status = response.status;
     } catch (e) {}
 
+    if (!DEBUG) {
+      console.clear();
+    }
+
     return {
       status: status,
       headers: headers,

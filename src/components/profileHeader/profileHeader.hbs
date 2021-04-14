@@ -3,16 +3,18 @@
     <div class="profile-info__main-info">
         <div class="profile-info__username-zone">
             <span class="profile-info__username">{{profile.username}}</span>
-            {{#if selfProfile}}
-                <a href="{{paths.settings}}" class="profile-info__settings">
-                    <i class="fas fa-cog profile-info__settings-icon"></i>
-                </a>
-            {{else}}
-                <button class="profile-info__follow-toggle">
-                    <i class="fa-heart profile-info__follow-icon
+            {{#if userIsAuthorized}}
+                {{#if selfProfile}}
+                    <a href="{{paths.settings}}" class="profile-info__settings">
+                        <i class="fas fa-cog profile-info__settings-icon"></i>
+                    </a>
+                {{else}}
+                    <button class="profile-info__follow-toggle">
+                        <i class="fa-heart profile-info__follow-icon
                             {{#if profile.followed}}fas profile-info__follow-icon_active{{else}}far{{/if}}
                         "></i>
-                </button>
+                    </button>
+                {{/if}}
             {{/if}}
         </div>
         <div class="profile-info__additional-info">

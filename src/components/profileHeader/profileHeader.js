@@ -43,6 +43,7 @@ export class ProfileHeader extends Component {
       ...this.props,
       selfProfile: selfProfile,
       profile: profile,
+      userIsAuthorized: user.authorized(),
     });
   }
 
