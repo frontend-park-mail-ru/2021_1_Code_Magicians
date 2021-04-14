@@ -25,10 +25,6 @@
     margin-left: 100px;
   }
 
-  &__content-wrapper {
-    display: block;
-  }
-
   &__logo {
     display: flex;
     justify-content: left;
@@ -124,6 +120,10 @@
 
     cursor: pointer;
     user-select: none;
+  }
+
+  &__toasts-box {
+    position: static;
   }
 }
 

@@ -58,7 +58,10 @@ export class ProfileHeader extends Component {
           }
         });
 
-    document.querySelector('.profile-info__follow-toggle').addEventListener('click', this.follow);
+    const followToggle = document.querySelector('.profile-info__follow-toggle');
+    if (followToggle) {
+      followToggle.addEventListener('click', this.follow);
+    }
 
     switch (profilesStore.getStatus()) {
       case constants.store.statuses.profilesStore.followed:
@@ -82,7 +85,10 @@ export class ProfileHeader extends Component {
    * Will
    */
   willUnmount() {
-    document.querySelector('.profile-info__follow-toggle').removeEventListener('click', this.follow);
+    const followToggle = document.querySelector('.profile-info__follow-toggle');
+    if (followToggle) {
+      followToggle.removeEventListener('click', this.follow);
+    }
   }
 
   /**

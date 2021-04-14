@@ -35,7 +35,7 @@ export class LoginView extends AuthView {
      * @return {string}
      */
   render() {
-    return this.tmpl({...this.props});
+    return this.tmpl({...this.props, payload: this._state.payload});
   }
 
   /**
@@ -63,7 +63,7 @@ export class LoginView extends AuthView {
       password: userPassword,
     };
 
-    this.setState(payload);
+    this.setState({payload: payload});
     actions.user.login(userName, userPassword);
   }
 

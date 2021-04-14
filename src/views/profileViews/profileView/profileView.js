@@ -67,7 +67,8 @@ export class ProfileView extends View {
 
     const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
     if (!user.authorized() &&
-        Object.keys(this.props.pathArgs).length === 0) {
+        Object.keys(this.props.pathArgs).length === 0 &&
+        userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       appRouter.go(this.props.paths.home);
       return;
     }
