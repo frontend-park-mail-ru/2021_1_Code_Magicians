@@ -1,4 +1,4 @@
-import {constants} from '../consts/consts';
+import {constants} from 'consts/consts';
 
 /**
  * Basic HTTP-module to communicate with the great server itself
@@ -24,11 +24,11 @@ export class HTTPModule {
    */
   static async _requestBackend(path, options = {}, body = null, serialize = true) {
     if (['POST', 'PUT', 'DELETE'].includes(options.method)) {
-      if (this._getCSRFToken()) {
+      if (this.getCSRFToken()) {
         options.headers = options.headers || new Headers();
         options.headers = {
           ...options.headers,
-          'X-CSRF-Token': this._getCSRFToken(),
+          'X-CSRF-Token': this.getCSRFToken(),
         };
       }
     }
@@ -105,7 +105,7 @@ export class HTTPModule {
    * @param {Boolean} serialize
    * @return {Object}
    */
-  static put(path, body, serialize = true) {
+  static put(path, body = null, serialize = true) {
     return this._requestBackend(path, {method: 'PUT'}, body, serialize);
   }
 
@@ -121,9 +121,8 @@ export class HTTPModule {
   /**
    * Get existing CSRF token
    * @return {String}
-   * @private
    */
-  static _getCSRFToken() {
+  static getCSRFToken() {
     return window.localStorage.getItem('CSRF-Token');
   }
 

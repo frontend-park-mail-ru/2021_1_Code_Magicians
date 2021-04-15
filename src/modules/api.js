@@ -1,6 +1,6 @@
 /* eslint-disable valid-jsdoc */
 import {HTTPModule} from './http';
-import {constants} from '../consts/consts';
+import {constants} from 'consts/consts';
 
 const paths = constants.network.pathsAPI;
 
@@ -221,5 +221,14 @@ export class API {
    */
   static changeAvatar(avatarFormData) {
     return HTTPModule.put(paths.changeAvatar, avatarFormData, false);
+  }
+
+  /**
+   * Mark notification as read
+   * @param notificationID
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static markNotificationRead(notificationID) {
+    return HTTPModule.put(`${paths.notificationRead}/${notificationID}`);
   }
 }

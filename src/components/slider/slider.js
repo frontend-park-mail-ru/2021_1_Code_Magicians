@@ -2,6 +2,7 @@ import {Component} from '../component';
 
 import SliderTemplate from './slider.hbs';
 import './slider.scss';
+import {actions} from 'actions/actions';
 
 /**
  * Slider for notifications and messages
@@ -58,7 +59,13 @@ export class Slider extends Component {
    * Did
    */
   didMount() {
-    if (this.props.typeIsMessages) {
+    if (!this.props.typeIsMessages) {
+      document
+          .querySelector('[name="MessagesSlider"]')
+          .querySelectorAll('.slider__item').forEach((notification) => {
+            notification.addEventListener('click', this.markAsRead);
+          });
+
       return;
     }
 
@@ -78,6 +85,11 @@ export class Slider extends Component {
    */
   willUnmount() {
     if (!this.props.typeIsMessages) {
+      document
+          .querySelector('[name="MessagesSlider"]')
+          .querySelectorAll('.slider__item').forEach((notification) => {
+            notification.removeEventListener('click', this.markAsRead);
+          });
       return;
     }
 
@@ -93,5 +105,16 @@ export class Slider extends Component {
     document
         .querySelector('.message-form')
         .removeEventListener('submit', this.submitMessageForm);
+  }
+
+  /**
+   * Mark notification as read
+   * @param {Event} event
+   */
+  markAsRead(event) {
+    event.preventDefault();
+
+    const notification = event.target.closest('.slider__item');
+    actions.notifications.readNotification(notification.getAttribute('data-id'));
   }
 }

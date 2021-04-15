@@ -6,6 +6,7 @@ import {constants} from 'consts/consts';
 
 import PageTemplate from './page.hbs';
 import './page.scss';
+import {userStore} from 'stores/userStore/UserStore';
 
 /**
  * Base page component
@@ -31,7 +32,13 @@ export class Page extends Component {
       ...props,
       sliderType: 'Notifications',
       typeIsMessages: false,
-      items: constants.mocks.notifications,
+      items: userStore.getNotifications().map((notification) => ({
+        ID: notification.ID,
+        imageLink: '/assets/img/Logo.png',
+        header: notification.title,
+        isNew: !notification.isRead,
+        text: notification.text,
+      })),
     }));
   }
 
