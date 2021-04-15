@@ -81,6 +81,8 @@
   &__bodies {
     overflow: auto;
     height: 250px;
+
+    margin-bottom: 30px;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -124,7 +126,6 @@
   display:flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
 
   margin: 0px 0 20px 0;
 
@@ -133,17 +134,13 @@
     height: 60px;
 
     border-radius: 50%;
-
-    background-image: url("../../assets/img/default-avatar.jpg");
-    background-size: cover;
-    background-position: center;
   }
 
   &__text {
     display: flex;
     flex-direction: column;
 
-    margin: 5px 15px;
+    margin: 5px 35px;
     &_username {
       font-size: 22px;
       font-weight: bold;
@@ -211,11 +208,10 @@
 
   flex-direction: column;
 
-  align-items: center;
-
   width: auto;
 
   &__text {
+    height: 50px;
     width: 400px;
   }
   &__submit {
@@ -268,5 +264,5 @@
 .pin-description {
   font-size: 16px;
   color: var(--gray);
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }

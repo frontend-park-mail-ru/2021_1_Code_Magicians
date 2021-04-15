@@ -24,12 +24,14 @@
             </div>
         </div>
         <div class="user-info">
-            <div class="user-info__avatar"></div>
-            <div class="user-info__text">
-                <div class="user-info__text_username">Username_Usernamov</div>
-                <div class="user-info__text_followers">31 follower</div>
+            <div class="user-info__avatar">
+                <img src="{{profile.avatarLink}}" alt="upload-logo" class="user-info__avatar">
             </div>
-            <div class="user-info__follow-button">Thats you!</div>
+            <div class="user-info__text">
+                <div class="user-info__text_username">{{profile.username}}</div>
+                <div class="user-info__text_followers">{{profile.followers}} followers</div>
+            </div>
+            <div class="user-info__follow-button">Follow</div>
         </div>
         <div class="pin-description"> When looking at creative photos, viewers are transported to an
         otherworldly scene where reality and fantasy become one</div>
@@ -41,7 +43,7 @@
                             <img src="/assets/img/Logo.png" alt="logo" class="sidebar__logo-image">
                         </a>
                         <div class="comment__text">
-                            <div class="comment__text_author">{{this.userID}}</div>
+                            <div class="comment__text_author">ID{{this.userID}}</div>
                             <div class="comment__text_message">{{this.text}}</div>
                         </div>
                     </div>

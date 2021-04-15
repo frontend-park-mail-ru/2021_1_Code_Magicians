@@ -5,6 +5,8 @@ import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {actions} from 'actions/actions';
+import {profilesStore} from 'stores/profilesStore/profilesStore';
+import {constants} from 'consts/consts';
 
 /**
  * Build pin view
@@ -21,6 +23,7 @@ export class PinView extends View {
     this.submit = this.submit.bind(this);
     userStore.bind('change', this.refresh);
     pinsStore.bind('change', this.refresh);
+    profilesStore.bind('change', this.refresh);
   }
 
   /**
@@ -51,11 +54,14 @@ export class PinView extends View {
    * @return {String}
    */
   render() {
+    const currentPin = pinsStore.getPinByID(this.props.pathArgs.pinID);
+    const profile = currentPin ? profilesStore.getProfileByID(currentPin['userID']) : constants.mocks.defaultProfile;
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({
         ...this.props,
-        pin: pinsStore.getPinByID(this.props.pathArgs.pinID),
+        profile: profile,
+        pin: currentPin,
         comments: pinsStore.getComments(this.props.pathArgs.pinID), // || constants.mocks.comments[0]
       }),
     }));
@@ -70,7 +76,6 @@ export class PinView extends View {
     event.preventDefault();
     const commentText = document.getElementById('comment-input').value;
 
-    console.log(true);
     actions.comments.postComment(commentText, this.props.pathArgs.pinID);
   }
 }

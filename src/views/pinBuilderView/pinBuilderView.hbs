@@ -35,15 +35,15 @@
                 <div class="pin-builder-form__wrapper">
                     <div class="author-info">
                         <div class="author-info__content">
-                            <img src="assets/img/default-avatar.jpg" alt="upload-logo" class="author-info__content_image">
+                            <img src="{{user.avatarLink}}" alt="upload-logo" class="author-info__content_image">
                         </div>
                         <div class="author-info__content">
                             <div class="author-info__description">
                                 <div class="author-info__description_name">
-                                    Username_Usernamov
+                                    {{user.username}}
                                 </div>
                                 <div class="author-info__description_followers">
-                                    31 follower
+                                    {{user.followers}} followers
                                 </div>
                             </div>
                         </div>
