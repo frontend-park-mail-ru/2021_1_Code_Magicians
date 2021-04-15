@@ -5,7 +5,6 @@ import {User} from 'models/User';
 import {actionTypes} from 'actions/actions';
 import {constants} from 'consts/consts';
 import {NotificationModel} from 'models/NotificationModel';
-import {HTTPModule} from 'modules/http';
 
 const storeStatuses = constants.store.statuses.userStore;
 
@@ -24,6 +23,7 @@ class UserStore extends Store {
 
     this._notifications = [];
     this._socketReady = false;
+    this._newNotification = false;
   }
 
   /**
@@ -342,7 +342,7 @@ class UserStore extends Store {
       this._socketReady = true;
       this._status = storeStatuses.ok;
 
-      this._ws.send(JSON.stringify({CSRFToken: HTTPModule.getCSRFToken()}));
+      this._ws.send(JSON.stringify({userID: this._user.profile.ID}));
     });
 
     this._ws.addEventListener('message', (event) => {
@@ -353,13 +353,22 @@ class UserStore extends Store {
         this._status = storeStatuses.internalError;
       }
 
+      console.log(message);
       switch (message.type) {
         case 'all-notifications':
-          this._notifications = message['allNotifications'].map((notificationData) => new NotificationModel(notificationData));
+          this._notifications = message['allNotifications'].map((notificationData) => {
+            if (!notificationData.isRead) {
+              this._newNotification = true;
+            }
+
+            return new NotificationModel(notificationData);
+          });
+
           this._trigger('change');
           break;
         case 'notification':
           this._notifications.push(new NotificationModel(message.notification));
+          this._newNotification = true;
           this._trigger('change');
           break;
         case 'ping':
@@ -367,7 +376,6 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
-      console.log(this._notifications);
     });
   }
 
@@ -392,6 +400,7 @@ class UserStore extends Store {
         case 204:
         case 409:
           this._notifications.find((n) => n.ID === data.notificationID).markAsRead();
+          this._newNotification = this._notifications.some((n) => !n.isRead);
           break;
         case 401:
         case 403:
@@ -426,6 +435,14 @@ class UserStore extends Store {
    */
   getNotifications() {
     return this._notifications;
+  }
+
+  /**
+   * Has it?
+   * @return {Boolean}
+   */
+  hasNewNotification() {
+    return this._newNotification;
   }
 }
 

@@ -28,6 +28,9 @@
             </button>
             <button name="notifications-toggle" class="sidebar__toggle slider-toggle">
                 <i class="fas fa-bell sidebar__toggle-icon"></i>
+                {{#if hasNewNotification}}
+                    <i class="fas fa-circle sidebar__news-marker"></i>
+                {{/if}}
             </button>
         {{/if}}
         <button class="sidebar__toggle theme-toggle">

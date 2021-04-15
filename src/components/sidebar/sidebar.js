@@ -34,6 +34,7 @@ export class Sidebar extends Component {
     return this.tmpl({
       ...this.props,
       userIsAuthorized: this._userIsAuthorized,
+      hasNewNotification: userStore.hasNewNotification(),
     });
   }
 
@@ -122,7 +123,9 @@ export class Sidebar extends Component {
           }
         });
 
-    document.querySelector('.theme-toggle').addEventListener('click', this.toggleTheme);
+    document
+        .querySelector('.theme-toggle')
+        .addEventListener('click', this.toggleTheme);
 
     if (this._userIsAuthorized) {
       document
@@ -141,7 +144,9 @@ export class Sidebar extends Component {
    * Will
    */
   willUnmount() {
-    document.querySelector('.theme-toggle').removeEventListener('click', this.toggleTheme);
+    document
+        .querySelector('.theme-toggle')
+        .removeEventListener('click', this.toggleTheme);
 
     if (this._userIsAuthorized) {
       document

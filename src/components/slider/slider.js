@@ -61,7 +61,7 @@ export class Slider extends Component {
   didMount() {
     if (!this.props.typeIsMessages) {
       document
-          .querySelector('[name="MessagesSlider"]')
+          .querySelector('[name="NotificationsSlider"]')
           .querySelectorAll('.slider__item').forEach((notification) => {
             notification.addEventListener('click', this.markAsRead);
           });
@@ -86,7 +86,7 @@ export class Slider extends Component {
   willUnmount() {
     if (!this.props.typeIsMessages) {
       document
-          .querySelector('[name="MessagesSlider"]')
+          .querySelector('[name="NotificationsSlider"]')
           .querySelectorAll('.slider__item').forEach((notification) => {
             notification.removeEventListener('click', this.markAsRead);
           });
