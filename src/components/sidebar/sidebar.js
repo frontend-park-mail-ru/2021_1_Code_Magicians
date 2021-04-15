@@ -4,8 +4,8 @@ import {userStore} from 'stores/userStore/UserStore';
 
 import SidebarTemplate from './sidebar.hbs';
 import './sidebar.scss';
-import {User} from 'models/user/User';
-import {Profile} from 'models/profile/Profile';
+import {User} from 'models/User';
+import {Profile} from 'models/Profile';
 import {constants} from 'consts/consts';
 
 /**

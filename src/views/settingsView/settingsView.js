@@ -11,8 +11,8 @@ import {constants} from 'consts/consts';
 
 import SettingsViewTemplate from './settingsView.hbs';
 import './settingsView.scss';
-import {User} from 'models/user/User';
-import {Profile} from 'models/profile/Profile';
+import {User} from 'models/User';
+import {Profile} from 'models/Profile';
 import {toastBox} from 'components/toast/toast';
 
 /**

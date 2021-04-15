@@ -3,7 +3,7 @@ import {constants} from 'consts/consts';
 import {actionTypes} from 'actions/actions';
 import {userStore} from '../userStore/UserStore';
 import {API} from 'modules/api';
-import {Pin} from 'models/pin/Pin';
+import {Pin} from 'models/Pin';
 
 const storeStatuses = constants.store.statuses.pinsStore;
 

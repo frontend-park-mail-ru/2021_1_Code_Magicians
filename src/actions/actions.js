@@ -32,6 +32,9 @@ export const actionTypes = {
   comments: {
     postComment: 'post-comment',
   },
+  notifications: {
+    readNotification: 'read-notification',
+  },
 };
 
 export const actions = {
@@ -166,6 +169,14 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.profiles.statusProcessed,
         data: {},
+      });
+    },
+  },
+  notifications: {
+    readNotification: (notificationID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.notifications.readNotification,
+        data: {notificationID: notificationID},
       });
     },
   },

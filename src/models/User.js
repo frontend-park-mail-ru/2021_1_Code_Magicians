@@ -1,6 +1,6 @@
-import {Model} from '../Model';
+import {Model} from './Model';
 // eslint-disable-next-line no-unused-vars
-import {Profile} from '../profile/Profile';
+import {Profile} from './Profile';
 
 /**
  * User model

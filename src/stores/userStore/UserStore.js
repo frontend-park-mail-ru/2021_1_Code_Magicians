@@ -1,9 +1,10 @@
 import {API} from 'modules/api';
 import Store from '../Store';
-import {Profile} from 'models/profile/Profile';
-import {User} from 'models/user/User';
+import {Profile} from 'models/Profile';
+import {User} from 'models/User';
 import {actionTypes} from 'actions/actions';
 import {constants} from 'consts/consts';
+import {NotificationModel} from 'models/NotificationModel';
 
 const storeStatuses = constants.store.statuses.userStore;
 
@@ -19,6 +20,9 @@ class UserStore extends Store {
 
     this._user = new User(new Profile());
     this._userLoaded = false;
+
+    this._notifications = [];
+    this._socketReady = false;
   }
 
   /**
@@ -52,6 +56,9 @@ class UserStore extends Store {
         break;
       case actionTypes.user.statusProcessed:
         this._status = storeStatuses.ok;
+        break;
+      case actionTypes.notifications.readNotification:
+        this._turnOffNotification(action.data);
         break;
     }
   }
@@ -314,6 +321,78 @@ class UserStore extends Store {
 
 
   /**
+   * Connect and start getting notifications
+   * @private
+   */
+  _connectToNotifications() {
+    this._ws = new WebSocket(constants.network.wsURL);
+    this._ws.addEventListener('error', () => {
+      this._status = storeStatuses.internalError;
+      this._socketReady = false;
+    });
+
+    this._ws.addEventListener('close', () => this._socketReady = false);
+
+    this._ws.addEventListener('open', () => {
+      this._socketReady = true;
+      this._status = storeStatuses.ok;
+    });
+
+    this._ws.addEventListener('message', (event) => {
+      let message = {};
+      try {
+        message = JSON.parse(event.data);
+      } catch (e) {
+        this._status = storeStatuses.internalError;
+      }
+
+      // const all = {
+      //   type: 'all-notifications',
+      //   allNotifications: [
+      //     {ID: 123, title: '123title'},
+      //     {},
+      //     {},
+      //   ],
+      // };
+      //
+      // const oneNew = {
+      //   type: 'notification',
+      //   notification: {
+      //     ID: 123,
+      //     title: '123title',
+      //   },
+      // };
+
+      switch (message.type) {
+        case 'all-notifications':
+          this._notifications = message.allNotifications;
+          this._trigger('change');
+          break;
+        case 'notification':
+          this._notifications.push(new NotificationModel(message.notification));
+          this._trigger('change');
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+    });
+  }
+
+  /**
+   * Mark notification as read
+   * @param {Object} data
+   * @private
+   */
+  _turnOffNotification(data) {
+    const notification = this._notifications.find((n) => n.ID === data.notificationID);
+    if (notification) {
+      // request backend
+      // if ok:
+      // notification.markAsRead();
+    }
+  }
+
+  /**
    * Returns user data
    * @return {User}
    */
@@ -327,6 +406,14 @@ class UserStore extends Store {
     }
 
     return null;
+  }
+
+  /**
+   * Get them
+   * @return {[]}
+   */
+  getNotifications() {
+    return this._notifications;
   }
 }
 

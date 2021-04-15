@@ -1,5 +1,5 @@
 import Store from '../Store';
-import {Profile} from 'models/profile/Profile';
+import {Profile} from 'models/Profile';
 import {constants} from 'consts/consts';
 import {actionTypes} from 'actions/actions';
 import {API} from 'modules/api';

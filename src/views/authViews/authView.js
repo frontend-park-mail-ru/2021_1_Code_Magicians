@@ -5,8 +5,8 @@ import {userStore} from 'stores/userStore/UserStore';
 import {constants} from 'consts/consts';
 
 import './authView.scss';
-import {User} from 'models/user/User';
-import {Profile} from 'models/profile/Profile';
+import {User} from 'models/User';
+import {Profile} from 'models/Profile';
 import {toastBox} from 'components/toast/toast';
 
 /**

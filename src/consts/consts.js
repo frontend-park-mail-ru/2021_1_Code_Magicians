@@ -1,4 +1,4 @@
-import {Pin} from 'models/pin/Pin';
+import {Pin} from 'models/Pin';
 
 // noinspection JSUnresolvedVariable
 export const constants = {
@@ -6,6 +6,7 @@ export const constants = {
     backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'http://www.pinter-best.com:8080',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
     bucketURL: 'https://pinterbestbucket.s3.eu-central-1.amazonaws.com/',
+    wsURL: 'ws://www.pinter-best.com:8080/notifications',
 
     pathsAPI: {
       signup: '/auth/signup',
@@ -101,6 +102,10 @@ export const constants = {
 
         clientError: 'client-error',
 
+        internalError: 'internal-error',
+      },
+      notificationsStore: {
+        ok: 'notifications-ok',
         internalError: 'internal-error',
       },
     },

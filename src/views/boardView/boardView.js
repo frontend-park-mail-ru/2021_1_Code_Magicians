@@ -4,8 +4,8 @@ import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {userStore} from 'stores/userStore/UserStore';
 import {Page} from 'components/page/page';
 import {constants} from 'consts/consts';
-import {Profile} from 'models/profile/Profile';
-import {Board} from 'models/board/Board';
+import {Profile} from 'models/Profile';
+import {Board} from 'models/Board';
 import {PinsFeed} from 'components/pinsFeed/pinsFeed';
 
 import BoardViewTemplate from './boardView.hbs';

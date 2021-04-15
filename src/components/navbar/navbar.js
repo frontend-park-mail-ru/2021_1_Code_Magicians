@@ -2,8 +2,8 @@ import {Component} from '../component';
 import {userStore} from 'stores/userStore/UserStore';
 import NavbarTemplate from './navbar.hbs';
 import './navbar.scss';
-import {User} from 'models/user/User';
-import {Profile} from 'models/profile/Profile';
+import {User} from 'models/User';
+import {Profile} from 'models/Profile';
 import {constants} from 'consts/consts';
 
 /**

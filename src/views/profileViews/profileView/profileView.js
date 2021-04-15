@@ -10,8 +10,8 @@ import {pinsStore} from 'stores/pinsStore/pinsStore';
 
 import ProfileViewTemplate from './profileView.hbs';
 import './profileView.scss';
-import {User} from 'models/user/User';
-import {Profile} from 'models/profile/Profile';
+import {User} from 'models/User';
+import {Profile} from 'models/Profile';
 import {actions} from 'actions/actions';
 import {toastBox} from 'components/toast/toast';
 

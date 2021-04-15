@@ -1,6 +1,6 @@
 import {constants} from 'consts/consts';
 import Store from '../Store';
-import {Board} from 'models/board/Board';
+import {Board} from 'models/Board';
 import {actionTypes} from 'actions/actions';
 import {userStore} from '../userStore/UserStore';
 import {API} from 'modules/api';

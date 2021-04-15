@@ -5,8 +5,8 @@ import {constants} from 'consts/consts';
 
 import ProfileHeaderTemplate from './profileHeader.hbs';
 import './profileHeader.scss';
-import {User} from 'models/user/User';
-import {Profile} from 'models/profile/Profile';
+import {User} from 'models/User';
+import {Profile} from 'models/Profile';
 import {actions} from 'actions/actions';
 import {toastBox} from 'components/toast/toast';
 

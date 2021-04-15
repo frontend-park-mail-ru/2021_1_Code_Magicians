@@ -1,5 +1,5 @@
-import {appDispatcher} from '../appManagers/dispatcher';
-import {eventMixin} from '../modules/eventMixin';
+import {appDispatcher} from 'appManagers/dispatcher';
+import {eventMixin} from 'modules/eventMixin';
 
 /**
  * Basic Store class
