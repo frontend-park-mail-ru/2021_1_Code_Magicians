@@ -1,5 +1,6 @@
 import {Pin} from 'models/Pin';
 
+
 // noinspection JSUnresolvedVariable
 export const constants = {
   network: {
@@ -49,7 +50,7 @@ export const constants = {
       signup: '/signup',
       login: '/login',
       createPin: '/create-pin',
-      pin: '/pin/:id{Number}',
+      pin: '/pin/:pinID{Number}',
       board: '/board/:boardID{Number}',
     },
   },
@@ -78,6 +79,7 @@ export const constants = {
 
         triedToDeleteForeignPin: 'foreign-pin-delete',
         userUnauthorized: 'unauthorized',
+        pinNotFound: 'pin-not-found',
 
         clientSidedError: 'client-error',
 
@@ -114,7 +116,7 @@ export const constants = {
   },
   mocks: {
     defaultProfile: {
-      ID: 1,
+      ID: null,
       username: 'username',
       avatarLink: '/assets/img/default-avatar.jpg',
     },
@@ -130,13 +132,20 @@ export const constants = {
       text: 'Welcome to Pinterbest! Welcome to Pinterbest Welcome to Pinterbest Welcome to Pinterbest',
       isNew: i % 2 !== 0,
     })),
-    pins: Array(50).fill(0).map((pin, i) => new Pin({
+    pins: Array(50).fill(0).map((pin, i) => ({
       ID: i,
       boardID: 100 + i % 3,
       title: `title${i}`,
       description: 'blah blah blah',
       tags: [],
       imageLink: '/assets/img/default-avatar.jpg',
+    })),
+    comments: Array(10).fill(0).map((comment, i) => ({
+      ID: i,
+      userID: 100 + i % 3,
+      pinID: `title${i}`,
+      addingTime: 'blah blah blah',
+      text: 'Nothing beats being paid for doing nothing',
     })),
     boards: [
       {

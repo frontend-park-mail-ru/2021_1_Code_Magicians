@@ -3,7 +3,7 @@ import {Model} from './Model';
 /**
  * Message model
  */
-export class Comment extends Model {
+export class CommentModel extends Model {
   /**
    * Constructor
    * @param {Object} props : {

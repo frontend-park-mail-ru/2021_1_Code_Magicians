@@ -151,28 +151,28 @@ class BoardsStore extends Store {
   _fetchProfileBoards(data) {
     this._fetchingBoards = true;
 
+    // console.log(data);
     this._boardsSource.sourceType = 'profile';
     this._boardsSource.sourceID = data.authorID;
 
-    this._boards = constants.mocks.boards;
-    this._fetchingBoards = false;
+    API.getProfileBoards(data.authorID).then((response) => {
+      switch (response.status) {
+        case 200:
+          console.log(response);
+          this._boards = response.responseBody.boards.map((boardData) => new Board(boardData));
+          break;
+        case 400:
+        case 404:
+          this._status = storeStatuses.clientSidedError;
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+          break;
+      }
 
-    this._trigger('change');
-    // API.getProfileBoards(data.authorID).then((response) => {
-    //   switch (response.status) {
-    //     case 200:
-    //       this._boards = response.responseBody.boards;
-    //       this._trigger('change');
-    //       break;
-    //     case 400:
-    //     case 404:
-    //       this._status = storeStatuses.clientSidedError;
-    //       break;
-    //     default:
-    //       this._status = storeStatuses.internalError;
-    //       break;
-    //   }
-    // });
+      this._fetchingBoards = false;
+      this._trigger('change');
+    });
   }
 
   /**
@@ -197,6 +197,10 @@ class BoardsStore extends Store {
    * @return {[]}
    */
   getBoardsByProfileID(profileID) {
+    if (!profileID) {
+      return null;
+    }
+
     if (this._boardsSource.sourceType === 'profile' &&
       this._boardsSource.sourceID === profileID) {
       return this._boards;

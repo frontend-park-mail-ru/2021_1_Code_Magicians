@@ -158,6 +158,9 @@
       color: white;
       background-color: var(--red);
     }
+    &:checked {
+      border: none;
+    }
   }
 }
 
@@ -248,7 +251,7 @@
 }
 
 .user-icon {
-  font-size: 10px;
+  font-size: 20px;
 
   color: var(--gray);
 

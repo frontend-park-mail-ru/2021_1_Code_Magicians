@@ -11,9 +11,11 @@
     width: 40%;
     height: 100%;
 
-    background-image: url("../../assets/img/defaultPin.jpeg");
+    //background-image: url("../../assets/img/defaultPin.jpeg");
     background-size: cover;
     background-position: center;
+
+    object-fit: cover;
 
     border-radius: 5px;
   }
@@ -63,6 +65,7 @@
 
 .info-panel {
   margin-top: 20px;
+
   &__title {
     font-size: 24px;
     font-weight: bold;
@@ -73,6 +76,16 @@
     color: var(--red);
     font-size: 22px;
     font-weight: bold;
+  }
+
+  &__bodies {
+    overflow: auto;
+    height: 250px;
+
+    margin-bottom: 30px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
@@ -113,7 +126,6 @@
   display:flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
 
   margin: 0px 0 20px 0;
 
@@ -122,17 +134,13 @@
     height: 60px;
 
     border-radius: 50%;
-
-    background-image: url("../../assets/img/default-avatar.jpg");
-    background-size: cover;
-    background-position: center;
   }
 
   &__text {
     display: flex;
     flex-direction: column;
 
-    margin: 5px 15px;
+    margin: 5px 35px;
     &_username {
       font-size: 22px;
       font-weight: bold;
@@ -197,7 +205,28 @@
 
 .comment-form {
   display: flex;
+
   flex-direction: column;
+
+  width: auto;
+
+  &__text {
+    height: 50px;
+    width: 400px;
+  }
+  &__submit {
+    width: fit-content;
+
+    padding: 10px 50px;
+    margin-top: 10px;
+
+    border-radius: 45px;
+    border: none;
+
+    color: white;
+
+    background-color: var(--red);
+  }
 }
 
 
@@ -235,5 +264,5 @@
 .pin-description {
   font-size: 16px;
   color: var(--gray);
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }

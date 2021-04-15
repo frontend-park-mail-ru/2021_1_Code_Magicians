@@ -5,6 +5,8 @@ import {userStore} from '../userStore/UserStore';
 import {API} from 'modules/api';
 import {Pin} from 'models/Pin';
 
+import {CommentModel} from 'models/CommentModel';
+
 const storeStatuses = constants.store.statuses.pinsStore;
 
 /**
@@ -83,11 +85,9 @@ class PinsStore extends Store {
       switch (response.status) {
         case 201:
           this._status = storeStatuses.pinCreated;
-          this._trigger('change');
+          this._newPinID = response.responseBody.ID;
           break;
         case 403:
-          this._status = storeStatuses.userUnauthorized;
-          break;
         case 400:
         case 404:
           this._status = storeStatuses.clientSidedError;
@@ -96,6 +96,8 @@ class PinsStore extends Store {
           this._status = storeStatuses.internalError;
           break;
       }
+
+      this._trigger('change');
     });
   }
 
@@ -140,7 +142,7 @@ class PinsStore extends Store {
    * @private
    */
   _postComment(data) {
-    API.postComment(data.text, data.pinID).then((response) => {
+    API.postComment(data.commentText, data.pinID).then((response) => {
       switch (response) {
         case 201:
           this._fetchComments({pinID: data.pinID});
@@ -173,12 +175,14 @@ class PinsStore extends Store {
       switch (response.status) {
         case 200:
           this._pin = new Pin(response.responseBody);
-          this._fetchComments({pinID: this._pin.ID});
+          // this._fetchComments({pinID: this._pin.ID});
+          break;
+        case 404:
+          this._status = storeStatuses.pinNotFound;
+          this._pin = null;
           break;
         case 400:
-        case 404:
           this._status = storeStatuses.clientSidedError;
-          this._pin = null;
           break;
         default:
           this._status = storeStatuses.internalError;
@@ -280,9 +284,9 @@ class PinsStore extends Store {
     this._fetchingComments = true;
     this._commentsSource.sourceID = data.pinID;
     API.getComments(data.pinID).then((response) => {
-      switch (response) {
+      switch (response.status) {
         case 200:
-          this._comments = response.responseBody.comments.map((commendData) => new Comment(commendData)) || [];
+          this._comments = response.responseBody.comments.map((commentData) => new CommentModel(commentData)) || [];
           break;
         case 400:
         case 404:
@@ -306,7 +310,7 @@ class PinsStore extends Store {
    * @return {Pin}
    */
   getPinByID(ID) {
-    if (this._pin.ID === ID) {
+    if ((this._pin && `${this._pin.ID}` === ID) || this._status === storeStatuses.pinNotFound) {
       return this._pin;
     }
 
@@ -384,6 +388,16 @@ class PinsStore extends Store {
     }
 
     return null;
+  }
+
+  /**
+   * Should be called only after status check
+   * @return {*|null}
+   */
+  getNewPinID() {
+    const pinID = this._newPinID;
+    this._newPinID = null;
+    return pinID;
   }
 }
 

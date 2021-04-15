@@ -21,29 +21,41 @@
                     <div class="shadow-line"></div>
                 </div>
                 <div class="pin-builder-form__wrapper">
-                    <div class="pin-board-selector">
-                        <input type="select" class="pin-board-selector__input">
-                        <button class="pin-board-selector__select-button">
-                            <i class="fas fa-chevron-circle-down user-icon"></i>
-                        </button>
-                        <button class="pin-board-selector__select-button">
-                            <i class="fas fa-heart user-icon"></i>
-                        </button>
+<!--                    <div class="pin-board-selector">-->
+<!--                        <input type="select" class="pin-board-selector__input" id="board-name">-->
+<!--                        <button class="pin-board-selector__select-button" id="create-board">-->
+<!--                            <i class="fas fa-chevron-circle-down user-icon"></i>-->
+<!--                        </button>-->
+<!--                        <button class="pin-board-selector__select-button">-->
+<!--                            <i class="fas fa-heart user-icon"></i>-->
+<!--                        </button>-->
 
+<!--                    </div>-->
+                    <div class="pin-board-selector">
+                        <input type="select" class="pin-board-selector__input" id="board-name">
+                        <div class="pin-board-selector__select-button pin-board-selector">
+                            <i class="fas fa-chevron-circle-down user-icon"></i>
+                        </div>
+                        <div class="pin-board-selector__select-button pin-board-selector"  id="create-board">
+                            <i class="fas fa-plus-circle user-icon"></i>
+                        </div>
+                        <div class="pin-board-selector__select-button pin-board-selector">
+                            <i class="fas fa-heart user-icon pin-board-selector__select-button"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="pin-builder-form__wrapper">
                     <div class="author-info">
                         <div class="author-info__content">
-                            <img src="assets/img/default-avatar.jpg" alt="upload-logo" class="author-info__content_image">
+                            <img src="{{profile.avatarLink}}" alt="upload-logo" class="author-info__content_image">
                         </div>
                         <div class="author-info__content">
                             <div class="author-info__description">
                                 <div class="author-info__description_name">
-                                    Username_Usernamov
+                                    {{profile.username}}
                                 </div>
                                 <div class="author-info__description_followers">
-                                    31 follower
+                                    {{profile.followers}} followers
                                 </div>
                             </div>
                         </div>

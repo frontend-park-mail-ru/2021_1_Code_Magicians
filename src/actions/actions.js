@@ -121,6 +121,12 @@ export const actions = {
         },
       });
     },
+    statusProcessed: () => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.pins.statusProcessed,
+        data: {},
+      });
+    },
   },
   boards: {
     createBoard: (boardData) => {
@@ -141,6 +147,7 @@ export const actions = {
   comments: {
     postComment: (commentText, pinID) => {
       appDispatcher.dispatch({
+        actionType: actionTypes.comments.postComment,
         data: {
           commentText: commentText,
           pinID: pinID,
