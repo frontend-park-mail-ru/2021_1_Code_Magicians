@@ -69,6 +69,7 @@ export class ProfileChanges extends Component {
         break;
       case constants.store.statuses.userStore.avatarUploaded:
         toastBox.addToast('Avatar uploaded successfully');
+        actions.user.statusProcessed();
     }
   }
 
