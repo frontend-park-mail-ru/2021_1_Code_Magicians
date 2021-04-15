@@ -3,6 +3,8 @@ import {Page} from 'components/page/page';
 import {userStore} from 'stores/userStore/UserStore';
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
+import {pinsStore} from 'stores/pinsStore/pinsStore';
+import {actions} from 'actions/actions';
 
 /**
  * Build pin view
@@ -18,6 +20,7 @@ export class PinView extends View {
     this.tmpl = PinViewTemplate;
     this.submit = this.submit.bind(this);
     userStore.bind('change', this.refresh);
+    pinsStore.bind('change', this.refresh);
   }
 
   /**
@@ -52,6 +55,8 @@ export class PinView extends View {
       ...this.props,
       page__content: this.tmpl({
         ...this.props,
+        pin: pinsStore.getPinByID(this.props.pathArgs.pinID),
+        comments: pinsStore.getComments(this.props.pathArgs.pinID), // || constants.mocks.comments[0]
       }),
     }));
     return this._nestedComponents.get('page').render();

@@ -44,7 +44,7 @@ export const constants = {
       signup: '/signup',
       login: '/login',
       createPin: '/create-pin',
-      pin: '/pin/:id{Number}',
+      pin: '/pin/:pinID{Number}',
       board: '/board/:boardID{Number}',
     },
   },
@@ -73,6 +73,7 @@ export const constants = {
 
         triedToDeleteForeignPin: 'foreign-pin-delete',
         userUnauthorized: 'unauthorized',
+        pinNotFound: 'pin-not-found',
 
         clientSidedError: 'client-error',
 
@@ -121,7 +122,7 @@ export const constants = {
       text: 'Welcome to Pinterbest! Welcome to Pinterbest Welcome to Pinterbest Welcome to Pinterbest',
       isNew: i % 2 !== 0,
     })),
-    pins: Array(50).fill(0).map((pin, i) => new Pin({
+    pins: Array(50).fill(0).map((pin, i) => ({
       ID: i,
       boardID: 100 + i % 3,
       title: `title${i}`,

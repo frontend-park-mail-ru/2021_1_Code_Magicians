@@ -144,10 +144,11 @@ export class API {
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static createPin(pinInfo) {
-    return HTTPModule.post(paths.pin, pinInfo, true);
+    return HTTPModule.post(paths.pin, pinInfo, false);
   }
 
   /**
+   * Get pin by it's ID
    * @param {String} pinID
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
