@@ -83,7 +83,6 @@ class PinsStore extends Store {
       switch (response.status) {
         case 201:
           this._status = storeStatuses.pinCreated;
-          this._trigger('change');
           break;
         case 403:
           this._status = storeStatuses.userUnauthorized;
@@ -96,6 +95,8 @@ class PinsStore extends Store {
           this._status = storeStatuses.internalError;
           break;
       }
+
+      this._trigger('change');
     });
   }
 
@@ -140,7 +141,7 @@ class PinsStore extends Store {
    * @private
    */
   _postComment(data) {
-    API.postComment(data.text, data.pinID).then((response) => {
+    API.postComment(data.commentText, data.pinID).then((response) => {
       switch (response) {
         case 201:
           this._fetchComments({pinID: data.pinID});
@@ -173,7 +174,7 @@ class PinsStore extends Store {
       switch (response.status) {
         case 200:
           this._pin = new Pin(response.responseBody);
-          this._fetchComments({pinID: this._pin.ID});
+          // this._fetchComments({pinID: this._pin.ID});
           break;
         case 400:
         case 404:

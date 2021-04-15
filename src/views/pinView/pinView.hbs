@@ -1,6 +1,8 @@
 <div class="pin-browser">
-    <div class="pin-browser__image-panel">
-    </div>
+<!--    <div class="pin-browser__image-panel">-->
+<!--        -->
+<!--    </div>-->
+    <img src="{{pin.imageLink}}" class="pin-browser__image-panel">
     <div class="pin-browser__info-panel">
         <div class="info-panel__title">Spectacular views</div>
         <div class="info-panel__controls">controls</div>
@@ -34,12 +36,22 @@
         <div class="info-panel__comments">Comments
             <div class="info-panel__bodies">
                 {{#each comments}}
-                    {{{comment}}}
+                    <div class="comment">
+                        <a href="{{paths.home}}" class="sidebar__home-link">
+                            <img src="/assets/img/Logo.png" alt="logo" class="sidebar__logo-image">
+                        </a>
+                        <div class="comment__text">
+                            <div class="comment__text_author">{{this.userID}}</div>
+                            <div class="comment__text_message">{{this.text}}</div>
+                        </div>
+                    </div>
                 {{/each}}
             </div>
+            <div class="">Add comment</div>
+            <div class="info-panel__add-comment"></div>
             <form class="comment-form">
-                <input type="text">
-                <input type="button">
+                <textarea class="comment-form__text" id="comment-input"></textarea>
+                <input type="submit" class="comment-form__submit">
             </form>
         </div>
     </div>

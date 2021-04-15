@@ -11,9 +11,11 @@
     width: 40%;
     height: 100%;
 
-    background-image: url("../../assets/img/defaultPin.jpeg");
+    //background-image: url("../../assets/img/defaultPin.jpeg");
     background-size: cover;
     background-position: center;
+
+    object-fit: cover;
 
     border-radius: 5px;
   }
@@ -63,6 +65,7 @@
 
 .info-panel {
   margin-top: 20px;
+
   &__title {
     font-size: 24px;
     font-weight: bold;
@@ -73,6 +76,14 @@
     color: var(--red);
     font-size: 22px;
     font-weight: bold;
+  }
+
+  &__bodies {
+    overflow: auto;
+    height: 250px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
@@ -197,7 +208,29 @@
 
 .comment-form {
   display: flex;
+
   flex-direction: column;
+
+  align-items: center;
+
+  width: auto;
+
+  &__text {
+    width: 400px;
+  }
+  &__submit {
+    width: fit-content;
+
+    padding: 10px 50px;
+    margin-top: 10px;
+
+    border-radius: 45px;
+    border: none;
+
+    color: white;
+
+    background-color: var(--red);
+  }
 }
 
 

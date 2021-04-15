@@ -138,6 +138,7 @@ export const actions = {
   comments: {
     postComment: (commentText, pinID) => {
       appDispatcher.dispatch({
+        actionType: actionTypes.comments.postComment,
         data: {
           commentText: commentText,
           pinID: pinID,

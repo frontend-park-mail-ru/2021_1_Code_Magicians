@@ -1,5 +1,3 @@
-import {Pin} from 'models/pin/Pin';
-
 // noinspection JSUnresolvedVariable
 export const constants = {
   network: {
@@ -130,6 +128,13 @@ export const constants = {
       description: 'blah blah blah',
       tags: [],
       imageLink: '/assets/img/default-avatar.jpg',
+    })),
+    comments: Array(10).fill(0).map((comment, i) => ({
+      ID: i,
+      userID: 100 + i % 3,
+      pinID: `title${i}`,
+      addingTime: 'blah blah blah',
+      text: 'Nothing beats being paid for doing nothing',
     })),
     boards: [
       {
