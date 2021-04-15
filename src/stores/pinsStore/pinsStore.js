@@ -84,10 +84,9 @@ class PinsStore extends Store {
       switch (response.status) {
         case 201:
           this._status = storeStatuses.pinCreated;
+          this._newPinID = response.responseBody.ID;
           break;
         case 403:
-          this._status = storeStatuses.userUnauthorized;
-          break;
         case 400:
         case 404:
           this._status = storeStatuses.clientSidedError;
@@ -388,6 +387,16 @@ class PinsStore extends Store {
     }
 
     return null;
+  }
+
+  /**
+   * Should be called only after status check
+   * @return {*|null}
+   */
+  getNewPinID() {
+    const pinID = this._newPinID;
+    this._newPinID = null;
+    return pinID;
   }
 }
 

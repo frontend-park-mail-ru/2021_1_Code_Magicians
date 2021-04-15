@@ -118,6 +118,12 @@ export const actions = {
         },
       });
     },
+    statusProcessed: () => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.pins.statusProcessed,
+        data: {},
+      });
+    },
   },
   boards: {
     createBoard: (boardData) => {

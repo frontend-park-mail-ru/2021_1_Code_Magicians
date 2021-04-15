@@ -10,6 +10,7 @@ export class Pin extends Model {
    * @param {Object} props : {
    *   ID,
    *   boardID,
+   *   userID,
    *   title,
    *   description,
    *   tags,

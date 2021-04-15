@@ -65,6 +65,7 @@ export class PinView extends View {
         comments: pinsStore.getComments(this.props.pathArgs.pinID), // || constants.mocks.comments[0]
       }),
     }));
+
     return this._nestedComponents.get('page').render();
   }
 
