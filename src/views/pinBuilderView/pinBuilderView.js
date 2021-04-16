@@ -10,6 +10,8 @@ import {appRouter} from 'appManagers/router';
 import {toastBox} from 'components/toast/toast';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
+import {User} from 'models/user/User';
+import {Profile} from 'models/profile/Profile';
 
 /**
  * Build pin view
@@ -42,7 +44,7 @@ export class PinBuilderView extends View {
    * Did
    */
   didMount() {
-    const user = userStore.getUser();
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
     if (!user.authorized() && userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       appRouter.back();
       return;
@@ -75,16 +77,29 @@ export class PinBuilderView extends View {
    * @return {String}
    */
   render() {
-    if (!userStore.getUser()) {
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+    if (!user.authorized() &&
+      userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       appRouter.back();
-      return;
+      return '';
     }
+
+    // const boards = user.profile.ID ? boardsStore.getBoardsByProfileID(user.profile.ID) : constants.mocks.boards;
+    // const select = document.getElementById('board-name');
+    // for (let i = 0; i<=boards.length; i++) {
+    //   const opt = document.createElement('option');
+    //   opt.value = boards[i].ID;
+    //   opt.innerHTML = boards[i].title;
+    //   select.appendChild(opt);
+    // }
+
 
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({
         ...this.props,
-        user: userStore.getUser().profile,
+        profile: user.profile,
+        // board: boards[0],
       }),
     }));
 
@@ -141,6 +156,11 @@ export class PinBuilderView extends View {
     event.preventDefault();
 
     const boardTitle = document.getElementById('board-name').value;
+
+    if (!boardTitle) {
+      toastBox.addToast('Don\'t forget your board name!', true);
+      return;
+    }
     const boardData = {
       title: boardTitle,
       description: 'Amazingestest-board',

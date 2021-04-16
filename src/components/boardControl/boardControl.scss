@@ -1,0 +1,30 @@
+.board-control {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+
+  padding: 2px 5px;
+
+  border: none;
+  border-radius: 5px;
+  outline: none;
+
+  cursor: pointer;
+
+  width:fit-content;
+
+  background-color: var(--white);
+  &__input {
+    border:none;
+    outline:none;
+
+    background-color: var(--white);
+    color: var(--black);
+  }
+  &__button {
+    border:none;
+    outline:none;
+
+    background:none;
+  }
+}

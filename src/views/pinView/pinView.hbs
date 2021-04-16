@@ -40,11 +40,11 @@
                 {{#each comments}}
                     <div class="comment">
                         <a href="{{paths.home}}" class="sidebar__home-link">
-                            <img src="/assets/img/Logo.png" alt="logo" class="sidebar__logo-image">
+                            <img src="{{this.author.avatarLink}}" alt="logo" class="sidebar__logo-image">
                         </a>
                         <div class="comment__text">
-                            <div class="comment__text_author">ID{{this.userID}}</div>
-                            <div class="comment__text_message">{{this.text}}</div>
+                            <div class="comment__text_author">{{this.author.username}}</div>
+                            <div class="comment__text_message">{{this.comment.text}}</div>
                         </div>
                     </div>
                 {{/each}}

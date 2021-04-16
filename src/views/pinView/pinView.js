@@ -56,6 +56,10 @@ export class PinView extends View {
   render() {
     const currentPin = pinsStore.getPinByID(this.props.pathArgs.pinID);
     const profile = currentPin ? profilesStore.getProfileByID(currentPin['userID']) : constants.mocks.defaultProfile;
+    const comments = pinsStore.getComments(this.props.pathArgs.pinID) || [];
+    const commentProfiles = profilesStore.getProfiles(comments.map((comment) => comment.userID)) || [];
+
+    // const commentProfiles = [constants.mocks.defaultProfile, constants.mocks.defaultProfile];
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({
