@@ -27,6 +27,8 @@
     border-radius: 10px;
 
     opacity: 0.8;
+
+    color: var(--perm-white);
   }
 
   &_info {
@@ -35,18 +37,10 @@
     }
   }
 
-  &_info #{$root}__message {
-    color: var(--black);
-  }
-
   &_error {
     &::before {
       background-color: var(--red);
     }
-  }
-
-  &_error #{$root}__message {
-    color: var(--perm-white);
   }
 
   &__close {
