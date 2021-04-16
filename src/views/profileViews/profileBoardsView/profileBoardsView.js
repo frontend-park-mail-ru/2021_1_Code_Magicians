@@ -2,8 +2,8 @@ import {ProfileView} from '../profileView/profileView';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {userStore} from 'stores/userStore/UserStore';
 import {constants} from 'consts/consts';
-import {Profile} from 'models/profile/Profile';
-import {User} from 'models/user/User';
+import {Profile} from 'models/Profile';
+import {User} from 'models/User';
 import ProfileBoardsViewTemplate from './profileBoardsView.hbs';
 
 import './profileBoardsView.scss';

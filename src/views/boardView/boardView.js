@@ -4,7 +4,7 @@ import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {Page} from 'components/page/page';
 import {constants} from 'consts/consts';
 import {PinsFeed} from 'components/pinsFeed/pinsFeed';
-import {Pin} from 'models/pin/Pin';
+import {Pin} from 'models/Pin';
 
 import BoardViewTemplate from './boardView.hbs';
 import './boardView.scss';
