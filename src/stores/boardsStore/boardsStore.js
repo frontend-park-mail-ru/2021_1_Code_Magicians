@@ -126,11 +126,11 @@ class BoardsStore extends Store {
    * @private
    */
   _fetchBoard(data) {
+    this._fetchingBoard = true;
     API.getBoardByID(data.boardID).then((response) => {
       switch (response.status) {
         case 200:
           this._board = new Board(response.responseBody);
-          this._trigger('change');
           break;
         case 400:
         case 404:
@@ -140,6 +140,9 @@ class BoardsStore extends Store {
           this._status = storeStatuses.internalError;
           break;
       }
+
+      this._fetchingBoard = false;
+      this._trigger('change');
     });
   }
 
@@ -219,12 +222,15 @@ class BoardsStore extends Store {
    * @return {Board}
    */
   getBoardByID(ID) {
-    if (this._board.ID === ID) {
+    if (this._board.ID === Number(ID)) {
       return this._board;
-    } else {
-      this._fetchBoard({boardID: ID});
-      return null;
     }
+
+    if (!this._fetchingBoard) {
+      this._fetchBoard({boardID: ID});
+    }
+
+    return null;
   }
 
   /**

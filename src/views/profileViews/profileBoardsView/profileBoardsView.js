@@ -1,7 +1,11 @@
 import {ProfileView} from '../profileView/profileView';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
-
+import {userStore} from 'stores/userStore/UserStore';
+import {constants} from 'consts/consts';
+import {Profile} from 'models/profile/Profile';
+import {User} from 'models/user/User';
 import ProfileBoardsViewTemplate from './profileBoardsView.hbs';
+
 import './profileBoardsView.scss';
 
 /**
@@ -23,9 +27,12 @@ export class ProfileBoardsView extends ProfileView {
    * @return {String}
    */
   render() {
+    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+    const boards = boardsStore.getBoardsByProfileID(this.props.pathArgs.profileID || user.profile.ID);
+    console.log(boards);
     this._profileMainContent = this.tmpl({
       ...this.props,
-      boards: boardsStore.getBoardsByProfileID(this.props.pathArgs.profileID),
+      boards: boards,
     });
 
     return super.render();
