@@ -14,6 +14,21 @@ module.exports = {
     publicPath: '/',
     filename: 'index_bundle.js',
   },
+  resolve: {
+    alias: {
+      assets: path.resolve('src/assets'),
+      components: path.resolve('src/components'),
+      appManagers: path.resolve('src/appManagers'),
+      stores: path.resolve('src/stores'),
+      models: path.resolve('src/models'),
+      views: path.resolve('src/views'),
+      actions: path.resolve('src/actions'),
+      consts: path.resolve('src/consts'),
+      modules: path.resolve('src/modules'),
+      utils: path.resolve('src/utils'),
+    },
+    extensions: ['.js'],
+  },
   module: {
     rules: [
       {
@@ -42,27 +57,17 @@ module.exports = {
       DEBUG: debug,
     }),
   ],
-  resolve: {
-    alias: {
-      assets: path.resolve('src/assets'),
-      components: path.resolve('src/components'),
-      appManagers: path.resolve('src/appManagers'),
-      stores: path.resolve('src/stores'),
-      models: path.resolve('src/models'),
-      views: path.resolve('src/views'),
-      actions: path.resolve('src/actions'),
-      consts: path.resolve('src/consts'),
-      modules: path.resolve('src/modules'),
-      utils: path.resolve('src/utils'),
-    },
-    extensions: ['.js'],
-  },
 
   devServer: {
+    host: '0.0.0.0',
+    port: port,
     publicPath: '/',
     contentBase: path.resolve('src'),
-    hot: true,
-    port: port,
+
+    hot: debug,
+    clientLogLevel: debug ? 'debug' : 'silent',
+    writeToDisk: true,
+
     historyApiFallback: true,
     disableHostCheck: true,
   },

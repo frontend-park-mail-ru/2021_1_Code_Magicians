@@ -367,7 +367,7 @@ class UserStore extends Store {
         default:
           this._status = storeStatuses.internalError;
       }
-      console.log(this._notifications);
+      // console.log(this._notifications);
     });
   }
 

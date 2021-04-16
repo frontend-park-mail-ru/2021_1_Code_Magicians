@@ -12,6 +12,7 @@ import {PinView} from 'views/pinView/pinView';
 import {BoardView} from 'views/boardView/boardView';
 
 import 'assets/css/base.scss';
+import 'assets/img/Logo.png';
 
 /**
  * Main app class
@@ -40,6 +41,26 @@ class App {
         .register(paths.board, new BoardView({}));
 
     appRouter.start();
+
+    if (DEBUG) {
+      this._startSW();
+    }
+  }
+
+  /**
+   * Starts Service worker
+   * @private
+   */
+  _startSW() {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js', {scope: '/'}).then((registration) => {
+          console.log('SW registered: ', registration);
+        }).catch((err) => {
+          console.log('FAIL');
+        });
+      });
+    }
   }
 }
 
