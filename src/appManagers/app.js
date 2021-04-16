@@ -12,6 +12,7 @@ import {PinView} from 'views/pinView/pinView';
 import {BoardView} from 'views/boardView/boardView';
 
 import 'assets/css/base.scss';
+import 'assets/img/Logo.png';
 
 /**
  * Main app class
@@ -37,9 +38,28 @@ class App {
         .register(paths.login, new LoginView({}))
         .register(paths.createPin, new PinBuilderView({}))
         .register(paths.pin, new PinView({}))
-        .register(paths.board, new BoardView({}));
+        .register(paths.board, new BoardView({}))
+        .start();
 
-    appRouter.start();
+    if (DEBUG) { // before https
+      this._startSW();
+    }
+  }
+
+  /**
+   * Starts Service worker
+   * @private
+   */
+  _startSW() {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator
+            .serviceWorker
+            .register('/sw.js', {scope: '/'})
+            .then((registration) => {})
+            .catch((err) => {});
+      });
+    }
   }
 }
 

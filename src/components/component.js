@@ -1,5 +1,4 @@
-import {constants} from '../consts/consts';
-
+import {constants} from 'consts/consts';
 
 /**
  * Base Component class (abstract)

@@ -27,6 +27,8 @@ export class AuthView extends View {
    * Did
    */
   didMount() {
+    document.querySelector('.auth-form').addEventListener('submit', this.submit);
+
     const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
     if (user.authorized()) {
       this.clearState();
@@ -41,8 +43,6 @@ export class AuthView extends View {
         actions.user.statusProcessed();
         break;
     }
-
-    document.querySelector('.auth-form').addEventListener('submit', this.submit);
   }
 
   /**
