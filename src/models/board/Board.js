@@ -8,7 +8,7 @@ export class Board extends Model {
    * Constructor
    * @param {Object} props : {
    *   ID,
-   *   authorID,
+   *   userID,
    *   title,
    *   description,
    *   avatarLink,

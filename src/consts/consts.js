@@ -106,7 +106,7 @@ export const constants = {
   },
   mocks: {
     defaultProfile: {
-      ID: 1,
+      ID: null,
       username: 'username',
       avatarLink: '/assets/img/default-avatar.jpg',
     },

@@ -66,7 +66,7 @@ export class PinView extends View {
         ...this.props,
         profile: profile,
         pin: currentPin,
-        comments: pinsStore.getComments(this.props.pathArgs.pinID), // || constants.mocks.comments[0]
+        comments: comments.map((comment, index) => ({comment: comment, author: commentProfiles[index]})),
       }),
     }));
 

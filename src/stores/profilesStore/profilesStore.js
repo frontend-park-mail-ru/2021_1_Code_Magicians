@@ -180,8 +180,10 @@ class ProfilesStore extends Store {
    * @return {[]}
    */
   getProfiles(profileIDs) {
-    if (profileIDs === this._profiles.map((profile) => profile.ID)) {
-      return this._profiles;
+    if (profileIDs.every((profileID) => this._profiles.some((profile) => profile.ID === profileID))) {
+      return profileIDs.reduce((profiles, profileID) => {
+        return profiles.push(this._profiles.find((profile) => profile.ID === profileID));
+      }, []);
     }
 
     if (!this._fetchingProfiles) {
