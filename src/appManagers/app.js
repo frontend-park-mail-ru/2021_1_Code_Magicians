@@ -38,11 +38,10 @@ class App {
         .register(paths.login, new LoginView({}))
         .register(paths.createPin, new PinBuilderView({}))
         .register(paths.pin, new PinView({}))
-        .register(paths.board, new BoardView({}));
+        .register(paths.board, new BoardView({}))
+        .start();
 
-    appRouter.start();
-
-    if (DEBUG) {
+    if (DEBUG) { // before https
       this._startSW();
     }
   }
@@ -54,11 +53,11 @@ class App {
   _startSW() {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js', {scope: '/'}).then((registration) => {
-          console.log('SW registered: ', registration);
-        }).catch((err) => {
-          console.log('FAIL');
-        });
+        navigator
+            .serviceWorker
+            .register('/sw.js', {scope: '/'})
+            .then((registration) => {})
+            .catch((err) => {});
       });
     }
   }

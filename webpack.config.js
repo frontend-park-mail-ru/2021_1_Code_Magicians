@@ -10,7 +10,7 @@ module.exports = {
   mode: debug ? 'development' : 'production',
   entry: path.resolve('src/main.js'),
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'src/dist'),
     publicPath: '/',
     filename: 'index_bundle.js',
   },
@@ -72,4 +72,7 @@ module.exports = {
     disableHostCheck: true,
   },
   devtool: 'eval-source-map',
+  optimization: {
+    minimize: true,
+  },
 };
