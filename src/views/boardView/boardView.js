@@ -3,9 +3,8 @@ import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {Page} from 'components/page/page';
 import {constants} from 'consts/consts';
-import {Profile} from 'models/Profile';
-import {Board} from 'models/Board';
 import {PinsFeed} from 'components/pinsFeed/pinsFeed';
+import {Pin} from 'models/pin/Pin';
 
 import BoardViewTemplate from './boardView.hbs';
 import './boardView.scss';
@@ -32,20 +31,21 @@ export class BoardView extends View {
    * @return {String}
    */
   render() {
-    // const boardID = this.props.pathArgs.boardID;
-    // const board = boardsStore.getBoardByID(boardID);
+    const boardID = this.props.pathArgs.boardID;
+    const board = boardsStore.getBoardByID(boardID) || constants.mocks.boards[0];
+
+    console.log(board);
     this._nestedComponents.set('_pinsFeed', new PinsFeed({
       ...this.props,
-      pins: constants.mocks.pins,
+      pins: board.pins.map((pinData) => new Pin(pinData)),
     }));
 
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({
         ...this.props,
-        board: new Board(constants.mocks.boards[1]),
-        boardPins: this._nestedComponents.get('_pinsFeed').render(), // pinsStore.getPinsByBoardID(boardID),
-        author: new Profile(constants.mocks.defaultProfile), // profilesStore.getProfileByID(board['authorID']),
+        board: board,
+        boardPins: this._nestedComponents.get('_pinsFeed').render(),
       }),
     }));
 

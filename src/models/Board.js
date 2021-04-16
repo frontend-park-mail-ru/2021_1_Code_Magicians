@@ -1,4 +1,5 @@
 import {Model} from './Model';
+import {constants} from 'consts/consts';
 
 /**
  * Board model
@@ -15,8 +16,11 @@ export class Board extends Model {
    * }
    */
   constructor(props = {}) {
-    super(props);
+    props.avatarLink = props.avatarLink ?
+      `${constants.network.bucketURL}/${props.avatarLink}` :
+      '/assets/img/default-board.jpg';
 
+    super(props);
     this.pins = [];
   }
 

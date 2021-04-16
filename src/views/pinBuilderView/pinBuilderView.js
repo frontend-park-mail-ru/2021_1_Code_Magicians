@@ -1,19 +1,17 @@
 import {View} from '../view.js';
-import {Page} from 'components/page/page';
-
-import {userStore} from 'stores/userStore/UserStore';
+import {actions} from 'actions/actions';
+import {toastBox} from 'components/toast/toast';
 
 import PinBuilderViewTemplate from './pinBuilderView.hbs';
 import './pinBuilderView.scss';
-import {actions} from 'actions/actions';
-import {descriptionRegexp} from 'consts/regexp';
-import {constants} from 'consts/consts';
-import {appRouter} from 'appManagers/router';
-import {toastBox} from 'components/toast/toast';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {User} from 'models/User';
+import {userStore} from 'stores/userStore/UserStore';
 import {Profile} from 'models/Profile';
+import {constants} from 'consts/consts';
+import {appRouter} from 'appManagers/router';
+import {descriptionRegexp} from 'consts/regexp';
 
 /**
  * Build pin view
@@ -97,6 +95,14 @@ export class PinBuilderView extends View {
         select.appendChild(opt);
       }
     }
+    // const boards = user.profile.ID ? boardsStore.getBoardsByProfileID(user.profile.ID) : constants.mocks.boards;
+    // const select = document.getElementById('board-name');
+    // for (let i = 0; i<=boards.length; i++) {
+    //   const opt = document.createElement('option');
+    //   opt.value = boards[i].ID;
+    //   opt.innerHTML = boards[i].title;
+    //   select.appendChild(opt);
+    // }
 
     this._nestedComponents.set('page', new Page({
       ...this.props,
@@ -132,6 +138,18 @@ export class PinBuilderView extends View {
       toastBox.addToast('Add your awesome pin description', true);
       return;
     }
+
+    // const nameError = name.match(descriptionRegexp);
+    // if (!nameError || nameError[0] !== name) {
+    //   toastBox.addToast('Add name to the pin', true);
+    //   return;
+    // }
+    //
+    // const descriptionError = description.match(descriptionRegexp);
+    // if (!descriptionError || descriptionError[0] !== description) {
+    //   toastBox.addToast('Add your awesome pin description', true);
+    //   return;
+    // }
 
     if (!image.files[0]) {
       toastBox.addToast('Don\'t forget your pin image!', true);

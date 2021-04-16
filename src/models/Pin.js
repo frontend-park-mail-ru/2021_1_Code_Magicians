@@ -1,4 +1,5 @@
 import {Model} from './Model';
+
 import {constants} from 'consts/consts';
 
 /**

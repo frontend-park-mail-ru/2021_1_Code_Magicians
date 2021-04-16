@@ -1,8 +1,6 @@
 import {View} from '../view.js';
 import {Page} from 'components/page/page';
 
-import {userStore} from 'stores/userStore/UserStore';
-
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
 
@@ -62,6 +60,7 @@ export class PinView extends View {
     const comments = pinsStore.getComments(this.props.pathArgs.pinID) || [];
     // const commentProfiles = profilesStore.getProfiles(comments.map((comment) => comment.userID)) || [];
     const commentProfiles = [constants.mocks.defaultProfile, constants.mocks.defaultProfile];
+
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({

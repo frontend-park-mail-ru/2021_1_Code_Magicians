@@ -149,6 +149,7 @@ export const constants = {
       {
         ID: 1,
         avatarLink: '/assets/img/boards/1.jpg',
+        pins: [],
         title: 'title1',
       },
       {
