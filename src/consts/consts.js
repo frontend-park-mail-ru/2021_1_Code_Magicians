@@ -1,7 +1,5 @@
-import {Pin} from 'models/Pin';
-
-
 // noinspection JSUnresolvedVariable
+
 export const constants = {
   network: {
     backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'http://www.pinter-best.com:8080',

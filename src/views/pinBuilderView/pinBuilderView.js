@@ -12,8 +12,8 @@ import {appRouter} from 'appManagers/router';
 import {toastBox} from 'components/toast/toast';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
-import {User} from 'models/user/User';
-import {Profile} from 'models/profile/Profile';
+import {User} from 'models/User';
+import {Profile} from 'models/Profile';
 
 /**
  * Build pin view

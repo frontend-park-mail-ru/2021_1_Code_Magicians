@@ -41,9 +41,9 @@ class App {
         .register(paths.board, new BoardView({}))
         .start();
 
-    if (DEBUG) { // before https
-      this._startSW();
-    }
+    // if (DEBUG) { // before https
+    //   this._startSW();
+    // }
   }
 
   /**
