@@ -5,6 +5,7 @@ import {User} from 'models/User';
 import {actionTypes} from 'actions/actions';
 import {constants} from 'consts/consts';
 import {NotificationModel} from 'models/NotificationModel';
+import {HTTPModule} from 'modules/http';
 
 const storeStatuses = constants.store.statuses.userStore;
 
@@ -342,7 +343,7 @@ class UserStore extends Store {
       this._socketReady = true;
       this._status = storeStatuses.ok;
 
-      this._ws.send(JSON.stringify({userID: this._user.profile.ID}));
+      this._ws.send(JSON.stringify({userID: this._user.profile.ID, CSRFToken: HTTPModule.getCSRFToken()}));
     });
 
     this._ws.addEventListener('message', (event) => {
