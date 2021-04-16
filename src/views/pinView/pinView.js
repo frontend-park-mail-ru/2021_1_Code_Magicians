@@ -1,6 +1,5 @@
 import {View} from '../view.js';
 import {Page} from 'components/page/page';
-import {userStore} from 'stores/userStore/UserStore';
 
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
@@ -27,7 +26,6 @@ export class PinView extends View {
 
     this.tmpl = PinViewTemplate;
     this.submit = this.submit.bind(this);
-    userStore.bind('change', this.refresh);
   }
 
   /**

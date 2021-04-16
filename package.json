@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack",
-    "start": "sudo PORT=80 webpack serve",
+    "start": "PORT=3000 webpack serve",
     "debug": "PORT=8081 DEBUG=true webpack serve",
     "lint": "eslint src/",
     "postinstall": "husky install"

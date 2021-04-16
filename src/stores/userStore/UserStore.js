@@ -353,7 +353,6 @@ class UserStore extends Store {
         this._status = storeStatuses.internalError;
       }
 
-      console.log(message);
       switch (message.type) {
         case 'all-notifications':
           this._notifications = message['allNotifications'].map((notificationData) => {
@@ -399,7 +398,7 @@ class UserStore extends Store {
       switch (response.status) {
         case 204:
         case 409:
-          this._notifications.find((n) => n.ID === data.notificationID).markAsRead();
+          this._notifications.find((n) => n.ID === Number(data.notificationID)).markAsRead();
           this._newNotification = this._notifications.some((n) => !n.isRead);
           break;
         case 401:

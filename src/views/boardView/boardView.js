@@ -1,7 +1,6 @@
 import {View} from 'views/view';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
-import {userStore} from 'stores/userStore/UserStore';
 import {Page} from 'components/page/page';
 import {constants} from 'consts/consts';
 import {Profile} from 'models/Profile';
@@ -26,7 +25,6 @@ export class BoardView extends View {
 
     boardsStore.bind('change', this.refresh);
     pinsStore.bind('change', this.refresh);
-    userStore.bind('change', this.refresh);
   }
 
   /**

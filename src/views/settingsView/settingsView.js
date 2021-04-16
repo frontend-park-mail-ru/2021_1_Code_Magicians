@@ -8,12 +8,13 @@ import {urlRegexp} from 'consts/regexp';
 import {actions} from 'actions/actions';
 import {appRouter} from 'appManagers/router';
 import {constants} from 'consts/consts';
-
-import SettingsViewTemplate from './settingsView.hbs';
-import './settingsView.scss';
 import {User} from 'models/User';
 import {Profile} from 'models/Profile';
 import {toastBox} from 'components/toast/toast';
+
+import SettingsViewTemplate from './settingsView.hbs';
+import './settingsView.scss';
+
 
 /**
  * Profile settings view
@@ -29,8 +30,6 @@ export class SettingsView extends View {
     this.tmpl = SettingsViewTemplate;
 
     this.logout = this.logout.bind(this);
-
-    userStore.bind('change', this.refresh);
   }
 
   /**

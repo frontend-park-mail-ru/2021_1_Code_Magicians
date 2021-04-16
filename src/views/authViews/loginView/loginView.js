@@ -2,12 +2,13 @@ import {actions} from 'actions/actions';
 import {usernameRegexp, passwordRegexp} from 'consts/regexp';
 import {validateInputs} from 'utils/validateUtils';
 import {AuthView} from '../authView';
-
-import LoginViewTemplate from './loginView.hbs';
-import './loginView.scss';
 import {userStore} from 'stores/userStore/UserStore';
 import {constants} from 'consts/consts';
 import {toastBox} from 'components/toast/toast';
+
+import LoginViewTemplate from './loginView.hbs';
+import './loginView.scss';
+
 
 /**
  * Login page view
@@ -26,8 +27,6 @@ export class LoginView extends AuthView {
 
     this.tmpl = LoginViewTemplate;
     this.setState(payload);
-
-    userStore.bind('change', this.refresh);
   }
 
   /**

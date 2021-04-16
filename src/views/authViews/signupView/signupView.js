@@ -4,10 +4,10 @@ import {validateInputs} from 'utils/validateUtils';
 import {AuthView} from '../authView';
 import {userStore} from 'stores/userStore/UserStore';
 import {constants} from 'consts/consts';
+import {toastBox} from 'components/toast/toast';
 
 import SignupViewTemplate from './signupView.hbs';
 import './signupView.scss';
-import {toastBox} from 'components/toast/toast';
 
 
 /**
@@ -28,8 +28,6 @@ export class SignupView extends AuthView {
 
     this.tmpl = SignupViewTemplate;
     this.setState({payload: payload});
-
-    userStore.bind('change', this.refresh);
   }
 
   /**
