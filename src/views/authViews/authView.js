@@ -49,6 +49,9 @@ export class AuthView extends View {
    * Will
    */
   willUnmount() {
-    document.querySelector('.auth-form').removeEventListener('submit', this.submit);
+    const form = document.querySelector('.auth-form');
+    if (form) {
+      form.removeEventListener('submit', this.submit);
+    }
   }
 }

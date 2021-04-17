@@ -59,10 +59,11 @@ export class BoardView extends View {
    */
   didMount() {
     super.didMount();
+
     switch (boardsStore.getStatus()) {
       case constants.store.statuses.profilesStore.boardNotFound:
         actions.profiles.statusProcessed();
-        appRouter.go(this.props.paths.notFound);
+        appRouter.back();
         break;
       case constants.store.statuses.profilesStore.clientError:
       case constants.store.statuses.profilesStore.internalError:

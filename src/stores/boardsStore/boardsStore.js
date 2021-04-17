@@ -219,7 +219,7 @@ class BoardsStore extends Store {
    * @return {Board}
    */
   getBoardByID(ID) {
-    if (!ID) {
+    if (!ID || this._status === storeStatuses.boardNotFound) {
       return null;
     }
 

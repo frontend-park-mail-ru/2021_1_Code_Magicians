@@ -9,6 +9,7 @@ import {actions} from 'actions/actions';
 import {profilesStore} from 'stores/profilesStore/profilesStore';
 import {constants} from 'consts/consts';
 import {userStore} from 'stores/userStore/UserStore';
+import {appRouter} from 'appManagers/router';
 
 /**
  * Build pin view
@@ -81,6 +82,10 @@ export class PinView extends View {
     }
 
     super.didMount();
+
+    if (pinsStore.getStatus() === constants.store.statuses.pinsStore.pinNotFound) {
+      appRouter.back();
+    }
   }
 
   /**

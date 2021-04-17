@@ -1,7 +1,6 @@
 import {View} from '../view';
 import {PinsFeed} from 'components/pinsFeed/pinsFeed';
 import {Page} from 'components/page/page';
-import {constants} from 'consts/consts';
 
 import FeedViewTemplate from './feedView.hbs';
 import './feedView.scss';
@@ -19,6 +18,8 @@ export class FeedView extends View {
     super(props, document.getElementById('app'));
 
     this.tmpl = FeedViewTemplate;
+
+    pinsStore.bind('change', this.refresh);
   }
 
   /**

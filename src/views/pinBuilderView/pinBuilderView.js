@@ -209,8 +209,5 @@ export class PinBuilderView extends View {
 
       fileReader.readAsDataURL(file[0]);
     }
-    //
-    // const image = document.getElementById('file-input');
-    // document.getElementById('preview-label').style.backgroundImage = image.files[0];
   }
 }
