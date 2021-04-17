@@ -5,13 +5,15 @@
   justify-content: center;
   flex-wrap: wrap;
 
+
   padding-bottom: 10px;
 
   background-color: var(--white);
 
   &__pin-wrapper {
     width: 250px;
-    height: 300px;
+    //height: 300px;
+    max-height: 500px;
 
     margin: 20px 10px;
   }
@@ -90,7 +92,7 @@
 
   &__pin-image {
     width: 250px;
-    height: 300px;
+    max-height: 500px;
 
     border-radius: 15px;
 
