@@ -55,8 +55,9 @@ export class Navbar extends Component {
    * Will
    */
   willUnmount() {
-    document
-        .querySelector('.navbar__search-wiper')
-        .removeEventListener('click', this.wipeSearchField);
+    const searchWiper = document.querySelector('.navbar__search-wiper');
+    if (searchWiper) {
+      searchWiper.removeEventListener('click', this.wipeSearchField);
+    }
   }
 }

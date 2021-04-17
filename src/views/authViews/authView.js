@@ -30,11 +30,6 @@ export class AuthView extends View {
     document.querySelector('.auth-form').addEventListener('submit', this.submit);
 
     const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
-    if (user.authorized()) {
-      this.clearState();
-      appRouter.go(this.props.paths.profile);
-      return;
-    }
 
     switch (userStore.getStatus()) {
       case constants.store.statuses.userStore.clientError:
@@ -42,6 +37,12 @@ export class AuthView extends View {
         toastBox.addToast('Something went wrong. Please, try to refresh the page or come back later.');
         actions.user.statusProcessed();
         break;
+    }
+
+    if (user.authorized()) {
+      this.clearState();
+      this._active = false;
+      appRouter.go(this.props.paths.profile);
     }
   }
 

@@ -31,6 +31,7 @@ export class FeedView extends View {
       ...this.props,
       pins: pinsStore.getPinsFeed(),
     }));
+
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({

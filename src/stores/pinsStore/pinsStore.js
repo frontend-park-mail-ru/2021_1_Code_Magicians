@@ -268,7 +268,7 @@ class PinsStore extends Store {
     API.getPinsFeed().then((response) => {
       switch (response.status) {
         case 200:
-          this._pins = response.responseBody.pins.map((pinData) => new Pin(pinData));
+          this._pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
           break;
         default:
           this._status = storeStatuses.internalError;

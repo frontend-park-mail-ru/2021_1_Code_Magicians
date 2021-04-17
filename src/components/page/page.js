@@ -28,11 +28,12 @@ export class Page extends Component {
       typeIsMessages: true,
       items: constants.mocks.messages,
     }));
+
     this._nestedComponents.set('_notificationsSlider', new Slider({
       ...props,
       sliderType: 'Notifications',
       typeIsMessages: false,
-      items: userStore.getNotifications().map((notification) => ({
+      items: userStore.getNotifications() && userStore.getNotifications().map((notification) => ({
         ID: notification.ID,
         imageLink: '/assets/img/Logo.png',
         header: notification.title,

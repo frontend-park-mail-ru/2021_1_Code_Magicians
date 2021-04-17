@@ -68,6 +68,7 @@ export class ProfileView extends View {
     if (!user.authorized() &&
         Object.keys(this.props.pathArgs).length === 0 &&
         userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
+      this._active = false;
       appRouter.go(this.props.paths.home);
       return;
     }

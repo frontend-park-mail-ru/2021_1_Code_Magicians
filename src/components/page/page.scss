@@ -16,6 +16,11 @@
   margin-top: 72px;
 
   height: 100%;
+
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .toasts-box {
