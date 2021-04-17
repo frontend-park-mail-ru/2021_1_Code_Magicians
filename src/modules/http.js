@@ -59,11 +59,11 @@ export class HTTPModule {
         this._setCSRFToken(response.headers.get('X-CSRF-Token'));
       }
 
-      if (response.headers.has('Content-Length') &&
-        response.headers.get('Content-Length') !== '0') {
-        responseBody = await response.json();
-      }
-
+      // if (response.headers.has('Content-Length') &&
+      //   response.headers.get('Content-Length') !== '0') {
+      //   responseBody = await response.json();
+      // }
+      responseBody = await response.json();
       headers = response.headers;
       status = response.status;
     } catch (e) {}

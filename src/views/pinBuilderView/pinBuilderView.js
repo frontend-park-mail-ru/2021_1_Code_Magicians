@@ -60,6 +60,7 @@ export class PinBuilderView extends View {
 
     document.querySelector('.pin-builder-form').addEventListener('submit', this.submit);
     document.getElementById('create-board').addEventListener('click', this.createBoard);
+    document.getElementById('file-input').addEventListener('change', this.previewImage);
     super.didMount();
   }
 
@@ -69,6 +70,7 @@ export class PinBuilderView extends View {
   willUnmount() {
     document.querySelector('.pin-builder-form').removeEventListener('submit', this.submit);
     document.getElementById('create-board').removeEventListener('click', this.createBoard);
+    document.getElementById('file-input').removeEventListener('change', this.previewImage);
 
 
     super.willUnmount();
@@ -172,7 +174,7 @@ export class PinBuilderView extends View {
   }
 
   /**
-   * Submit callback
+   * createBoard callback
    * @param {Event} event
    */
   createBoard(event) {
@@ -189,5 +191,26 @@ export class PinBuilderView extends View {
       description: 'Amazingestest-board',
     };
     actions.boards.createBoard(boardData);
+  }
+
+  /**
+   * previewImage callback
+   * @param {Event} event
+   */
+  previewImage(event) {
+    event.preventDefault();
+    const file = document.getElementById('file-input').files;
+    if (file.length > 0) {
+      const fileReader = new FileReader();
+
+      fileReader.onload = function(event) {
+        document.getElementById('preview-label').style.backgroundImage = 'url(\'' + event.target.result + '\')';
+      };
+
+      fileReader.readAsDataURL(file[0]);
+    }
+    //
+    // const image = document.getElementById('file-input');
+    // document.getElementById('preview-label').style.backgroundImage = image.files[0];
   }
 }

@@ -1,47 +1,49 @@
 <div class="pin-browser">
     <img src="{{pin.imageLink}}" class="pin-browser__image-panel">
     <div class="pin-browser__info-panel">
-        <h1 class="info-panel__title">{{pin.title}}</h1>
-        <div class="pin-stats">
-            <div class="pin-stats__item">
-                <i class="fas fa-eye pin-icon"></i>
-                <div class="pin-stats__item_val">420</div>
-                <div class="pin-stats__item_descr">views</div>
+        <div class="pin-browser__wrapper">
+            <h1 class="info-panel__title">{{pin.title}}</h1>
+            <div class="pin-stats">
+                <div class="pin-stats__item">
+                    <i class="fas fa-eye pin-icon"></i>
+                    <div class="pin-stats__item_val">420</div>
+                    <div class="pin-stats__item_descr">views</div>
+                </div>
+                <div class="pin-stats__item">
+                    <i class="fas fa-thumbtack pin-icon"></i>
+                    <div class="pin-stats__item_val">69</div>
+                    <div class="pin-stats__item_descr">saves</div>
+                </div>
+                <div class="pin-stats__item">
+                    <i class="fas fa-external-link-alt pin-icon"></i>
+                    <div class="pin-stats__item_val">13</div>
+                    <div class="pin-stats__item_descr">link clicks</div>
+                </div>
             </div>
-            <div class="pin-stats__item">
-                <i class="fas fa-thumbtack pin-icon"></i>
-                <div class="pin-stats__item_val">69</div>
-                <div class="pin-stats__item_descr">saves</div>
-            </div>
-            <div class="pin-stats__item">
-                <i class="fas fa-external-link-alt pin-icon"></i>
-                <div class="pin-stats__item_val">13</div>
-                <div class="pin-stats__item_descr">link clicks</div>
-            </div>
-        </div>
-        <div class="user-info">
-            <div class="user-info__avatar">
-                <img src="{{profile.avatarLink}}" alt="upload-logo" class="user-info__avatar">
-            </div>
-            <a href="/profile/{{profile.ID}}" class="user-info__text">
-                <div class="user-info__text_username">{{profile.username}}</div>
-                <div class="user-info__text_followers">{{profile.followers}} followers</div>
-            </a>
-            {{#if userIsAuthorized}}
-                {{#if pinIsSelfOwned}}
-                    <div class="user-info__follow-button user-info__follow-button_disabled">That's you</div>
-                {{else}}
-                    <div class="user-info__follow-button
-                {{#if profile.followed}}
-                    user-info__follow-button_inactive
-                {{else}}
-                    user-info__follow-button_active
-                {{/if}}">{{#if profile.followed}}Following{{else}}Follow{{/if}}
-                    </div>
+            <div class="user-info">
+                <div class="user-info__avatar">
+                    <img src="{{profile.avatarLink}}" alt="upload-logo" class="user-info__avatar">
+                </div>
+                <a href="/profile/{{profile.ID}}" class="user-info__text">
+                    <div class="user-info__text_username">{{profile.username}}</div>
+                    <div class="user-info__text_followers">{{profile.followers}} followers</div>
+                </a>
+                {{#if userIsAuthorized}}
+                    {{#if pinIsSelfOwned}}
+                        <div class="user-info__follow-button user-info__follow-button_disabled">Follow</div>
+                    {{else}}
+                        <div class="user-info__follow-button
+                    {{#if profile.followed}}
+                        user-info__follow-button_inactive
+                    {{else}}
+                        user-info__follow-button_active
+                    {{/if}}">{{#if profile.followed}}Following{{else}}Follow{{/if}}
+                        </div>
+                    {{/if}}
                 {{/if}}
-            {{/if}}
+            </div>
+            <div class="pin-description"> {{pin.description}}</div>
         </div>
-        <div class="pin-description"> {{pin.description}}</div>
         <div class="info-panel__comments">Comments
             <div class="info-panel__bodies">
                 {{#each comments}}
