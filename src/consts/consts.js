@@ -27,6 +27,7 @@ export const constants = {
 
       pin: '/pin',
       pins: '/pins',
+      pinsFeed: '/pins/feed',
 
       follow: '/follow',
 

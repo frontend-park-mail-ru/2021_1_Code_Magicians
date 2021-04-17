@@ -154,14 +154,12 @@ class BoardsStore extends Store {
   _fetchProfileBoards(data) {
     this._fetchingBoards = true;
 
-    // console.log(data);
     this._boardsSource.sourceType = 'profile';
     this._boardsSource.sourceID = data.authorID;
 
     API.getProfileBoards(data.authorID).then((response) => {
       switch (response.status) {
         case 200:
-          console.log(response);
           this._boards = response.responseBody.boards.map((boardData) => new Board(boardData));
           break;
         case 400:
@@ -222,6 +220,10 @@ class BoardsStore extends Store {
    * @return {Board}
    */
   getBoardByID(ID) {
+    if (!ID) {
+      return null;
+    }
+
     if (this._board.ID === Number(ID)) {
       return this._board;
     }

@@ -5,6 +5,7 @@ import {constants} from 'consts/consts';
 
 import FeedViewTemplate from './feedView.hbs';
 import './feedView.scss';
+import {pinsStore} from 'stores/pinsStore/pinsStore';
 
 /**
  * Main pins feed view
@@ -25,7 +26,10 @@ export class FeedView extends View {
    * @return {String}
    */
   render() {
-    this._nestedComponents.set('_pinsFeed', new PinsFeed({...this.props, pins: constants.mocks.pins}));
+    this._nestedComponents.set('_pinsFeed', new PinsFeed({
+      ...this.props,
+      pins: pinsStore.getPinsFeed(),
+    }));
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({

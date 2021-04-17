@@ -12,6 +12,7 @@ import {Profile} from 'models/Profile';
 import {constants} from 'consts/consts';
 import {appRouter} from 'appManagers/router';
 import {descriptionRegexp} from 'consts/regexp';
+import {Page} from 'components/page/page';
 
 /**
  * Build pin view

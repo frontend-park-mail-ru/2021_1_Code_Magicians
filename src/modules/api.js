@@ -186,6 +186,15 @@ export class API {
   }
 
   /**
+   * Get feed
+   * @param {Number} pinsNumber
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static getPinsFeed(pinsNumber = 50) {
+    return HTTPModule.get(`${paths.pinsFeed}/${pinsNumber}`);
+  }
+
+  /**
    * Get Comments gy pin id
    * @param {Number} pinID
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}

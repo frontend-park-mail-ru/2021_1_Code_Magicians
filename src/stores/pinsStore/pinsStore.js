@@ -204,26 +204,24 @@ class PinsStore extends Store {
     this._pinsSource.sourceType = 'profile';
     this._pinsSource.sourceID = data.profileID;
 
-    this._pins = constants.mocks.pins;
-    this._fetchingPins = false;
-    this._trigger('change');
-    // API.getPinsByProfileID(data.profileID, data.pinsNumber || 0).then((response) => {
-    //   switch (response.status) {
-    //     case 200:
-    //       this._pins = response.responseBody.pins.map((pinData) => new Pin(pinData));
-    //       break;
-    //     case 400:
-    //     case 404:
-    //       this._status = storeStatuses.clientSidedError;
-    //       this._pins = [];
-    //       break;
-    //     default:
-    //       this._status = storeStatuses.internalError;
-    //       break;
-    //   }
-    //
-    //   this._trigger('change');
-    // });
+    API.getPinsByProfileID(data.profileID).then((response) => {
+      switch (response.status) {
+        case 200:
+          this._pins = response.responseBody.pins.map((pinData) => new Pin(pinData));
+          break;
+        case 400:
+        case 404:
+          this._status = storeStatuses.clientSidedError;
+          this._pins = [];
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+          break;
+      }
+
+      this._fetchingPins = false;
+      this._trigger('change');
+    });
   }
 
   /**
@@ -309,6 +307,10 @@ class PinsStore extends Store {
    * @return {Pin}
    */
   getPinByID(ID) {
+    if (!ID) {
+      return null;
+    }
+
     if ((this._pin && `${this._pin.ID}` === ID) || this._status === storeStatuses.pinNotFound) {
       return this._pin;
     }
@@ -326,6 +328,10 @@ class PinsStore extends Store {
    * @return {[]}
    */
   getPinsByProfileID(profileID) {
+    if (!profileID) {
+      return null;
+    }
+
     if (this._pinsSource.sourceType === 'profile' &&
       this._pinsSource.sourceID === profileID) {
       return this._pins;
@@ -344,6 +350,10 @@ class PinsStore extends Store {
    * @return {[]}
    */
   getPinsByBoardID(boardID) {
+    if (!boardID) {
+      return null;
+    }
+
     if (this._pinsSource.sourceType === 'board' &&
       this._pinsSource.sourceID === boardID) {
       return this._pins;
@@ -378,6 +388,10 @@ class PinsStore extends Store {
    * @return {[]}
    */
   getComments(pinID) {
+    if (!pinID) {
+      return null;
+    }
+
     if (this._commentsSource.sourceID === pinID) {
       return this._comments;
     }

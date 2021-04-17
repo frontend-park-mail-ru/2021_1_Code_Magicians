@@ -1,6 +1,9 @@
 import {ProfileView} from '../profileView/profileView';
 import {PinsFeed} from 'components/pinsFeed/pinsFeed';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
+import {userStore} from 'stores/userStore/UserStore';
+import {profilesStore} from 'stores/profilesStore/profilesStore';
+import {boardsStore} from 'stores/boardsStore/boardsStore';
 
 
 /**
@@ -20,10 +23,18 @@ export class ProfilePinsView extends ProfileView {
    * @return {String}
    */
   render() {
+    const profileBoards =
+      boardsStore
+          .getBoardsByProfileID(this.props.pathArgs.profileID ||
+            (userStore.getUser() && userStore.getUser().profile.ID));
+
+    const mainBoard = profileBoards && profileBoards[0];
+
     this._nestedComponents.set('_pinsFeed', new PinsFeed({
       ...this.props,
-      pins: pinsStore.getPinsByProfileID(this.props.pathArgs.profileID),
+      pins: pinsStore.getPinsByBoardID(mainBoard && mainBoard.ID),
     }));
+
     this._profileMainContent = this._nestedComponents.get('_pinsFeed').render();
 
     return super.render();

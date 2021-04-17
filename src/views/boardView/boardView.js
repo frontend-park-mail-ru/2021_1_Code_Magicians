@@ -2,9 +2,7 @@ import {View} from 'views/view';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {Page} from 'components/page/page';
-import {constants} from 'consts/consts';
 import {PinsFeed} from 'components/pinsFeed/pinsFeed';
-import {Pin} from 'models/Pin';
 
 import BoardViewTemplate from './boardView.hbs';
 import './boardView.scss';
@@ -32,12 +30,12 @@ export class BoardView extends View {
    */
   render() {
     const boardID = this.props.pathArgs.boardID;
-    const board = boardsStore.getBoardByID(boardID) || constants.mocks.boards[0];
+    const board = boardsStore.getBoardByID(boardID);
+    const pins = pinsStore.getPinsByBoardID(board ? board.ID : null);
 
-    console.log(board);
     this._nestedComponents.set('_pinsFeed', new PinsFeed({
       ...this.props,
-      pins: board.pins.map((pinData) => new Pin(pinData)),
+      pins: pins,
     }));
 
     this._nestedComponents.set('page', new Page({
