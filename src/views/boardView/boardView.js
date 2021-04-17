@@ -6,6 +6,10 @@ import {PinsFeed} from 'components/pinsFeed/pinsFeed';
 
 import BoardViewTemplate from './boardView.hbs';
 import './boardView.scss';
+import {constants} from 'consts/consts';
+import {actions} from 'actions/actions';
+import {appRouter} from 'appManagers/router';
+import {toastBox} from 'components/toast/toast';
 
 /**
  * Board view
@@ -48,5 +52,23 @@ export class BoardView extends View {
     }));
 
     return this._nestedComponents.get('page').render();
+  }
+
+  /**
+   * Did
+   */
+  didMount() {
+    super.didMount();
+    switch (boardsStore.getStatus()) {
+      case constants.store.statuses.profilesStore.boardNotFound:
+        actions.profiles.statusProcessed();
+        appRouter.go(this.props.paths.notFound);
+        break;
+      case constants.store.statuses.profilesStore.clientError:
+      case constants.store.statuses.profilesStore.internalError:
+        toastBox.addToast('Something went wrong. Please, try again or refresh the page');
+        actions.profiles.statusProcessed();
+        break;
+    }
   }
 }

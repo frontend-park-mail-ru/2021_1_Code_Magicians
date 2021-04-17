@@ -262,9 +262,20 @@ class PinsStore extends Store {
    */
   _fetchFeed(data) {
     // later will be API function for this. Now only that mock
+    this._pinsSource.sourceType = 'feed';
     this._fetchingPins = true;
 
-    this._pinsSource.sourceType = 'feed';
+    API.getPinsFeed().then((response) => {
+      switch (response.status) {
+        case 200:
+          this._pins = response.responseBody.pins.map((pinData) => new Pin(pinData));
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+
+      this._trigger('change');
+    });
 
     this._pins = constants.mocks.pins;
 

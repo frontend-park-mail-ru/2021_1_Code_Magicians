@@ -90,6 +90,7 @@ export const constants = {
         boardCreated: 'board-created',
         boardDeleted: 'board-deleted',
         userUnauthorized: 'unauthorized',
+        boardNotFound: 'board-not-found',
 
         clientSidedError: 'client-error',
 

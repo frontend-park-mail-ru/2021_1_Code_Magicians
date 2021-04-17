@@ -182,7 +182,8 @@ class ProfilesStore extends Store {
   getProfiles(profileIDs) {
     if (profileIDs.every((profileID) => this._profiles.some((profile) => profile.ID === profileID))) {
       return profileIDs.reduce((profiles, profileID) => {
-        return profiles.push(this._profiles.find((profile) => profile.ID === profileID));
+        profiles.push(this._profiles.find((profile) => profile.ID === profileID));
+        return profiles;
       }, []);
     }
 

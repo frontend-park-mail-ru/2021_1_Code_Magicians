@@ -1,11 +1,7 @@
 <div class="pin-browser">
-<!--    <div class="pin-browser__image-panel">-->
-<!--        -->
-<!--    </div>-->
     <img src="{{pin.imageLink}}" class="pin-browser__image-panel">
     <div class="pin-browser__info-panel">
-        <div class="info-panel__title">Spectacular views</div>
-        <div class="info-panel__controls">controls</div>
+        <h1 class="info-panel__title">{{pin.title}}</h1>
         <div class="pin-stats">
             <div class="pin-stats__item">
                 <i class="fas fa-eye pin-icon"></i>
@@ -27,34 +23,47 @@
             <div class="user-info__avatar">
                 <img src="{{profile.avatarLink}}" alt="upload-logo" class="user-info__avatar">
             </div>
-            <div class="user-info__text">
+            <a href="/profile/{{profile.ID}}" class="user-info__text">
                 <div class="user-info__text_username">{{profile.username}}</div>
                 <div class="user-info__text_followers">{{profile.followers}} followers</div>
-            </div>
-            <div class="user-info__follow-button">Follow</div>
+            </a>
+            {{#if userIsAuthorized}}
+                {{#if pinIsSelfOwned}}
+                    <div class="user-info__follow-button user-info__follow-button_disabled">That's you</div>
+                {{else}}
+                    <div class="user-info__follow-button
+                {{#if profile.followed}}
+                    user-info__follow-button_inactive
+                {{else}}
+                    user-info__follow-button_active
+                {{/if}}">{{#if profile.followed}}Following{{else}}Follow{{/if}}
+                    </div>
+                {{/if}}
+            {{/if}}
         </div>
-        <div class="pin-description"> When looking at creative photos, viewers are transported to an
-        otherworldly scene where reality and fantasy become one</div>
+        <div class="pin-description"> {{pin.description}}</div>
         <div class="info-panel__comments">Comments
             <div class="info-panel__bodies">
                 {{#each comments}}
                     <div class="comment">
-                        <a href="{{paths.home}}" class="sidebar__home-link">
-                            <img src="{{this.author.avatarLink}}" alt="logo" class="sidebar__logo-image">
-                        </a>
+                        <img src="{{this.author.avatarLink}}" alt="logo" class="comment__avatar">
                         <div class="comment__text">
-                            <div class="comment__text_author">{{this.author.username}}</div>
+                            <a href="/profile/{{this.author.ID}}" class="comment__text_author">
+                                {{this.author.username}}
+                            </a>
                             <div class="comment__text_message">{{this.comment.text}}</div>
                         </div>
                     </div>
                 {{/each}}
             </div>
-            <div class="">Add comment</div>
-            <div class="info-panel__add-comment"></div>
-            <form class="comment-form">
-                <textarea class="comment-form__text" id="comment-input"></textarea>
-                <input type="submit" class="comment-form__submit">
-            </form>
+            {{#if userIsAuthorized}}
+                <div class="">Add comment</div>
+                <div class="info-panel__add-comment"></div>
+                <form class="comment-form">
+                    <textarea class="comment-form__text" id="comment-input"></textarea>
+                    <input type="submit" class="comment-form__submit"value="Send">
+                </form>
+            {{/if}}
         </div>
     </div>
     <div class="pin-browser__tags-panel">

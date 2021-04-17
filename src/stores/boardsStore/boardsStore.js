@@ -132,9 +132,8 @@ class BoardsStore extends Store {
         case 200:
           this._board = new Board(response.responseBody);
           break;
-        case 400:
         case 404:
-          this._status = storeStatuses.clientSidedError;
+          this._status = storeStatuses.boardNotFound;
           break;
         default:
           this._status = storeStatuses.internalError;
