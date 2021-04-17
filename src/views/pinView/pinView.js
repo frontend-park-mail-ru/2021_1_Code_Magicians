@@ -39,13 +39,16 @@ export class PinView extends View {
     const selfProfile = userStore.getUser() && userStore.getUser().profile;
 
     const currentPin = pinsStore.getPinByID(this.props.pathArgs.pinID);
-    const comments = pinsStore.getComments(this.props.pathArgs.pinID) || [];
-    const commentProfiles = profilesStore.getProfiles(comments.map((comment) => comment.userID)) || [];
+    const comments = pinsStore.getComments(this.props.pathArgs.pinID);
+    const commentProfiles = comments && profilesStore.getProfiles(comments.map((comment) => comment.userID));
 
     this.profile = currentPin && profilesStore.getProfileByID(currentPin['userID']);
     const pinIsSelfOwned = this.profile && selfProfile && this.profile.ID === selfProfile.ID;
 
-    const templateComments = comments.map((comment, index) => ({comment: comment, author: commentProfiles[index]}));
+    const templateComments = comments && commentProfiles && comments.map((comment, index) => ({
+      comment: comment,
+      author: commentProfiles[index],
+    }));
 
     this._nestedComponents.set('page', new Page({
       ...this.props,

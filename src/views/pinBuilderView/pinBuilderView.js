@@ -81,38 +81,15 @@ export class PinBuilderView extends View {
    * @return {String}
    */
   render() {
-    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
-    if (!user.authorized() &&
-      userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
-      appRouter.back();
-      return '';
-    }
-
-    const boards = user.profile.ID ? boardsStore.getBoardsByProfileID(user.profile.ID) : constants.mocks.boards;
-    const select = document.getElementById('board-name');
-    if (boards && select) {
-      for (let i = 0; i <= boards.length; i++) {
-        const opt = document.createElement('option');
-        opt.value = boards[i].ID;
-        opt.innerHTML = boards[i].title;
-        select.appendChild(opt);
-      }
-    }
-    // const boards = user.profile.ID ? boardsStore.getBoardsByProfileID(user.profile.ID) : constants.mocks.boards;
-    // const select = document.getElementById('board-name');
-    // for (let i = 0; i<=boards.length; i++) {
-    //   const opt = document.createElement('option');
-    //   opt.value = boards[i].ID;
-    //   opt.innerHTML = boards[i].title;
-    //   select.appendChild(opt);
-    // }
+    const profile = userStore.getUser() && userStore.getUser().profile;
+    const userBoards = profile && boardsStore.getBoardsByProfileID(profile.ID);
 
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({
         ...this.props,
-        profile: user.profile,
-        // board: boards[0],
+        profile: profile,
+        profileBoards: userBoards,
       }),
     }));
 
@@ -204,7 +181,7 @@ export class PinBuilderView extends View {
       const fileReader = new FileReader();
 
       fileReader.onload = function(event) {
-        document.getElementById('preview-label').style.backgroundImage = 'url(\'' + event.target.result + '\')';
+        document.getElementById('preview-label').style.backgroundImage = `url('${event.target.result}'`;
       };
 
       fileReader.readAsDataURL(file[0]);

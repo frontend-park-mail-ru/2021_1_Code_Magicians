@@ -19,20 +19,16 @@
                         <input class="pin-builder-form__input" type="text" name="name" placeholder="Add name">
                     </label>
                     <div class="shadow-line"></div>
-                </div>
+<!--                </div>-->
                 <div class="pin-builder-form__wrapper">
-<!--                    <div class="pin-board-selector">-->
-<!--                        <input type="select" class="pin-board-selector__input" id="board-name">-->
-<!--                        <button class="pin-board-selector__select-button" id="create-board">-->
-<!--                            <i class="fas fa-chevron-circle-down user-icon"></i>-->
-<!--                        </button>-->
-<!--                        <button class="pin-board-selector__select-button">-->
-<!--                            <i class="fas fa-heart user-icon"></i>-->
-<!--                        </button>-->
-
-<!--                    </div>-->
                     <div class="pin-board-selector">
-                        <input type="select" class="pin-board-selector__input" id="board-name">
+                        <select class="pin-board-selector__input" id="board-name">
+                            {{#each profileBoards}}
+                                <option data-boardID="{{this.ID}}" class="pin-board-selector__option">
+                                    {{this.title}}
+                                </option>
+                            {{/each}}
+                        </select>
                         <div class="pin-board-selector__select-button pin-board-selector">
                             <i class="fas fa-chevron-circle-down user-icon"></i>
                         </div>
