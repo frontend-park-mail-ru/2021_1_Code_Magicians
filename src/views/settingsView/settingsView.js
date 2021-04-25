@@ -8,8 +8,6 @@ import {urlRegexp} from 'consts/regexp';
 import {actions} from 'actions/actions';
 import {appRouter} from 'appManagers/router';
 import {constants} from 'consts/consts';
-import {User} from 'models/User';
-import {Profile} from 'models/Profile';
 import {toastBox} from 'components/toast/toast';
 
 import SettingsViewTemplate from './settingsView.hbs';
@@ -103,9 +101,7 @@ export class SettingsView extends View {
 
     super.didMount();
 
-    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
-    if (!user.authorized() &&
-        userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
+    if (!userStore.getUser() || !userStore.getUser().authorized()) {
       appRouter.go('/');
     }
 

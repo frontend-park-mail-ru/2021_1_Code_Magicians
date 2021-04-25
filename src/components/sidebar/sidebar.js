@@ -4,9 +4,6 @@ import {userStore} from 'stores/userStore/UserStore';
 
 import SidebarTemplate from './sidebar.hbs';
 import './sidebar.scss';
-import {User} from 'models/User';
-import {Profile} from 'models/Profile';
-import {constants} from 'consts/consts';
 
 /**
  * Side bar (page__sidebar)
@@ -28,8 +25,7 @@ export class Sidebar extends Component {
    * @return {string} final html
    */
   render() {
-    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
-    this._userIsAuthorized = user.authorized();
+    this._userIsAuthorized = userStore.getUser() && userStore.getUser().authorized();
 
     return this.tmpl({
       ...this.props,
@@ -51,10 +47,8 @@ export class Sidebar extends Component {
 
     const icon = document.querySelector('.theme-toggle-icon');
 
-    const newFaClass = icon.classList.contains('far') ? 'fas' : 'far';
-    const oldFaClass = newFaClass === 'fas' ? 'far' : 'fas';
-
-    icon.classList.replace(oldFaClass, newFaClass);
+    icon.classList.toggle('far');
+    icon.classList.toggle('fas');
   }
 
   /**

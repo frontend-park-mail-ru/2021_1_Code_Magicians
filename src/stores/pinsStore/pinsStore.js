@@ -36,6 +36,8 @@ class PinsStore extends Store {
       actionType: null,
       data: {},
     };
+
+    this._processFetchedPins = this._processFetchedPins.bind(this);
   }
 
   /**
@@ -142,7 +144,7 @@ class PinsStore extends Store {
    */
   _postComment(data) {
     API.postComment(data.commentText, data.pinID).then((response) => {
-      switch (response) {
+      switch (response.status) {
         case 201:
           this._fetchComments({pinID: data.pinID});
           break;
@@ -204,24 +206,7 @@ class PinsStore extends Store {
     this._pinsSource.sourceType = 'profile';
     this._pinsSource.sourceID = data.profileID;
 
-    API.getPinsByProfileID(data.profileID).then((response) => {
-      switch (response.status) {
-        case 200:
-          this._pins = response.responseBody.pins.map((pinData) => new Pin(pinData));
-          break;
-        case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
-          this._pins = [];
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
-      }
-
-      this._fetchingPins = false;
-      this._trigger('change');
-    });
+    API.getPinsByProfileID(data.profileID).then(this._processFetchedPins);
   }
 
   /**
@@ -235,24 +220,7 @@ class PinsStore extends Store {
     this._pinsSource.sourceType = 'board';
     this._pinsSource.sourceID = data.boardID;
 
-    API.getPinsByBoardID(data.boardID).then((response) => {
-      switch (response.status) {
-        case 200:
-          this._pins = response.responseBody.pins.map((pinData) => new Pin(pinData));
-          break;
-        case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
-          this._pins = [];
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
-      }
-
-      this._fetchingPins = false;
-      this._trigger('change');
-    });
+    API.getPinsByBoardID(data.boardID).then(this._processFetchedPins);
   }
 
   /**
@@ -311,6 +279,29 @@ class PinsStore extends Store {
     });
   }
 
+  /**
+   * Process
+   * @param {Object} response
+   * @private
+   */
+  _processFetchedPins(response) {
+    switch (response.status) {
+      case 200:
+        this._pins = response.responseBody.pins.map((pinData) => new Pin(pinData));
+        break;
+      case 400:
+      case 404:
+        this._status = storeStatuses.clientSidedError;
+        this._pins = [];
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
+    }
+
+    this._fetchingPins = false;
+    this._trigger('change');
+  }
 
   /**
    * Get pin

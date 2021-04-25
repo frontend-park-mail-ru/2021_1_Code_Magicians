@@ -5,8 +5,6 @@ import {userStore} from 'stores/userStore/UserStore';
 import {constants} from 'consts/consts';
 
 import './authView.scss';
-import {User} from 'models/User';
-import {Profile} from 'models/Profile';
 import {toastBox} from 'components/toast/toast';
 
 /**
@@ -29,8 +27,6 @@ export class AuthView extends View {
   didMount() {
     document.querySelector('.auth-form').addEventListener('submit', this.submit);
 
-    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
-
     switch (userStore.getStatus()) {
       case constants.store.statuses.userStore.clientError:
       case constants.store.statuses.userStore.internalError:
@@ -39,9 +35,8 @@ export class AuthView extends View {
         break;
     }
 
-    if (user.authorized()) {
+    if (userStore.getUser() && userStore.getUser().authorized()) {
       this.clearState();
-      this._active = false;
       appRouter.go(this.props.paths.profile);
     }
   }

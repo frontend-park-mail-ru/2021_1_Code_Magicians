@@ -5,8 +5,6 @@ import {constants} from 'consts/consts';
 
 import ProfileHeaderTemplate from './profileHeader.hbs';
 import './profileHeader.scss';
-import {User} from 'models/User';
-import {Profile} from 'models/Profile';
 import {actions} from 'actions/actions';
 import {toastBox} from 'components/toast/toast';
 
@@ -32,18 +30,15 @@ export class ProfileHeader extends Component {
    */
   render() {
     const selfProfile = Object.keys(this.props.pathArgs).length === 0;
-    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+    const user = userStore.getUser();
 
-    let profile = selfProfile ? user.profile : null;
-    profile = profile ||
-      profilesStore.getProfileByID(this.props.pathArgs.profileID) ||
-      constants.mocks.defaultProfile;
+    const profile = selfProfile ? user && user.profile : profilesStore.getProfileByID(this.props.pathArgs.profileID);
 
     return this.tmpl({
       ...this.props,
       selfProfile: selfProfile,
       profile: profile,
-      userIsAuthorized: user.authorized(),
+      userIsAuthorized: user && user.authorized(),
     });
   }
 

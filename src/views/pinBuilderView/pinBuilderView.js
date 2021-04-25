@@ -6,9 +6,7 @@ import PinBuilderViewTemplate from './pinBuilderView.hbs';
 import './pinBuilderView.scss';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
-import {User} from 'models/User';
 import {userStore} from 'stores/userStore/UserStore';
-import {Profile} from 'models/Profile';
 import {constants} from 'consts/consts';
 import {appRouter} from 'appManagers/router';
 import {descriptionRegexp} from 'consts/regexp';
@@ -46,8 +44,7 @@ export class PinBuilderView extends View {
    * Did
    */
   didMount() {
-    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
-    if (!user.authorized() && userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
+    if (!userStore.getUser() || !userStore.getUser().authorized()) {
       appRouter.back();
       return;
     }
@@ -61,6 +58,7 @@ export class PinBuilderView extends View {
     document.querySelector('.pin-builder-form').addEventListener('submit', this.submit);
     document.getElementById('create-board').addEventListener('click', this.createBoard);
     document.getElementById('file-input').addEventListener('change', this.previewImage);
+
     super.didMount();
   }
 
@@ -71,7 +69,6 @@ export class PinBuilderView extends View {
     document.querySelector('.pin-builder-form').removeEventListener('submit', this.submit);
     document.getElementById('create-board').removeEventListener('click', this.createBoard);
     document.getElementById('file-input').removeEventListener('change', this.previewImage);
-
 
     super.willUnmount();
   }
@@ -119,18 +116,6 @@ export class PinBuilderView extends View {
       return;
     }
 
-    // const nameError = name.match(descriptionRegexp);
-    // if (!nameError || nameError[0] !== name) {
-    //   toastBox.addToast('Add name to the pin', true);
-    //   return;
-    // }
-    //
-    // const descriptionError = description.match(descriptionRegexp);
-    // if (!descriptionError || descriptionError[0] !== description) {
-    //   toastBox.addToast('Add your awesome pin description', true);
-    //   return;
-    // }
-
     if (!image.files[0]) {
       toastBox.addToast('Don\'t forget your pin image!', true);
       return;
@@ -139,14 +124,14 @@ export class PinBuilderView extends View {
     const payload = {
       title: name,
       description: description,
-      // tags: [],
-      // boardID: 0,
     };
+
     const formData = new FormData();
 
     formData.append('pinInfo', JSON.stringify(payload));
     formData.append('pinImage', image.files[0]);
     actions.pins.createPin(formData);
+
     this.setState(payload);
   }
 
@@ -157,16 +142,18 @@ export class PinBuilderView extends View {
   createBoard(event) {
     event.preventDefault();
 
-    const boardTitle = document.getElementById('board-name').value;
+    const boardTitle = document.getElementById('board-name').value.trim();
 
     if (!boardTitle) {
       toastBox.addToast('Don\'t forget your board name!', true);
       return;
     }
+
     const boardData = {
       title: boardTitle,
-      description: 'Amazingestest-board',
+      description: '',
     };
+
     actions.boards.createBoard(boardData);
   }
 
@@ -176,6 +163,7 @@ export class PinBuilderView extends View {
    */
   previewImage(event) {
     event.preventDefault();
+
     const file = document.getElementById('file-input').files;
     if (file.length > 0) {
       const fileReader = new FileReader();

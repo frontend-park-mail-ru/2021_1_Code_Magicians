@@ -2,7 +2,6 @@ import {ProfileView} from '../profileView/profileView';
 import {PinsFeed} from 'components/pinsFeed/pinsFeed';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {userStore} from 'stores/userStore/UserStore';
-import {profilesStore} from 'stores/profilesStore/profilesStore';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
 
 

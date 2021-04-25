@@ -73,13 +73,13 @@ export class SignupView extends AuthView {
    * Did
    */
   didMount() {
-    super.didMount();
-
     switch (userStore.getStatus()) {
       case constants.store.statuses.userStore.signupConflict:
         toastBox.addToast('This username or email already taken. Please, choose another one', true);
         actions.user.statusProcessed();
         break;
     }
+
+    super.didMount();
   }
 }

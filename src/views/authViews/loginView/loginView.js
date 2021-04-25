@@ -70,11 +70,11 @@ export class LoginView extends AuthView {
    * Did
    */
   didMount() {
-    super.didMount();
-
     if (userStore.getStatus() === constants.store.statuses.userStore.invalidCredentials) {
       toastBox.addToast('This user doesn\'t exist or password is incorrect', true);
       actions.user.statusProcessed();
     }
+
+    super.didMount();
   }
 }

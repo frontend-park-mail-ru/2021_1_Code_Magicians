@@ -133,7 +133,7 @@
   flex-direction: row;
   align-items: center;
 
-  margin: 0px 0 20px 0;
+  margin: 0 0 20px 0;
 
   &__avatar {
     width: 60px;
@@ -261,6 +261,8 @@
     color: white;
 
     background-color: var(--red);
+
+    cursor: pointer;
   }
 }
 
@@ -276,7 +278,7 @@
     display: flex;
     flex-direction: column;
 
-    margin: 0px 20px 0px 0px;
+    margin: 0 20px 0 0;
 
     &_val {
       font-size: 22px;

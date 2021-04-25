@@ -6,8 +6,6 @@ import {constants} from 'consts/consts';
 
 import ProfileChangesTemplate from './profileChanges.hbs';
 import './profileChanges.scss';
-import {User} from 'models/User';
-import {Profile} from 'models/Profile';
 import {toastBox} from 'components/toast/toast';
 import {validateInputs} from 'utils/validateUtils';
 
@@ -30,8 +28,7 @@ export class ProfileChanges extends Component {
    * @return {String}
    */
   render() {
-    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
-    return this.tmpl({...this.props, user: user.profile});
+    return this.tmpl({...this.props, user: userStore.getUser() && userStore.getUser().profile});
   }
 
   /**

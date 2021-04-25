@@ -26,7 +26,7 @@ export class ProfileView extends View {
   constructor(props = {}) {
     super(props, document.getElementById('app'));
 
-    this._profileMainContent = ''; // different in different views
+    this._profileMainContent = '<div class="profile-overview"></div>'; // different in different views
 
     this.baseTmpl = ProfileViewTemplate;
 
@@ -40,10 +40,10 @@ export class ProfileView extends View {
    * @return {String}
    */
   render() {
-    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
+    const user = userStore.getUser();
 
-    this._userIsAuthorized = user.authorized();
-    this.props.userID = user.profile['ID'];
+    this._userIsAuthorized = user && user.authorized();
+    this.props.userID = user && user.profile['ID'];
     this.props.profileID = this.props.pathArgs.profileID || 0;
 
     this._nestedComponents.set('profileHeader', new ProfileHeader({...this.props}));

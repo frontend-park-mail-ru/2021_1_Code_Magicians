@@ -25,12 +25,12 @@ export class View extends Component {
    * @param {Object} pathArgs from path
    */
   show(pathArgs) {
+    this._active = true;
     this.props.pathArgs = pathArgs;
 
     this._parent.insertAdjacentHTML('afterbegin', this.render());
 
     this.didMount();
-    this._active = true;
   }
 
   /**

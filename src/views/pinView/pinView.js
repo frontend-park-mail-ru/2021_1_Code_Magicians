@@ -23,7 +23,7 @@ export class PinView extends View {
     super(props, document.getElementById('app'));
 
     this.tmpl = PinViewTemplate;
-    this.submit = this.submit.bind(this);
+    this.sendComment = this.sendComment.bind(this);
     this.follow = this.follow.bind(this);
 
     pinsStore.bind('change', this.refresh);
@@ -71,7 +71,7 @@ export class PinView extends View {
   didMount() {
     const commentForm = document.querySelector('.comment-form');
     if (commentForm) {
-      commentForm.addEventListener('submit', this.submit);
+      commentForm.addEventListener('submit', this.sendComment);
     }
 
     const followButton = document.querySelector('.user-info__follow-button_active');
@@ -96,22 +96,23 @@ export class PinView extends View {
   willUnmount() {
     const commentForm = document.querySelector('.comment-form');
     if (commentForm) {
-      commentForm.removeEventListener('submit', this.submit);
+      commentForm.removeEventListener('submit', this.sendComment);
     }
 
     super.willUnmount();
   }
 
   /**
-   * Submit callback
+   * Send comment
    * @param {Event} event
    */
-  submit(event) {
+  sendComment(event) {
     event.preventDefault();
 
-    const commentText = document.getElementById('comment-input').value;
-
-    actions.comments.postComment(commentText, this.props.pathArgs.pinID);
+    const commentText = document.getElementById('comment-input').value.trim();
+    if (commentText) {
+      actions.comments.postComment(commentText, this.props.pathArgs.pinID);
+    }
   }
 
   /**

@@ -24,14 +24,20 @@ class App {
   run() {
     const paths = constants.network.routerPaths;
 
+    this.setTheme();
+
     appRouter
         .register(paths.index, new FeedView({}))
         .register(paths.profile, new ProfileView({}))
         .register(paths.profileBoards, new ProfileBoardsView({}))
         .register(paths.profilePins, new ProfilePinsView({}))
+        .register(paths.profileFollowers, new ProfileView({}))
+        .register(paths.profileFollowing, new ProfileView({}))
         .register(paths.otherProfile, new ProfileView({}))
         .register(paths.otherProfileBoards, new ProfileBoardsView({}))
         .register(paths.otherProfilePins, new ProfilePinsView({}))
+        .register(paths.otherProfileFollowers, new ProfileView({}))
+        .register(paths.otherProfileFollowing, new ProfileView({}))
         .register(paths.settings, new SettingsView({}))
         .register(paths.settingsSection, new SettingsView({}))
         .register(paths.signup, new SignupView({}))
@@ -44,6 +50,13 @@ class App {
     // if (DEBUG) { // before https
     //   this._startSW();
     // }
+  }
+
+  /**
+   * Set theme from local storage or set default (light)
+   */
+  setTheme() {
+    document.documentElement.setAttribute('theme', window.localStorage.getItem('theme'));
   }
 
   /**
