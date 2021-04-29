@@ -3,11 +3,11 @@ import {userStore} from 'stores/userStore/UserStore';
 import {actions} from 'actions/actions';
 import {firstNameRegexp, myEmailRegexp, usernameRegexp} from 'consts/regexp';
 import {constants} from 'consts/consts';
+import {toastBox} from 'components/toast/toast';
+import {validateInputs} from 'utils/validateUtils';
 
 import ProfileChangesTemplate from './profileChanges.hbs';
 import './profileChanges.scss';
-import {toastBox} from 'components/toast/toast';
-import {validateInputs} from 'utils/validateUtils';
 
 /**
  * Profile changes form

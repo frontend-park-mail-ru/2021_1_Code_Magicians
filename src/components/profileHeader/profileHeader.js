@@ -2,11 +2,11 @@ import {Component} from '../component';
 import {userStore} from 'stores/userStore/UserStore';
 import {profilesStore} from 'stores/profilesStore/profilesStore';
 import {constants} from 'consts/consts';
+import {actions} from 'actions/actions';
+import {toastBox} from 'components/toast/toast';
 
 import ProfileHeaderTemplate from './profileHeader.hbs';
 import './profileHeader.scss';
-import {actions} from 'actions/actions';
-import {toastBox} from 'components/toast/toast';
 
 /**
  * Profile header

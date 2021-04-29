@@ -1,6 +1,8 @@
 import {Model} from './Model';
 import {constants} from 'consts/consts';
 
+import LogoImage from '../assets/img/Logo.png';
+
 /**
  * Notification model.
  */
@@ -17,7 +19,7 @@ export class NotificationModel extends Model {
    * }
    */
   constructor(props = {}) {
-    props.logoLink = props.logoLink ? `${constants.network.bucketURL}${props.logoLink}` : '/assets/img/Logo.png';
+    props.logoLink = props.logoLink ? `${constants.network.bucketURL}${props.logoLink}` : LogoImage;
 
     super(props);
   }

@@ -3,10 +3,11 @@ import {Sidebar} from '../sidebar/sidebar';
 import {Component} from '../component';
 import {Slider} from '../slider/slider';
 import {constants} from 'consts/consts';
+import {userStore} from 'stores/userStore/UserStore';
 
 import PageTemplate from './page.hbs';
 import './page.scss';
-import {userStore} from 'stores/userStore/UserStore';
+import LogoImage from '../../assets/img/Logo.png';
 
 /**
  * Base page component
@@ -35,7 +36,7 @@ export class Page extends Component {
       typeIsMessages: false,
       items: userStore.getNotifications() && userStore.getNotifications().map((notification) => ({
         ID: notification.ID,
-        imageLink: '/assets/img/Logo.png',
+        imageLink: LogoImage,
         header: notification.title,
         isNew: !notification.isRead,
         text: notification.text,

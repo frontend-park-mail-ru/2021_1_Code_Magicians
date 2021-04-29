@@ -43,6 +43,25 @@ module.exports = {
         test: /\.(jpg|jpeg|png|ico|ttf)$/,
         loader: 'file-loader',
       },
+      {
+        test: /\.js$/,
+        exclude: /(.*node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'entry',
+                  corejs: {version: '3.11.1', proposals: true},
+                  targets: {chrome: '87'},
+                },
+              ],
+            ],
+          },
+        },
+      },
     ],
   },
   plugins: [

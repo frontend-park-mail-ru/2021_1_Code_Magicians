@@ -3,11 +3,11 @@ import {actions} from 'actions/actions';
 import {userStore} from 'stores/userStore/UserStore';
 import {constants} from 'consts/consts';
 import {passwordRegexp} from 'consts/regexp';
+import {toastBox} from 'components/toast/toast';
+import {validateInput} from 'utils/validateUtils';
 
 import SecuritySettingsTemplate from './securitySettings.hbs';
 import './securitySettings.scss';
-import {toastBox} from 'components/toast/toast';
-import {validateInput} from 'utils/validateUtils';
 
 /**
  * Security settings form

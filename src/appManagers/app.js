@@ -12,7 +12,6 @@ import {PinView} from 'views/pinView/pinView';
 import {BoardView} from 'views/boardView/boardView';
 
 import 'assets/css/base.scss';
-import 'assets/img/Logo.png';
 
 /**
  * Main app class
@@ -47,9 +46,9 @@ class App {
         .register(paths.board, new BoardView({}))
         .start();
 
-    // if (DEBUG) { // before https
-    //   this._startSW();
-    // }
+    if (!DEBUG) {
+      this._startSW();
+    }
   }
 
   /**
