@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
@@ -79,11 +80,16 @@ module.exports = {
 
   devServer: {
     host: '0.0.0.0',
+    https: debug ? false : {
+      key: fs.readFileSync(path.resolve('certs/privkey.pem')),
+      cert: fs.readFileSync(path.resolve('certs/fullchain.pem')),
+    },
     port: port,
     publicPath: '/',
     contentBase: path.resolve('src'),
 
     hot: debug,
+    inline: debug,
     clientLogLevel: debug ? 'debug' : 'silent',
     writeToDisk: true,
 

@@ -2,10 +2,10 @@
 
 export const constants = {
   network: {
-    backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'https://www.pinter-best.com:8080',
+    backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'https://pinter-best.com:8080',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
     bucketURL: 'https://pinterbestbucket.s3.eu-central-1.amazonaws.com/',
-    wsURL: DEBUG ? 'ws://127.0.0.1:8080/notifications' : 'ws://www.pinter-best.com:8080/notifications',
+    wsURL: DEBUG ? 'ws://127.0.0.1:8080/notifications' : 'wss://pinter-best.com:8080/notifications',
 
     pathsAPI: {
       signup: '/auth/signup',
