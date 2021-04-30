@@ -1,15 +1,14 @@
 import {View} from '../view.js';
 import {Page} from 'components/page/page';
-
-import PinViewTemplate from './pinView.hbs';
-import './pinView.scss';
-
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {actions} from 'actions/actions';
 import {profilesStore} from 'stores/profilesStore/profilesStore';
 import {constants} from 'consts/consts';
 import {userStore} from 'stores/userStore/UserStore';
 import {appRouter} from 'appManagers/router';
+
+import PinViewTemplate from './pinView.hbs';
+import './pinView.scss';
 
 /**
  * Build pin view

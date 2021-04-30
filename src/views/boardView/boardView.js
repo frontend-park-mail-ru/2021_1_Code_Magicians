@@ -3,13 +3,14 @@ import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {Page} from 'components/page/page';
 import {PinsFeed} from 'components/pinsFeed/pinsFeed';
-
-import BoardViewTemplate from './boardView.hbs';
-import './boardView.scss';
 import {constants} from 'consts/consts';
 import {actions} from 'actions/actions';
 import {appRouter} from 'appManagers/router';
 import {toastBox} from 'components/toast/toast';
+
+import BoardViewTemplate from './boardView.hbs';
+import './boardView.scss';
+
 
 /**
  * Board view

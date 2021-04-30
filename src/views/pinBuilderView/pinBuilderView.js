@@ -1,9 +1,6 @@
 import {View} from '../view.js';
 import {actions} from 'actions/actions';
 import {toastBox} from 'components/toast/toast';
-
-import PinBuilderViewTemplate from './pinBuilderView.hbs';
-import './pinBuilderView.scss';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {userStore} from 'stores/userStore/UserStore';
@@ -11,6 +8,10 @@ import {constants} from 'consts/consts';
 import {appRouter} from 'appManagers/router';
 import {descriptionRegexp} from 'consts/regexp';
 import {Page} from 'components/page/page';
+
+import PinBuilderViewTemplate from './pinBuilderView.hbs';
+import './pinBuilderView.scss';
+
 
 /**
  * Build pin view

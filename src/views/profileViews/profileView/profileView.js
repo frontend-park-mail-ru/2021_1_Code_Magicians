@@ -7,13 +7,12 @@ import {constants} from 'consts/consts';
 import {profilesStore} from 'stores/profilesStore/profilesStore';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
+import {actions} from 'actions/actions';
+import {toastBox} from 'components/toast/toast';
 
 import ProfileViewTemplate from './profileView.hbs';
 import './profileView.scss';
-import {User} from 'models/User';
-import {Profile} from 'models/Profile';
-import {actions} from 'actions/actions';
-import {toastBox} from 'components/toast/toast';
+
 
 /**
  * Base profile view
@@ -64,8 +63,8 @@ export class ProfileView extends View {
   didMount() {
     super.didMount();
 
-    const user = userStore.getUser() || new User(new Profile(constants.mocks.defaultProfile));
-    if (!user.authorized() &&
+    const user = userStore.getUser();
+    if ((!user || !user.authorized()) &&
         Object.keys(this.props.pathArgs).length === 0 &&
         userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       this._active = false;

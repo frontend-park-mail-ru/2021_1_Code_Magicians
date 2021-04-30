@@ -101,8 +101,12 @@ export class SettingsView extends View {
 
     super.didMount();
 
-    if (!userStore.getUser() || !userStore.getUser().authorized()) {
-      appRouter.go('/');
+    const user = userStore.getUser();
+    if ((!user || !user.authorized()) &&
+      userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
+      this._active = false;
+      appRouter.go(this.props.paths.home);
+      return;
     }
 
     switch (userStore.getStatus()) {
