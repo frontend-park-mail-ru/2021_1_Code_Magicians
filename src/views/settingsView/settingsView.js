@@ -112,7 +112,7 @@ export class SettingsView extends View {
     switch (userStore.getStatus()) {
       case constants.store.statuses.userStore.clientError:
       case constants.store.statuses.userStore.internalError:
-        toastBox.addToast('Something went wrong. Please, try to refresh the page or come back later.', true);
+        toastBox.addToast(constants.toastMessages.unknownError, true);
         actions.user.statusProcessed();
         break;
     }

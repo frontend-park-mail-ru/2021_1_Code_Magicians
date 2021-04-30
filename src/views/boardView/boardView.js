@@ -68,7 +68,7 @@ export class BoardView extends View {
         break;
       case constants.store.statuses.profilesStore.clientError:
       case constants.store.statuses.profilesStore.internalError:
-        toastBox.addToast('Something went wrong. Please, try again or refresh the page');
+        toastBox.addToast(constants.toastMessages.unknownError);
         actions.profiles.statusProcessed();
         break;
     }

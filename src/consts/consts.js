@@ -118,6 +118,9 @@ export const constants = {
       },
     },
   },
+  toastMessages: {
+    unknownError: 'Something went wrong. Please, try to refresh the page or come back later.',
+  },
   mocks: {
     defaultProfile: {
       ID: null,
