@@ -6,7 +6,7 @@
             <i class="fas fa-times navbar__search-wiper-icon"></i>
         </button>
     </form>
-    {{#if userIsAuthorised}}
+    {{#if userIsAuthorized}}
         <div class="navbar__user-section">
             <img src="{{user.avatarLink}}" alt="Avatar" class="navbar__user-avatar">
             <a href="{{paths.profile}}" class="navbar__username"> {{user.username}} </a>
@@ -15,9 +15,12 @@
             <a class="navbar__action" href="{{paths.createPin}}">
                 <i class="fas fa-plus navbar__action-icon"></i>
             </a>
-            <button class="navbar__action disabled">
+            <button class="navbar__action" name="dropdown-toggle">
                 <i class="fas fa-ellipsis-v navbar__action-icon"></i>
             </button>
+        </div>
+        <div class="navbar__dropdown-actions">
+            <button class="navbar__dropdown-action" name="logout">Log out</button>
         </div>
     {{else}}
         <div class="navbar__auth-section">

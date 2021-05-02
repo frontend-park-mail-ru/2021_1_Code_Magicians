@@ -1,7 +1,9 @@
 import {Component} from '../component';
 import {userStore} from 'stores/userStore/UserStore';
+
 import NavbarTemplate from './navbar.hbs';
 import './navbar.scss';
+import {actions} from '../../actions/actions';
 
 
 /**
@@ -16,6 +18,8 @@ export class Navbar extends Component {
     super(props);
 
     this.tmpl = NavbarTemplate;
+
+    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
   /**
@@ -24,10 +28,11 @@ export class Navbar extends Component {
    */
   render() {
     const user = userStore.getUser();
+    this._userIsAuthorized = user && user.authorized();
 
     return this.tmpl({
       ...this.props,
-      userIsAuthorised: user && user.authorized(),
+      userIsAuthorized: this._userIsAuthorized,
       user: user && user.profile,
     });
   }
@@ -48,6 +53,16 @@ export class Navbar extends Component {
     document
         .querySelector('.navbar__search-wiper')
         .addEventListener('click', this.wipeSearchField);
+    if (this._userIsAuthorized) {
+      document
+          .querySelector('[name="dropdown-toggle"]')
+          .addEventListener('click', this.toggleDropdown);
+      document
+          .querySelector('[name="logout"]')
+          .addEventListener('click', this.logout);
+
+      document.addEventListener('click', this.closeDropdown);
+    }
   }
 
   /**
@@ -55,8 +70,55 @@ export class Navbar extends Component {
    */
   willUnmount() {
     const searchWiper = document.querySelector('.navbar__search-wiper');
-    if (searchWiper) {
-      searchWiper.removeEventListener('click', this.wipeSearchField);
+    searchWiper.removeEventListener('click', this.wipeSearchField);
+
+    if (this._userIsAuthorized) {
+      document
+          .querySelector('[name="dropdown-toggle"]')
+          .removeEventListener('click', this.toggleDropdown);
+      document
+          .querySelector('[name="logout"]')
+          .removeEventListener('click', this.logout);
+
+      document.removeEventListener('click', this.closeDropdown);
     }
+  }
+
+  /**
+   * Toggle it
+   * @param {Event} event
+   */
+  toggleDropdown(event) {
+    event.preventDefault();
+
+    const dropdown = document.querySelector('.navbar__dropdown-actions');
+    dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  /**
+   * Close it
+   * @param {Event} event
+   */
+  closeDropdown(event) {
+    event.preventDefault();
+
+    const toggleButton = document.querySelector('[name="dropdown-toggle"]');
+    const dropdown = document.querySelector('.navbar__dropdown-actions');
+
+    if (toggleButton.contains(event.target) || dropdown.contains(event.target)) {
+      return;
+    }
+
+    document.querySelector('.navbar__dropdown-actions').style.display = 'none';
+  }
+
+  /**
+   * Logout
+   * @param {Event} event
+   */
+  logout(event) {
+    event.preventDefault();
+
+    actions.user.logout();
   }
 }

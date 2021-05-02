@@ -1,14 +1,15 @@
 import {Component} from '../component';
 import {actions} from 'actions/actions';
 import {ChatBlock} from '../chatBlock/chatBlock';
-
-import SliderTemplate from './slider.hbs';
-import './slider.scss';
 import {validateInputs} from '../../utils/validateUtils';
 import {usernameRegexp} from '../../consts/regexp';
 import {userStore} from '../../stores/userStore/UserStore';
 import {constants} from '../../consts/consts';
 import {toastBox} from '../toast/toast';
+
+import SliderTemplate from './slider.hbs';
+import './slider.scss';
+
 
 /**
  * Slider for notifications and messages
