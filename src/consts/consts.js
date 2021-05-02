@@ -32,6 +32,9 @@ export const constants = {
       follow: '/follow',
 
       notificationRead: '/notifications/read',
+
+      postMessage: '/message',
+      chatRead: '/chats/read',
     },
 
     routerPaths: {
@@ -67,9 +70,11 @@ export const constants = {
         passwordChanged: 'password changed',
         profileEdited: 'profile edited',
         avatarUploaded: 'avatar uploaded',
+        messageSent: 'message sent',
         editConflict: 'edit conflict',
         badAvatarImage: 'bad avatar',
         signupConflict: 'signup conflict',
+        userNotFound: 'user not found',
 
         clientError: 'client error',
         internalError: 'internal error',

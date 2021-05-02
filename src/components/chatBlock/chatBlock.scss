@@ -1,0 +1,141 @@
+.chat {
+  position: fixed;
+  top: 0; bottom: 0;
+  left: 495px;
+
+  display: none;
+  flex-direction: column;
+
+  width: 500px;
+
+  border-left: var(--almost-white) 2px solid;
+  box-shadow: 6px 0 6px 0 var(--main-elements-shadow);
+
+  background-color: var(--white);
+
+  z-index: 3;
+
+  &__header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    min-height: 70px;
+
+    padding-left: 30px;
+
+    border-bottom: 2px solid var(--almost-white);
+
+    &-avatar-image {
+      border-radius: 50%;
+
+      object-fit: cover;
+
+      width: 50px;
+      height: 50px;
+    }
+
+    &-username {
+      margin-left: 15px;
+
+      text-decoration: none;
+      font-size: 18px;
+      font-family: var(--font-medium);
+
+      color: var(--black);
+    }
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__message {
+    max-width: 350px;
+
+    margin: 10px;
+    padding: 12px;
+
+    border-radius: 10px;
+
+    &-text {
+      margin: 0;
+    }
+
+    &_primary {
+      align-self: flex-start;
+
+      color: var(--black);
+      background-color: var(--almost-white);
+    }
+
+    &_secondary {
+      align-self: flex-end;
+
+      color: var(--white);
+      background-color: var(--gray);
+
+    }
+  }
+
+  &__message {
+    &-form {
+      margin-top: auto;
+
+      display: flex;
+      align-items: center;
+
+      border-left: var(--white) 2px solid;
+      border-top: var(--white) 2px solid;
+
+      background-color: var(--almost-white);
+    }
+
+    &-input {
+      flex-grow: 1;
+
+      min-height: 70px;
+
+      padding: 10px 10px;
+
+      border: none;
+      outline: none;
+
+      color: var(--black);
+      background-color: transparent;
+
+      resize: none;
+    }
+  }
+
+  &__send-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+
+    padding: 0 15px;
+
+    outline: none;
+    border: none;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+    &-icon {
+      font-size: 22px;
+      color: var(--gray);
+    }
+  }
+}

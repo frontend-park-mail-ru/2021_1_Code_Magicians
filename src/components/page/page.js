@@ -2,7 +2,6 @@ import {Navbar} from '../navbar/navbar';
 import {Sidebar} from '../sidebar/sidebar';
 import {Component} from '../component';
 import {Slider} from '../slider/slider';
-import {constants} from 'consts/consts';
 import {userStore} from 'stores/userStore/UserStore';
 
 import PageTemplate from './page.hbs';
@@ -27,7 +26,7 @@ export class Page extends Component {
       ...props,
       sliderType: 'Messages',
       typeIsMessages: true,
-      items: constants.mocks.messages,
+      items: userStore.getChats(),
     }));
 
     this._nestedComponents.set('_notificationsSlider', new Slider({

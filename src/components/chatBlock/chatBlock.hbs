@@ -1,0 +1,21 @@
+<div class="chat">
+    <div class="chat__header">
+        <a href="{{paths.profile}}/{{profile.ID}}" class="chat__header-avatar">
+            <img src="{{profile.avatarLink}}" alt="avatar" class="chat__header-avatar-image">
+        </a>
+        <a href="{{paths.profile}}/{{profile.ID}}" class="chat__header-username">{{profile.username}}</a>
+    </div>
+    <div class="chat__messages">
+        {{#each messages}}
+            <div class="chat__message chat__message{{#if this.isSelf}}_secondary{{else}}_primary{{/if}}">
+                <p class="chat__message-text">{{this.text}}</p>
+            </div>
+        {{/each}}
+    </div>
+    <form class="chat__message-form">
+        <textarea class="chat__message-input" placeholder="Write a message..."></textarea>
+        <button class="chat__send-button">
+            <i class="far fa-paper-plane chat__send-button-icon"></i>
+        </button>
+    </form>
+</div>

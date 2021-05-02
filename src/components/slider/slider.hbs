@@ -4,6 +4,15 @@
             <h2 class="slider__header-text">{{sliderType}}</h2>
         </div>
         <div class="slider__items">
+            {{#unless items}}
+                <p class="slider__feature-description">
+                    {{#if typeIsMessages}}
+                        Here will be your opened chats with messages to other Pinterbest users!
+                    {{else}}
+                        Here you can find notifications about new followers, comments to your pins and other events!
+                    {{/if}}
+                </p>
+            {{/unless}}
             {{#each items}}
                 <div data-id="{{this.ID}}" class="slider__item">
                     <img src="{{this.imageLink}}" alt="image" class="slider__item-image">
@@ -21,6 +30,7 @@
                     To :
                     <input type="text" class="message-form__target-input message-form__input">
                 </label>
+                <div class="errors chat-username-errors input-error-text"></div>
                 <label class="message-form__label message-form__text-label">
                     Message text :
                     <textarea class="message-form__text-input message-form__input"></textarea>
@@ -32,5 +42,8 @@
             <button class="slider__message-button slider__message-button_primary">New message</button>
         {{/if}}
     </div>
+    {{#if typeIsMessages}}
+        {{{chatBlock}}}
+    {{/if}}
     <div class="page-shader"></div>
 </div>

@@ -35,6 +35,12 @@ export const actionTypes = {
   notifications: {
     readNotification: 'read-notification',
   },
+  messages: {
+    sendMessage: 'send-message',
+  },
+  chats: {
+    markAsRead: 'mark-as-read',
+  },
 };
 
 export const actions = {
@@ -184,6 +190,25 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.notifications.readNotification,
         data: {notificationID: notificationID},
+      });
+    },
+  },
+  messages: {
+    sendMessage: (messageText, targetUsername) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.messages.sendMessage,
+        data: {
+          messageText: messageText,
+          targetUsername: targetUsername,
+        },
+      });
+    },
+  },
+  chats: {
+    markAsRead: (chatID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.chats.markAsRead,
+        data: {chatID: chatID},
       });
     },
   },
