@@ -229,7 +229,6 @@ class PinsStore extends Store {
    * @private
    */
   _fetchFeed(number = 50) {
-    // later will be API function for this. Now only that mock
     this._pinsSource.sourceType = 'feed';
     this._fetchingPins = true;
 
@@ -242,13 +241,9 @@ class PinsStore extends Store {
           this._status = storeStatuses.internalError;
       }
 
+      this._fetchingPins = false;
       this._trigger('change');
     });
-
-    // this._pins = constants.mocks.pins;
-
-    this._fetchingPins = false;
-    this._trigger('change');
   }
 
   /**
