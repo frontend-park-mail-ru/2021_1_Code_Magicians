@@ -1,12 +1,27 @@
-<div class="board-control">
-    <input type="select" class="board-control__input" id="board-name">
-    <div class="board-control__button">
-        <i class="fas fa-chevron-circle-down board-icon"></i>
+<div class="pin-board-selector">
+    <select class="pin-board-selector__input">
+        {{#each profileBoards}}
+            <option data-boardID="{{this.ID}}" class="pin-board-selector__option">
+                {{this.title}}
+            </option>
+        {{/each}}
+    </select>
+    <div class="pin-board-selector__select-button pin-board-selector"  id="create-board">
+        <i class="fas fa-plus-circle user-icon"></i>
     </div>
-    <div class="board-control__button"  id="create-board">
-        <i class="fas fa-plus-circle board-icon"></i>
+    <div class="pin-board-selector__select-button pin-board-selector">
+        <i class="fas fa-heart user-icon pin-board-selector__select-button"></i>
     </div>
-    <div class="board-control__button">
-        <i class="fas fa-heart board-icon"></i>
+</div>
+<div class="board-create-form">
+    <div class="blur-background" id="board-form">
+        <div class="board-creator">
+            <i class="fas fa-times-circle board-creator__close" id="board-close"></i>
+            <div class="board-creator__title">Create your own board</div>
+                <div class="board-create-form__hint">Add board name</div>
+                <input type="text" class ="board-create-form__text"  id="board-name" placeholder="Shopping list? Ideas? Memes...">
+                <div class="shadow-line"></div>
+                <input type="submit" class="board-create-form__button" value="Create board">
+        </div>
     </div>
 </div>
