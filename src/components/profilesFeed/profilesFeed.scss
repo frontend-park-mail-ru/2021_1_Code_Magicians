@@ -1,0 +1,72 @@
+.profiles-feed {
+  display: flex;
+  flex-direction: column;
+
+  padding: 15px;
+
+  background-color: var(--white);
+
+  &__profile {
+    display: flex;
+    align-items: center;
+
+    height: 80px;
+    width: 300px;
+
+    margin: 10px 0;
+    padding: 10px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    color: var(--black);
+    background-color: var(--almost-white);
+  }
+
+  &__avatar {
+    height: 60px;
+    width: 60px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+  }
+
+  &__main-info {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 20px;
+  }
+
+  &__username {
+    font-family: var(--font-medium);
+  }
+
+  &__fullname {
+    font-size: 14px;
+
+    margin-top: 5px;
+
+    color: var(--gray);
+  }
+
+  &__followers-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-left: auto;
+  }
+
+  &__followers-counter {
+    font-size: 14px;
+
+    font-family: var(--font-medium);
+  }
+
+  &__followers {
+    font-size: 12px;
+  }
+}

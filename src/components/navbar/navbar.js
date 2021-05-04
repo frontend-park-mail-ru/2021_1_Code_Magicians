@@ -137,7 +137,6 @@ export class Navbar extends Component {
         .trim()
         .replaceAll(/(\s+)/g, '+');
 
-    console.log(query);
     if (query) {
       actions.common.search(query);
       appRouter.go(constants.network.routerPaths.search);

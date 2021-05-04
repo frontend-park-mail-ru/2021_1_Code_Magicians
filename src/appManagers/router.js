@@ -4,42 +4,6 @@ import {pathParamRegExp, pathPropTypeRegexp, regSubstr, urlRegexp} from 'consts/
 import {constants} from 'consts/consts';
 
 /**
- * Extracts keys from the path, using the template
- * @param {String} path
- * @param {String} template
- * @return {Object}
- */
-function getPathArgs(path, template) {
-  if (!template) {
-    return {};
-  }
-
-  let argsValid = true;
-  const splitPath = path.split('/');
-
-  const pathArgs = template
-      .split('/')
-      .reduce((args, prop, index) => {
-        const propName = prop.replace(pathPropTypeRegexp, '');
-
-        if (propName.startsWith(':')) {
-          const propValue = splitPath[index];
-          const propType = prop.match(pathPropTypeRegexp)[2];
-          switch (propType) {
-            case 'Number':
-              argsValid = argsValid && !isNaN(Number(propValue));
-              break;
-          }
-          args[propName.slice(1)] = propValue;
-        }
-
-        return args;
-      }, {});
-
-  return {argsValid: argsValid, pathArgs: pathArgs};
-}
-
-/**
  * Router
  */
 class Router {
@@ -100,7 +64,7 @@ class Router {
       window.history.pushState(null, null, path);
     }
 
-    const {argsValid, pathArgs} = getPathArgs(path, key);
+    const {argsValid, pathArgs} = this._getPathArgs(path, key);
     if (!argsValid) {
       this._currentView = this._routes.get(constants.network.routerPaths.notFound);
     }
@@ -145,6 +109,42 @@ class Router {
     });
 
     this.go(window.location.pathname);
+  }
+
+  /**
+   * Extracts keys from the path, using the template
+   * @param {String} path
+   * @param {String} template
+   * @return {Object}
+   */
+  _getPathArgs(path, template) {
+    if (!template) {
+      return {};
+    }
+
+    let argsValid = true;
+    const splitPath = path.split('/');
+
+    const pathArgs = template
+        .split('/')
+        .reduce((args, prop, index) => {
+          const propName = prop.replace(pathPropTypeRegexp, '');
+
+          if (propName.startsWith(':')) {
+            const propValue = splitPath[index];
+            const propType = prop.match(pathPropTypeRegexp)[2];
+            switch (propType) {
+              case 'Number':
+                argsValid = argsValid && !isNaN(Number(propValue));
+                break;
+            }
+            args[propName.slice(1)] = propValue;
+          }
+
+          return args;
+        }, {});
+
+    return {argsValid: argsValid, pathArgs: pathArgs};
   }
 }
 

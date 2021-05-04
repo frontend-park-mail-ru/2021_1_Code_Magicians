@@ -1,14 +1,15 @@
 import {View} from '../view';
-
-import SearchViewTemplate from 'searchView.hbs';
 import {Page} from '../../components/page/page';
+import {ProfilesFeed} from '../../components/profilesFeed/profilesFeed';
+
+import SearchViewTemplate from './searchView.hbs';
 
 /**
  * Search view
  */
 export class SearchView extends View {
   /**
-   * Makes new settings view
+   * Makes new SearchView
    * @param {Object} props
    */
   constructor(props = {}) {
@@ -18,7 +19,7 @@ export class SearchView extends View {
   }
 
   /**
-   * Returns settings view html
+   * Returns SearchView html
    * @return {String}
    */
   render() {
@@ -26,21 +27,22 @@ export class SearchView extends View {
       ...this.props,
       page__content: this.tmpl({
         ...this.props,
+        profilesFeed: new ProfilesFeed({}).render(),
       }),
     }));
 
     return this._nestedComponents.get('page').render();
   }
 
-  /**
-   * Did
-   */
-  didMount() {
-  }
-
-  /**
-   * Will
-   */
-  willUnmount() {
-  }
+  // /**
+  //  * Did
+  //  */
+  // didMount() {
+  // }
+  //
+  // /**
+  //  * Will
+  //  */
+  // willUnmount() {
+  // }
 }
