@@ -27,8 +27,6 @@
     border-radius: 10px;
 
     opacity: 0.8;
-
-    color: var(--perm-white);
   }
 
   &_info {
@@ -65,6 +63,8 @@
   }
 
   &__message {
+    color: var(--perm-white);
+
     position: relative;
   }
 }

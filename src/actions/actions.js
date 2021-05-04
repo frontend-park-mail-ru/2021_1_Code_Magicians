@@ -42,6 +42,9 @@ export const actionTypes = {
     markAsRead: 'mark-as-read',
     setActiveChat: 'set-active-chat',
   },
+  common: {
+    search: 'search',
+  },
 };
 
 export const actions = {
@@ -201,6 +204,17 @@ export const actions = {
         data: {
           messageText: messageText,
           targetUsername: targetUsername,
+        },
+      });
+    },
+  },
+  common: {
+    search: (query, opts = {searchProfiles: true, searchPins: true}) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.common.search,
+        data: {
+          query: query,
+          opts: opts,
         },
       });
     },

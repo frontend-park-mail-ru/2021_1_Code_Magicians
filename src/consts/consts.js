@@ -58,6 +58,7 @@ export const constants = {
       createPin: '/create-pin',
       pin: '/pin/:pinID{Number}',
       board: '/board/:boardID{Number}',
+      search: '/search',
     },
   },
   store: {
