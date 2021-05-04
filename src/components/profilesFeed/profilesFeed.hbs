@@ -1,17 +1,15 @@
 <div class="profiles-feed">
     {{#each profiles}}
-        <a href="{{paths.profile}}/{{this.ID}}" class="profiles-feed__profile">
+        <a href="/profile/{{this.ID}}" class="profiles-feed__profile">
             <img src="{{this.avatarLink}}" alt="avatar" class="profiles-feed__avatar">
             <div class="profiles-feed__main-info">
                 <span class="profiles-feed__username">{{this.username}}</span>
-                <span class="profiles-feed__fullname">Nikita Ermilov</span>
+                <span class="profiles-feed__fullname">{{this.name}}</span>
             </div>
             <div class="profiles-feed__followers-section">
-                <span class="profiles-feed__followers-counter">250</span>
-                <span class="profiles-feed__followers">follow</span>
+                <span class="profiles-feed__followers-counter">{{this.followers}}</span>
+                <span class="profiles-feed__followers">followers</span>
             </div>
         </a>
     {{/each}}
-<!--    {{this.followers}}-->
-<!--    {{this.firstName}}-->
 </div>

@@ -209,12 +209,12 @@ export const actions = {
     },
   },
   common: {
-    search: (query, opts = {searchProfiles: true, searchPins: true}) => {
+    search: (query, searchingItems) => {
       appDispatcher.dispatch({
         actionType: actionTypes.common.search,
         data: {
           query: query,
-          opts: opts,
+          searchingItems: searchingItems,
         },
       });
     },

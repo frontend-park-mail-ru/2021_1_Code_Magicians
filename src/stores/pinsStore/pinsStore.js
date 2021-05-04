@@ -12,6 +12,8 @@ const storeStatuses = constants.store.statuses.pinsStore;
  * PinsStore
  */
 class PinsStore extends Store {
+  lastSearchQuery = '';
+
   /**
    * Makes new pins store
    */
@@ -63,6 +65,11 @@ class PinsStore extends Store {
         break;
       case actionTypes.pins.statusProcessed:
         this._status = storeStatuses.ok;
+        break;
+      case actionTypes.common.search:
+        if (action.data.searchingItems === 'pins') {
+          this._searchPins(action.data);
+        }
         break;
       default:
         return;
@@ -286,7 +293,6 @@ class PinsStore extends Store {
         break;
       case 400:
       case 404:
-        this._status = storeStatuses.clientSidedError;
         this._pins = [];
         break;
       default:
@@ -296,6 +302,20 @@ class PinsStore extends Store {
 
     this._fetchingPins = false;
     this._trigger('change');
+  }
+
+  /**
+   * Search some pins
+   * @param {Object} data
+   * @private
+   */
+  _searchPins(data) {
+    this.lastSearchQuery = data.query;
+    this._fetchingPins = true;
+
+    this._pinsSource.sourceType = 'search';
+
+    API.searchPins(data.query).then(this._processFetchedPins);
   }
 
   /**
@@ -409,6 +429,19 @@ class PinsStore extends Store {
     const pinID = this._newPinID;
     this._newPinID = null;
     return pinID;
+  }
+
+  /**
+   * Get found pins by query
+   * @param {String} query
+   * @return {*}
+   */
+  getFoundPins(query) {
+    if (this._fetchingPins) {
+      return null;
+    }
+
+    return query === this.lastSearchQuery ? this._pins : null;
   }
 }
 

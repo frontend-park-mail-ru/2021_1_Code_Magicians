@@ -1,1 +1,12 @@
-{{{profilesFeed}}}
+<div class="search-page">
+    <h2 class="search-page__search-description">
+        {{searchType}} found by query '{{query}}' :
+    </h2>
+    {{#if searchingProfiles}}
+        <div class="search-page__profiles">
+            {{{foundItems}}}
+        </div>
+    {{else}}
+        {{{foundItems}}}
+    {{/if}}
+</div>

@@ -2,7 +2,6 @@ import {Component} from '../component';
 import {userStore} from 'stores/userStore/UserStore';
 import {actions} from '../../actions/actions';
 import {appRouter} from '../../appManagers/router';
-import {constants} from '../../consts/consts';
 
 import NavbarTemplate from './navbar.hbs';
 import './navbar.scss';
@@ -137,9 +136,9 @@ export class Navbar extends Component {
         .trim()
         .replaceAll(/(\s+)/g, '+');
 
-    if (query) {
-      actions.common.search(query);
-      appRouter.go(constants.network.routerPaths.search);
+    if (query && query.replace('@', '')) {
+      actions.common.search(query, query.startsWith('@') ? 'profiles' : 'pins');
+      appRouter.go(`/search/${query}`);
     }
 
     document.querySelector('.navbar__dropdown-actions').style.display = 'none';
