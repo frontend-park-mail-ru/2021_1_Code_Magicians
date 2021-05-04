@@ -1,38 +1,9 @@
-import {ProfileView} from '../profileView/profileView.js';
+import {ProfileView} from '../profileView/profileView';
+import {boardsStore} from 'stores/boardsStore/boardsStore';
+import {userStore} from 'stores/userStore/UserStore';
 
-const boards = [
-  {
-    id: 1,
-    avatarLink: '/assets/img/boards/1.jpg',
-    title: 'title1',
-  },
-  {
-    id: 2,
-    avatarLink: '/assets/img/boards/2.jpg',
-    title: 'title2',
-  },
-  {
-    id: 3,
-    avatarLink: '/assets/img/boards/3.jpg',
-    title: 'title3',
-  },
-  {
-    id: 4,
-    avatarLink: '/assets/img/boards/4.jpg',
-    title: 'title4',
-  },
-  {
-    id: 5,
-    avatarLink: '/assets/img/boards/5.jpg',
-    title: 'title5',
-  },
-  {
-    id: 6,
-    avatarLink: '/assets/img/boards/6.jpg',
-    title: 'title6',
-  },
-];
-
+import ProfileBoardsViewTemplate from './profileBoardsView.hbs';
+import './profileBoardsView.scss';
 
 /**
  * Profile boards view
@@ -44,6 +15,8 @@ export class ProfileBoardsView extends ProfileView {
    */
   constructor(props = {}) {
     super(props);
+
+    this.tmpl = ProfileBoardsViewTemplate;
   }
 
   /**
@@ -51,10 +24,11 @@ export class ProfileBoardsView extends ProfileView {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['profileBoardsView.hbs'];
-    this._profileMainContent = tmpl({
+    this._profileMainContent = this.tmpl({
       ...this.props,
-      boards: boards, // debugging purpose
+      boards: boardsStore.getBoardsByProfileID(
+          this.props.pathArgs.profileID || (userStore.getUser() && userStore.getUser().profile.ID),
+      ),
     });
 
     return super.render();

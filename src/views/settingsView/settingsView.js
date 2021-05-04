@@ -1,13 +1,18 @@
-import {View} from '../view.js';
-import {Page} from '../../components/page/page.js';
-import {ProfileChanges} from '../../components/profileChanges/profileChanges.js';
-import {SecuritySettings} from '../../components/securitySettings/securitySettings.js';
-import {NotificationSettings} from '../../components/notificationSettings/notificationSettings.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {urlRegexp} from '../../consts/regexp.js';
-import {actions} from '../../actions/actions.js';
-import {appRouter} from '../../appManagers/router.js';
-import {constants} from '../../consts/consts.js';
+import {View} from '../view';
+import {Page} from 'components/page/page';
+import {ProfileChanges} from 'components/profileChanges/profileChanges';
+import {SecuritySettings} from 'components/securitySettings/securitySettings';
+import {NotificationSettings} from 'components/notificationSettings/notificationSettings';
+import {userStore} from 'stores/userStore/UserStore';
+import {urlRegexp} from 'consts/regexp';
+import {actions} from 'actions/actions';
+import {appRouter} from 'appManagers/router';
+import {constants} from 'consts/consts';
+import {toastBox} from 'components/toast/toast';
+
+import SettingsViewTemplate from './settingsView.hbs';
+import './settingsView.scss';
+
 
 /**
  * Profile settings view
@@ -20,7 +25,9 @@ export class SettingsView extends View {
   constructor(props = {}) {
     super(props, document.getElementById('app'));
 
-    userStore.bind('change', this.refresh);
+    this.tmpl = SettingsViewTemplate;
+
+    this.logout = this.logout.bind(this);
   }
 
   /**
@@ -28,8 +35,6 @@ export class SettingsView extends View {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['settingsView.hbs'];
-
     let settingsForm;
     switch (this.props.pathArgs['section']) {
       case 'profile':
@@ -48,13 +53,12 @@ export class SettingsView extends View {
     this._nestedComponents.set('_settingsForm', settingsForm);
     this._nestedComponents.set('page', new Page({
       ...this.props,
-      page__content: tmpl({
+      page__content: this.tmpl({
         ...this.props,
         settingsForm: this._nestedComponents.get('_settingsForm').render(),
       }),
     }));
 
-    this._nestedComponents.get('page').setState({view: 'settings'});
     return this._nestedComponents.get('page').render();
   }
 
@@ -78,9 +82,13 @@ export class SettingsView extends View {
 
   /**
    * On logout button
+   * @param {Event} ev
    */
-  logout() {
+  logout(ev) {
+    ev.preventDefault();
+
     actions.user.logout();
+    appRouter.go(this.props.paths.home);
   }
 
   /**
@@ -92,9 +100,21 @@ export class SettingsView extends View {
     document.querySelector('.settings__logout-button').addEventListener('click', this.logout);
 
     super.didMount();
-    if (!userStore.getUser().authorized() &&
-        userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
-      appRouter.go('/');
+
+    const user = userStore.getUser();
+    if ((!user || !user.authorized()) &&
+      userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
+      this._active = false;
+      appRouter.go(this.props.paths.home);
+      return;
+    }
+
+    switch (userStore.getStatus()) {
+      case constants.store.statuses.userStore.clientError:
+      case constants.store.statuses.userStore.internalError:
+        toastBox.addToast(constants.toastMessages.unknownError, true);
+        actions.user.statusProcessed();
+        break;
     }
   }
 

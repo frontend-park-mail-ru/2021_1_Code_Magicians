@@ -1,8 +1,14 @@
-import {actions} from '../../../actions/actions.js';
-import {appRouter} from '../../../appManagers/router.js';
-import {usernameRegexp, passwordRegexp} from '../../../consts/regexp.js';
-import {validateInput} from '../../../utils/utils.js';
-import {AuthView} from '../authView.js';
+import {actions} from 'actions/actions';
+import {usernameRegexp, passwordRegexp} from 'consts/regexp';
+import {validateInputs} from 'utils/validateUtils';
+import {AuthView} from '../authView';
+import {userStore} from 'stores/userStore/UserStore';
+import {constants} from 'consts/consts';
+import {toastBox} from 'components/toast/toast';
+
+import LoginViewTemplate from './loginView.hbs';
+import './loginView.scss';
+
 
 /**
  * Login page view
@@ -19,6 +25,7 @@ export class LoginView extends AuthView {
       password: '',
     };
 
+    this.tmpl = LoginViewTemplate;
     this.setState(payload);
   }
 
@@ -27,8 +34,7 @@ export class LoginView extends AuthView {
      * @return {string}
      */
   render() {
-    const tmpl = Handlebars.templates['loginView.hbs'];
-    return tmpl({});
+    return this.tmpl({...this.props, payload: this._state.payload});
   }
 
   /**
@@ -38,26 +44,37 @@ export class LoginView extends AuthView {
   submit(event) {
     event.preventDefault();
 
-    const userName = document.querySelector('[name="login-username"]').value.trim();
-    const userPassword = document.querySelector('[name="login-pass"]').value.trim();
+    const userName = document.querySelector('[name="username"]').value.trim();
+    const userPassword = document.querySelector('[name="password"]').value.trim();
 
-    AuthView.clearInputs('.errors');
+    const inputsValid = validateInputs(
+        [userName, userPassword],
+        ['.name-errors', '.password-errors'],
+        [usernameRegexp, passwordRegexp],
+    );
 
-    const errors = [];
-    errors.push(validateInput(userName, usernameRegexp));
-    document.querySelector('.name-errors').innerHTML = errors[0];
-    errors.push(validateInput(userPassword, passwordRegexp));
-    document.querySelector('.password-errors').innerHTML = errors[1];
-
-    if ([...errors].find((el) => el !== '')) return;
+    if (!inputsValid) {
+      return;
+    }
 
     const payload = {
       name: userName,
       password: userPassword,
     };
 
-    this.setState(payload);
+    this.setState({payload: payload});
     actions.user.login(userName, userPassword);
-    appRouter.go('/profile');
+  }
+
+  /**
+   * Did
+   */
+  didMount() {
+    if (userStore.getStatus() === constants.store.statuses.userStore.invalidCredentials) {
+      toastBox.addToast('This user doesn\'t exist or password is incorrect', true);
+      actions.user.statusProcessed();
+    }
+
+    super.didMount();
   }
 }

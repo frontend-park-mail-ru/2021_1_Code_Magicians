@@ -1,32 +1,45 @@
-<div class="signup-page">
-    <div class="signup-page__wrapper">
-        <div class="signup-page__content">
-            <div class="signup-page__content-wrapper">
-                <a class="signup-page__logo" href="/home">
-                    <img src="../../../assets/img/Logo.png" alt="logo" class="signup-page__logo-image">
+<div class="auth-page signup-page">
+    <div class="auth-page__wrapper">
+        <div class="auth-page__content">
+            <div class="auth-page__content-wrapper">
+                <a class="auth-page__logo" href="{{paths.home}}">
+                    <img src="/assets/img/Logo.png" alt="logo" class="auth-page__logo-image">
                 </a>
-                <div class="signup-page__title">Register</div>
+                <div class="auth-page__title">Register</div>
             </div>
-            <div class="signup-page__content-wrapper">
-                <form class="signup-form auth-form">
+            <div class="auth-page__content-wrapper">
+                <form class="auth-form">
                     <label>
-                        <input class="signup-form__input" type="text" name="signup-username" placeholder="Your Name" value="{{payload.name}}">
+                        <input
+                                class="auth-form__input"
+                                type="text" name="username"
+                                placeholder="Your Name"
+                                value="{{payload.name}}">
                     </label>
                     <div class="errors name-errors input-error-text"></div>
                     <label>
-                        <input class="signup-form__input" type="text" name="signup-email" placeholder="Email" value="{{payload.email}}">
+                        <input
+                                class="auth-form__input"
+                                type="text" name="email"
+                                placeholder="Email"
+                                value="{{payload.email}}">
                     </label>
                     <div class="errors email-errors input-error-text"></div>
                     <label>
-                        <input class="signup-form__input" type="password" name="signup-pass" placeholder="Password" value="{{payload.password}}">
+                        <input
+                                class="auth-form__input"
+                                type="password" name="password"
+                                placeholder="Password"
+                                value="{{payload.password}}">
                     </label>
                     <div class="errors password-errors input-error-text"></div>
-                    <input class="signup-form__submit button" type="submit" value="Register">
+                    <input class="auth-form__submit auth-view__button" type="submit" value="Register">
                 </form>
             </div>
         </div>
     </div>
-    <div class="signup-page__side">
-        Have an account?  <a href="/login" class="login-button button">Login</a>
+    <div class="auth-page__side">
+        Have an account?  <a href="{{paths.login}}" class="auth-button auth-view__button">Login</a>
     </div>
+    <div class="toasts-box"></div>
 </div>

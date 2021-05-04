@@ -1,8 +1,16 @@
 .profile-boards {
+  $root: &;
+
   display: flex;
   flex-wrap: wrap;
 
-  margin: 40px 0 30px 40px;
+  width: 100%;
+  min-height: calc(100% - 240px);
+
+  padding-top: 40px;
+  padding-left: 50px;
+
+  background-color: var(--white);
 
   &__board {
     display: flex;
@@ -13,6 +21,10 @@
     height: 340px;
 
     margin: 5px 12px;
+
+    &:hover #{$root}__title {
+      color: var(--black);
+    }
   }
 
   &__board-avatar {
@@ -30,11 +42,8 @@
     color: var(--gray);
 
     text-decoration: underline;
+    font-size: 18px;
 
     transition: 0.3s;
-
-    &:hover {
-      color: var(--black);
-    }
   }
 }

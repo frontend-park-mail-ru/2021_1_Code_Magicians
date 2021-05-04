@@ -1,8 +1,14 @@
-import {actions} from '../../../actions/actions.js';
-import {appRouter} from '../../../appManagers/router.js';
-import {emailRegexp, usernameRegexp, passwordRegexp} from '../../../consts/regexp.js';
-import {validateInput} from '../../../utils/utils.js';
-import {AuthView} from '../authView.js';
+import {actions} from 'actions/actions';
+import {myEmailRegexp, usernameRegexp, passwordRegexp} from 'consts/regexp';
+import {validateInputs} from 'utils/validateUtils';
+import {AuthView} from '../authView';
+import {userStore} from 'stores/userStore/UserStore';
+import {constants} from 'consts/consts';
+import {toastBox} from 'components/toast/toast';
+
+import SignupViewTemplate from './signupView.hbs';
+import './signupView.scss';
+
 
 /**
  * Signup page view
@@ -20,7 +26,8 @@ export class SignupView extends AuthView {
       password: '',
     };
 
-    this.setState(payload);
+    this.tmpl = SignupViewTemplate;
+    this.setState({payload: payload});
   }
 
   /**
@@ -28,8 +35,7 @@ export class SignupView extends AuthView {
      * @return {string}
      */
   render() {
-    const tmpl = Handlebars.templates['signupView.hbs'];
-    return tmpl({});
+    return this.tmpl({...this.props, payload: this._state.payload});
   }
 
   /**
@@ -39,21 +45,19 @@ export class SignupView extends AuthView {
   submit(event) {
     event.preventDefault();
 
-    const userName = document.querySelector('[name="signup-username"]').value.trim();
-    const userPassword = document.querySelector('[name="signup-pass"]').value.trim();
-    const userEmail = document.querySelector('[name="signup-email"]').value.trim();
+    const userName = document.querySelector('[name="username"]').value.trim();
+    const userPassword = document.querySelector('[name="password"]').value.trim();
+    const userEmail = document.querySelector('[name="email"]').value.trim();
 
-    AuthView.clearInputs('.errors');
+    const inputsValid = validateInputs(
+        [userName, userEmail, userPassword],
+        ['.name-errors', '.email-errors', '.password-errors'],
+        [usernameRegexp, myEmailRegexp, passwordRegexp],
+    );
 
-    const errors = [];
-    errors.push(validateInput(userName, usernameRegexp));
-    document.querySelector('.name-errors').innerHTML = errors[0];
-    errors.push(validateInput(userEmail, emailRegexp));
-    document.querySelector('.email-errors').innerHTML = errors[1];
-    errors.push(validateInput(userPassword, passwordRegexp));
-    document.querySelector('.password-errors').innerHTML = errors[2];
-
-    if ([...errors].find((el) => el !== '')) return;
+    if (!inputsValid) {
+      return;
+    }
 
     const payload = {
       name: userName,
@@ -61,8 +65,21 @@ export class SignupView extends AuthView {
       password: userPassword,
     };
 
-    this.setState(payload);
+    this.setState({payload: payload});
     actions.user.signup(userName, userEmail, userPassword);
-    appRouter.go('/profile');
+  }
+
+  /**
+   * Did
+   */
+  didMount() {
+    switch (userStore.getStatus()) {
+      case constants.store.statuses.userStore.signupConflict:
+        toastBox.addToast('This username or email already taken. Please, choose another one', true);
+        actions.user.statusProcessed();
+        break;
+    }
+
+    super.didMount();
   }
 }

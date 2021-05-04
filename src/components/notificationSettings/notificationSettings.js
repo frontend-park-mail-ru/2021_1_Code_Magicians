@@ -1,4 +1,7 @@
-import {Component} from '../component.js';
+import {Component} from '../component';
+
+import NotificationSettingsTemplate from './notificationSettings.hbs';
+import './notificationSettings.scss';
 
 /**
  * Notification settings form
@@ -10,6 +13,8 @@ export class NotificationSettings extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = NotificationSettingsTemplate;
   }
 
   /**
@@ -17,8 +22,6 @@ export class NotificationSettings extends Component {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['notificationSettings.hbs'];
-
-    return tmpl({...this.props});
+    return this.tmpl({...this.props});
   }
 }

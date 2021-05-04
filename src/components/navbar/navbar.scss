@@ -115,6 +115,8 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
+    font-family: var(--font-medium);
+
     color: var(--black);
   }
 
@@ -199,8 +201,8 @@
 
     padding: 10px;
 
-    border: 1px solid var(--red);
-    border-radius: 2px;
+    border: 2px solid var(--red);
+    border-radius: 3px;
 
     text-decoration: none;
 
@@ -238,12 +240,19 @@
       color: var(--black);
 
       &::before {
-        background-color: var(--almost-white);
+        background-color: var(--white);
       }
     }
   }
 
   &__auth-text {
     position: relative;
+  }
+}
+
+.disabled {
+  cursor: default;
+  &:hover .navbar__action-icon {
+    color: var(--gray);
   }
 }

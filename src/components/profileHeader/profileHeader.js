@@ -1,6 +1,12 @@
-import {Component} from '../component.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {Profile} from '../../models/profile/Profile.js';
+import {Component} from '../component';
+import {userStore} from 'stores/userStore/UserStore';
+import {profilesStore} from 'stores/profilesStore/profilesStore';
+import {constants} from 'consts/consts';
+import {actions} from 'actions/actions';
+import {toastBox} from 'components/toast/toast';
+
+import ProfileHeaderTemplate from './profileHeader.hbs';
+import './profileHeader.scss';
 
 /**
  * Profile header
@@ -12,6 +18,10 @@ export class ProfileHeader extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = ProfileHeaderTemplate;
+
+    this.follow = this.follow.bind(this);
   }
 
   /**
@@ -19,13 +29,16 @@ export class ProfileHeader extends Component {
    * @return {string} final html
    */
   render() {
-    const tmpl = Handlebars.templates['profileHeader.hbs'];
     const selfProfile = Object.keys(this.props.pathArgs).length === 0;
-    const profile = selfProfile ? userStore.getUser().profile : new Profile(); // will find real foreign profile
-    return tmpl({
+    const user = userStore.getUser();
+
+    const profile = selfProfile ? user && user.profile : profilesStore.getProfileByID(this.props.pathArgs.profileID);
+
+    return this.tmpl({
       ...this.props,
-      selfProfile: Object.keys(this.props.pathArgs).length === 0,
+      selfProfile: selfProfile,
       profile: profile,
+      userIsAuthorized: user && user.authorized(),
     });
   }
 
@@ -40,5 +53,52 @@ export class ProfileHeader extends Component {
             link.classList.add('profile-links__link_active');
           }
         });
+
+    const followToggle = document.querySelector('.profile-info__follow-toggle');
+    if (followToggle) {
+      followToggle.addEventListener('click', this.follow);
+    }
+
+    switch (profilesStore.getStatus()) {
+      case constants.store.statuses.profilesStore.followed:
+        toastBox.addToast(
+            `${profilesStore.getProfileByID(this.props.pathArgs.profileID)['username']} is now followed!`,
+        );
+
+        actions.profiles.statusProcessed();
+        break;
+      case constants.store.statuses.profilesStore.unfollowed:
+        toastBox.addToast(
+            `${profilesStore.getProfileByID(this.props.pathArgs.profileID)['username']} isn't followed anymore`,
+        );
+
+        actions.profiles.statusProcessed();
+        break;
+    }
+  }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    const followToggle = document.querySelector('.profile-info__follow-toggle');
+    if (followToggle) {
+      followToggle.removeEventListener('click', this.follow);
+    }
+  }
+
+  /**
+   * Follow listener
+   * @param {Event} event
+   */
+  follow(event) {
+    event.preventDefault();
+
+    const profile = profilesStore.getProfileByID(this.props.pathArgs.profileID);
+    if (!profile.followed) {
+      actions.profiles.follow(profile['ID']);
+    } else {
+      actions.profiles.unfollow(profile['ID']);
+    }
   }
 }

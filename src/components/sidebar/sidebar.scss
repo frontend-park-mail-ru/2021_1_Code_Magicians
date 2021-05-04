@@ -131,6 +131,15 @@
     }
   }
 
+  &__news-marker {
+    position: absolute;
+    top: 0; right: 0;
+
+    font-size: 10px;
+
+    color: var(--red);
+  }
+
   .slider-toggle:hover &__toggle-icon {
     color: var(--red);
   }
@@ -145,5 +154,7 @@
 }
 
 .slider-toggle {
+  position: relative;
+
   margin-bottom: 10px;
 }

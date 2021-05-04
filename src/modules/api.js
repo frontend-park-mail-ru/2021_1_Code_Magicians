@@ -1,8 +1,8 @@
 /* eslint-disable valid-jsdoc */
-import {HTTPModule} from './http.js';
-import {constants} from '../consts/consts.js';
+import {HTTPModule} from './http';
+import {constants} from 'consts/consts';
 
-const paths = constants.network.paths;
+const paths = constants.network.pathsAPI;
 
 /**
  * Module that provides abstraction to communicate with server via standard API
@@ -144,10 +144,11 @@ export class API {
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static createPin(pinInfo) {
-    return HTTPModule.post(paths.pin, pinInfo, true);
+    return HTTPModule.post(paths.pin, pinInfo, false);
   }
 
   /**
+   * Get pin by it's ID
    * @param {String} pinID
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
@@ -182,6 +183,15 @@ export class API {
   static getPinsByProfileID(profileID, pinsNumber = 0) {
     const queries = pinsNumber ? `?pinsNumber=${pinsNumber}` : '';
     return HTTPModule.get(`${paths.pins}/${profileID}${queries}`);
+  }
+
+  /**
+   * Get feed
+   * @param {Number} pinsNumber
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static getPinsFeed(pinsNumber = 50) {
+    return HTTPModule.get(`${paths.pinsFeed}/${pinsNumber}`);
   }
 
   /**
@@ -221,5 +231,14 @@ export class API {
    */
   static changeAvatar(avatarFormData) {
     return HTTPModule.put(paths.changeAvatar, avatarFormData, false);
+  }
+
+  /**
+   * Mark notification as read
+   * @param notificationID
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static markNotificationRead(notificationID) {
+    return HTTPModule.put(`${paths.notificationRead}/${notificationID}`);
   }
 }

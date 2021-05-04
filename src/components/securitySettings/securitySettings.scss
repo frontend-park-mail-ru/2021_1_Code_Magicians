@@ -5,9 +5,13 @@
     align-items: flex-start;
     justify-content: space-between;
 
-    height: 200px;
+    height: 280px;
     max-width: 300px;
 
     margin-top: 50px;
+  }
+
+  &__submit {
+    min-height: 40px;
   }
 }

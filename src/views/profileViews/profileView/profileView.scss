@@ -10,7 +10,16 @@
 
   margin-top: 3px;
 
+  width: 100%;
+  min-height: calc(100% - 240px);
+
   background-color: var(--almost-white);
 
   transition: var(--theme-transition);
+}
+
+.profile-overview {
+  width: 100%;
+
+  background-color: var(--white);
 }

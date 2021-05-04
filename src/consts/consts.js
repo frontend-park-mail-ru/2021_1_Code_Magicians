@@ -1,14 +1,13 @@
-import {Board} from '../models/board/Board.js';
-import {Pin} from '../models/pin/Pin.js';
+// noinspection JSUnresolvedVariable
 
 export const constants = {
   network: {
-    backendURL: 'http://www.pinter-best.com:8080',
-    // backendURL: 'http://127.0.0.1:8080',
+    backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'https://pinter-best.com:8080',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
     bucketURL: 'https://pinterbestbucket.s3.eu-central-1.amazonaws.com/',
+    wsURL: DEBUG ? 'ws://127.0.0.1:8080/notifications' : 'wss://pinter-best.com:8080/notifications',
 
-    paths: {
+    pathsAPI: {
       signup: '/auth/signup',
       login: '/auth/login',
       logout: '/auth/logout',
@@ -28,33 +27,62 @@ export const constants = {
 
       pin: '/pin',
       pins: '/pins',
+      pinsFeed: '/pins/feed',
 
       follow: '/follow',
+
+      notificationRead: '/notifications/read',
+    },
+
+    routerPaths: {
+      notFound: '/404',
+      index: '/',
+      home: '/home',
+      profile: '/profile',
+      profileBoards: '/profile/boards',
+      profilePins: '/profile/pins',
+      profileFollowers: '/profile/followers',
+      profileFollowing: '/profile/following',
+      otherProfile: '/profile/:profileID{Number}',
+      otherProfileBoards: '/profile/:profileID{Number}/boards',
+      otherProfilePins: '/profile/:profileID{Number}/pins',
+      otherProfileFollowers: '/profile/:profileID{Number}/followers',
+      otherProfileFollowing: '/profile/:profileID{Number}/following',
+      settings: '/settings',
+      settingsSection: '/settings/:section{String}',
+      signup: '/signup',
+      login: '/login',
+      createPin: '/create-pin',
+      pin: '/pin/:pinID{Number}',
+      board: '/board/:boardID{Number}',
     },
   },
   store: {
     statuses: {
       userStore: {
         ok: 'ok',
-
-        alreadyAuthorized: 'already authorized',
         unauthorized: 'unauthorized',
+        invalidCredentials: 'invalid credentials',
 
         passwordChanged: 'password changed',
         profileEdited: 'profile edited',
+        avatarUploaded: 'avatar uploaded',
         editConflict: 'edit conflict',
         badAvatarImage: 'bad avatar',
+        signupConflict: 'signup conflict',
 
         clientError: 'client error',
         internalError: 'internal error',
       },
       pinsStore: {
         ok: 'ok',
+
         pinCreated: 'pin-created',
         pinDeleted: 'pin-deleted',
 
         triedToDeleteForeignPin: 'foreign-pin-delete',
         userUnauthorized: 'unauthorized',
+        pinNotFound: 'pin-not-found',
 
         clientSidedError: 'client-error',
 
@@ -66,6 +94,7 @@ export const constants = {
         boardCreated: 'board-created',
         boardDeleted: 'board-deleted',
         userUnauthorized: 'unauthorized',
+        boardNotFound: 'board-not-found',
 
         clientSidedError: 'client-error',
 
@@ -75,16 +104,29 @@ export const constants = {
         ok: 'profiles-ok',
         followed: 'followed',
         unfollowed: 'unfollowed',
+        profileNotFound: 'profile-not-found',
 
         userUnauthorized: 'unauthorized',
 
-        clientSidedError: 'client-error',
+        clientError: 'client-error',
 
+        internalError: 'internal-error',
+      },
+      notificationsStore: {
+        ok: 'notifications-ok',
         internalError: 'internal-error',
       },
     },
   },
+  toastMessages: {
+    unknownError: 'Something went wrong. Please, try to refresh the page or come back later.',
+  },
   mocks: {
+    defaultProfile: {
+      ID: null,
+      username: 'username',
+      avatarLink: '/assets/img/default-avatar.jpg',
+    },
     messages: Array(10).fill(0).map((item, i) => ({
       imageLink: '/assets/img/Logo.png',
       header: 'Pinterbest',
@@ -97,7 +139,7 @@ export const constants = {
       text: 'Welcome to Pinterbest! Welcome to Pinterbest Welcome to Pinterbest Welcome to Pinterbest',
       isNew: i % 2 !== 0,
     })),
-    pins: Array(50).fill(0).map((pin, i) => new Pin({
+    pins: Array(50).fill(0).map((pin, i) => ({
       ID: i,
       boardID: 100 + i % 3,
       title: `title${i}`,
@@ -105,12 +147,45 @@ export const constants = {
       tags: [],
       imageLink: '/assets/img/default-avatar.jpg',
     })),
-    boards: Array(10).fill(0).map((board, i) => new Board({
+    comments: Array(10).fill(0).map((comment, i) => ({
       ID: i,
-      authorID: 100 + i % 3,
-      title: `title${i}`,
-      description: 'blah blah blah',
-      avatarLink: '/assets/img/default-avatar.jpg',
+      userID: 100 + i % 3,
+      pinID: `title${i}`,
+      addingTime: 'blah blah blah',
+      text: 'Nothing beats being paid for doing nothing',
     })),
+    boards: [
+      {
+        ID: 1,
+        avatarLink: '/assets/img/boards/1.jpg',
+        pins: [],
+        title: 'title1',
+      },
+      {
+        ID: 2,
+        avatarLink: '/assets/img/boards/2.jpg',
+        title: 'title2',
+      },
+      {
+        ID: 3,
+        avatarLink: '/assets/img/boards/3.jpg',
+        title: 'title3',
+      },
+      {
+        ID: 4,
+        avatarLink: '/assets/img/boards/4.jpg',
+        title: 'title4',
+      },
+      {
+        ID: 5,
+        avatarLink: '/assets/img/boards/5.jpg',
+        title: 'title5',
+      },
+      {
+        ID: 6,
+        avatarLink: '/assets/img/boards/6.jpg',
+        title: 'title6',
+      },
+    ],
   },
 };

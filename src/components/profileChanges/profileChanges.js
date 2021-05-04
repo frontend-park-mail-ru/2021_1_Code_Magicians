@@ -1,8 +1,13 @@
-import {Component} from '../component.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {actions} from '../../actions/actions.js';
-import {firstNameRegexp, usernameRegexp} from '../../consts/regexp.js';
-import {constants} from '../../consts/consts.js';
+import {Component} from '../component';
+import {userStore} from 'stores/userStore/UserStore';
+import {actions} from 'actions/actions';
+import {firstNameRegexp, myEmailRegexp, usernameRegexp} from 'consts/regexp';
+import {constants} from 'consts/consts';
+import {toastBox} from 'components/toast/toast';
+import {validateInputs} from 'utils/validateUtils';
+
+import ProfileChangesTemplate from './profileChanges.hbs';
+import './profileChanges.scss';
 
 /**
  * Profile changes form
@@ -14,6 +19,8 @@ export class ProfileChanges extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = ProfileChangesTemplate;
   }
 
   /**
@@ -21,9 +28,7 @@ export class ProfileChanges extends Component {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['profileChanges.hbs'];
-
-    return tmpl({...this.props, user: userStore.getUser().profile});
+    return this.tmpl({...this.props, user: userStore.getUser() && userStore.getUser().profile});
   }
 
   /**
@@ -46,9 +51,22 @@ export class ProfileChanges extends Component {
         .querySelector('.profile-changes__avatar-preview')
         .addEventListener('click', this.selectAvatar);
 
-    if (userStore.getStatus() === constants.store.statuses.userStore.profileEdited) {
-      alert('profile edited successfully');
-      actions.user.statusProcessed();
+    switch (userStore.getStatus()) {
+      case constants.store.statuses.userStore.profileEdited:
+        toastBox.addToast('Profile edited successfully');
+        actions.user.statusProcessed();
+        break;
+      case constants.store.statuses.userStore.editConflict:
+        toastBox.addToast('This username or email is already taken. Please, try something else', true);
+        actions.user.statusProcessed();
+        break;
+      case constants.store.statuses.userStore.badAvatarImage:
+        toastBox.addToast('Bad avatar image. Please try again', true);
+        actions.user.statusProcessed();
+        break;
+      case constants.store.statuses.userStore.avatarUploaded:
+        toastBox.addToast('Avatar uploaded successfully');
+        actions.user.statusProcessed();
     }
   }
 
@@ -80,32 +98,25 @@ export class ProfileChanges extends Component {
   submit(event) {
     event.preventDefault();
     const target = event.target;
-
-    const changes = {};
+    document.querySelectorAll('.errors').forEach((errorField) => errorField.innerHTML = '');
 
     const firstName = target.querySelector('[name="firstName"]').value.trim();
     const username = target.querySelector('[name="username"]').value.trim();
     const email = target.querySelector('[name="email"]').value.trim();
 
-    const usernameIsValid = username.match(usernameRegexp);
-    if (!usernameIsValid) {
-      alert('username invalid');
-      return;
+    const inputsValid = validateInputs(
+        [firstName, username, email],
+        ['.name-errors', '.username-errors', '.email-errors'],
+        [firstNameRegexp, usernameRegexp, myEmailRegexp],
+    );
+
+    if (inputsValid) {
+      actions.user.editProfile({
+        firstName: firstName,
+        username: username,
+        email: email,
+      });
     }
-
-    if (firstName) {
-      const firstNameIsValid = firstName.match(firstNameRegexp);
-      if (!firstNameIsValid) {
-        alert('name invalid');
-        return;
-      }
-    }
-
-    changes['firstName'] = firstName;
-    changes['username'] = username;
-    changes['email'] = email;
-
-    actions.user.editProfile(changes);
   }
 
   /**

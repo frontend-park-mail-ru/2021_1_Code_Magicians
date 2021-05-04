@@ -5,7 +5,7 @@
         </div>
         <div class="slider__items">
             {{#each items}}
-                <div class="slider__item">
+                <div data-id="{{this.ID}}" class="slider__item">
                     <img src="{{this.imageLink}}" alt="image" class="slider__item-image">
                     <div class="slider__item-content">
                         <span class="slider__item-header">{{this.header}}</span>

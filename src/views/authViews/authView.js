@@ -1,8 +1,11 @@
-import {View} from '../view.js';
-import {actions} from '../../actions/actions.js';
-import {appRouter} from '../../appManagers/router.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {constants} from '../../consts/consts.js';
+import {View} from '../view';
+import {actions} from 'actions/actions';
+import {appRouter} from 'appManagers/router';
+import {userStore} from 'stores/userStore/UserStore';
+import {constants} from 'consts/consts';
+
+import './authView.scss';
+import {toastBox} from 'components/toast/toast';
 
 /**
  * Parent Authentication view
@@ -14,6 +17,7 @@ export class AuthView extends View {
    */
   constructor(props = {}) {
     super(props, document.getElementById('app'));
+
     this.submit = this.submit.bind(this);
   }
 
@@ -21,27 +25,29 @@ export class AuthView extends View {
    * Did
    */
   didMount() {
-    if (userStore.getStatus() === constants.store.statuses.userStore.alreadyAuthorized) {
-      this.clearState();
-      actions.user.statusProcessed();
-      appRouter.go('/');
-      return;
+    document.querySelector('.auth-form').addEventListener('submit', this.submit);
+
+    switch (userStore.getStatus()) {
+      case constants.store.statuses.userStore.clientError:
+      case constants.store.statuses.userStore.internalError:
+        toastBox.addToast(constants.toastMessages.unknownError);
+        actions.user.statusProcessed();
+        break;
     }
 
-    document.querySelector('.auth-form').addEventListener('submit', this.submit);
+    if (userStore.getUser() && userStore.getUser().authorized()) {
+      this.clearState();
+      appRouter.go(this.props.paths.profile);
+    }
   }
+
   /**
    * Will
    */
   willUnmount() {
-    document.querySelector('.auth-form').removeEventListener('submit', this.submit);
-  }
-
-  /**
-   * Clears innerHTML for certain class
-   * @param {string} name - payload data
-   */
-  static clearInputs(name) {
-    document.querySelectorAll(name).forEach((input) => input.value = '');
+    const form = document.querySelector('.auth-form');
+    if (form) {
+      form.removeEventListener('submit', this.submit);
+    }
   }
 }

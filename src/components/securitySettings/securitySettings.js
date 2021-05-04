@@ -1,8 +1,13 @@
-import {Component} from '../component.js';
-import {actions} from '../../actions/actions.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
-import {constants} from '../../consts/consts.js';
-import {passwordRegexp} from '../../consts/regexp.js';
+import {Component} from '../component';
+import {actions} from 'actions/actions';
+import {userStore} from 'stores/userStore/UserStore';
+import {constants} from 'consts/consts';
+import {passwordRegexp} from 'consts/regexp';
+import {toastBox} from 'components/toast/toast';
+import {validateInput} from 'utils/validateUtils';
+
+import SecuritySettingsTemplate from './securitySettings.hbs';
+import './securitySettings.scss';
 
 /**
  * Security settings form
@@ -14,6 +19,8 @@ export class SecuritySettings extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = SecuritySettingsTemplate;
   }
 
   /**
@@ -21,9 +28,7 @@ export class SecuritySettings extends Component {
    * @return {String}
    */
   render() {
-    const tmpl = Handlebars.templates['securitySettings.hbs'];
-
-    return tmpl({...this.props});
+    return this.tmpl({...this.props});
   }
 
   /**
@@ -33,7 +38,7 @@ export class SecuritySettings extends Component {
     document.querySelector('.security-settings').addEventListener('submit', this.submit);
 
     if (userStore.getStatus() === constants.store.statuses.userStore.passwordChanged) {
-      alert('password changed successfully');
+      toastBox.addToast('Password changed successfully');
       actions.user.statusProcessed();
     }
   }
@@ -52,16 +57,18 @@ export class SecuritySettings extends Component {
   submit(event) {
     event.preventDefault();
 
+    document.querySelectorAll('.errors').forEach((errorField) => errorField.innerHTML = '');
+
     const newPassword = document.querySelector('[name="new-password"]');
     const confirmPassword = document.querySelector('[name="confirm-password"]');
 
-    if (!newPassword.value.match(passwordRegexp)) {
-      alert('Password must be 8 chars length at least');
-      return;
-    }
+    const errors = [];
+    errors.push(validateInput(newPassword.value, passwordRegexp));
+    document.querySelector('.password-errors').innerHTML = errors[0];
+    errors.push(newPassword.value === confirmPassword.value ? '' : 'Passwords do not match');
+    document.querySelector('.password-confirm-errors').innerHTML = errors[1];
 
-    if (newPassword.value !== confirmPassword.value) {
-      alert('Password must be same');
+    if ([...errors].some((error) => error)) {
       return;
     }
 

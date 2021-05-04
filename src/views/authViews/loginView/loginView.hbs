@@ -1,28 +1,38 @@
-<div class="login-page">
-    <div class="login-page__wrapper">
-        <div class="login-page__content">
-            <div class="login-page__content-wrapper">
-                <a class="login-page__logo" href="/home">
-                    <img src="../../../assets/img/Logo.png" alt="logo" class="login-page__logo-image">
+<div class="auth-page login-page">
+    <div class="auth-page__wrapper">
+        <div class="auth-page__content">
+            <div class="auth-page__content-wrapper">
+                <a class="auth-page__logo" href="{{paths.home}}">
+                    <img src="/assets/img/Logo.png" alt="logo" class="auth-page__logo-image">
                 </a>
-                <div class="login-page__title">Login</div>
+                <div class="auth-page__title">Login</div>
             </div>
-            <div class="login-page__content-wrapper">
-                <form class="login-form auth-form">
+            <div class="auth-page__content-wrapper">
+                <form class="auth-form">
                     <label>
-                        <input class="login-form__input" type="text" name="login-username" placeholder="Username">
+                        <input
+                                class="auth-form__input"
+                                type="text" name="username"
+                                placeholder="Username"
+                        >
                     </label>
                     <div class="errors name-errors input-error-text"></div>
                     <label>
-                        <input class="login-form__input" type="password" name="login-pass" placeholder="Password">
+                        <input
+                                class="auth-form__input"
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                        >
                     </label>
                     <div class="errors password-errors input-error-text"></div>
-                    <input class="login-form__submit button" type="submit" value="Login">
+                    <input class="auth-form__submit auth-view__button" type="submit" value="Login">
                 </form>
             </div>
         </div>
     </div>
-    <div class="login-page__side">
-        No account yet? <a href="/signup" class="signup-button button">Register</a>
+    <div class="auth-page__side">
+        No account yet? <a href="{{paths.signup}}" class="auth-button auth-view__button">Register</a>
     </div>
+    <div class="toasts-box"></div>
 </div>

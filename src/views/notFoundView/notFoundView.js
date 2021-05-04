@@ -1,5 +1,8 @@
-import {View} from '../view.js';
-import {appRouter} from '../../appManagers/router.js';
+import {View} from '../view';
+import {appRouter} from 'appManagers/router';
+
+import NotFoundViewTemplate from './notFoundView.hbs';
+import './notFoundView.scss';
 
 /**
  * Page not found view
@@ -12,7 +15,11 @@ export class NotFoundView extends View {
   constructor(props = {}) {
     super(props, document.getElementById('app'));
 
-    this.back = (event) => appRouter.back();
+    this.tmpl = NotFoundViewTemplate;
+    this.back = (event) => {
+      event.preventDefault();
+      appRouter.back();
+    };
   }
 
   /**
@@ -20,9 +27,7 @@ export class NotFoundView extends View {
      * @return {string}
      */
   render() {
-    const tmpl = Handlebars.templates['notFoundView.hbs'];
-
-    return tmpl({});
+    return this.tmpl({...this.props});
   }
 
   /**

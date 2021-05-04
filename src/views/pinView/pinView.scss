@@ -1,0 +1,305 @@
+.pin-browser {
+  position: fixed;
+  top: 92px; left: 95px; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: row;
+
+  padding-bottom: 30px;
+  &__image-panel {
+    width: 40%;
+    height: 100%;
+
+    background-size: cover;
+    background-position: center;
+
+    object-fit: cover;
+
+    border-radius: 5px;
+  }
+
+  &__info-panel {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    width: 40%;
+    height: 100%;
+
+    margin-left: 50px;
+  }
+
+  &__tags-panel {
+    display: flex;
+    flex-direction: column;
+
+    width: auto;
+    height: fit-content;
+
+    margin: 0 20px;
+
+    border-radius: 5px;
+
+    background-color: var(--white);
+  }
+
+  &__search-title {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--gray);
+
+    &_icon {
+      color: var(--gray);
+      margin-right: 10px;
+
+    }
+    &_text {
+      color: var(--gray);
+
+    }
+  }
+}
+
+.info-panel {
+  margin-top: 20px;
+
+  &__title {
+    font-family: var(--font-bold);
+    color: var(--black);
+  }
+
+  &__comments {
+    display: flex;
+    flex-direction: column;
+
+    width: 400px;
+
+    padding-bottom: 30px;
+
+    color: var(--red);
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  &__bodies {
+    overflow: auto;
+    max-height: 250px;
+
+    margin-bottom: 30px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin: 20px 30px 20px 0;
+
+  &__avatar {
+    height: 40px;
+    width: 40px;
+
+
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__text {
+    color: var(--gray);
+    margin: 10px 0 10px 30px;
+
+    &_author {
+      font-size: 20px;
+      text-decoration: none;
+      font-weight: bold;
+
+      color: var(--black);
+    }
+    &_message {
+      font-size: 14px;
+    }
+  }
+
+}
+
+.user-info {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin: 0 0 20px 0;
+
+  &__avatar {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+  }
+
+  &__text {
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 5px 35px;
+    &_username {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--black);
+    }
+    &_followers {
+      font-size: 14px;
+      color: var(--gray);
+    }
+  }
+
+  &__follow-button {
+    align-items: center;
+
+    width: fit-content;
+
+    margin: 5px 20px;
+    padding: 10px 25px;
+
+    border-radius: 45px;
+    outline: 0;
+
+    color: var(--perm-white);
+
+    text-align: center;
+
+    user-select: none;
+
+    &_active {
+      background-color: var(--red);
+
+      cursor: pointer;
+    }
+
+    &_inactive {
+      background-color: var(--gray);
+    }
+
+    &_disabled {
+      background-color: var(--gray);
+    }
+  }
+}
+
+.tags-list {
+  display:flex;
+  flex-direction: column;
+
+  padding-bottom: 40px;
+
+  &title {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__tag {
+    align-items: center;
+
+    width: fit-content;
+
+    margin: 5px 20px;
+    padding: 10px 25px;
+
+    border-radius: 45px;
+
+    outline: 0;
+    border: 1px solid var(--red);
+    background-color: var(--white);
+
+    color: var(--black);
+    //cursor: pointer;
+    user-select: none;
+
+  }
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+
+  width: auto;
+  margin-top: auto;
+
+  &__text {
+    height: 50px;
+    width: 400px;
+
+    padding: 5px;
+
+    outline: none;
+
+    font-size: 16px;
+    background-color: var(--white);
+    color: var(--black);
+
+    resize: none;
+  }
+
+  &__submit {
+    width: fit-content;
+
+    padding: 10px 50px;
+    margin-top: 10px;
+
+    border-radius: 45px;
+    border: none;
+
+    font-family: var(--font-medium);
+    font-size: 16px;
+    color: white;
+
+    background-color: var(--red);
+
+    cursor: pointer;
+  }
+}
+
+
+.pin-stats {
+  display: flex;
+  flex-direction: row;
+
+  margin: 20px 0;
+  padding: 10px 0;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 20px 0 0;
+
+    &_val {
+      font-size: 22px;
+      color: var(--black);
+
+      margin: 10px 0;
+    }
+    &_descr {
+      font-size: 16px;
+      color: var(--gray);
+    }
+  }
+}
+
+.pin-icon {
+  font-size: 16px;
+  color: var(--gray);
+}
+
+.pin-description {
+  font-size: 16px;
+  color: var(--gray);
+  margin-bottom: 100px;
+}

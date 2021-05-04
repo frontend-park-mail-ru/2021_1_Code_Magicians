@@ -1,4 +1,5 @@
-import {Component} from '../components/component.js';
+import {Component} from 'components/component';
+import {userStore} from 'stores/userStore/UserStore';
 
 /**
  * Base view class (abstract)
@@ -16,6 +17,7 @@ export class View extends Component {
     this._parent = parent;
 
     this.refresh = this.refresh.bind(this);
+    userStore.bind('change', this.refresh);
   }
 
   /**
@@ -23,10 +25,11 @@ export class View extends Component {
    * @param {Object} pathArgs from path
    */
   show(pathArgs) {
-    this.props.pathArgs = pathArgs;
     this._active = true;
+    this.props.pathArgs = pathArgs;
 
     this._parent.insertAdjacentHTML('afterbegin', this.render());
+
     this.didMount();
   }
 

@@ -1,6 +1,9 @@
-import {Component} from '../component.js';
-import {urlRegexp} from '../../consts/regexp.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
+import {Component} from '../component';
+import {urlRegexp} from 'consts/regexp';
+import {userStore} from 'stores/userStore/UserStore';
+
+import SidebarTemplate from './sidebar.hbs';
+import './sidebar.scss';
 
 /**
  * Side bar (page__sidebar)
@@ -13,6 +16,7 @@ export class Sidebar extends Component {
   constructor(props) {
     super(props);
 
+    this.tmpl = SidebarTemplate;
     this.hideSliders = this.hideSliders.bind(this);
   }
 
@@ -21,11 +25,12 @@ export class Sidebar extends Component {
    * @return {string} final html
    */
   render() {
-    this._userIsAuthorized = userStore.getUser().authorized();
-    const tmpl = Handlebars.templates['sidebar.hbs'];
-    return tmpl({
+    this._userIsAuthorized = userStore.getUser() && userStore.getUser().authorized();
+
+    return this.tmpl({
       ...this.props,
       userIsAuthorized: this._userIsAuthorized,
+      hasNewNotification: userStore.hasNewNotification(),
     });
   }
 
@@ -42,10 +47,8 @@ export class Sidebar extends Component {
 
     const icon = document.querySelector('.theme-toggle-icon');
 
-    const newFaClass = icon.classList.contains('far') ? 'fas' : 'far';
-    const oldFaClass = newFaClass === 'fas' ? 'far' : 'fas';
-
-    icon.classList.replace(oldFaClass, newFaClass);
+    icon.classList.toggle('far');
+    icon.classList.toggle('fas');
   }
 
   /**
@@ -114,7 +117,9 @@ export class Sidebar extends Component {
           }
         });
 
-    document.querySelector('.theme-toggle').addEventListener('click', this.toggleTheme);
+    document
+        .querySelector('.theme-toggle')
+        .addEventListener('click', this.toggleTheme);
 
     if (this._userIsAuthorized) {
       document
@@ -133,7 +138,9 @@ export class Sidebar extends Component {
    * Will
    */
   willUnmount() {
-    document.querySelector('.theme-toggle').removeEventListener('click', this.toggleTheme);
+    document
+        .querySelector('.theme-toggle')
+        .removeEventListener('click', this.toggleTheme);
 
     if (this._userIsAuthorized) {
       document

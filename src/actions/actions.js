@@ -1,4 +1,4 @@
-import {appDispatcher} from '../appManagers/dispatcher.js';
+import {appDispatcher} from 'appManagers/dispatcher';
 
 export const actionTypes = {
   user: {
@@ -17,26 +17,23 @@ export const actionTypes = {
   pins: {
     createPin: 'create-pin',
     deletePin: 'delete-pin',
-    loadPinsFeed: 'load-pins-feed',
 
     statusProcessed: 'pins-status-processed',
   },
   boards: {
     createBoard: 'create-board',
     deleteBoard: 'delete-board',
-    loadBoardsFeed: 'load-boards-feed',
   },
   profiles: {
     follow: 'follow-profile',
     unfollow: 'unfollow-profile',
+    statusProcessed: 'profile-status-processed',
   },
   comments: {
     postComment: 'post-comment',
   },
-  common: {
-    loadForeignProfile: 'load-profile',
-    loadPin: 'load-pin', // load pin for pin's page. It contains messages, author's profile and so on
-    loadBoard: 'load-board',
+  notifications: {
+    readNotification: 'read-notification',
   },
 };
 
@@ -124,12 +121,10 @@ export const actions = {
         },
       });
     },
-    loadPinsFeed: (pinsNumber) => {
+    statusProcessed: () => {
       appDispatcher.dispatch({
-        actionType: actionTypes.pins.loadPinsFeed,
-        data: {
-          pinsNumber: pinsNumber,
-        },
+        actionType: actionTypes.pins.statusProcessed,
+        data: {},
       });
     },
   },
@@ -148,18 +143,11 @@ export const actions = {
         },
       });
     },
-    loadBoardsFeed: (boardsNum) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.boards.loadBoardsFeed,
-        data: {
-          boardsNum: boardsNum,
-        },
-      });
-    },
   },
   comments: {
     postComment: (commentText, pinID) => {
       appDispatcher.dispatch({
+        actionType: actionTypes.comments.postComment,
         data: {
           commentText: commentText,
           pinID: pinID,
@@ -184,30 +172,18 @@ export const actions = {
         },
       });
     },
+    statusProcessed: () => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.profiles.statusProcessed,
+        data: {},
+      });
+    },
   },
-  common: {
-    loadForeignProfile: (profileID) => {
+  notifications: {
+    readNotification: (notificationID) => {
       appDispatcher.dispatch({
-        actionType: actionTypes.common.loadForeignProfile,
-        data: {
-          profileID: profileID,
-        },
-      });
-    },
-    loadPin: (pinID) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.common.loadPin,
-        data: {
-          pinID: pinID,
-        },
-      });
-    },
-    loadBoard: (boardID) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.common.loadBoard,
-        data: {
-          boardID: boardID,
-        },
+        actionType: actionTypes.notifications.readNotification,
+        data: {notificationID: notificationID},
       });
     },
   },

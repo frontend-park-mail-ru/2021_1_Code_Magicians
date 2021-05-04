@@ -1,12 +1,9 @@
-import Store from '../Store.js';
-import {Profile} from '../../models/profile/Profile.js';
-import {constants} from '../../consts/consts.js';
-import {actionTypes} from '../../actions/actions.js';
-import {appDispatcher} from '../../appManagers/dispatcher.js';
-import {API} from '../../modules/api.js';
-import {userStore} from '../userStore/UserStore.js';
-import {pinsStore} from '../pinsStore/pinsStore.js';
-import {boardsStore} from '../boardsStore/boardsStore.js';
+import Store from '../Store';
+import {Profile} from 'models/Profile';
+import {constants} from 'consts/consts';
+import {actionTypes} from 'actions/actions';
+import {API} from 'modules/api';
+import {userStore} from '../userStore/UserStore';
 
 const storeStatuses = constants.store.statuses.profilesStore;
 
@@ -21,7 +18,7 @@ class ProfilesStore extends Store {
     super();
 
     this._profiles = [];
-    this._profile = new Profile();
+    this._profile = new Profile({ID: 0});
 
     this._lastAction = {
       actionType: null,
@@ -40,28 +37,13 @@ class ProfilesStore extends Store {
 
     switch (action.actionType) {
       case actionTypes.profiles.follow:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
         this._follow(action.data, true);
         break;
       case actionTypes.profiles.unfollow:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
         this._follow(action.data, false);
         break;
-      case actionTypes.common.loadForeignProfile:
-        appDispatcher.waitFor([userStore.dispatcherToken]);
-        this._fetchProfile(action.data);
-        break;
-      case actionTypes.common.loadPin:
-        appDispatcher.waitFor([pinsStore.dispatcherToken]);
-        // need to fetch commentators' profiles and pin's author's profile
-
-        this._fetchProfiles({profileIDs: pinsStore.getComments().map((comment) => comment['userID'])});
-        this._fetchProfile({profileID: pinsStore.getPin()['authorID']});
-        break;
-      case actionTypes.common.loadBoard:
-        appDispatcher.waitFor([boardsStore.dispatcherToken]);
-
-        this._fetchProfile({profileID: boardsStore.getBoard()['authorID']});
+      case actionTypes.profiles.statusProcessed:
+        this._status = storeStatuses.ok;
         break;
       default:
         return;
@@ -95,7 +77,6 @@ class ProfilesStore extends Store {
           }
 
           this._status = follow ? storeStatuses.followed : storeStatuses.unfollowed;
-          this._trigger('change');
           break;
         case 401:
           this._status = storeStatuses.userUnauthorized;
@@ -103,12 +84,14 @@ class ProfilesStore extends Store {
         case 400:
         case 404:
         case 409:
-          this._status = storeStatuses.clientSidedError;
+          this._status = storeStatuses.clientError;
           break;
         default:
           this._status = storeStatuses.internalError;
           break;
       }
+
+      this._trigger('change');
     });
   }
 
@@ -118,20 +101,29 @@ class ProfilesStore extends Store {
    * @private
    */
   _fetchProfile(data) {
+    if (this._profile.ID === Number(data.profileID)) {
+      return;
+    }
+    this._fetchingProfile = true;
+
     API.getProfileByUsernameOrID(data.profileID).then((response) => {
       switch (response.status) {
         case 200:
           this._profile = new Profile(response.responseBody);
-          this._trigger('change');
+          break;
+        case 404:
+          this._status = storeStatuses.profileNotFound;
           break;
         case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
+          this._status = storeStatuses.clientError;
           break;
         default:
           this._status = storeStatuses.internalError;
           break;
       }
+
+      this._fetchingProfile = false;
+      this._trigger('change');
     });
   }
 
@@ -141,6 +133,7 @@ class ProfilesStore extends Store {
    * @private
    */
   _fetchProfiles(data) {
+    this._fetchingProfiles = true;
     Promise
         .all(data.profileIDs.map((profileID) => API.getProfileByUsernameOrID(profileID)))
         .then((responses) => {
@@ -151,7 +144,7 @@ class ProfilesStore extends Store {
                 break;
               case 400:
               case 404:
-                this._status = storeStatuses.clientSidedError;
+                this._status = storeStatuses.clientError;
                 break;
               default:
                 this._status = storeStatuses.internalError;
@@ -159,25 +152,46 @@ class ProfilesStore extends Store {
             }
           });
 
+          this._fetchingProfiles = false;
           this._trigger('change');
         });
   }
 
-
   /**
    * Get profile
+   * @param {String} ID
    * @return {Profile}
    */
-  getProfile() {
-    return this._profile;
+  getProfileByID(ID) {
+    if (this._profile.ID === Number(ID) || this._status === storeStatuses.profileNotFound) {
+      return this._profile;
+    }
+
+    if (!this._fetchingProfile) {
+      this._fetchProfile({profileID: ID});
+    }
+
+    return null;
   }
 
   /**
    * Get profiles
+   * @param {Array} profileIDs
    * @return {[]}
    */
-  getProfiles() {
-    return this._profiles;
+  getProfiles(profileIDs) {
+    if (profileIDs.every((profileID) => this._profiles.some((profile) => profile.ID === profileID))) {
+      return profileIDs.reduce((profiles, profileID) => {
+        profiles.push(this._profiles.find((profile) => profile.ID === profileID));
+        return profiles;
+      }, []);
+    }
+
+    if (!this._fetchingProfiles) {
+      this._fetchProfiles({profileIDs: profileIDs});
+    }
+
+    return null;
   }
 }
 

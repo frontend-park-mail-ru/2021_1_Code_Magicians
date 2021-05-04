@@ -1,5 +1,8 @@
-import {Component} from '../component.js';
-import {userStore} from '../../stores/userStore/UserStore.js';
+import {Component} from '../component';
+import {userStore} from 'stores/userStore/UserStore';
+import NavbarTemplate from './navbar.hbs';
+import './navbar.scss';
+
 
 /**
  * Navigation bar (page__navbar)
@@ -11,6 +14,8 @@ export class Navbar extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.tmpl = NavbarTemplate;
   }
 
   /**
@@ -18,11 +23,12 @@ export class Navbar extends Component {
    * @return {string} final html
    */
   render() {
-    const tmpl = Handlebars.templates['navbar.hbs'];
-    return tmpl({
+    const user = userStore.getUser();
+
+    return this.tmpl({
       ...this.props,
-      userIsAuthorised: userStore.getUser().authorized(),
-      user: userStore.getUser().profile,
+      userIsAuthorised: user && user.authorized(),
+      user: user && user.profile,
     });
   }
 
@@ -31,6 +37,7 @@ export class Navbar extends Component {
    * @param {Event} event
    */
   wipeSearchField(event) {
+    event.preventDefault();
     document.querySelector('.navbar__search-input').value = '';
   }
 
@@ -47,8 +54,9 @@ export class Navbar extends Component {
    * Will
    */
   willUnmount() {
-    document
-        .querySelector('.navbar__search-wiper')
-        .removeEventListener('click', this.wipeSearchField);
+    const searchWiper = document.querySelector('.navbar__search-wiper');
+    if (searchWiper) {
+      searchWiper.removeEventListener('click', this.wipeSearchField);
+    }
   }
 }

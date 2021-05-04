@@ -1,0 +1,50 @@
+@import 'fonts.scss';
+
+:root {
+    --white: rgba(255, 255, 255, 1);
+    --almost-white: rgba(248, 248, 248, 1);
+    --red: rgba(203, 7, 15, 1);
+    --gray: rgba(169, 169, 169, 1);
+    --black: rgba(37, 37, 37, 1);
+    --perm-white: rgba(255, 255, 255, 1);
+    --lightgreen: green;
+
+    --main-elements-shadow: rgba(0, 0, 0, 0.05);
+
+    --perm-blur: rgba(33, 36, 40, 0.3);
+
+    --theme-transition: 0.5s;
+
+    --font-regular: 'Montserrat Regular';
+    --font-medium: 'Montserrat Medium';
+    --font-bold: 'Montserrat Bold';
+}
+
+:root[theme='dark'] {
+    --white: rgba(37, 37, 37, 1);
+    --almost-white: rgba(66, 66, 66, 1);
+    --red: rgba(203, 7, 15, 1);
+    --gray: rgba(169, 169, 169, 1);
+    --black: rgba(230, 230, 230, 1);
+    --perm-white: rgba(255, 255, 255, 1);
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+
+    margin: 0;
+    background-color: var(--almost-white);
+
+    font-family: var(--font-regular);
+}
+
+#app {
+    height: 100%;
+    width: 100%;
+}
