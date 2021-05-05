@@ -241,4 +241,23 @@ export class API {
   static markNotificationRead(notificationID) {
     return HTTPModule.put(`${paths.notificationRead}/${notificationID}`);
   }
+
+  /**
+   * Mark chat as read
+   * @param {Number} chatID
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static markChatRead(chatID) {
+    return HTTPModule.put(`${paths.chatRead}/${chatID}`);
+  }
+
+  /**
+   * Post new message. Can start new chat
+   * @param {String} messageText
+   * @param {String} targetUsername
+   * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   */
+  static sendMessage(messageText, targetUsername) {
+    return HTTPModule.post(`${paths.postMessage}/${targetUsername}`, {messageText: messageText});
+  }
 }

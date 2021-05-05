@@ -31,6 +31,7 @@ export class Sidebar extends Component {
       ...this.props,
       userIsAuthorized: this._userIsAuthorized,
       hasNewNotification: userStore.hasNewNotification(),
+      hasNewMessage: userStore.hasNewMessage(),
     });
   }
 
@@ -67,7 +68,7 @@ export class Sidebar extends Component {
       document
           .querySelector(`[name="${sliderName}Slider"]`)
           .style
-          .display = display === 'none' ? 'block' : 'none';
+          .display = display === 'none' ? 'flex' : 'none';
 
       if (display === 'none') {
         document

@@ -180,6 +180,46 @@
     transition: 0.2s;
   }
 
+  &__dropdown {
+    &-actions {
+      position: fixed;
+      top: 60px;
+      right: 10px;
+
+      display: none;
+      flex-direction: column;
+      align-items: center;
+
+      width: 100px;
+
+      padding: 5px 5px;
+
+      border-radius: 10px;
+
+      background-color: var(--almost-white);
+    }
+
+    &-action {
+      outline: none;
+      border: none;
+
+      margin: 5px 0;
+
+      font-size: 16px;
+
+      color: var(--black);
+      background-color: transparent;
+
+      cursor: pointer;
+
+      &:hover {
+        color: var(--red);
+        text-decoration: underline;
+      }
+    }
+
+  }
+
   &__auth-section {
     display: flex;
     justify-content: space-between;

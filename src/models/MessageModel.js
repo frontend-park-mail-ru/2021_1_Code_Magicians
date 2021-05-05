@@ -1,17 +1,17 @@
 import {Model} from './Model';
 
 /**
- * Comment model
+ * Message model
  */
-export class CommentModel extends Model {
+export class MessageModel extends Model {
   /**
    * Constructor
    * @param {Object} props : {
    *   ID,
-   *   userID,
-   *   pinID,
-   *   addingTime,
+   *   chatID,
+   *   authorID,
    *   text,
+   *   addingTime,
    * }
    */
   constructor(props = {}) {

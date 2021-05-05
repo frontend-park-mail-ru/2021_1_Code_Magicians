@@ -5,6 +5,8 @@ import {User} from 'models/User';
 import {actionTypes} from 'actions/actions';
 import {constants} from 'consts/consts';
 import {NotificationModel} from 'models/NotificationModel';
+import {Chat} from '../../models/Chat';
+import {MessageModel} from '../../models/MessageModel';
 
 const storeStatuses = constants.store.statuses.userStore;
 
@@ -21,9 +23,11 @@ class UserStore extends Store {
     this._user = new User(new Profile());
     this._userLoaded = false;
 
-    this._notifications = [];
     this._socketReady = false;
+    this._notifications = [];
     this._newNotification = false;
+    this._chats = [];
+    this._newMessage = false;
   }
 
   /**
@@ -61,6 +65,14 @@ class UserStore extends Store {
       case actionTypes.notifications.readNotification:
         this._turnOffNotification(action.data);
         break;
+      case actionTypes.messages.sendMessage:
+        this._sendMessage(action.data);
+        break;
+      case actionTypes.chats.markAsRead:
+        this._markChatRead(action.data);
+        break;
+      case actionTypes.chats.setActiveChat:
+        this._setActiveChat(action.data);
     }
   }
 
@@ -144,7 +156,7 @@ class UserStore extends Store {
         case 204:
           this._user.onLogout();
           this._status = storeStatuses.unauthorized;
-          this._disconnectFromNotifications();
+          this._disconnectFromWS();
           break;
         case 401:
           this._status = storeStatuses.clientError;
@@ -304,8 +316,8 @@ class UserStore extends Store {
         case 200:
           authorized = true;
           profile = new Profile(response.responseBody);
-          if (!this._notificationsConnected) {
-            this._connectToNotifications();
+          if (!this._connectedToWS) {
+            this._connectToWS();
           }
           break;
         case 401:
@@ -328,8 +340,9 @@ class UserStore extends Store {
   /**
    * Connect and start getting notifications
    */
-  _connectToNotifications() {
+  _connectToWS() {
     this._ws = this._ws || new WebSocket(constants.network.wsURL);
+
     this._ws.addEventListener('error', () => {
       this._status = storeStatuses.internalError;
       this._socketReady = false;
@@ -338,7 +351,7 @@ class UserStore extends Store {
     this._ws.addEventListener('close', () => this._socketReady = false);
 
     this._ws.addEventListener('open', () => {
-      this._notificationsConnected = true;
+      this._connectedToWS = true;
       this._socketReady = true;
       this._status = storeStatuses.ok;
 
@@ -368,6 +381,31 @@ class UserStore extends Store {
         case 'notification':
           this._notifications.push(new NotificationModel(message.notification));
           this._newNotification = true;
+
+          this._trigger('change');
+          break;
+        case 'all-chats':
+          this._chats = message['allChats'].map((chatData) => {
+            if (!chatData.isRead) {
+              this._newMessage = true;
+            }
+
+            return new Chat(chatData);
+          });
+
+          this._trigger('change');
+          break;
+        case 'new-chat':
+          this._chats.push(new Chat(message['chat']));
+
+          this._newMessage = true;
+          this._trigger('change');
+          break;
+        case 'new-message':
+          const msg = new MessageModel(message['message']);
+          this._chats.find((chat) => chat.ID === msg.chatID).messages.push(msg);
+
+          this._newMessage = true;
           this._trigger('change');
           break;
         case 'ping':
@@ -382,9 +420,12 @@ class UserStore extends Store {
    * Disconnect
    * @private
    */
-  _disconnectFromNotifications() {
-    this._notificationsConnected = false;
+  _disconnectFromWS() {
+    this._connectedToWS = false;
+
     this._notifications = null;
+    this._chats = null;
+
     this._ws.close();
   }
 
@@ -413,6 +454,70 @@ class UserStore extends Store {
   }
 
   /**
+   * Send new message
+   * @param {Object} data
+   * @private
+   */
+  _sendMessage(data) {
+    API.sendMessage(data.messageText, data.targetUsername).then((response) => {
+      switch (response.status) {
+        case 201:
+          this._status = storeStatuses.messageSent;
+          break;
+        case 404:
+          this._status = storeStatuses.userNotFound;
+          break;
+        case 400:
+        case 401:
+        default:
+          this._status = storeStatuses.internalError;
+      }
+
+      this._trigger('change');
+    });
+  }
+
+  /**
+   * Mark it
+   * @param {Object} data
+   * @private
+   */
+  _markChatRead(data) {
+    API.markChatRead(data.chatID).then((response) => {
+      switch (response.status) {
+        case 204:
+        case 409:
+          this._chats.find((chat) => chat.ID === Number(data.chatID)).markAsRead();
+          this._newMessage = this._chats?.some((chat) => !chat.isRead);
+          break;
+        case 401:
+        case 403:
+        case 404:
+        default:
+          this._status = storeStatuses.internalError;
+          break;
+      }
+
+      if (response.status !== 409) {
+        this._trigger('change');
+      }
+    });
+  }
+
+  /**
+   * Set it
+   * @param {Object} data
+   * @private
+   */
+  _setActiveChat(data) {
+    this._chat = this._chats && this._chats.length && this._chats.find((chat) => {
+      return chat.ID === Number(data.chatID);
+    });
+
+    this._trigger('change');
+  }
+
+  /**
    * Returns user data
    * @return {User}
    */
@@ -437,11 +542,35 @@ class UserStore extends Store {
   }
 
   /**
+   * Get em
+   * @return {*}
+   */
+  getChats() {
+    return this._chats;
+  }
+
+  /**
+   * Get single chat
+   * @return {*}
+   */
+  getChat() {
+    return this._chat;
+  }
+
+  /**
    * Has it?
    * @return {Boolean}
    */
   hasNewNotification() {
     return this._newNotification;
+  }
+
+  /**
+   * Has it?
+   * @return {Boolean}
+   */
+  hasNewMessage() {
+    return this._newMessage;
   }
 }
 

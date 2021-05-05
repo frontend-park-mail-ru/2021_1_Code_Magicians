@@ -25,6 +25,9 @@
         {{#if userIsAuthorized}}
             <button name="messages-toggle" class="sidebar__toggle slider-toggle">
                 <i class="fas fa-comment-dots sidebar__toggle-icon"></i>
+                {{#if hasNewMessage}}
+                    <i class="fas fa-circle sidebar__news-marker"></i>
+                {{/if}}
             </button>
             <button name="notifications-toggle" class="sidebar__toggle slider-toggle">
                 <i class="fas fa-bell sidebar__toggle-icon"></i>
