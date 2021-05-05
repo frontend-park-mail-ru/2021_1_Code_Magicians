@@ -2,15 +2,16 @@ import {View} from '../view.js';
 import {actions} from 'actions/actions';
 import {toastBox} from 'components/toast/toast';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
-import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {userStore} from 'stores/userStore/UserStore';
 import {constants} from 'consts/consts';
 import {appRouter} from 'appManagers/router';
 import {descriptionRegexp} from 'consts/regexp';
 import {Page} from 'components/page/page';
+import {BoardControl} from 'components/boardControl/boardControl';
 
 import PinBuilderViewTemplate from './pinBuilderView.hbs';
 import './pinBuilderView.scss';
+import {boardsStore} from '../../stores/boardsStore/boardsStore';
 
 
 /**
@@ -35,8 +36,6 @@ export class PinBuilderView extends View {
     this.setState(payload);
     this.submit = this.submit.bind(this);
 
-    this.createBoard = this.createBoard.bind(this);
-
     pinsStore.bind('change', this.refresh);
     boardsStore.bind('change', this.refresh);
   }
@@ -57,7 +56,6 @@ export class PinBuilderView extends View {
     }
 
     document.querySelector('.pin-builder-form').addEventListener('submit', this.submit);
-    document.getElementById('create-board').addEventListener('click', this.createBoard);
     document.getElementById('file-input').addEventListener('change', this.previewImage);
 
     super.didMount();
@@ -68,7 +66,6 @@ export class PinBuilderView extends View {
    */
   willUnmount() {
     document.querySelector('.pin-builder-form').removeEventListener('submit', this.submit);
-    document.getElementById('create-board').removeEventListener('click', this.createBoard);
     document.getElementById('file-input').removeEventListener('change', this.previewImage);
 
     super.willUnmount();
@@ -80,14 +77,14 @@ export class PinBuilderView extends View {
    */
   render() {
     const profile = userStore.getUser() && userStore.getUser().profile;
-    const userBoards = profile && boardsStore.getBoardsByProfileID(profile.ID);
-
+    const boardControl = new BoardControl(this.props);
+    this._nestedComponents.set('_boardControl', boardControl);
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({
         ...this.props,
+        boardControl: this._nestedComponents.get('_boardControl').render(),
         profile: profile,
-        profileBoards: userBoards,
       }),
     }));
 
@@ -122,9 +119,13 @@ export class PinBuilderView extends View {
       return;
     }
 
+    const selectInput = document.querySelector('.pin-board-selector__input');
+    const boardID = Number(selectInput.options[selectInput.selectedIndex].getAttribute('data-boardID'));
+
     const payload = {
       title: name,
       description: description,
+      boardID: boardID,
     };
 
     const formData = new FormData();
@@ -134,28 +135,6 @@ export class PinBuilderView extends View {
     actions.pins.createPin(formData);
 
     this.setState(payload);
-  }
-
-  /**
-   * createBoard callback
-   * @param {Event} event
-   */
-  createBoard(event) {
-    event.preventDefault();
-
-    const boardTitle = document.getElementById('board-name').value.trim();
-
-    if (!boardTitle) {
-      toastBox.addToast('Don\'t forget your board name!', true);
-      return;
-    }
-
-    const boardData = {
-      title: boardTitle,
-      description: '',
-    };
-
-    actions.boards.createBoard(boardData);
   }
 
   /**

@@ -19,26 +19,9 @@
                         <input class="pin-builder-form__input" type="text" name="name" placeholder="Add name">
                     </label>
                     <div class="shadow-line"></div>
-<!--                </div>-->
+                </div>
                 <div class="pin-builder-form__wrapper">
-                    <div class="pin-board-selector">
-                        <select class="pin-board-selector__input" id="board-name">
-                            {{#each profileBoards}}
-                                <option data-boardID="{{this.ID}}" class="pin-board-selector__option">
-                                    {{this.title}}
-                                </option>
-                            {{/each}}
-                        </select>
-                        <div class="pin-board-selector__select-button pin-board-selector">
-                            <i class="fas fa-chevron-circle-down user-icon"></i>
-                        </div>
-                        <div class="pin-board-selector__select-button pin-board-selector"  id="create-board">
-                            <i class="fas fa-plus-circle user-icon"></i>
-                        </div>
-                        <div class="pin-board-selector__select-button pin-board-selector">
-                            <i class="fas fa-heart user-icon pin-board-selector__select-button"></i>
-                        </div>
-                    </div>
+                    {{{boardControl}}}
                 </div>
                 <div class="pin-builder-form__wrapper">
                     <div class="author-info">
@@ -78,3 +61,4 @@
         </form>
     </div>
 </div>
+

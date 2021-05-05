@@ -6,9 +6,11 @@ import {profilesStore} from 'stores/profilesStore/profilesStore';
 import {constants} from 'consts/consts';
 import {userStore} from 'stores/userStore/UserStore';
 import {appRouter} from 'appManagers/router';
+import {BoardControl} from 'components/boardControl/boardControl';
 
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
+import {boardsStore} from '../../stores/boardsStore/boardsStore';
 
 /**
  * Build pin view
@@ -26,6 +28,7 @@ export class PinView extends View {
     this.follow = this.follow.bind(this);
 
     pinsStore.bind('change', this.refresh);
+    boardsStore.bind('change', this.refresh);
     profilesStore.bind('change', this.refresh);
   }
 
@@ -49,6 +52,8 @@ export class PinView extends View {
       author: commentProfiles[index],
     }));
 
+    const boardControl = new BoardControl(this.props);
+    this._nestedComponents.set('_boardControl', boardControl);
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.tmpl({
@@ -58,6 +63,7 @@ export class PinView extends View {
         pinIsSelfOwned: pinIsSelfOwned,
         pin: currentPin,
         comments: templateComments,
+        boardControl: this._nestedComponents.get('_boardControl').render(),
       }),
     }));
 
