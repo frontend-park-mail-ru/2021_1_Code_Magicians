@@ -119,9 +119,13 @@ export class PinBuilderView extends View {
       return;
     }
 
+    const selectInput = document.querySelector('.pin-board-selector__input');
+    const boardID = Number(selectInput.options[selectInput.selectedIndex].getAttribute('data-boardID'));
+
     const payload = {
       title: name,
       description: description,
+      boardID: boardID,
     };
 
     const formData = new FormData();
