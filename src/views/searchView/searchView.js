@@ -37,24 +37,31 @@ export class SearchView extends View {
         .pathname
         .replace('/search/', '');
     const searchingProfiles = query.startsWith('@');
+
     const foundItems = searchingProfiles ? profilesStore.getFoundProfiles(query) : pinsStore.getFoundPins(query);
     if (!foundItems) {
       actions.common.search(query, searchingProfiles ? 'profiles' : 'pins');
     }
 
-    this._nestedComponents.set('_foundItems', searchingProfiles ?
-    new ProfilesFeed({...this.props, profiles: foundItems}) :
-    new PinsFeed({...this.props, pins: foundItems}));
+    let foundItemsFeed = {};
+    if (searchingProfiles) {
+      foundItemsFeed = new ProfilesFeed({...this.props, profiles: foundItems});
+    } else {
+      foundItemsFeed = new PinsFeed({...this.props, pins: foundItems});
+    }
 
+    const html = this.tmpl({
+      ...this.props,
+      searchType: searchingProfiles ? 'Profiles' : 'Pins',
+      searchingProfiles: searchingProfiles,
+      query: query.replaceAll('+', ' ').replace('@', ''),
+      foundItems: this._nestedComponents.get('_foundItems').render(),
+    });
+
+    this._nestedComponents.set('_foundItems', foundItemsFeed);
     this._nestedComponents.set('page', new Page({
       ...this.props,
-      page__content: this.tmpl({
-        ...this.props,
-        searchType: searchingProfiles ? 'Profiles' : 'Pins',
-        searchingProfiles: searchingProfiles,
-        query: query.replaceAll('+', ' ').replace('@', ''),
-        foundItems: this._nestedComponents.get('_foundItems').render(),
-      }),
+      page__content: html,
     }));
 
     return this._nestedComponents.get('page').render();
