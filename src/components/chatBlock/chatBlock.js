@@ -29,7 +29,7 @@ export class ChatBlock extends Component {
     const profile = chat && new Profile(chat.targetProfile);
 
     const messages = chat && chat.messages.map((message) => {
-      message.isSelf = message.authorID !== (user && user.profile['ID']);
+      message.isSelf = message.authorID === (user && user.profile['ID']);
 
       return message;
     });

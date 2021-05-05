@@ -27,7 +27,7 @@ export class ProfilePinsView extends ProfileView {
           .getBoardsByProfileID(this.props.pathArgs.profileID ||
             (userStore.getUser() && userStore.getUser().profile.ID));
 
-    const mainBoard = profileBoards && profileBoards[0];
+    const mainBoard = profileBoards && profileBoards.find((board) => board.title === 'Saved pins');
 
     this._nestedComponents.set('_pinsFeed', new PinsFeed({
       ...this.props,

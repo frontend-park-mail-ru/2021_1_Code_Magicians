@@ -68,6 +68,7 @@ class BoardsStore extends Store {
       switch (response.status) {
         case 201:
           this._status = storeStatuses.boardCreated;
+          this._fetchProfileBoards({authorID: userStore.getUser().profile.ID});
           break;
         case 401:
           this._status = storeStatuses.userUnauthorized;
@@ -80,7 +81,9 @@ class BoardsStore extends Store {
           break;
       }
 
-      this._trigger('change');
+      if (response.status !== 201) {
+        this._trigger('change');
+      }
     });
   }
 

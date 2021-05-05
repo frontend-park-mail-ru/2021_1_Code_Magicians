@@ -7,10 +7,10 @@ import {constants} from 'consts/consts';
 import {userStore} from 'stores/userStore/UserStore';
 import {appRouter} from 'appManagers/router';
 import {BoardControl} from 'components/boardControl/boardControl';
+import {boardsStore} from '../../stores/boardsStore/boardsStore';
 
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
-import {boardsStore} from '../../stores/boardsStore/boardsStore';
 
 /**
  * Build pin view

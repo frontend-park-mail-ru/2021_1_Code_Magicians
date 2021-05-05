@@ -106,8 +106,6 @@ export class Navbar extends Component {
    * @param {Event} event
    */
   closeDropdown(event) {
-    event.preventDefault();
-
     const toggleButton = document.querySelector('[name="dropdown-toggle"]');
     const dropdown = document.querySelector('.navbar__dropdown-actions');
 

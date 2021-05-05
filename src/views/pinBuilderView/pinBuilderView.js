@@ -43,8 +43,11 @@ export class PinBuilderView extends View {
    * Did
    */
   didMount() {
-    if (!userStore.getUser() || !userStore.getUser().authorized()) {
-      appRouter.back();
+    const user = userStore.getUser();
+    if ((!user || !user.authorized()) &&
+      userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
+      this._active = false;
+      appRouter.go(this.props.paths.home);
       return;
     }
 
