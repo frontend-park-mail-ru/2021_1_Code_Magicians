@@ -38,17 +38,13 @@ export class Vlist extends Component {
     const numberCols = Math.floor(this.props.width / 400);
     const colWidth = 400;
 
-    const Column = function() {
-      return {
-        heights: [],
-        pins: [],
-        scrollPos: 0,
-        colHeight: 0,
-        idx: 0,
-      };
-    };
-
-    const cols = Array(numberCols).fill(0).map(() => new Column());
+    const cols = Array(numberCols).fill(0).map(() => ({
+      heights: [],
+      pins: [],
+      scrollPos: 0,
+      colHeight: 0,
+      idx: 0,
+    }));
 
     let maxColHeight = 0;
     let elHeight = 0;

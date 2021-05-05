@@ -1,6 +1,6 @@
 import {constants} from 'consts/consts';
 import {appRouter} from 'appManagers/router';
-import {VirtualizedList} from '../views/virtualizedList/virtualizedList';
+import {VirtualizedList} from 'views/virtualizedList/virtualizedList';
 import {ProfileView} from 'views/profileViews/profileView/profileView';
 import {ProfileBoardsView} from 'views/profileViews/profileBoardsView/profileBoardsView';
 import {ProfilePinsView} from 'views/profileViews/profilePinsView/profilePinsView';

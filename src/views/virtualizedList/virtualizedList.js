@@ -1,9 +1,10 @@
 import {View} from '../view';
 import {Page} from 'components/page/page';
+import {Vlist} from 'components/vlist/vlist';
 import {pinsStore} from 'stores/pinsStore/pinsStore';
+
 import VlistTemplate from './virtualizedList.hbs';
 import './virtualizedList.scss';
-import {Vlist} from '../../components/vlist/vlist';
 
 /**
  * Main pins virtualized list view
@@ -41,8 +42,7 @@ export class VirtualizedList extends View {
       page__content: this.tmpl({
         vlist: this._nestedComponents.get('_vlist').render(),
       }),
-    },
-    ));
+    }));
 
     return this._nestedComponents.get('page').render();
   }
