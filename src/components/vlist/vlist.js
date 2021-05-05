@@ -1,6 +1,9 @@
 import {Component} from '../component.js';
 import vlistTemplate from './vlist.hbs';
+import vlistPinsTemplate from './vlistRowPins.hbs';
 import './vlist.scss';
+import {API} from '../../modules/api';
+import {Pin} from '../../models/Pin';
 
 
 /**
@@ -25,6 +28,7 @@ export class Vlist extends Component {
     this.setState(statePayload);
 
     this.tmpl = vlistTemplate;
+    this.loadMore = this.loadMore.bind(this);
   }
 
   /**
@@ -103,6 +107,7 @@ export class Vlist extends Component {
    */
   didMount() {
     // document.querySelector('.page__content').addEventListener('scroll', this.scrollHandler);
+    document.querySelector('.vlist-load-button').addEventListener('click', this.loadMore);
     super.didMount();
   }
 
@@ -111,10 +116,37 @@ export class Vlist extends Component {
    */
   willUnmount() {
     // document.querySelector('.page__content').removeEventListener('scroll', this.scrollHandler);
+    document.querySelector('.vlist-load-button').removeEventListener('click', this.loadMore);
+
     super.willUnmount();
   }
 
-// TODO: fix scrolling / loading content
+  /**
+   * load more pins
+   * @param {Event} e
+   */
+  loadMore(e) {
+    e.preventDefault();
+
+    document.querySelector('.vlist-load-button').style.display = 'none';
+
+    const columns = Array(this._state.lastCols).fill(0).map(()=> []);
+    const colWidth = this._state.lastWidth;
+    API.getPinsFeed(50).then((response) => {
+      let pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
+      pins = pins.slice(20);
+      pins.forEach((pin, index) => {
+        pin.imageHeight = pin.imageHeight / pin.imageWidth * colWidth;
+        pin.imageWidth = colWidth;
+        columns[index % columns.length].push(pin);
+      });
+      columns.forEach((array, index)=> {
+        document.querySelector(`.vlist-col-${index}`).innerHTML+= vlistPinsTemplate({pins: array});
+      });
+    });
+  }
+
+// // TODO: fix scrolling / loading content
 //   /**
 //    * scrollHandler callback
 //    * @param {Event} event
