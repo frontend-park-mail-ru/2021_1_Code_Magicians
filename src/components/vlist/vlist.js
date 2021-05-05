@@ -2,8 +2,8 @@ import {Component} from '../component.js';
 import vlistTemplate from './vlist.hbs';
 import vlistPinsTemplate from './vlistRowPins.hbs';
 import './vlist.scss';
-import {API} from '../../modules/api';
-import {Pin} from '../../models/Pin';
+import {API} from 'modules/api';
+import {Pin} from 'models/Pin';
 
 
 /**
