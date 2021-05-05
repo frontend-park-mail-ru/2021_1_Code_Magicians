@@ -11,6 +11,7 @@ import {BoardControl} from 'components/boardControl/boardControl';
 
 import PinBuilderViewTemplate from './pinBuilderView.hbs';
 import './pinBuilderView.scss';
+import {boardsStore} from '../../stores/boardsStore/boardsStore';
 
 
 /**
@@ -36,6 +37,7 @@ export class PinBuilderView extends View {
     this.submit = this.submit.bind(this);
 
     pinsStore.bind('change', this.refresh);
+    boardsStore.bind('change', this.refresh);
   }
 
   /**

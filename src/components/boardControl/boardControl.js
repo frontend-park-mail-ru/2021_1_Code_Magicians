@@ -6,7 +6,6 @@ import {userStore} from 'stores/userStore/UserStore';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {toastBox} from 'components/toast/toast';
 import {actions} from 'actions/actions';
-import {pinsStore} from 'stores/pinsStore/pinsStore';
 
 /**
  * BoardControl
@@ -20,9 +19,6 @@ export class BoardControl extends Component {
     super(props);
 
     this.tmpl = BoardControlTemplate;
-
-    pinsStore.bind('change', this.refresh);
-    boardsStore.bind('change', this.refresh);
   }
 
   /**
@@ -49,8 +45,8 @@ export class BoardControl extends Component {
       return;
     }
 
-    document.getElementById('create-board').addEventListener('click', this.createBoard);
-    document.querySelector('.board-create-form').addEventListener('click', this.hideBoard);
+    document.getElementById('create-board').addEventListener('click', this.showBoardForm);
+    document.querySelector('.board-create-form').addEventListener('click', this.hideBoardForm);
     document.querySelector('.board-create-form__button').addEventListener('click', this.createBoardSubmit);
 
     super.didMount();
@@ -60,8 +56,8 @@ export class BoardControl extends Component {
    * Will
    */
   willUnmount() {
-    document.getElementById('create-board').removeEventListener('click', this.createBoard);
-    document.querySelector('.board-create-form').removeEventListener('click', this.hideBoard);
+    document.getElementById('create-board').removeEventListener('click', this.showBoardForm);
+    document.querySelector('.board-create-form').removeEventListener('click', this.hideBoardForm);
     document.querySelector('.board-create-form__button').removeEventListener('click', this.createBoardSubmit);
 
     super.willUnmount();
@@ -71,7 +67,7 @@ export class BoardControl extends Component {
    * hideBoard callback
    * @param {Event} event
    */
-  hideBoard(event) {
+  hideBoardForm(event) {
     // event.preventDefault();
     if (event.target.id === 'board-form' || event.target.id === 'board-close') {
       document.querySelector('.board-create-form').style.visibility = 'hidden';
@@ -84,7 +80,7 @@ export class BoardControl extends Component {
    * createBoard callback
    * @param {Event} event
    */
-  createBoard(event) {
+  showBoardForm(event) {
     event.preventDefault();
 
     document.querySelector('.board-create-form').style.visibility = 'visible';
