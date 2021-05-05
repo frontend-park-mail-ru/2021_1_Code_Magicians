@@ -40,6 +40,7 @@ export const actionTypes = {
   },
   chats: {
     markAsRead: 'mark-as-read',
+    setActiveChat: 'set-active-chat',
   },
 };
 
@@ -208,6 +209,12 @@ export const actions = {
     markAsRead: (chatID) => {
       appDispatcher.dispatch({
         actionType: actionTypes.chats.markAsRead,
+        data: {chatID: chatID},
+      });
+    },
+    setActiveChat: (chatID) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.chats.setActiveChat,
         data: {chatID: chatID},
       });
     },

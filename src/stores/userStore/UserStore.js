@@ -71,6 +71,8 @@ class UserStore extends Store {
       case actionTypes.chats.markAsRead:
         this._markChatRead(action.data);
         break;
+      case actionTypes.chats.setActiveChat:
+        this._setActiveChat(action.data);
     }
   }
 
@@ -496,8 +498,23 @@ class UserStore extends Store {
           break;
       }
 
-      this._trigger('change');
+      if (response.status !== 409) {
+        this._trigger('change');
+      }
     });
+  }
+
+  /**
+   * Set it
+   * @param {Object} data
+   * @private
+   */
+  _setActiveChat(data) {
+    this._chat = this._chats && this._chats.length && this._chats.find((chat) => {
+      return chat.ID === Number(data.chatID);
+    });
+
+    this._trigger('change');
   }
 
   /**
@@ -533,16 +550,11 @@ class UserStore extends Store {
   }
 
   /**
-   * Get single chat by ID
-   * @param {String} chatID
+   * Get single chat
    * @return {*}
    */
-  getChat(chatID) {
-    if (!chatID) {
-      return null;
-    }
-
-    return this._chats && this._chats.find((chat) => chat.ID === chatID);
+  getChat() {
+    return this._chat;
   }
 
   /**

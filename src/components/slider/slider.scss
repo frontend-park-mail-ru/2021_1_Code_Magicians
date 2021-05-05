@@ -78,6 +78,8 @@
       width: 45px;
       height: 45px;
 
+      border-radius: 50%;
+
       object-fit: cover;
     }
 
@@ -85,6 +87,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      justify-content: center;
 
       flex-grow: 1;
 

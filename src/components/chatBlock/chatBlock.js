@@ -4,6 +4,7 @@ import {actions} from '../../actions/actions';
 
 import ChatBlockTemplate from './chatBlock.hbs';
 import './chatBlock.scss';
+import {Profile} from '../../models/Profile';
 
 /**
  * Chat block. Later can be used in mobile
@@ -24,16 +25,18 @@ export class ChatBlock extends Component {
    */
   render() {
     const user = userStore.getUser();
-    const chat = userStore.getChat(this._state.chatID);
+    const chat = userStore.getChat();
+    const profile = chat && new Profile(chat.targetProfile);
+
     const messages = chat && chat.messages.map((message) => {
-      message.isSelf = message.authorID === (user && user['ID']);
+      message.isSelf = message.authorID !== (user && user.profile['ID']);
 
       return message;
     });
 
     return this.tmpl({
       ...this.props,
-      profile: chat && chat.profile,
+      profile: profile,
       messages: messages,
     });
   }
@@ -69,8 +72,8 @@ export class ChatBlock extends Component {
   submitMessageForm(event) {
     event.preventDefault();
 
-    const messageText = event.target.closest('.chat__message-input').value.trim();
-    const chat = userStore.getChat(this._state.chatID);
+    const messageText = document.querySelector('.chat__message-input').value.trim();
+    const chat = userStore.getChat();
     const targetUsername = chat && chat['targetProfile'].username;
 
     if (messageText && targetUsername) {

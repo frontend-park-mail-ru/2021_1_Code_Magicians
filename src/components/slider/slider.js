@@ -207,10 +207,14 @@ export class Slider extends Component {
 
     const chat = event.target.closest('.slider__item');
 
-    document.querySelector('.slider__item_selected').classList.remove('slider__item_selected');
+    const selectedChat = document.querySelector('.slider__item_selected');
+    if (selectedChat) {
+      selectedChat.classList.remove('slider__item_selected');
+    }
     chat.classList.add('slider__item_selected');
 
-    this._nestedComponents.get('_chatBlock').setState({chatID: chat.getAttribute('data-id')});
+    actions.chats.setActiveChat(chat.getAttribute('data-id'));
+
     document.querySelector('.chat').style.display = 'flex';
   }
 }

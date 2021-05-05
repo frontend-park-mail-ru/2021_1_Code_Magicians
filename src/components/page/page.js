@@ -3,6 +3,7 @@ import {Sidebar} from '../sidebar/sidebar';
 import {Component} from '../component';
 import {Slider} from '../slider/slider';
 import {userStore} from 'stores/userStore/UserStore';
+import {Profile} from '../../models/Profile';
 
 import PageTemplate from './page.hbs';
 import './page.scss';
@@ -22,11 +23,23 @@ export class Page extends Component {
 
     this._nestedComponents.set('_pageNavbar', new Navbar(props));
     this._nestedComponents.set('_pageSidebar', new Sidebar(props));
+
+    const chats = userStore.getChats();
     this._nestedComponents.set('_messagesSlider', new Slider({
       ...props,
       sliderType: 'Messages',
       typeIsMessages: true,
-      items: userStore.getChats(),
+      items: chats && chats.length && chats.map((chat) => {
+        const targetProfile = new Profile(chat.targetProfile);
+
+        return {
+          ID: chat.ID,
+          isNew: !chat.isRead,
+          header: targetProfile.username,
+          imageLink: targetProfile.avatarLink,
+          text: chat.messages && chat.messages.slice(-1).pop().text,
+        };
+      }),
     }));
 
     this._nestedComponents.set('_notificationsSlider', new Slider({
