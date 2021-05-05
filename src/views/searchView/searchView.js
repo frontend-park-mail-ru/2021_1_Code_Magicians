@@ -49,6 +49,7 @@ export class SearchView extends View {
     } else {
       foundItemsFeed = new PinsFeed({...this.props, pins: foundItems});
     }
+    this._nestedComponents.set('_foundItems', foundItemsFeed);
 
     const html = this.tmpl({
       ...this.props,
@@ -58,7 +59,6 @@ export class SearchView extends View {
       foundItems: this._nestedComponents.get('_foundItems').render(),
     });
 
-    this._nestedComponents.set('_foundItems', foundItemsFeed);
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: html,
