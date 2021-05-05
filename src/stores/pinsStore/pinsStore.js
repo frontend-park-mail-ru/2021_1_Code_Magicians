@@ -245,7 +245,7 @@ class PinsStore extends Store {
       this._trigger('change');
     });
 
-    this._pins = constants.mocks.pins;
+    // this._pins = constants.mocks.pins;
 
     this._fetchingPins = false;
     this._trigger('change');

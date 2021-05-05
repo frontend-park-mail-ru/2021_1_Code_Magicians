@@ -8,9 +8,9 @@ import {appRouter} from 'appManagers/router';
 import {descriptionRegexp} from 'consts/regexp';
 import {Page} from 'components/page/page';
 import {BoardControl} from 'components/boardControl/boardControl';
-
 import PinBuilderViewTemplate from './pinBuilderView.hbs';
 import './pinBuilderView.scss';
+import {boardsStore} from '../../stores/boardsStore/boardsStore';
 
 
 /**
@@ -36,6 +36,7 @@ export class PinBuilderView extends View {
     this.submit = this.submit.bind(this);
 
     pinsStore.bind('change', this.refresh);
+    boardsStore.bind('change', this.refresh);
   }
 
   /**
@@ -117,9 +118,13 @@ export class PinBuilderView extends View {
       return;
     }
 
+    const selectInput = document.querySelector('.pin-board-selector__input');
+    const boardID = Number(selectInput.options[selectInput.selectedIndex].getAttribute('data-boardID'));
+
     const payload = {
       title: name,
       description: description,
+      boardID: boardID,
     };
 
     const formData = new FormData();

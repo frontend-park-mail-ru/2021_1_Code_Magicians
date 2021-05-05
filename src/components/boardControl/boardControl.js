@@ -6,10 +6,9 @@ import {userStore} from 'stores/userStore/UserStore';
 import {boardsStore} from 'stores/boardsStore/boardsStore';
 import {toastBox} from 'components/toast/toast';
 import {actions} from 'actions/actions';
-import {pinsStore} from 'stores/pinsStore/pinsStore';
 
 /**
- * BoardControl
+ * Vlist
  */
 export class BoardControl extends Component {
   /**
@@ -20,9 +19,6 @@ export class BoardControl extends Component {
     super(props);
 
     this.tmpl = BoardControlTemplate;
-
-    pinsStore.bind('change', this.refresh);
-    boardsStore.bind('change', this.refresh);
   }
 
   /**

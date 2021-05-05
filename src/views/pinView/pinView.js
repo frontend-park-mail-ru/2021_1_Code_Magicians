@@ -10,6 +10,7 @@ import {BoardControl} from 'components/boardControl/boardControl';
 
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
+import {boardsStore} from '../../stores/boardsStore/boardsStore';
 
 /**
  * Build pin view
@@ -28,6 +29,7 @@ export class PinView extends View {
 
     pinsStore.bind('change', this.refresh);
     profilesStore.bind('change', this.refresh);
+    boardsStore.bind('change', this.refresh);
   }
 
   /**
