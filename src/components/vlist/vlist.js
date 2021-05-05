@@ -106,7 +106,10 @@ export class Vlist extends Component {
    */
   didMount() {
     // document.querySelector('.page__content').addEventListener('scroll', this.scrollHandler);
-    document.querySelector('.vlist-load-button').addEventListener('click', this.loadMore);
+    const tmp = document.querySelector('.vlist-load-button');
+    if (tmp) {
+      tmp.addEventListener('click', this.loadMore);
+    }
     super.didMount();
   }
 
@@ -115,7 +118,10 @@ export class Vlist extends Component {
    */
   willUnmount() {
     // document.querySelector('.page__content').removeEventListener('scroll', this.scrollHandler);
-    document.querySelector('.vlist-load-button').removeEventListener('click', this.loadMore);
+    const tmp = document.querySelector('.vlist-load-button');
+    if (tmp) {
+      tmp.removeEventListener('click', this.loadMore);
+    }
 
     super.willUnmount();
   }
