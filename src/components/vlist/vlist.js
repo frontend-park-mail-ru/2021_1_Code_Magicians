@@ -1,5 +1,4 @@
 import {Component} from '../component.js';
-
 import vlistTemplate from './vlist.hbs';
 import './vlist.scss';
 
@@ -15,6 +14,16 @@ export class Vlist extends Component {
   constructor(props) {
     super(props);
 
+    const statePayload = {
+      startIdx: 0,
+      endIdx: 0,
+      height: 0,
+      lastWidth: 0,
+      lastCols: 0,
+      render: true,
+    };
+    this.setState(statePayload);
+
     this.tmpl = vlistTemplate;
   }
 
@@ -28,73 +37,63 @@ export class Vlist extends Component {
     }
     const numberCols = Math.floor(this.props.width / 400);
     const colWidth = 400;
-    const col = {
-      heights: [],
-      pins: [],
-      scrollPos: 0,
-      colHeight: 0,
-      idx: 0,
+
+    const Column = function() {
+      return {
+        heights: [],
+        pins: [],
+        scrollPos: 0,
+        colHeight: 0,
+        idx: 0,
+      };
     };
 
-    // const statePayload = {
-    //   startIdx: 0,
-    //   endIdx: 0,
-    //   height: 0,
-    //   lastWidth: 0,
-    //   render: true,
-    // };
+    const cols = Array(numberCols).fill(0).map(() => new Column());
 
-
-    const cols = Array(numberCols).fill(col);
-
-    console.log(cols);
-
-    const maxColHeight = 0;
+    let maxColHeight = 0;
     let elHeight = 0;
     let elWidth = 0;
     let pinsLeft = this.props.pins.length;
     let index = 0;
-    // while (maxColHeight < this.props.height * 5 && pinsLeft > 0) {
-    //   for (let i = 0; i < numberCols; i++) {
-    //     col.pins[i] = this.props.pins[i];
-    //     elHeight = this.props.pins[i].imageHeight;
-    //     if (!elHeight) {
-    //       col.heights[i] = 500;
-    //     } else {
-    //       col.heights[i] = elHeight;
-    //     }
-    //     col.colHeight += col.heights[i];
-    //     cols[i] = col;
-    //   }
-    //   pinsLeft--;
-    // }
-    index = 0;
+
+    let layer = 0;
+    const pins = this.props.pins;
+
+    const statePayload = this._state;
+    index = statePayload.startIdx;
+
     while ((maxColHeight < (this.props.height * 5)) && (pinsLeft > 0)) {
       for (let i = 0; i < numberCols; i++) {
-        if (cols[i] && cols[i].colHeight > maxColHeight) {
-          continue;
+        if (!pinsLeft) {
+          break;
         }
-        const pin = this.props.pins[index];
-        cols[i].pins[index] = pin;
+        const pin = pins[index];
+        cols[i].pins.push(pin);
+
         elHeight = pin.imageHeight;
         elWidth = pin.imageWidth;
         if (!elHeight || !elWidth) {
-          cols[i].heights[index] = 500;
+          cols[i].heights.push(500);
         } else {
-          cols[i].heights[index] = elHeight / elWidth * colWidth; // by=400*by/bx
-          cols[i].pins[index].imageHeight = cols[i].heights[index];
+          cols[i].heights.push(elHeight / elWidth * colWidth); // by=400*by/bx
+          cols[i].pins[layer].imageHeight = cols[i].heights[layer];
         }
-        cols[i].colHeight += col.heights[index] + 20;
-        cols[i].pins[index].imageWidth = colWidth;
-        // cols[index] = col;
+        cols[i].colHeight += cols[i].heights[layer] + 20;
+        cols[i].pins[layer].imageWidth = colWidth;
+        if (cols[i].colHeight > maxColHeight) {
+          maxColHeight = cols[i].colHeight;
+        }
         index++;
         pinsLeft--;
       }
+      layer++;
     }
 
-    // var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-    //
-    // return { width: srcWidth*ratio, height: srcHeight*ratio };
+    statePayload.startIdx = index;
+    statePayload.lastCols = numberCols;
+    statePayload.lastWidth = colWidth;
+    this.setState(statePayload);
+
     return this.tmpl({
       ...this.props,
       colWidth: colWidth,
@@ -102,10 +101,12 @@ export class Vlist extends Component {
     });
   }
 
+
   /**
    * Did
    */
   didMount() {
+    // document.querySelector('.page__content').addEventListener('scroll', this.scrollHandler);
     super.didMount();
   }
 
@@ -113,16 +114,21 @@ export class Vlist extends Component {
    * Will
    */
   willUnmount() {
+    // document.querySelector('.page__content').removeEventListener('scroll', this.scrollHandler);
     super.willUnmount();
   }
 
-  /**
-   * createBoard callback
-   * @param {Event} event
-   */
-  createBoard(event) {
-    event.preventDefault();
-
-    // document.querySelector('.board-create-form').style.visibility = 'visible';
-  }
+// TODO: fix scrolling / loading content
+//   /**
+//    * scrollHandler callback
+//    * @param {Event} event
+//    */
+//   scrollHandler(event) {
+//     const pageContent = document.querySelector('.page__content');
+//
+//     if ((pageContent.scrollTop + window.innerHeight - 72.5) === pageContent.scrollHeight) {
+//
+//     }
+//     // document.querySelector('.board-create-form').style.visibility = 'visible';
+//   }
 }

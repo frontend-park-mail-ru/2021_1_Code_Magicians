@@ -37,7 +37,6 @@ export const constants = {
     routerPaths: {
       notFound: '/404',
       index: '/',
-      virtualizedList: '/vlist',
       home: '/home',
       profile: '/profile',
       profileBoards: '/profile/boards',
