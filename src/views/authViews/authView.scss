@@ -150,3 +150,28 @@
 
   color: var(--red);
 }
+
+
+@media only screen and (max-width: 1000px) {
+  .auth-page {
+
+    &__wrapper {
+      width: 100%;
+    }
+
+    &__side {
+      position: absolute;
+    }
+    &__content {
+      margin-left: 5px;
+    }
+
+
+  }
+  .auth-form {
+
+    &__input {
+      width: 250px;
+    }
+  }
+}

@@ -101,7 +101,6 @@ export class Vlist extends Component {
     });
   }
 
-
   /**
    * Did
    */
