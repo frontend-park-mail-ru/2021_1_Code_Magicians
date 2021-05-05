@@ -186,6 +186,24 @@ export class API {
   }
 
   /**
+   * Search profiles
+   * @param {String} query
+   * @return {Promise<{headers: (*&{'Content-Type': string})|*, responseBody: {}, status: string}>}
+   */
+  static searchProfiles(query) {
+    return HTTPModule.get(`${paths.searchProfiles}/${query}`);
+  }
+
+  /**
+   * Search pins
+   * @param {String} query
+   * @return {Promise<{headers: (*&{'Content-Type': string})|*, responseBody: {}, status: string}>}
+   */
+  static searchPins(query) {
+    return HTTPModule.get(`${paths.searchPins}/${query}`);
+  }
+
+  /**
    * Get feed
    * @param {Number} pinsNumber
    * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}

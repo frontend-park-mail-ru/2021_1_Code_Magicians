@@ -1,0 +1,19 @@
+.search-page {
+  min-height: 100%;
+
+  background-color: var(--white);
+
+  &__search-description {
+    margin: 0;
+    padding-top: 25px;
+    padding-left: 20px;
+
+    color: var(--black);
+    background-color: var(--white);
+  }
+
+  &__profiles {
+    margin-left: 50px;
+    margin-top: 30px;
+  }
+}

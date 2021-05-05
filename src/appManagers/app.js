@@ -10,6 +10,7 @@ import {LoginView} from 'views/authViews/loginView/loginView';
 import {PinBuilderView} from 'views/pinBuilderView/pinBuilderView';
 import {PinView} from 'views/pinView/pinView';
 import {BoardView} from 'views/boardView/boardView';
+import {SearchView} from '../views/searchView/searchView';
 
 import 'assets/css/base.scss';
 
@@ -23,7 +24,7 @@ class App {
   run() {
     const paths = constants.network.routerPaths;
 
-    this.setTheme();
+    this._setTheme();
 
     appRouter
         .register(paths.index, new VirtualizedList({}))
@@ -44,6 +45,7 @@ class App {
         .register(paths.createPin, new PinBuilderView({}))
         .register(paths.pin, new PinView({}))
         .register(paths.board, new BoardView({}))
+        .register(paths.search, new SearchView({}))
         .start();
 
     if (!DEBUG) {
@@ -54,7 +56,7 @@ class App {
   /**
    * Set theme from local storage or set default (light)
    */
-  setTheme() {
+  _setTheme() {
     document.documentElement.setAttribute('theme', window.localStorage.getItem('theme'));
   }
 

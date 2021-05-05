@@ -11,6 +11,8 @@ const storeStatuses = constants.store.statuses.profilesStore;
  * ProfilesStore
  */
 class ProfilesStore extends Store {
+  lastSearchQuery = '';
+
   /**
    * Makes new profiles store
    */
@@ -44,6 +46,11 @@ class ProfilesStore extends Store {
         break;
       case actionTypes.profiles.statusProcessed:
         this._status = storeStatuses.ok;
+        break;
+      case actionTypes.common.search:
+        if (action.data.searchingItems === 'profiles') {
+          this._searchProfiles(action.data);
+        }
         break;
       default:
         return;
@@ -158,6 +165,32 @@ class ProfilesStore extends Store {
   }
 
   /**
+   * Search profiles
+   * @param {Object} data
+   * @private
+   */
+  _searchProfiles(data) {
+    this.lastSearchQuery = data.query;
+    this._fetchingProfiles = true;
+
+    API.searchProfiles(data.query.replace('@', '')).then((response) => {
+      switch (response.status) {
+        case 200:
+          this._profiles = response.responseBody.profiles.map((profileData) => new Profile(profileData));
+          break;
+        case 404:
+          this._profiles = [];
+          break;
+        default:
+          this._status = storeStatuses.internalError;
+      }
+
+      this._fetchingProfiles = false;
+      this._trigger('change');
+    });
+  }
+
+  /**
    * Get profile
    * @param {String} ID
    * @return {Profile}
@@ -192,6 +225,19 @@ class ProfilesStore extends Store {
     }
 
     return null;
+  }
+
+  /**
+   * Get found profile
+   * @param {String} query
+   * @return {{avatarLink: string, ID: null, username: string}[]}
+   */
+  getFoundProfiles(query) {
+    if (this._fetchingProfiles) {
+      return null;
+    }
+
+    return query === this.lastSearchQuery ? this._profiles : null;
   }
 }
 

@@ -1,9 +1,10 @@
 import {Component} from '../component';
 import {userStore} from 'stores/userStore/UserStore';
+import {actions} from '../../actions/actions';
+import {appRouter} from '../../appManagers/router';
 
 import NavbarTemplate from './navbar.hbs';
 import './navbar.scss';
-import {actions} from '../../actions/actions';
 
 
 /**
@@ -53,6 +54,7 @@ export class Navbar extends Component {
     document
         .querySelector('.navbar__search-wiper')
         .addEventListener('click', this.wipeSearchField);
+
     if (this._userIsAuthorized) {
       document
           .querySelector('[name="dropdown-toggle"]')
@@ -63,6 +65,10 @@ export class Navbar extends Component {
 
       document.addEventListener('click', this.closeDropdown);
     }
+
+    document
+        .querySelector('.navbar__search-form')
+        .addEventListener('submit', this.activateSearch);
   }
 
   /**
@@ -107,6 +113,32 @@ export class Navbar extends Component {
 
     if (toggleButton.contains(event.target) || dropdown.contains(event.target)) {
       return;
+    }
+
+    document
+        .querySelector('.navbar__search-wiper')
+        .removeEventListener('click', this.wipeSearchField);
+    document
+        .querySelector('.navbar__search-form')
+        .removeEventListener('submit', this.activateSearch);
+  }
+
+  /**
+   * Search form submit callback
+   * @param {Event} event
+   */
+  activateSearch(event) {
+    event.preventDefault();
+
+    const query = document
+        .querySelector('.navbar__search-input')
+        .value
+        .trim()
+        .replaceAll(/(\s+)/g, '+');
+
+    if (query && query.replace('@', '')) {
+      actions.common.search(query, query.startsWith('@') ? 'profiles' : 'pins');
+      appRouter.go(`/search/${query}`);
     }
 
     document.querySelector('.navbar__dropdown-actions').style.display = 'none';
