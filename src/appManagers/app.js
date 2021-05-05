@@ -1,6 +1,6 @@
 import {constants} from 'consts/consts';
 import {appRouter} from 'appManagers/router';
-import {FeedView} from 'views/feedView/feedView';
+import {VirtualizedList} from 'views/virtualizedList/virtualizedList';
 import {ProfileView} from 'views/profileViews/profileView/profileView';
 import {ProfileBoardsView} from 'views/profileViews/profileBoardsView/profileBoardsView';
 import {ProfilePinsView} from 'views/profileViews/profilePinsView/profilePinsView';
@@ -26,7 +26,7 @@ class App {
     this.setTheme();
 
     appRouter
-        .register(paths.index, new FeedView({}))
+        .register(paths.index, new VirtualizedList({}))
         .register(paths.profile, new ProfileView({}))
         .register(paths.profileBoards, new ProfileBoardsView({}))
         .register(paths.profilePins, new ProfilePinsView({}))

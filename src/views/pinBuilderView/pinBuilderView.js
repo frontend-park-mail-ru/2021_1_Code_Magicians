@@ -8,7 +8,6 @@ import {appRouter} from 'appManagers/router';
 import {descriptionRegexp} from 'consts/regexp';
 import {Page} from 'components/page/page';
 import {BoardControl} from 'components/boardControl/boardControl';
-
 import PinBuilderViewTemplate from './pinBuilderView.hbs';
 import './pinBuilderView.scss';
 import {boardsStore} from '../../stores/boardsStore/boardsStore';

@@ -1,0 +1,6 @@
+{{#each pins}}
+    <a href="/pin/{{this.ID}}"  class="vlist-element" style="height:{{this.imageHeight}}px; background-color:#{{this.imageAvgColor}};">
+        <img src="{{this.imageLink}}" alt="{{this.title}}" class="vlist-element__media" style="" loading="lazy">
+        <div class="vlist-element__link"> {{this.title}} </div>
+    </a>
+{{/each}}

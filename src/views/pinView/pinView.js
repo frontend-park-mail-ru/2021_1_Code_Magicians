@@ -30,6 +30,7 @@ export class PinView extends View {
     pinsStore.bind('change', this.refresh);
     boardsStore.bind('change', this.refresh);
     profilesStore.bind('change', this.refresh);
+    boardsStore.bind('change', this.refresh);
   }
 
   /**

@@ -6,18 +6,18 @@
 
 
   padding-bottom: 30px;
+
   &__image-panel {
     vertical-align: middle;
 
     object-fit: contain;
 
     width: auto;
-
     max-width: 55%;
-
     min-width: 30%;
 
     height: auto;
+    max-height: 100%;
 
     border-radius: 5px;
 

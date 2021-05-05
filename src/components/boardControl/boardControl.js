@@ -8,7 +8,7 @@ import {toastBox} from 'components/toast/toast';
 import {actions} from 'actions/actions';
 
 /**
- * BoardControl
+ * Vlist
  */
 export class BoardControl extends Component {
   /**

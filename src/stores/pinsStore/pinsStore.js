@@ -225,15 +225,15 @@ class PinsStore extends Store {
 
   /**
    * Fetch pins feed or do nothing if it's ready
-   * @param {Object} data
+   * @param {Number} number
    * @private
    */
-  _fetchFeed(data) {
+  _fetchFeed(number = 50) {
     // later will be API function for this. Now only that mock
     this._pinsSource.sourceType = 'feed';
     this._fetchingPins = true;
 
-    API.getPinsFeed().then((response) => {
+    API.getPinsFeed(number).then((response) => {
       switch (response.status) {
         case 200:
           this._pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
@@ -245,7 +245,7 @@ class PinsStore extends Store {
       this._trigger('change');
     });
 
-    this._pins = constants.mocks.pins;
+    // this._pins = constants.mocks.pins;
 
     this._fetchingPins = false;
     this._trigger('change');
@@ -370,15 +370,16 @@ class PinsStore extends Store {
 
   /**
    * Get feed
+   * @param {Number} number
    * @return {null|[]}
    */
-  getPinsFeed() {
+  getPinsFeed(number = 50) {
     if (this._pinsSource.sourceType === 'feed') {
       return this._pins;
     }
 
     if (!this._fetchingPins) {
-      this._fetchFeed({});
+      this._fetchFeed(number);
     }
 
     return null;

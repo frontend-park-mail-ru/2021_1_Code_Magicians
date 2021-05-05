@@ -10,11 +10,9 @@
 
 **Backend:** Golang, PostgreSQL
 
-## Demo
+## Production
 
-[pinter-best_back.com](http://52.59.228.167:8081) - backend working demo
-
-[pinter-best_front.com](http://52.59.228.167) - layout frontend demo
+[pinter-best.com](https://pinter-best.com)
 
 ## API (openAPI)
 
