@@ -1,12 +1,11 @@
-import {Component} from '../component.js';
-import {userStore} from 'stores/userStore';
-import {boardsStore} from 'stores/boardsStore';
-import {toastBox} from 'components/toast/toast';
-import {actions} from 'actions/actions';
+import { userStore } from 'stores/userStore';
+import { boardsStore } from 'stores/boardsStore';
+import { toastBox } from 'components/toast/toast';
+import { actions } from 'actions/actions';
+import { Component } from '../component.js';
 
 import BoardControlTemplate from './boardControl.hbs';
 import './boardControl.scss';
-
 
 /**
  * Vlist
@@ -48,14 +47,14 @@ export class BoardControl extends Component {
     }
 
     document
-        .getElementById('create-board')
-        .addEventListener('click', this.showBoardForm);
+      .getElementById('create-board')
+      .addEventListener('click', this.showBoardForm);
     document
-        .querySelector('.board-create-form')
-        .addEventListener('click', this.hideBoardForm);
+      .querySelector('.board-create-form')
+      .addEventListener('click', this.hideBoardForm);
     document
-        .querySelector('.board-create-form__button')
-        .addEventListener('click', this.createBoardSubmit);
+      .querySelector('.board-create-form__button')
+      .addEventListener('click', this.createBoardSubmit);
   }
 
   /**
@@ -67,14 +66,14 @@ export class BoardControl extends Component {
     }
 
     document
-        .getElementById('create-board')
-        .removeEventListener('click', this.showBoardForm);
+      .getElementById('create-board')
+      .removeEventListener('click', this.showBoardForm);
     document
-        .querySelector('.board-create-form')
-        .removeEventListener('click', this.hideBoardForm);
+      .querySelector('.board-create-form')
+      .removeEventListener('click', this.hideBoardForm);
     document
-        .querySelector('.board-create-form__button')
-        .removeEventListener('click', this.createBoardSubmit);
+      .querySelector('.board-create-form__button')
+      .removeEventListener('click', this.createBoardSubmit);
   }
 
   /**

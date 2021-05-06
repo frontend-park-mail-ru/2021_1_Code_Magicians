@@ -1,4 +1,4 @@
-import {appDispatcher} from 'appManagers/dispatcher';
+import { appDispatcher } from 'appManagers/dispatcher';
 
 export const actionTypes = {
   user: {
@@ -53,9 +53,9 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.user.signup,
         data: {
-          username: username,
-          email: email,
-          password: password,
+          username,
+          email,
+          password,
         },
       });
     },
@@ -63,8 +63,8 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.user.login,
         data: {
-          username: username,
-          password: password,
+          username,
+          password,
         },
       });
     },
@@ -96,7 +96,7 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.user.changePassword,
         data: {
-          password: password,
+          password,
         },
       });
     },
@@ -119,7 +119,7 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.pins.createPin,
         data: {
-          formData: formData,
+          formData,
         },
       });
     },
@@ -127,7 +127,7 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.pins.deletePin,
         data: {
-          pinID: pinID,
+          pinID,
         },
       });
     },
@@ -149,7 +149,7 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.boards.deleteBoard,
         data: {
-          boardID: boardID,
+          boardID,
         },
       });
     },
@@ -159,8 +159,8 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.comments.postComment,
         data: {
-          commentText: commentText,
-          pinID: pinID,
+          commentText,
+          pinID,
         },
       });
     },
@@ -170,7 +170,7 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.profiles.follow,
         data: {
-          profileID: profileID,
+          profileID,
         },
       });
     },
@@ -178,7 +178,7 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.profiles.unfollow,
         data: {
-          profileID: profileID,
+          profileID,
         },
       });
     },
@@ -193,7 +193,7 @@ export const actions = {
     readNotification: (notificationID) => {
       appDispatcher.dispatch({
         actionType: actionTypes.notifications.readNotification,
-        data: {notificationID: notificationID},
+        data: { notificationID },
       });
     },
   },
@@ -202,8 +202,8 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.messages.sendMessage,
         data: {
-          messageText: messageText,
-          targetUsername: targetUsername,
+          messageText,
+          targetUsername,
         },
       });
     },
@@ -213,8 +213,8 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.common.search,
         data: {
-          query: query,
-          searchingItems: searchingItems,
+          query,
+          searchingItems,
         },
       });
     },
@@ -223,13 +223,13 @@ export const actions = {
     markAsRead: (chatID) => {
       appDispatcher.dispatch({
         actionType: actionTypes.chats.markAsRead,
-        data: {chatID: chatID},
+        data: { chatID },
       });
     },
     setActiveChat: (chatID) => {
       appDispatcher.dispatch({
         actionType: actionTypes.chats.setActiveChat,
-        data: {chatID: chatID},
+        data: { chatID },
       });
     },
   },

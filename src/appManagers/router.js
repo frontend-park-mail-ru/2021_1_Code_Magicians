@@ -1,7 +1,11 @@
-import {NotFoundView} from 'views/notFoundView/notFoundView';
-
-import {pathParamRegExp, pathPropTypeRegexp, regSubstr, urlRegexp} from 'consts/regexp';
-import {constants} from 'consts/consts';
+import { NotFoundView } from 'views/notFoundView/notFoundView';
+import {
+  pathParamRegExp,
+  pathPropTypeRegexp,
+  regSubstr,
+  urlRegexp,
+} from 'consts/regexp';
+import { constants } from 'consts/consts';
 
 /**
  * Router
@@ -46,16 +50,14 @@ class Router {
 
     let key = [...this._routes.keys()].find((key) => key === path);
     if (!key) {
-      key = [...this._routes.keys()].find((key) => {
-        return RegExp(
-            `^${
-              key.replaceAll(
-                  pathParamRegExp,
-                  (substring) => substring.endsWith('/') ? `${regSubstr}/` : regSubstr,
-              )
-            }$`,
-        ).test(path);
-      });
+      key = [...this._routes.keys()].find((key) => RegExp(
+        `^${
+          key.replaceAll(
+            pathParamRegExp,
+            (substring) => (substring.endsWith('/') ? `${regSubstr}/` : regSubstr),
+          )
+        }$`,
+      ).test(path));
     }
 
     this._currentView = key ? this._routes.get(key) : this._routes.get(constants.network.routerPaths.notFound);
@@ -64,7 +66,7 @@ class Router {
       window.history.pushState(null, null, path);
     }
 
-    const {argsValid, pathArgs} = this._getPathArgs(path, key);
+    const { argsValid, pathArgs } = this._getPathArgs(path, key);
     if (!argsValid) {
       this._currentView = this._routes.get(constants.network.routerPaths.notFound);
     }
@@ -126,25 +128,28 @@ class Router {
     const splitPath = path.split('/');
 
     const pathArgs = template
-        .split('/')
-        .reduce((args, prop, index) => {
-          const propName = prop.replace(pathPropTypeRegexp, '');
+      .split('/')
+      .reduce((args, prop, index) => {
+        const propName = prop.replace(pathPropTypeRegexp, '');
 
-          if (propName.startsWith(':')) {
-            const propValue = splitPath[index];
-            const propType = prop.match(pathPropTypeRegexp)[2];
-            switch (propType) {
-              case 'Number':
-                argsValid = argsValid && !isNaN(Number(propValue));
-                break;
-            }
-            args[propName.slice(1)] = propValue;
+        if (propName.startsWith(':')) {
+          const propValue = splitPath[index];
+          const propType = prop.match(pathPropTypeRegexp)[2];
+          switch (propType) {
+          case 'Number':
+            argsValid = argsValid && !Number.isNaN(Number(propValue));
+            break;
+          default:
+            argsValid = true;
+            break;
           }
+          args[propName.slice(1)] = propValue;
+        }
 
-          return args;
-        }, {});
+        return args;
+      }, {});
 
-    return {argsValid: argsValid, pathArgs: pathArgs};
+    return { argsValid, pathArgs };
   }
 }
 

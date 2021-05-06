@@ -1,4 +1,4 @@
-import {Component} from 'components/component';
+import { Component } from 'components/component';
 
 import ToastTemplate from './toast.hbs';
 import './toast.scss';
@@ -23,7 +23,7 @@ class Toast extends Component {
    * @return {*}
    */
   render() {
-    return this.tmpl({...this.props, message: this._state.message});
+    return this.tmpl({ ...this.props, message: this._state.message });
   }
 
   /**
@@ -32,7 +32,7 @@ class Toast extends Component {
    * @param {Boolean} isError
    */
   addToast(message, isError = false) {
-    this.setState({message: message});
+    this.setState({ message });
 
     const toast = document.createElement('div');
     toast.classList.add('toast');

@@ -1,9 +1,9 @@
-import {constants} from 'consts/consts';
+import { constants } from 'consts/consts';
+import { Board } from 'models/Board';
+import { actionTypes } from 'actions/actions';
+import { API } from 'modules/api';
+import { userStore } from './userStore';
 import Store from './Store';
-import {Board} from 'models/Board';
-import {actionTypes} from 'actions/actions';
-import {userStore} from './userStore';
-import {API} from 'modules/api';
 
 const storeStatuses = constants.store.statuses.boardsStore;
 
@@ -24,7 +24,7 @@ class BoardsStore extends Store {
     this._boards = [];
     this._board = new Board();
 
-    this._lastAction = {actionType: null, data: {}};
+    this._lastAction = { actionType: null, data: {} };
   }
 
   /**
@@ -37,17 +37,17 @@ class BoardsStore extends Store {
     }
 
     switch (action.actionType) {
-      case actionTypes.boards.createBoard:
-        this._createBoard(action.data);
-        break;
-      case actionTypes.boards.deleteBoard:
-        this._deleteBoard(action.data);
-        break;
-      case actionTypes.boards.statusProcessed:
-        this._status = storeStatuses.ok;
-        break;
-      default:
-        return;
+    case actionTypes.boards.createBoard:
+      this._createBoard(action.data);
+      break;
+    case actionTypes.boards.deleteBoard:
+      this._deleteBoard(action.data);
+      break;
+    case actionTypes.boards.statusProcessed:
+      this._status = storeStatuses.ok;
+      break;
+    default:
+      return;
     }
 
     this._lastAction = action;
@@ -66,19 +66,19 @@ class BoardsStore extends Store {
 
     API.createBoard(boardData).then((response) => {
       switch (response.status) {
-        case 201:
-          this._status = storeStatuses.boardCreated;
-          this._fetchProfileBoards({authorID: userStore.getUser().profile.ID});
-          break;
-        case 401:
-          this._status = storeStatuses.userUnauthorized;
-          break;
-        case 400:
-          this._status = storeStatuses.clientSidedError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 201:
+        this._status = storeStatuses.boardCreated;
+        this._fetchProfileBoards({ authorID: userStore.getUser().profile.ID });
+        break;
+      case 401:
+        this._status = storeStatuses.userUnauthorized;
+        break;
+      case 400:
+        this._status = storeStatuses.clientSidedError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
 
       if (response.status !== 201) {
@@ -100,25 +100,25 @@ class BoardsStore extends Store {
 
     API.deleteBoardByID(data.boardID).then((response) => {
       switch (response.status) {
-        case 200:
-        case 204:
-          this._status = storeStatuses.boardDeleted;
-          this._board = this._board.ID !== data.boardID ? this._board : new Board({});
-          this._boards = this._boards.filter((board) => board.ID !== data.boardID);
-          this._trigger('change');
-          break;
-        case 401:
-          this._status = storeStatuses.userUnauthorized;
-          break;
-        case 400:
-        case 403:
-        case 404:
-        case 409:
-          this._status = storeStatuses.clientSidedError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 200:
+      case 204:
+        this._status = storeStatuses.boardDeleted;
+        this._board = this._board.ID !== data.boardID ? this._board : new Board({});
+        this._boards = this._boards.filter((board) => board.ID !== data.boardID);
+        this._trigger('change');
+        break;
+      case 401:
+        this._status = storeStatuses.userUnauthorized;
+        break;
+      case 400:
+      case 403:
+      case 404:
+      case 409:
+        this._status = storeStatuses.clientSidedError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
     });
   }
@@ -132,15 +132,15 @@ class BoardsStore extends Store {
     this._fetchingBoard = true;
     API.getBoardByID(data.boardID).then((response) => {
       switch (response.status) {
-        case 200:
-          this._board = new Board(response.responseBody);
-          break;
-        case 404:
-          this._status = storeStatuses.boardNotFound;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 200:
+        this._board = new Board(response.responseBody);
+        break;
+      case 404:
+        this._status = storeStatuses.boardNotFound;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
 
       this._fetchingBoard = false;
@@ -161,16 +161,16 @@ class BoardsStore extends Store {
 
     API.getProfileBoards(data.authorID).then((response) => {
       switch (response.status) {
-        case 200:
-          this._boards = response.responseBody.boards.map((boardData) => new Board(boardData));
-          break;
-        case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 200:
+        this._boards = response.responseBody.boards.map((boardData) => new Board(boardData));
+        break;
+      case 400:
+      case 404:
+        this._status = storeStatuses.clientSidedError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
 
       this._fetchingBoards = false;
@@ -180,10 +180,9 @@ class BoardsStore extends Store {
 
   /**
    * Fetch it
-   * @param {Object} data
    * @private
    */
-  _fetchBoardsFeed(data) {
+  _fetchBoardsFeed() {
     this._fetchingBoards = true;
 
     this._boardsSource.sourceType = 'feed';
@@ -204,13 +203,13 @@ class BoardsStore extends Store {
       return null;
     }
 
-    if (this._boardsSource.sourceType === 'profile' &&
-      this._boardsSource.sourceID === profileID) {
+    if (this._boardsSource.sourceType === 'profile'
+      && this._boardsSource.sourceID === profileID) {
       return this._boards;
     }
 
     if (!this._fetchingBoards) {
-      this._fetchProfileBoards({authorID: profileID});
+      this._fetchProfileBoards({ authorID: profileID });
     }
 
     return this._fetchingBoards ? null : this._boards;
@@ -231,7 +230,7 @@ class BoardsStore extends Store {
     }
 
     if (!this._fetchingBoard) {
-      this._fetchBoard({boardID: ID});
+      this._fetchBoard({ boardID: ID });
     }
 
     return null;
@@ -247,7 +246,7 @@ class BoardsStore extends Store {
     }
 
     if (!this._fetchingBoards) {
-      this._fetchBoardsFeed({});
+      this._fetchBoardsFeed();
     }
 
     return null;

@@ -1,6 +1,6 @@
 /* eslint-disable valid-jsdoc */
-import {HTTPModule} from './http';
-import {constants} from 'consts/consts';
+import { constants } from 'consts/consts';
+import { HTTPModule } from './http';
 
 const paths = constants.network.pathsAPI;
 
@@ -15,14 +15,14 @@ export class API {
    * @param {String} password
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
-  static signupUser({username, email, password}) {
+  static signupUser({ username, email, password }) {
     return HTTPModule.post(
-        paths.signup,
-        {
-          username: username,
-          email: email,
-          password: password,
-        },
+      paths.signup,
+      {
+        username,
+        email,
+        password,
+      },
     );
   }
 
@@ -32,13 +32,13 @@ export class API {
    * @param {String} password
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
-  static loginUser({username, password}) {
+  static loginUser({ username, password }) {
     return HTTPModule.post(
-        paths.login,
-        {
-          username: username,
-          password: password,
-        },
+      paths.login,
+      {
+        username,
+        password,
+      },
     );
   }
 
@@ -90,7 +90,7 @@ export class API {
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static changeUserPassword(newPassword) {
-    return HTTPModule.put(paths.changePassword, {password: newPassword});
+    return HTTPModule.put(paths.changePassword, { password: newPassword });
   }
 
   /**
@@ -107,8 +107,8 @@ export class API {
    * @param {String} description
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
-  static createBoard({title, description}) {
-    return HTTPModule.post(paths.board, {title: title, description: description});
+  static createBoard({ title, description }) {
+    return HTTPModule.post(paths.board, { title, description });
   }
 
   /**
@@ -228,7 +228,7 @@ export class API {
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static postComment(commentText, pinID) {
-    return HTTPModule.post(`${paths.comment}/${pinID}`, {text: commentText});
+    return HTTPModule.post(`${paths.comment}/${pinID}`, { text: commentText });
   }
 
   /**
@@ -238,8 +238,8 @@ export class API {
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */
   static followProfile(profileID, follow = true) {
-    return follow ? HTTPModule.post(`${paths.follow}/${profileID}`) :
-      HTTPModule.delete(`${paths.follow}/${profileID}`);
+    return follow ? HTTPModule.post(`${paths.follow}/${profileID}`)
+      : HTTPModule.delete(`${paths.follow}/${profileID}`);
   }
 
   /**
@@ -276,6 +276,6 @@ export class API {
    * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static sendMessage(messageText, targetUsername) {
-    return HTTPModule.post(`${paths.postMessage}/${targetUsername}`, {messageText: messageText});
+    return HTTPModule.post(`${paths.postMessage}/${targetUsername}`, { messageText });
   }
 }

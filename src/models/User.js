@@ -1,6 +1,6 @@
-import {Model} from './Model';
+import { Model } from './Model';
 // eslint-disable-next-line no-unused-vars
-import {Profile} from './Profile';
+import { Profile } from './Profile';
 
 /**
  * User model
@@ -12,7 +12,7 @@ export class User extends Model {
    * @param {boolean} authorized
    */
   constructor(profile, authorized = false) {
-    super({_isAuthorized: authorized});
+    super({ _isAuthorized: authorized });
     this.profile = profile;
   }
 

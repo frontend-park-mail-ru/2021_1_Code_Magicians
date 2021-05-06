@@ -1,5 +1,5 @@
-import {appDispatcher} from 'appManagers/dispatcher';
-import {eventMixin} from 'modules/eventMixin';
+import { appDispatcher } from 'appManagers/dispatcher';
+import { eventMixin } from 'modules/eventMixin';
 
 /**
  * Basic Store class
@@ -20,9 +20,9 @@ class Store {
    * @param {Object} action -- action, presented by Dispatcher.
    * It contains action type (String) and action data (Object) for Store to work with it.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   processEvent(action) {
   }
-
 
   /**
    * Get status

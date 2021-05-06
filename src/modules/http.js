@@ -1,4 +1,4 @@
-import {constants} from 'consts/consts';
+import { constants } from 'consts/consts';
 
 /**
  * Basic HTTP-module to communicate with the great server itself
@@ -41,18 +41,18 @@ export class HTTPModule {
       options.body = serialize ? JSON.stringify(body) : body;
       if (serialize) {
         options.headers = options.headers || new Headers();
-        options.headers = {...options.headers, 'Content-Type': 'application/json;charset=utf-8'};
+        options.headers = { ...options.headers, 'Content-Type': 'application/json;charset=utf-8' };
       }
     }
 
     try {
       const response = await fetch(
-          this.makeURL(path),
-          {
-            credentials: 'include',
-            mode: 'cors',
-            ...options,
-          },
+        this.makeURL(path),
+        {
+          credentials: 'include',
+          mode: 'cors',
+          ...options,
+        },
       );
 
       if (response.headers.has('X-CSRF-Token')) {
@@ -63,16 +63,19 @@ export class HTTPModule {
       status = response.status;
 
       responseBody = await response.json();
-    } catch (e) {}
+      // eslint-disable-next-line no-empty
+    } catch (err) {}
 
+    // eslint-disable-next-line no-undef
     if (!DEBUG) {
+      // eslint-disable-next-line no-console
       console.clear();
     }
 
     return {
-      status: status,
-      headers: headers,
-      responseBody: responseBody,
+      status,
+      headers,
+      responseBody,
     };
   }
 
@@ -82,7 +85,7 @@ export class HTTPModule {
    * @return {Object}
    */
   static get(path) {
-    return this._requestBackend(path, {method: 'GET'});
+    return this._requestBackend(path, { method: 'GET' });
   }
 
   /**
@@ -93,7 +96,7 @@ export class HTTPModule {
    * @return {Object}
    */
   static post(path, body = null, serialize = true) {
-    return this._requestBackend(path, {method: 'POST'}, body, serialize);
+    return this._requestBackend(path, { method: 'POST' }, body, serialize);
   }
 
   /**
@@ -104,7 +107,7 @@ export class HTTPModule {
    * @return {Object}
    */
   static put(path, body = null, serialize = true) {
-    return this._requestBackend(path, {method: 'PUT'}, body, serialize);
+    return this._requestBackend(path, { method: 'PUT' }, body, serialize);
   }
 
   /**
@@ -113,7 +116,7 @@ export class HTTPModule {
    * @return {Object}
    */
   static delete(path) {
-    return this._requestBackend(path, {method: 'DELETE'});
+    return this._requestBackend(path, { method: 'DELETE' });
   }
 
   /**

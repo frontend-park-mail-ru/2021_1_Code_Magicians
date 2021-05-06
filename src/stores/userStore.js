@@ -1,12 +1,12 @@
-import {API} from 'modules/api';
+import { API } from 'modules/api';
+import { Profile } from 'models/Profile';
+import { User } from 'models/User';
+import { actionTypes } from 'actions/actions';
+import { constants } from 'consts/consts';
+import { NotificationModel } from 'models/NotificationModel';
 import Store from './Store';
-import {Profile} from 'models/Profile';
-import {User} from 'models/User';
-import {actionTypes} from 'actions/actions';
-import {constants} from 'consts/consts';
-import {NotificationModel} from 'models/NotificationModel';
-import {Chat} from '../models/Chat';
-import {MessageModel} from '../models/MessageModel';
+import { Chat } from '../models/Chat';
+import { MessageModel } from '../models/MessageModel';
 
 const storeStatuses = constants.store.statuses.userStore;
 
@@ -38,41 +38,44 @@ class UserStore extends Store {
     this._status = storeStatuses.ok;
 
     switch (action.actionType) {
-      case actionTypes.user.login:
-        this._login(action.data);
-        break;
-      case actionTypes.user.logout:
-        this._logout();
-        break;
-      case actionTypes.user.signup:
-        this._signup(action.data);
-        break;
-      case actionTypes.user.deleteProfile:
-        this._deleteProfile();
-        break;
-      case actionTypes.user.editProfile:
-        this._editProfile(action.data);
-        break;
-      case actionTypes.user.changePassword:
-        this._changePassword(action.data);
-        break;
-      case actionTypes.user.changeAvatar:
-        this._changeAvatar(action.data);
-        break;
-      case actionTypes.user.statusProcessed:
-        this._status = storeStatuses.ok;
-        break;
-      case actionTypes.notifications.readNotification:
-        this._turnOffNotification(action.data);
-        break;
-      case actionTypes.messages.sendMessage:
-        this._sendMessage(action.data);
-        break;
-      case actionTypes.chats.markAsRead:
-        this._markChatRead(action.data);
-        break;
-      case actionTypes.chats.setActiveChat:
-        this._setActiveChat(action.data);
+    case actionTypes.user.login:
+      this._login(action.data);
+      break;
+    case actionTypes.user.logout:
+      this._logout();
+      break;
+    case actionTypes.user.signup:
+      this._signup(action.data);
+      break;
+    case actionTypes.user.deleteProfile:
+      this._deleteProfile();
+      break;
+    case actionTypes.user.editProfile:
+      this._editProfile(action.data);
+      break;
+    case actionTypes.user.changePassword:
+      this._changePassword(action.data);
+      break;
+    case actionTypes.user.changeAvatar:
+      this._changeAvatar(action.data);
+      break;
+    case actionTypes.user.statusProcessed:
+      this._status = storeStatuses.ok;
+      break;
+    case actionTypes.notifications.readNotification:
+      this._turnOffNotification(action.data);
+      break;
+    case actionTypes.messages.sendMessage:
+      this._sendMessage(action.data);
+      break;
+    case actionTypes.chats.markAsRead:
+      this._markChatRead(action.data);
+      break;
+    case actionTypes.chats.setActiveChat:
+      this._setActiveChat(action.data);
+      break;
+    default:
+      break;
     }
   }
 
@@ -88,18 +91,18 @@ class UserStore extends Store {
 
     API.loginUser(credentials).then((response) => {
       switch (response.status) {
-        case 204:
-          this._fetchUserData();
-          break;
-        case 403:
-          this._status = storeStatuses.clientError;
-          break;
-        case 404:
-        case 401:
-          this._status = storeStatuses.invalidCredentials;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+      case 204:
+        this._fetchUserData();
+        break;
+      case 403:
+        this._status = storeStatuses.clientError;
+        break;
+      case 404:
+      case 401:
+        this._status = storeStatuses.invalidCredentials;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       if (response.status !== 204) {
@@ -121,18 +124,18 @@ class UserStore extends Store {
 
     API.signupUser(credentials).then((response) => {
       switch (response.status) {
-        case 201:
-          this._fetchUserData();
-          break;
-        case 403:
-        case 400:
-          this._status = storeStatuses.clientError;
-          break;
-        case 409:
-          this._status = storeStatuses.signupConflict;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+      case 201:
+        this._fetchUserData();
+        break;
+      case 403:
+      case 400:
+        this._status = storeStatuses.clientError;
+        break;
+      case 409:
+        this._status = storeStatuses.signupConflict;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       if (response.status !== 201) {
@@ -153,16 +156,16 @@ class UserStore extends Store {
 
     API.logoutUser().then((response) => {
       switch (response.status) {
-        case 204:
-          this._user.onLogout();
-          this._status = storeStatuses.unauthorized;
-          this._disconnectFromWS();
-          break;
-        case 401:
-          this._status = storeStatuses.clientError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+      case 204:
+        this._user.onLogout();
+        this._status = storeStatuses.unauthorized;
+        this._disconnectFromWS();
+        break;
+      case 401:
+        this._status = storeStatuses.clientError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       this._userLoaded = false;
@@ -182,15 +185,15 @@ class UserStore extends Store {
 
     API.deleteSelfProfile().then((response) => {
       switch (response.status) {
-        case 204:
-          this._user.onLogout();
-          this._status = storeStatuses.unauthorized;
-          break;
-        case 401:
-          this._status = storeStatuses.clientError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+      case 204:
+        this._user.onLogout();
+        this._status = storeStatuses.unauthorized;
+        break;
+      case 401:
+        this._status = storeStatuses.clientError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       this._userLoaded = false;
@@ -209,11 +212,11 @@ class UserStore extends Store {
       return;
     }
 
-    const profile = this._user.profile;
+    const { profile } = this._user;
     changes = Object.fromEntries(
-        Object
-            .entries(changes)
-            .filter((change) => change[1] !== profile[change[0]]),
+      Object
+        .entries(changes)
+        .filter((change) => change[1] !== profile[change[0]]),
     );
 
     if (Object.keys(changes).length === 0) {
@@ -222,18 +225,18 @@ class UserStore extends Store {
 
     API.editProfile(changes).then((response) => {
       switch (response.status) {
-        case 204:
-          this._fetchUserData();
-          this._status = storeStatuses.profileEdited;
-          break;
-        case 409:
-          this._status = storeStatuses.editConflict;
-          break;
-        case 401:
-          this._status = storeStatuses.clientError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+      case 204:
+        this._fetchUserData();
+        this._status = storeStatuses.profileEdited;
+        break;
+      case 409:
+        this._status = storeStatuses.editConflict;
+        break;
+      case 401:
+        this._status = storeStatuses.clientError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       if (response.status !== 204) {
@@ -255,14 +258,14 @@ class UserStore extends Store {
 
     API.changeUserPassword(data.password).then((response) => {
       switch (response.status) {
-        case 204:
-          this._status = storeStatuses.passwordChanged;
-          break;
-        case 401:
-          this._status = storeStatuses.clientError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+      case 204:
+        this._status = storeStatuses.passwordChanged;
+        break;
+      case 401:
+        this._status = storeStatuses.clientError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       this._trigger('change');
@@ -282,18 +285,18 @@ class UserStore extends Store {
 
     API.changeAvatar(avatarFormData).then((response) => {
       switch (response.status) {
-        case 204:
-          this._fetchUserData();
-          this._status = storeStatuses.avatarUploaded;
-          break;
-        case 400:
-          this._status = storeStatuses.badAvatarImage;
-          break;
-        case 401:
-          this._status = storeStatuses.clientError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+      case 204:
+        this._fetchUserData();
+        this._status = storeStatuses.avatarUploaded;
+        break;
+      case 400:
+        this._status = storeStatuses.badAvatarImage;
+        break;
+      case 401:
+        this._status = storeStatuses.clientError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       if (response.status !== 204) {
@@ -313,19 +316,19 @@ class UserStore extends Store {
 
     API.getSelfProfile().then((response) => {
       switch (response.status) {
-        case 200:
-          authorized = true;
-          profile = new Profile(response.responseBody);
-          if (!this._connectedToWS) {
-            this._connectToWS();
-          }
-          break;
-        case 401:
-          this._user.onLogout();
-          this._status = storeStatuses.unauthorized;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+      case 200:
+        authorized = true;
+        profile = new Profile(response.responseBody);
+        if (!this._connectedToWS) {
+          this._connectToWS();
+        }
+        break;
+      case 401:
+        this._user.onLogout();
+        this._status = storeStatuses.unauthorized;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       this._user = new User(profile, authorized);
@@ -335,7 +338,6 @@ class UserStore extends Store {
       this._trigger('change');
     });
   }
-
 
   /**
    * Connect and start getting notifications
@@ -355,7 +357,7 @@ class UserStore extends Store {
       this._socketReady = true;
       this._status = storeStatuses.ok;
 
-      this._ws.send(JSON.stringify({userID: this._user.profile.ID}));
+      this._ws.send(JSON.stringify({ userID: this._user.profile.ID }));
     });
 
     this._ws.addEventListener('message', (event) => {
@@ -367,51 +369,51 @@ class UserStore extends Store {
       }
 
       switch (message.type) {
-        case 'all-notifications':
-          this._notifications = message['allNotifications'].map((notificationData) => {
-            if (!notificationData.isRead) {
-              this._newNotification = true;
-            }
+      case 'all-notifications':
+        this._notifications = message.allNotifications.map((notificationData) => {
+          if (!notificationData.isRead) {
+            this._newNotification = true;
+          }
 
-            return new NotificationModel(notificationData);
-          });
+          return new NotificationModel(notificationData);
+        });
 
-          this._trigger('change');
-          break;
-        case 'notification':
-          this._notifications.push(new NotificationModel(message.notification));
-          this._newNotification = true;
+        this._trigger('change');
+        break;
+      case 'notification':
+        this._notifications.push(new NotificationModel(message.notification));
+        this._newNotification = true;
 
-          this._trigger('change');
-          break;
-        case 'all-chats':
-          this._chats = message['allChats'].map((chatData) => {
-            if (!chatData.isRead) {
-              this._newMessage = true;
-            }
+        this._trigger('change');
+        break;
+      case 'all-chats':
+        this._chats = message.allChats.map((chatData) => {
+          if (!chatData.isRead) {
+            this._newMessage = true;
+          }
 
-            return new Chat(chatData);
-          });
+          return new Chat(chatData);
+        });
 
-          this._trigger('change');
-          break;
-        case 'new-chat':
-          this._chats.push(new Chat(message['chat']));
+        this._trigger('change');
+        break;
+      case 'new-chat':
+        this._chats.push(new Chat(message.chat));
 
-          this._newMessage = true;
-          this._trigger('change');
-          break;
-        case 'new-message':
-          const msg = new MessageModel(message['message']);
-          this._chats.find((chat) => chat.ID === msg.chatID).messages.push(msg);
+        this._newMessage = true;
+        this._trigger('change');
+        break;
+      case 'new-message':
+        const msg = new MessageModel(message.message);
+        this._chats.find((chat) => chat.ID === msg.chatID).messages.push(msg);
 
-          this._newMessage = true;
-          this._trigger('change');
-          break;
-        case 'ping':
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+        this._newMessage = true;
+        this._trigger('change');
+        break;
+      case 'ping':
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
     });
   }
@@ -437,16 +439,16 @@ class UserStore extends Store {
   _turnOffNotification(data) {
     API.markNotificationRead(data.notificationID).then((response) => {
       switch (response.status) {
-        case 204:
-        case 409:
-          this._notifications.find((n) => n.ID === Number(data.notificationID)).markAsRead();
-          this._newNotification = this._notifications.some((n) => !n.isRead);
-          break;
-        case 401:
-        case 403:
-        case 404:
-        default:
-          this._status = storeStatuses.internalError;
+      case 204:
+      case 409:
+        this._notifications.find((n) => n.ID === Number(data.notificationID)).markAsRead();
+        this._newNotification = this._notifications.some((n) => !n.isRead);
+        break;
+      case 401:
+      case 403:
+      case 404:
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       this._trigger('change');
@@ -461,16 +463,16 @@ class UserStore extends Store {
   _sendMessage(data) {
     API.sendMessage(data.messageText, data.targetUsername).then((response) => {
       switch (response.status) {
-        case 201:
-          this._status = storeStatuses.messageSent;
-          break;
-        case 404:
-          this._status = storeStatuses.userNotFound;
-          break;
-        case 400:
-        case 401:
-        default:
-          this._status = storeStatuses.internalError;
+      case 201:
+        this._status = storeStatuses.messageSent;
+        break;
+      case 404:
+        this._status = storeStatuses.userNotFound;
+        break;
+      case 400:
+      case 401:
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       this._trigger('change');
@@ -485,17 +487,17 @@ class UserStore extends Store {
   _markChatRead(data) {
     API.markChatRead(data.chatID).then((response) => {
       switch (response.status) {
-        case 204:
-        case 409:
-          this._chats.find((chat) => chat.ID === Number(data.chatID)).markAsRead();
-          this._newMessage = this._chats?.some((chat) => !chat.isRead);
-          break;
-        case 401:
-        case 403:
-        case 404:
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 204:
+      case 409:
+        this._chats.find((chat) => chat.ID === Number(data.chatID)).markAsRead();
+        this._newMessage = this._chats?.some((chat) => !chat.isRead);
+        break;
+      case 401:
+      case 403:
+      case 404:
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
 
       if (response.status !== 409) {
@@ -510,9 +512,7 @@ class UserStore extends Store {
    * @private
    */
   _setActiveChat(data) {
-    this._chat = this._chats && this._chats.length && this._chats.find((chat) => {
-      return chat.ID === Number(data.chatID);
-    });
+    this._chat = this._chats && this._chats.length && this._chats.find((chat) => chat.ID === Number(data.chatID));
 
     this._trigger('change');
   }

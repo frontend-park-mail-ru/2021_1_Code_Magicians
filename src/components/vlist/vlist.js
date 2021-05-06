@@ -1,10 +1,10 @@
-import {Component} from '../component.js';
+import { API } from 'modules/api';
+import { Pin } from 'models/Pin';
+import { Component } from '../component.js';
+
 import vlistTemplate from './vlist.hbs';
 import vlistPinsTemplate from './vlistRowPins.hbs';
 import './vlist.scss';
-import {API} from 'modules/api';
-import {Pin} from 'models/Pin';
-
 
 /**
  * Vlist
@@ -37,7 +37,7 @@ export class Vlist extends Component {
    */
   render() {
     if (!this.props.pins) {
-      return;
+      return '';
     }
     const numberCols = Math.floor(this.props.width / 400);
     const colWidth = 400;
@@ -57,7 +57,7 @@ export class Vlist extends Component {
     let index = 0;
 
     let layer = 0;
-    const pins = this.props.pins;
+    const { pins } = this.props;
 
     const statePayload = this._state;
     index = statePayload.startIdx;
@@ -96,8 +96,8 @@ export class Vlist extends Component {
 
     return this.tmpl({
       ...this.props,
-      colWidth: colWidth,
-      cols: cols,
+      colWidth,
+      cols,
     });
   }
 
@@ -135,7 +135,7 @@ export class Vlist extends Component {
 
     document.querySelector('.vlist-load-button').style.display = 'none';
 
-    const columns = Array(this._state.lastCols).fill(0).map(()=> []);
+    const columns = Array(this._state.lastCols).fill(0).map(() => []);
     const colWidth = this._state.lastWidth;
     API.getPinsFeed(50).then((response) => {
       let pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
@@ -145,8 +145,8 @@ export class Vlist extends Component {
         pin.imageWidth = colWidth;
         columns[index % columns.length].push(pin);
       });
-      columns.forEach((array, index)=> {
-        document.querySelector(`.vlist-col-${index}`).innerHTML+= vlistPinsTemplate({pins: array});
+      columns.forEach((array, index) => {
+        document.querySelector(`.vlist-col-${index}`).innerHTML += vlistPinsTemplate({ pins: array });
       });
     });
   }

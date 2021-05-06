@@ -1,10 +1,10 @@
-import {Component} from '../component';
-import {actions} from 'actions/actions';
-import {userStore} from 'stores/userStore';
-import {constants} from 'consts/consts';
-import {passwordRegexp} from 'consts/regexp';
-import {toastBox} from 'components/toast/toast';
-import {validateInput} from 'utils/validateUtils';
+import { actions } from 'actions/actions';
+import { userStore } from 'stores/userStore';
+import { constants } from 'consts/consts';
+import { passwordRegexp } from 'consts/regexp';
+import { toastBox } from 'components/toast/toast';
+import { validateInput } from 'utils/validateUtils';
+import { Component } from '../component';
 
 import SecuritySettingsTemplate from './securitySettings.hbs';
 import './securitySettings.scss';
@@ -28,7 +28,7 @@ export class SecuritySettings extends Component {
    * @return {String}
    */
   render() {
-    return this.tmpl({...this.props});
+    return this.tmpl({ ...this.props });
   }
 
   /**
@@ -64,9 +64,11 @@ export class SecuritySettings extends Component {
 
     const errors = [];
     errors.push(validateInput(newPassword.value, passwordRegexp));
-    document.querySelector('.password-errors').innerHTML = errors[0];
     errors.push(newPassword.value === confirmPassword.value ? '' : 'Passwords do not match');
-    document.querySelector('.password-confirm-errors').innerHTML = errors[1];
+    [
+      document.querySelector('.password-errors').innerHTML,
+      document.querySelector('.password-confirm-errors').innerHTML,
+    ] = errors;
 
     if ([...errors].some((error) => error)) {
       return;

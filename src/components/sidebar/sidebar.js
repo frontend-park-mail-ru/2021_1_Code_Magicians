@@ -1,6 +1,6 @@
-import {Component} from '../component';
-import {urlRegexp} from 'consts/regexp';
-import {userStore} from 'stores/userStore';
+import { urlRegexp } from 'consts/regexp';
+import { userStore } from 'stores/userStore';
+import { Component } from '../component';
 
 import SidebarTemplate from './sidebar.hbs';
 import './sidebar.scss';
@@ -40,6 +40,8 @@ export class Sidebar extends Component {
    * @param {Event} event
    */
   toggleTheme(event) {
+    event.preventDefault();
+
     const htmlTag = document.documentElement;
     const newTheme = htmlTag.getAttribute('theme') === 'dark' ? 'light' : 'dark';
 
@@ -66,20 +68,20 @@ export class Sidebar extends Component {
       this.hideSliders(event);
 
       document
-          .querySelector(`[name="${sliderName}Slider"]`)
-          .style
-          .display = display === 'none' ? 'flex' : 'none';
+        .querySelector(`[name="${sliderName}Slider"]`)
+        .style
+        .display = display === 'none' ? 'flex' : 'none';
 
       if (display === 'none') {
         document
-            .querySelector(`[name="${sliderName.toLowerCase()}-toggle"]`)
-            .classList
-            .add('sidebar__toggle_active');
+          .querySelector(`[name="${sliderName.toLowerCase()}-toggle"]`)
+          .classList
+          .add('sidebar__toggle_active');
       } else {
         document
-            .querySelector(`[name="${sliderName.toLowerCase()}-toggle"]`)
-            .classList
-            .remove('sidebar__toggle_active');
+          .querySelector(`[name="${sliderName.toLowerCase()}-toggle"]`)
+          .classList
+          .remove('sidebar__toggle_active');
       }
 
       document.querySelector('.page__wrap').style.overflow = 'hidden';
@@ -94,11 +96,11 @@ export class Sidebar extends Component {
     event.preventDefault();
 
     document
-        .querySelectorAll('.slider-wrapper')
-        .forEach((slider) => slider.style.display = 'none');
+      .querySelectorAll('.slider-wrapper')
+      .forEach((slider) => slider.style.display = 'none');
     document
-        .querySelectorAll('.slider-toggle')
-        .forEach((toggle) => toggle.classList.remove('sidebar__toggle_active'));
+      .querySelectorAll('.slider-toggle')
+      .forEach((toggle) => toggle.classList.remove('sidebar__toggle_active'));
 
     document.querySelector('.page__wrap').style.overflow = 'auto';
   }
@@ -108,30 +110,30 @@ export class Sidebar extends Component {
    */
   didMount() {
     document
-        .querySelectorAll('.sidebar__view-option')
-        .forEach((item) => {
-          const link = item.querySelector('.sidebar__view-link');
-          const currLocation = window.location.pathname === '/' ? '/home' : window.location.pathname;
+      .querySelectorAll('.sidebar__view-option')
+      .forEach((item) => {
+        const link = item.querySelector('.sidebar__view-link');
+        const currLocation = window.location.pathname === '/' ? '/home' : window.location.pathname;
 
-          if (currLocation.startsWith(link.href.replace(urlRegexp, ''))) {
-            item.classList.add('sidebar__view-option_selected');
-          }
-        });
+        if (currLocation.startsWith(link.href.replace(urlRegexp, ''))) {
+          item.classList.add('sidebar__view-option_selected');
+        }
+      });
 
     document
-        .querySelector('.theme-toggle')
-        .addEventListener('click', this.toggleTheme);
+      .querySelector('.theme-toggle')
+      .addEventListener('click', this.toggleTheme);
 
     if (this._userIsAuthorized) {
       document
-          .querySelectorAll('.page-shader')
-          .forEach((button) => button.addEventListener('click', this.hideSliders));
+        .querySelectorAll('.page-shader')
+        .forEach((button) => button.addEventListener('click', this.hideSliders));
       document
-          .querySelector('[name="messages-toggle"]')
-          .addEventListener('click', this.toggleSlider('Messages'));
+        .querySelector('[name="messages-toggle"]')
+        .addEventListener('click', this.toggleSlider('Messages'));
       document
-          .querySelector('[name="notifications-toggle"]')
-          .addEventListener('click', this.toggleSlider('Notifications'));
+        .querySelector('[name="notifications-toggle"]')
+        .addEventListener('click', this.toggleSlider('Notifications'));
     }
   }
 
@@ -140,19 +142,19 @@ export class Sidebar extends Component {
    */
   willUnmount() {
     document
-        .querySelector('.theme-toggle')
-        .removeEventListener('click', this.toggleTheme);
+      .querySelector('.theme-toggle')
+      .removeEventListener('click', this.toggleTheme);
 
     if (this._userIsAuthorized) {
       document
-          .querySelectorAll('.page-shader')
-          .forEach((button) => button.removeEventListener('click', this.hideSliders));
+        .querySelectorAll('.page-shader')
+        .forEach((button) => button.removeEventListener('click', this.hideSliders));
       document
-          .querySelector('[name="messages-toggle"]')
-          .removeEventListener('click', this.toggleSlider('Messages'));
+        .querySelector('[name="messages-toggle"]')
+        .removeEventListener('click', this.toggleSlider('Messages'));
       document
-          .querySelector('[name="notifications-toggle"]')
-          .removeEventListener('click', this.toggleSlider('Notifications'));
+        .querySelector('[name="notifications-toggle"]')
+        .removeEventListener('click', this.toggleSlider('Notifications'));
 
       this._userIsAuthorized = false;
     }

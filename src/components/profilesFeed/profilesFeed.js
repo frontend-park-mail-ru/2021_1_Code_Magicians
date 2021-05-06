@@ -1,4 +1,4 @@
-import {Component} from '../component';
+import { Component } from '../component';
 
 import ProfilesFeedTemplate from './profilesFeed.hbs';
 import './profilesFeed.scss';
@@ -22,6 +22,6 @@ export class ProfilesFeed extends Component {
    * @return {String}
    */
   render() {
-    return this.tmpl({...this.props});
+    return this.tmpl({ ...this.props });
   }
 }

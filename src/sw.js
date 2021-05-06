@@ -23,18 +23,18 @@ this.addEventListener('fetch', (event) => {
   }
 
   event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        if (!event.request.url.startsWith(backendURL) && cachedResponse) {
-          return cachedResponse;
-        }
+    caches.match(event.request).then((cachedResponse) => {
+      if (!event.request.url.startsWith(backendURL) && cachedResponse) {
+        return cachedResponse;
+      }
 
-        return fetch(event.request)
-            .then((res) => caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, res.clone()).then(() => {});
+      return fetch(event.request)
+        .then((res) => caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, res.clone()).then(() => {});
 
-              return res;
-            }))
-            .catch(() => cachedResponse || caches.match(event.request));
-      }),
+          return res;
+        }))
+        .catch(() => cachedResponse || caches.match(event.request));
+    }),
   );
 });

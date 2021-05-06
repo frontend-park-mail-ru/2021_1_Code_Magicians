@@ -2,10 +2,12 @@ const path = require('path');
 const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const debug = process.env.DEBUG === 'true';
 const port = process.env.PORT || 80;
+const babelOptions = JSON.parse(fs.readFileSync(path.resolve('./.babelrc.json')).toString());
+// const tsOptions =
 
 module.exports = {
   mode: debug ? 'development' : 'production',
@@ -49,8 +51,24 @@ module.exports = {
         exclude: /(.*node_modules)/,
         use: {
           loader: 'babel-loader',
-          options: JSON.parse(fs.readFileSync(path.resolve('./.babelrc.json')).toString()),
+          options: babelOptions,
         },
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: babelOptions,
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: debug,
+            },
+          },
+        ],
       },
     ],
   },
@@ -73,7 +91,7 @@ module.exports = {
       key: fs.readFileSync(path.resolve('certs/privkey.pem')),
       cert: fs.readFileSync(path.resolve('certs/fullchain.pem')),
     },
-    port: port,
+    port,
     publicPath: '/',
     contentBase: path.resolve('src'),
 
