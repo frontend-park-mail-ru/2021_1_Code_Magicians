@@ -328,7 +328,9 @@ class PinsStore extends Store {
       return null;
     }
 
-    if ((this._pin && `${this._pin.ID}` === ID) || this._status === storeStatuses.pinNotFound) {
+    if ((this._pin && `${this._pin.ID}` === ID) ||
+      this._status === storeStatuses.pinNotFound ||
+      this._status === storeStatuses.internalError) {
       return this._pin;
     }
 

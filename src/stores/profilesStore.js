@@ -196,6 +196,10 @@ class ProfilesStore extends Store {
    * @return {Profile}
    */
   getProfileByID(ID) {
+    if (!ID) {
+      return null;
+    }
+
     if (this._profile.ID === Number(ID) || this._status === storeStatuses.profileNotFound) {
       return this._profile;
     }
