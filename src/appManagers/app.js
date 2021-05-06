@@ -12,7 +12,7 @@ import {PinView} from 'views/pinView/pinView';
 import {BoardView} from 'views/boardView/boardView';
 import {SearchView} from '../views/searchView/searchView';
 
-import 'assets/css/base.scss';
+import 'assets/styles/base.scss';
 
 /**
  * Main app class
