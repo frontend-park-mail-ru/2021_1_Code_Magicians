@@ -2,7 +2,7 @@ import {actions} from 'actions/actions';
 import {usernameRegexp, passwordRegexp} from 'consts/regexp';
 import {validateInputs} from 'utils/validateUtils';
 import {AuthView} from '../authView';
-import {userStore} from 'stores/userStore/UserStore';
+import {userStore} from 'stores/userStore';
 import {constants} from 'consts/consts';
 import {toastBox} from 'components/toast/toast';
 

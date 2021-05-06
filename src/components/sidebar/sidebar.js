@@ -1,6 +1,6 @@
 import {Component} from '../component';
 import {urlRegexp} from 'consts/regexp';
-import {userStore} from 'stores/userStore/UserStore';
+import {userStore} from 'stores/userStore';
 
 import SidebarTemplate from './sidebar.hbs';
 import './sidebar.scss';

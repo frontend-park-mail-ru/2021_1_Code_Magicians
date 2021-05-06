@@ -1,5 +1,5 @@
 import {Component} from 'components/component';
-import {userStore} from 'stores/userStore/UserStore';
+import {userStore} from 'stores/userStore';
 
 /**
  * Base view class (abstract)

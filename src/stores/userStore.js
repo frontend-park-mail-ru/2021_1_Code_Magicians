@@ -1,12 +1,12 @@
 import {API} from 'modules/api';
-import Store from '../Store';
+import Store from './Store';
 import {Profile} from 'models/Profile';
 import {User} from 'models/User';
 import {actionTypes} from 'actions/actions';
 import {constants} from 'consts/consts';
 import {NotificationModel} from 'models/NotificationModel';
-import {Chat} from '../../models/Chat';
-import {MessageModel} from '../../models/MessageModel';
+import {Chat} from '../models/Chat';
+import {MessageModel} from '../models/MessageModel';
 
 const storeStatuses = constants.store.statuses.userStore;
 

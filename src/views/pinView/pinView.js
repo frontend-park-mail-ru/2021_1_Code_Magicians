@@ -1,13 +1,13 @@
 import {View} from '../view.js';
 import {Page} from 'components/page/page';
-import {pinsStore} from 'stores/pinsStore/pinsStore';
+import {pinsStore} from 'stores/pinsStore';
 import {actions} from 'actions/actions';
-import {profilesStore} from 'stores/profilesStore/profilesStore';
+import {profilesStore} from 'stores/profilesStore';
 import {constants} from 'consts/consts';
-import {userStore} from 'stores/userStore/UserStore';
+import {userStore} from 'stores/userStore';
 import {appRouter} from 'appManagers/router';
 import {BoardControl} from 'components/boardControl/boardControl';
-import {boardsStore} from '../../stores/boardsStore/boardsStore';
+import {boardsStore} from '../../stores/boardsStore';
 
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';

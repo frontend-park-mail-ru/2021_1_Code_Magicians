@@ -1,8 +1,8 @@
 import {constants} from 'consts/consts';
-import Store from '../Store';
+import Store from './Store';
 import {Board} from 'models/Board';
 import {actionTypes} from 'actions/actions';
-import {userStore} from '../userStore/UserStore';
+import {userStore} from './userStore';
 import {API} from 'modules/api';
 
 const storeStatuses = constants.store.statuses.boardsStore;

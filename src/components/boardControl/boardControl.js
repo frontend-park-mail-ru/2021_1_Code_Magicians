@@ -1,6 +1,6 @@
 import {Component} from '../component.js';
-import {userStore} from 'stores/userStore/UserStore';
-import {boardsStore} from 'stores/boardsStore/boardsStore';
+import {userStore} from 'stores/userStore';
+import {boardsStore} from 'stores/boardsStore';
 import {toastBox} from 'components/toast/toast';
 import {actions} from 'actions/actions';
 

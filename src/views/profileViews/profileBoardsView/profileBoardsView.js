@@ -1,6 +1,6 @@
 import {ProfileView} from '../profileView/profileView';
-import {boardsStore} from 'stores/boardsStore/boardsStore';
-import {userStore} from 'stores/userStore/UserStore';
+import {boardsStore} from 'stores/boardsStore';
+import {userStore} from 'stores/userStore';
 
 import ProfileBoardsViewTemplate from './profileBoardsView.hbs';
 import './profileBoardsView.scss';

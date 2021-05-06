@@ -1,7 +1,7 @@
 import {View} from '../view';
 import {actions} from 'actions/actions';
 import {appRouter} from 'appManagers/router';
-import {userStore} from 'stores/userStore/UserStore';
+import {userStore} from 'stores/userStore';
 import {constants} from 'consts/consts';
 
 import './authView.scss';

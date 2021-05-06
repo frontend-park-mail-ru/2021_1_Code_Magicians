@@ -1,5 +1,5 @@
 import {Component} from '../component';
-import {userStore} from 'stores/userStore/UserStore';
+import {userStore} from 'stores/userStore';
 import {actions} from 'actions/actions';
 import {firstNameRegexp, myEmailRegexp, usernameRegexp} from 'consts/regexp';
 import {constants} from 'consts/consts';

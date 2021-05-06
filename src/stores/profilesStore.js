@@ -1,9 +1,9 @@
-import Store from '../Store';
+import Store from './Store';
 import {Profile} from 'models/Profile';
 import {constants} from 'consts/consts';
 import {actionTypes} from 'actions/actions';
 import {API} from 'modules/api';
-import {userStore} from '../userStore/UserStore';
+import {userStore} from './userStore';
 
 const storeStatuses = constants.store.statuses.profilesStore;
 

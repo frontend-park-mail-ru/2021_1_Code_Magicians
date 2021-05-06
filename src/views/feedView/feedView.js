@@ -1,7 +1,7 @@
 import {View} from '../view';
 import {PinsFeed} from 'components/pinsFeed/pinsFeed';
 import {Page} from 'components/page/page';
-import {pinsStore} from 'stores/pinsStore/pinsStore';
+import {pinsStore} from 'stores/pinsStore';
 
 import FeedViewTemplate from './feedView.hbs';
 import './feedView.scss';

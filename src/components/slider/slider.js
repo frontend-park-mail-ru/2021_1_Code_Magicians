@@ -3,7 +3,7 @@ import {actions} from 'actions/actions';
 import {ChatBlock} from '../chatBlock/chatBlock';
 import {validateInputs} from '../../utils/validateUtils';
 import {usernameRegexp} from '../../consts/regexp';
-import {userStore} from '../../stores/userStore/UserStore';
+import {userStore} from '../../stores/userStore';
 import {constants} from '../../consts/consts';
 import {toastBox} from '../toast/toast';
 

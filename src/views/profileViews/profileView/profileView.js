@@ -1,12 +1,12 @@
 import {View} from '../../view';
 import {Page} from 'components/page/page';
 import {ProfileHeader} from 'components/profileHeader/profileHeader';
-import {userStore} from 'stores/userStore/UserStore';
+import {userStore} from 'stores/userStore';
 import {appRouter} from 'appManagers/router';
 import {constants} from 'consts/consts';
-import {profilesStore} from 'stores/profilesStore/profilesStore';
-import {boardsStore} from 'stores/boardsStore/boardsStore';
-import {pinsStore} from 'stores/pinsStore/pinsStore';
+import {profilesStore} from 'stores/profilesStore';
+import {boardsStore} from 'stores/boardsStore';
+import {pinsStore} from 'stores/pinsStore';
 import {actions} from 'actions/actions';
 import {toastBox} from 'components/toast/toast';
 

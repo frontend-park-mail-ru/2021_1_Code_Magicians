@@ -1,6 +1,6 @@
 import {Component} from '../component';
 import {actions} from 'actions/actions';
-import {userStore} from 'stores/userStore/UserStore';
+import {userStore} from 'stores/userStore';
 import {constants} from 'consts/consts';
 import {passwordRegexp} from 'consts/regexp';
 import {toastBox} from 'components/toast/toast';

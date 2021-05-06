@@ -3,7 +3,7 @@ import {Page} from 'components/page/page';
 import {ProfileChanges} from 'components/profileChanges/profileChanges';
 import {SecuritySettings} from 'components/securitySettings/securitySettings';
 import {NotificationSettings} from 'components/notificationSettings/notificationSettings';
-import {userStore} from 'stores/userStore/UserStore';
+import {userStore} from 'stores/userStore';
 import {urlRegexp} from 'consts/regexp';
 import {actions} from 'actions/actions';
 import {appRouter} from 'appManagers/router';

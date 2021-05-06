@@ -1,7 +1,7 @@
 import {Component} from '../component';
-import {userStore} from 'stores/userStore/UserStore';
 import {actions} from '../../actions/actions';
 import {appRouter} from '../../appManagers/router';
+import {userStore} from 'stores/userStore';
 
 import NavbarTemplate from './navbar.hbs';
 import './navbar.scss';
