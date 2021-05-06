@@ -49,18 +49,7 @@ module.exports = {
         exclude: /(.*node_modules)/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  useBuiltIns: 'entry',
-                  corejs: {version: '3.11.1', proposals: true},
-                  targets: {chrome: '87'},
-                },
-              ],
-            ],
-          },
+          options: JSON.parse(fs.readFileSync(path.resolve('./.babelrc.json')).toString()),
         },
       },
     ],
