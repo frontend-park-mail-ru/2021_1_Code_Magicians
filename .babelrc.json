@@ -8,5 +8,16 @@
         "targets": {"chrome": "87"}
       }
     ]
-  ]
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ]
+  ],
+  "assumptions": {
+    "setPublicClassFields": true
+  }
 }
