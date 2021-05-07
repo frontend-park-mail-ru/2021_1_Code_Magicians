@@ -94,13 +94,11 @@ class UserStore extends Store {
       case 204:
         this._fetchUserData();
         break;
-      case 403:
-        this._status = storeStatuses.clientError;
-        break;
       case 404:
       case 401:
         this._status = storeStatuses.invalidCredentials;
         break;
+      case 403:
       default:
         this._status = storeStatuses.internalError;
       }
@@ -127,13 +125,11 @@ class UserStore extends Store {
       case 201:
         this._fetchUserData();
         break;
-      case 403:
-      case 400:
-        this._status = storeStatuses.clientError;
-        break;
       case 409:
         this._status = storeStatuses.signupConflict;
         break;
+      case 403:
+      case 400:
       default:
         this._status = storeStatuses.internalError;
       }
@@ -162,8 +158,6 @@ class UserStore extends Store {
         this._disconnectFromWS();
         break;
       case 401:
-        this._status = storeStatuses.clientError;
-        break;
       default:
         this._status = storeStatuses.internalError;
       }
@@ -190,8 +184,6 @@ class UserStore extends Store {
         this._status = storeStatuses.unauthorized;
         break;
       case 401:
-        this._status = storeStatuses.clientError;
-        break;
       default:
         this._status = storeStatuses.internalError;
       }
@@ -208,7 +200,7 @@ class UserStore extends Store {
    */
   _editProfile(changes) {
     if (!this._user.authorized()) {
-      this._status = storeStatuses.clientError;
+      this._status = storeStatuses.internalError;
       return;
     }
 
@@ -233,8 +225,6 @@ class UserStore extends Store {
         this._status = storeStatuses.editConflict;
         break;
       case 401:
-        this._status = storeStatuses.clientError;
-        break;
       default:
         this._status = storeStatuses.internalError;
       }
@@ -252,7 +242,7 @@ class UserStore extends Store {
    */
   _changePassword(data) {
     if (!this._user.authorized()) {
-      this._status = storeStatuses.clientError;
+      this._status = storeStatuses.internalError;
       return;
     }
 
@@ -262,8 +252,6 @@ class UserStore extends Store {
         this._status = storeStatuses.passwordChanged;
         break;
       case 401:
-        this._status = storeStatuses.clientError;
-        break;
       default:
         this._status = storeStatuses.internalError;
       }
@@ -293,8 +281,6 @@ class UserStore extends Store {
         this._status = storeStatuses.badAvatarImage;
         break;
       case 401:
-        this._status = storeStatuses.clientError;
-        break;
       default:
         this._status = storeStatuses.internalError;
       }

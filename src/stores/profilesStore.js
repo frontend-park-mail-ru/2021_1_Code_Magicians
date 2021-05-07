@@ -91,8 +91,6 @@ class ProfilesStore extends Store {
       case 400:
       case 404:
       case 409:
-        this._status = storeStatuses.clientError;
-        break;
       default:
         this._status = storeStatuses.internalError;
         break;
@@ -122,8 +120,6 @@ class ProfilesStore extends Store {
         this._status = storeStatuses.profileNotFound;
         break;
       case 400:
-        this._status = storeStatuses.clientError;
-        break;
       default:
         this._status = storeStatuses.internalError;
         break;
@@ -151,8 +147,6 @@ class ProfilesStore extends Store {
             break;
           case 400:
           case 404:
-            this._status = storeStatuses.clientError;
-            break;
           default:
             this._status = storeStatuses.internalError;
             break;

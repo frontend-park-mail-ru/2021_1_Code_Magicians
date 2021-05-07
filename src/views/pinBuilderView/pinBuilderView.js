@@ -1,17 +1,16 @@
-import {View} from '../view.js';
-import {actions} from 'actions/actions';
-import {toastBox} from 'components/toast/toast';
-import {pinsStore} from 'stores/pinsStore';
-import {userStore} from 'stores/userStore';
-import {constants} from 'consts/consts';
-import {appRouter} from 'appManagers/router';
-import {descriptionRegexp} from 'consts/regexp';
-import {Page} from 'components/page/page';
-import {BoardControl} from 'components/boardControl/boardControl';
+import { actions } from 'actions/actions';
+import { toastBox } from 'components/toast/toast';
+import { pinsStore } from 'stores/pinsStore';
+import { userStore } from 'stores/userStore';
+import { constants } from 'consts/consts';
+import { appRouter } from 'appManagers/router';
+import { descriptionRegexp } from 'consts/regexp';
+import { Page } from 'components/page/page';
+import { BoardControl } from 'components/boardControl/boardControl';
+import { View } from '../view.js';
 import PinBuilderViewTemplate from './pinBuilderView.hbs';
 import './pinBuilderView.scss';
-import {boardsStore} from '../../stores/boardsStore';
-
+import { boardsStore } from '../../stores/boardsStore';
 
 /**
  * Build pin view
@@ -44,8 +43,8 @@ export class PinBuilderView extends View {
    */
   didMount() {
     const user = userStore.getUser();
-    if ((!user || !user.authorized()) &&
-      userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
+    if ((!user || !user.authorized())
+      && userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       this._active = false;
       appRouter.go(this.props.paths.home);
       return;
@@ -86,7 +85,7 @@ export class PinBuilderView extends View {
       page__content: this.tmpl({
         ...this.props,
         boardControl: this._nestedComponents.get('_boardControl').render(),
-        profile: profile,
+        profile,
       }),
     }));
 
@@ -126,8 +125,8 @@ export class PinBuilderView extends View {
 
     const payload = {
       title: name,
-      description: description,
-      boardID: boardID,
+      description,
+      boardID,
     };
 
     const formData = new FormData();
@@ -150,7 +149,7 @@ export class PinBuilderView extends View {
     if (file.length > 0) {
       const fileReader = new FileReader();
 
-      fileReader.onload = function(event) {
+      fileReader.onload = (event) => {
         document.getElementById('preview-label').style.backgroundImage = `url('${event.target.result}'`;
       };
 

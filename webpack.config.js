@@ -7,7 +7,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const debug = process.env.DEBUG === 'true';
 const port = process.env.PORT || 80;
 const babelOptions = JSON.parse(fs.readFileSync(path.resolve('./.babelrc.json')).toString());
-// const tsOptions =
 
 module.exports = {
   mode: debug ? 'development' : 'production',

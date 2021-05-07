@@ -1,13 +1,13 @@
-import {View} from '../view.js';
-import {Page} from 'components/page/page';
-import {pinsStore} from 'stores/pinsStore';
-import {actions} from 'actions/actions';
-import {profilesStore} from 'stores/profilesStore';
-import {constants} from 'consts/consts';
-import {userStore} from 'stores/userStore';
-import {appRouter} from 'appManagers/router';
-import {BoardControl} from 'components/boardControl/boardControl';
-import {boardsStore} from '../../stores/boardsStore';
+import { Page } from 'components/page/page';
+import { pinsStore } from 'stores/pinsStore';
+import { actions } from 'actions/actions';
+import { profilesStore } from 'stores/profilesStore';
+import { constants } from 'consts/consts';
+import { userStore } from 'stores/userStore';
+import { appRouter } from 'appManagers/router';
+import { BoardControl } from 'components/boardControl/boardControl';
+import { View } from '../view.js';
+import { boardsStore } from '../../stores/boardsStore';
 
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
@@ -45,11 +45,11 @@ export class PinView extends View {
     const comments = pinsStore.getComments(this.props.pathArgs.pinID);
     const commentProfiles = comments && profilesStore.getProfiles(comments.map((comment) => comment.userID));
 
-    this.profile = currentPin && profilesStore.getProfileByID(currentPin['userID']);
+    this.profile = currentPin && profilesStore.getProfileByID(currentPin.userID);
     const pinIsSelfOwned = this.profile && selfProfile && this.profile.ID === selfProfile.ID;
 
     const templateComments = comments && commentProfiles && comments.map((comment, index) => ({
-      comment: comment,
+      comment,
       author: commentProfiles[index],
     }));
 
@@ -60,8 +60,8 @@ export class PinView extends View {
       page__content: this.tmpl({
         ...this.props,
         profile: this.profile,
-        userIsAuthorized: userIsAuthorized,
-        pinIsSelfOwned: pinIsSelfOwned,
+        userIsAuthorized,
+        pinIsSelfOwned,
         pin: currentPin,
         comments: templateComments,
         boardControl: this._nestedComponents.get('_boardControl').render(),

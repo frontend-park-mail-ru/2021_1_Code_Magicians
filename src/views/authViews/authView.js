@@ -1,11 +1,11 @@
-import {View} from '../view';
-import {actions} from 'actions/actions';
-import {appRouter} from 'appManagers/router';
-import {userStore} from 'stores/userStore';
-import {constants} from 'consts/consts';
+import { actions } from 'actions/actions';
+import { appRouter } from 'appManagers/router';
+import { userStore } from 'stores/userStore';
+import { constants } from 'consts/consts';
+import { toastBox } from 'components/toast/toast';
+import { View } from '../view';
 
 import './authView.scss';
-import {toastBox} from 'components/toast/toast';
 
 /**
  * Parent Authentication view
@@ -27,12 +27,9 @@ export class AuthView extends View {
   didMount() {
     document.querySelector('.auth-form').addEventListener('submit', this.submit);
 
-    switch (userStore.getStatus()) {
-      case constants.store.statuses.userStore.clientError:
-      case constants.store.statuses.userStore.internalError:
-        toastBox.addToast(constants.toastMessages.unknownError);
-        actions.user.statusProcessed();
-        break;
+    if (userStore.getStatus() === constants.store.statuses.userStore.internalError) {
+      toastBox.addToast(constants.toastMessages.unknownError);
+      actions.user.statusProcessed();
     }
 
     if (userStore.getUser() && userStore.getUser().authorized()) {

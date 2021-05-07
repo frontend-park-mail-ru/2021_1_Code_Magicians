@@ -1,7 +1,7 @@
-import {View} from '../view';
-import {Page} from 'components/page/page';
-import {Vlist} from 'components/vlist/vlist';
-import {pinsStore} from 'stores/pinsStore';
+import { Page } from 'components/page/page';
+import { Vlist } from 'components/vlist/vlist';
+import { pinsStore } from 'stores/pinsStore';
+import { View } from '../view';
 
 import VlistTemplate from './virtualizedList.hbs';
 import './virtualizedList.scss';
