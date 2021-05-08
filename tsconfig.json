@@ -6,17 +6,11 @@
     "allowJs": true,
     "outDir": "./dist/",
     "strict": true,
-    //    "noImplicitAny": true,
     "moduleResolution": "classic",
     "baseUrl": ".",
     "sourceMap": true,
-    //     "typeRoots": ["src/@types"],
-    // "types": [],
-//    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "declaration": true,
-
-    //     "experimentalDecorators": true,
 
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
