@@ -56,18 +56,12 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: babelOptions,
+        use: {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: debug,
           },
-          {
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: debug,
-            },
-          },
-        ],
+        },
       },
     ],
   },

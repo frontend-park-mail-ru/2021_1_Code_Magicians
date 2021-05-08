@@ -66,7 +66,6 @@ export class HTTPModule {
       // eslint-disable-next-line no-empty
     } catch (err) {}
 
-    // eslint-disable-next-line no-undef
     if (!DEBUG) {
       // eslint-disable-next-line no-console
       console.clear();

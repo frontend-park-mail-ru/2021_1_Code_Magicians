@@ -48,7 +48,6 @@ class App {
       .register(paths.search, new SearchView({}))
       .start();
 
-    // eslint-disable-next-line no-undef
     if (!DEBUG) {
       this._startSW();
     }

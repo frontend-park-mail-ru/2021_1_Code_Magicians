@@ -2,11 +2,9 @@
 
 export const constants = {
   network: {
-    // eslint-disable-next-line no-undef
     backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'https://pinter-best.com:8080',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
     bucketURL: 'https://pinterbestbucket.s3.eu-central-1.amazonaws.com/',
-    // eslint-disable-next-line no-undef
     wsURL: DEBUG ? 'ws://127.0.0.1:8080/socket' : 'wss://pinter-best.com:8080/socket',
 
     pathsAPI: {

@@ -28,7 +28,7 @@ export class AuthView extends View {
     document.querySelector('.auth-form').addEventListener('submit', this.submit);
 
     if (userStore.getStatus() === constants.store.statuses.userStore.internalError) {
-      toastBox.addToast(constants.toastMessages.unknownError);
+      toastBox.addToast(constants.toastMessages.unknownError, true);
       actions.user.statusProcessed();
     }
 
