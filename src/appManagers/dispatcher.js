@@ -38,7 +38,7 @@ class Dispatcher {
    * @param {Array} IDs array of dispatchToken strings
    */
   waitFor(IDs) {
-    IDs.forEach((ID) => this._isPending.get(ID) ? false : this._invokeCallback(ID));
+    IDs.forEach((ID) => (this._isPending.get(ID) ? false : this._invokeCallback(ID)));
   }
 
   /**

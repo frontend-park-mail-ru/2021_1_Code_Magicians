@@ -1,4 +1,4 @@
-import {constants} from 'consts/consts';
+import { constants } from 'consts/consts';
 
 /**
  * Base Component class (abstract)
@@ -24,7 +24,7 @@ export class Component {
    * @param {Object} state
    */
   setState(state) {
-    this._state = {...this._state, ...state};
+    this._state = { ...this._state, ...state };
   }
 
   /**

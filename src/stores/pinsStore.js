@@ -1,10 +1,10 @@
-import Store from '../Store';
-import {constants} from 'consts/consts';
-import {actionTypes} from 'actions/actions';
-import {userStore} from '../userStore/UserStore';
-import {API} from 'modules/api';
-import {Pin} from 'models/Pin';
-import {CommentModel} from 'models/CommentModel';
+import { constants } from 'consts/consts';
+import { actionTypes } from 'actions/actions';
+import { API } from 'modules/api';
+import { Pin } from 'models/Pin';
+import { CommentModel } from 'models/CommentModel';
+import { userStore } from './userStore';
+import Store from './Store';
 
 const storeStatuses = constants.store.statuses.pinsStore;
 
@@ -48,31 +48,31 @@ class PinsStore extends Store {
    */
   processEvent(action) {
     this._status = storeStatuses.ok;
-    if (this._lastAction === action &&
-      action.actionType !== actionTypes.pins.createPin) {
+    if (this._lastAction === action
+      && action.actionType !== actionTypes.pins.createPin) {
       return;
     }
 
     switch (action.actionType) {
-      case actionTypes.pins.createPin:
-        this._createPin(action.data);
-        break;
-      case actionTypes.pins.deletePin:
-        this._deletePin(action.data);
-        break;
-      case actionTypes.comments.postComment:
-        this._postComment(action.data);
-        break;
-      case actionTypes.pins.statusProcessed:
-        this._status = storeStatuses.ok;
-        break;
-      case actionTypes.common.search:
-        if (action.data.searchingItems === 'pins') {
-          this._searchPins(action.data);
-        }
-        break;
-      default:
-        return;
+    case actionTypes.pins.createPin:
+      this._createPin(action.data);
+      break;
+    case actionTypes.pins.deletePin:
+      this._deletePin(action.data);
+      break;
+    case actionTypes.comments.postComment:
+      this._postComment(action.data);
+      break;
+    case actionTypes.pins.statusProcessed:
+      this._status = storeStatuses.ok;
+      break;
+    case actionTypes.common.search:
+      if (action.data.searchingItems === 'pins') {
+        this._searchPins(action.data);
+      }
+      break;
+    default:
+      return;
     }
 
     this._lastAction = action;
@@ -91,18 +91,18 @@ class PinsStore extends Store {
 
     API.createPin(pinData.formData).then((response) => {
       switch (response.status) {
-        case 201:
-          this._status = storeStatuses.pinCreated;
-          this._newPinID = response.responseBody.ID;
-          break;
-        case 403:
-        case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 201:
+        this._status = storeStatuses.pinCreated;
+        this._newPinID = response.responseBody.ID;
+        break;
+      case 403:
+      case 400:
+      case 404:
+        this._status = storeStatuses.clientSidedError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
 
       this._trigger('change');
@@ -120,26 +120,26 @@ class PinsStore extends Store {
       return;
     }
 
-    const pinID = pinData.pinID;
+    const { pinID } = pinData;
     API.deletePinByID(pinID).then((response) => {
       switch (response.status) {
-        case 204:
-        case 200:
-          this._pin = this._pin.ID === pinID ? null : this._pin;
-          this._pins = this._pins.filter((pin) => pin.ID !== pinID);
-          this._status = storeStatuses.pinDeleted;
-          this._trigger('change');
-          break;
-        case 401:
-        case 400:
-        case 403:
-        case 404:
-        case 409:
-          this._status = storeStatuses.clientSidedError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 204:
+      case 200:
+        this._pin = this._pin.ID === pinID ? null : this._pin;
+        this._pins = this._pins.filter((pin) => pin.ID !== pinID);
+        this._status = storeStatuses.pinDeleted;
+        this._trigger('change');
+        break;
+      case 401:
+      case 400:
+      case 403:
+      case 404:
+      case 409:
+        this._status = storeStatuses.clientSidedError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
     });
   }
@@ -152,19 +152,19 @@ class PinsStore extends Store {
   _postComment(data) {
     API.postComment(data.commentText, data.pinID).then((response) => {
       switch (response.status) {
-        case 201:
-          this._fetchComments({pinID: data.pinID});
-          break;
-        case 401:
-          this._status = storeStatuses.userUnauthorized;
-          break;
-        case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 201:
+        this._fetchComments({ pinID: data.pinID });
+        break;
+      case 401:
+        this._status = storeStatuses.userUnauthorized;
+        break;
+      case 400:
+      case 404:
+        this._status = storeStatuses.clientSidedError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
 
       this._trigger('change');
@@ -178,23 +178,23 @@ class PinsStore extends Store {
    */
   _fetchPin(data) {
     this._fetchingPin = true;
-    const pinID = data.pinID;
+    const { pinID } = data;
     API.getPinByID(pinID).then((response) => {
       switch (response.status) {
-        case 200:
-          this._pin = new Pin(response.responseBody);
-          // this._fetchComments({pinID: this._pin.ID});
-          break;
-        case 404:
-          this._status = storeStatuses.pinNotFound;
-          this._pin = null;
-          break;
-        case 400:
-          this._status = storeStatuses.clientSidedError;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 200:
+        this._pin = new Pin(response.responseBody);
+        // this._fetchComments({pinID: this._pin.ID});
+        break;
+      case 404:
+        this._status = storeStatuses.pinNotFound;
+        this._pin = null;
+        break;
+      case 400:
+        this._status = storeStatuses.clientSidedError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
 
       this._fetchingPin = false;
@@ -241,11 +241,11 @@ class PinsStore extends Store {
 
     API.getPinsFeed(number).then((response) => {
       switch (response.status) {
-        case 200:
-          this._pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
-          break;
-        default:
-          this._status = storeStatuses.internalError;
+      case 200:
+        this._pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
+        break;
+      default:
+        this._status = storeStatuses.internalError;
       }
 
       this._fetchingPins = false;
@@ -263,17 +263,17 @@ class PinsStore extends Store {
     this._commentsSource.sourceID = data.pinID;
     API.getComments(data.pinID).then((response) => {
       switch (response.status) {
-        case 200:
-          this._comments = response.responseBody.comments.map((commentData) => new CommentModel(commentData)) || [];
-          break;
-        case 400:
-        case 404:
-          this._status = storeStatuses.clientSidedError;
-          this._comments = null;
-          break;
-        default:
-          this._status = storeStatuses.internalError;
-          break;
+      case 200:
+        this._comments = response.responseBody.comments.map((commentData) => new CommentModel(commentData)) || [];
+        break;
+      case 400:
+      case 404:
+        this._status = storeStatuses.clientSidedError;
+        this._comments = null;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
       }
 
       this._fetchingComments = false;
@@ -288,16 +288,16 @@ class PinsStore extends Store {
    */
   _processFetchedPins(response) {
     switch (response.status) {
-      case 200:
-        this._pins = response.responseBody.pins.map((pinData) => new Pin(pinData));
-        break;
-      case 400:
-      case 404:
-        this._pins = [];
-        break;
-      default:
-        this._status = storeStatuses.internalError;
-        break;
+    case 200:
+      this._pins = response.responseBody.pins.map((pinData) => new Pin(pinData));
+      break;
+    case 400:
+    case 404:
+      this._pins = [];
+      break;
+    default:
+      this._status = storeStatuses.internalError;
+      break;
     }
 
     this._fetchingPins = false;
@@ -328,12 +328,14 @@ class PinsStore extends Store {
       return null;
     }
 
-    if ((this._pin && `${this._pin.ID}` === ID) || this._status === storeStatuses.pinNotFound) {
+    if ((this._pin && `${this._pin.ID}` === ID)
+      || this._status === storeStatuses.pinNotFound
+      || this._status === storeStatuses.internalError) {
       return this._pin;
     }
 
     if (!this._fetchingPin) {
-      this._fetchPin({pinID: ID});
+      this._fetchPin({ pinID: ID });
     }
 
     return null;
@@ -349,13 +351,13 @@ class PinsStore extends Store {
       return null;
     }
 
-    if (this._pinsSource.sourceType === 'profile' &&
-      this._pinsSource.sourceID === profileID) {
+    if (this._pinsSource.sourceType === 'profile'
+      && this._pinsSource.sourceID === profileID) {
       return this._pins;
     }
 
     if (!this._fetchingPins) {
-      this._fetchProfilePins({profileID: profileID});
+      this._fetchProfilePins({ profileID });
     }
 
     return this._fetchingPins ? null : this._pins;
@@ -371,13 +373,13 @@ class PinsStore extends Store {
       return null;
     }
 
-    if (this._pinsSource.sourceType === 'board' &&
-      this._pinsSource.sourceID === boardID) {
+    if (this._pinsSource.sourceType === 'board'
+      && this._pinsSource.sourceID === boardID) {
       return this._pins;
     }
 
     if (!this._fetchingPins) {
-      this._fetchBoardPins({boardID: boardID});
+      this._fetchBoardPins({ boardID });
     }
 
     return null;
@@ -415,7 +417,7 @@ class PinsStore extends Store {
     }
 
     if (!this._fetchingComments) {
-      this._fetchComments({pinID: pinID});
+      this._fetchComments({ pinID });
     }
 
     return null;

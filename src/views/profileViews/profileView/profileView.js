@@ -1,18 +1,17 @@
-import {View} from '../../view';
-import {Page} from 'components/page/page';
-import {ProfileHeader} from 'components/profileHeader/profileHeader';
-import {userStore} from 'stores/userStore/UserStore';
-import {appRouter} from 'appManagers/router';
-import {constants} from 'consts/consts';
-import {profilesStore} from 'stores/profilesStore/profilesStore';
-import {boardsStore} from 'stores/boardsStore/boardsStore';
-import {pinsStore} from 'stores/pinsStore/pinsStore';
-import {actions} from 'actions/actions';
-import {toastBox} from 'components/toast/toast';
+import { Page } from 'components/page/page';
+import { ProfileHeader } from 'components/profileHeader/profileHeader';
+import { userStore } from 'stores/userStore';
+import { appRouter } from 'appManagers/router';
+import { constants } from 'consts/consts';
+import { profilesStore } from 'stores/profilesStore';
+import { boardsStore } from 'stores/boardsStore';
+import { pinsStore } from 'stores/pinsStore';
+import { actions } from 'actions/actions';
+import { toastBox } from 'components/toast/toast';
+import { View } from '../../view';
 
 import ProfileViewTemplate from './profileView.hbs';
 import './profileView.scss';
-
 
 /**
  * Base profile view
@@ -42,10 +41,10 @@ export class ProfileView extends View {
     const user = userStore.getUser();
 
     this._userIsAuthorized = user && user.authorized();
-    this.props.userID = user && user.profile['ID'];
+    this.props.userID = user && user.profile.ID;
     this.props.profileID = this.props.pathArgs.profileID || 0;
 
-    this._nestedComponents.set('profileHeader', new ProfileHeader({...this.props}));
+    this._nestedComponents.set('profileHeader', new ProfileHeader({ ...this.props }));
     this._nestedComponents.set('page', new Page({
       ...this.props,
       page__content: this.baseTmpl({
@@ -64,9 +63,9 @@ export class ProfileView extends View {
     super.didMount();
 
     const user = userStore.getUser();
-    if ((!user || !user.authorized()) &&
-        Object.keys(this.props.pathArgs).length === 0 &&
-        userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
+    if ((!user || !user.authorized())
+        && Object.keys(this.props.pathArgs).length === 0
+        && userStore.getStatus() === constants.store.statuses.userStore.unauthorized) {
       this._active = false;
       appRouter.go(this.props.paths.home);
       return;
@@ -79,15 +78,17 @@ export class ProfileView extends View {
 
     if (this.props.pathArgs.length !== 0) {
       switch (profilesStore.getStatus()) {
-        case constants.store.statuses.profilesStore.profileNotFound:
-          actions.profiles.statusProcessed();
-          appRouter.go(this.props.paths.notFound);
-          break;
-        case constants.store.statuses.profilesStore.clientError:
-        case constants.store.statuses.profilesStore.internalError:
-          toastBox.addToast(constants.toastMessages.unknownError);
-          actions.profiles.statusProcessed();
-          break;
+      case constants.store.statuses.profilesStore.profileNotFound:
+        actions.profiles.statusProcessed();
+        appRouter.go(this.props.paths.notFound);
+        break;
+      case constants.store.statuses.profilesStore.clientError:
+      case constants.store.statuses.profilesStore.internalError:
+        toastBox.addToast(constants.toastMessages.unknownError);
+        actions.profiles.statusProcessed();
+        break;
+      default:
+        break;
       }
     }
   }

@@ -1,7 +1,7 @@
-import {View} from '../view';
-import {PinsFeed} from 'components/pinsFeed/pinsFeed';
-import {Page} from 'components/page/page';
-import {pinsStore} from 'stores/pinsStore/pinsStore';
+import { PinsFeed } from 'components/pinsFeed/pinsFeed';
+import { Page } from 'components/page/page';
+import { pinsStore } from 'stores/pinsStore';
+import { View } from '../view';
 
 import FeedViewTemplate from './feedView.hbs';
 import './feedView.scss';
@@ -37,8 +37,7 @@ export class FeedView extends View {
       page__content: this.tmpl({
         pinsFeed: this._nestedComponents.get('_pinsFeed').render(),
       }),
-    },
-    ));
+    }));
 
     return this._nestedComponents.get('page').render();
   }

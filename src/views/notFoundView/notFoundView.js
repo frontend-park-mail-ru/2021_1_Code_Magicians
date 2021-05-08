@@ -1,5 +1,5 @@
-import {View} from '../view';
-import {appRouter} from 'appManagers/router';
+import { appRouter } from 'appManagers/router';
+import { View } from '../view';
 
 import NotFoundViewTemplate from './notFoundView.hbs';
 import './notFoundView.scss';
@@ -27,7 +27,7 @@ export class NotFoundView extends View {
      * @return {string}
      */
   render() {
-    return this.tmpl({...this.props});
+    return this.tmpl({ ...this.props });
   }
 
   /**

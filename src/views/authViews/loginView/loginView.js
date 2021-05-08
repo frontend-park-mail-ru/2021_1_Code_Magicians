@@ -1,14 +1,13 @@
-import {actions} from 'actions/actions';
-import {usernameRegexp, passwordRegexp} from 'consts/regexp';
-import {validateInputs} from 'utils/validateUtils';
-import {AuthView} from '../authView';
-import {userStore} from 'stores/userStore/UserStore';
-import {constants} from 'consts/consts';
-import {toastBox} from 'components/toast/toast';
+import { actions } from 'actions/actions';
+import { usernameRegexp, passwordRegexp } from 'consts/regexp';
+import { validateInputs } from 'utils/validateUtils';
+import { userStore } from 'stores/userStore';
+import { constants } from 'consts/consts';
+import { toastBox } from 'components/toast/toast';
+import { AuthView } from '../authView';
 
 import LoginViewTemplate from './loginView.hbs';
 import './loginView.scss';
-
 
 /**
  * Login page view
@@ -34,7 +33,7 @@ export class LoginView extends AuthView {
      * @return {string}
      */
   render() {
-    return this.tmpl({...this.props, payload: this._state.payload});
+    return this.tmpl({ ...this.props, payload: this._state.payload });
   }
 
   /**
@@ -48,9 +47,9 @@ export class LoginView extends AuthView {
     const userPassword = document.querySelector('[name="password"]').value.trim();
 
     const inputsValid = validateInputs(
-        [userName, userPassword],
-        ['.name-errors', '.password-errors'],
-        [usernameRegexp, passwordRegexp],
+      [userName, userPassword],
+      ['.name-errors', '.password-errors'],
+      [usernameRegexp, passwordRegexp],
     );
 
     if (!inputsValid) {
@@ -62,7 +61,7 @@ export class LoginView extends AuthView {
       password: userPassword,
     };
 
-    this.setState({payload: payload});
+    this.setState({ payload });
     actions.user.login(userName, userPassword);
   }
 

@@ -1,14 +1,13 @@
-import {View} from '../view';
-import {Page} from '../../components/page/page';
-import {ProfilesFeed} from '../../components/profilesFeed/profilesFeed';
-import {PinsFeed} from '../../components/pinsFeed/pinsFeed';
-import {profilesStore} from '../../stores/profilesStore/profilesStore';
-import {pinsStore} from '../../stores/pinsStore/pinsStore';
-import {actions} from '../../actions/actions';
+import { View } from '../view';
+import { Page } from '../../components/page/page';
+import { ProfilesFeed } from '../../components/profilesFeed/profilesFeed';
+import { PinsFeed } from '../../components/pinsFeed/pinsFeed';
+import { profilesStore } from '../../stores/profilesStore';
+import { pinsStore } from '../../stores/pinsStore';
+import { actions } from '../../actions/actions';
 
 import SearchViewTemplate from './searchView.hbs';
 import './searchView.scss';
-
 
 /**
  * Search view
@@ -33,9 +32,9 @@ export class SearchView extends View {
    */
   render() {
     const query = window
-        .location
-        .pathname
-        .replace('/search/', '');
+      .location
+      .pathname
+      .replace('/search/', '');
     const searchingProfiles = query.startsWith('@');
 
     const foundItems = searchingProfiles ? profilesStore.getFoundProfiles(query) : pinsStore.getFoundPins(query);
@@ -45,16 +44,16 @@ export class SearchView extends View {
 
     let foundItemsFeed = {};
     if (searchingProfiles) {
-      foundItemsFeed = new ProfilesFeed({...this.props, profiles: foundItems});
+      foundItemsFeed = new ProfilesFeed({ ...this.props, profiles: foundItems });
     } else {
-      foundItemsFeed = new PinsFeed({...this.props, pins: foundItems});
+      foundItemsFeed = new PinsFeed({ ...this.props, pins: foundItems });
     }
     this._nestedComponents.set('_foundItems', foundItemsFeed);
 
     const html = this.tmpl({
       ...this.props,
       searchType: searchingProfiles ? 'Profiles' : 'Pins',
-      searchingProfiles: searchingProfiles,
+      searchingProfiles,
       query: query.replaceAll('+', ' ').replace('@', ''),
       foundItems: this._nestedComponents.get('_foundItems').render(),
     });

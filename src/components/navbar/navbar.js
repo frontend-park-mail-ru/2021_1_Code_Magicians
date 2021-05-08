@@ -1,11 +1,10 @@
-import {Component} from '../component';
-import {userStore} from 'stores/userStore/UserStore';
-import {actions} from '../../actions/actions';
-import {appRouter} from '../../appManagers/router';
+import { userStore } from 'stores/userStore';
+import { Component } from '../component';
+import { actions } from '../../actions/actions';
+import { appRouter } from '../../appManagers/router';
 
 import NavbarTemplate from './navbar.hbs';
 import './navbar.scss';
-
 
 /**
  * Navigation bar (page__navbar)
@@ -52,23 +51,23 @@ export class Navbar extends Component {
    */
   didMount() {
     document
-        .querySelector('.navbar__search-wiper')
-        .addEventListener('click', this.wipeSearchField);
+      .querySelector('.navbar__search-wiper')
+      .addEventListener('click', this.wipeSearchField);
 
     if (this._userIsAuthorized) {
       document
-          .querySelector('[name="dropdown-toggle"]')
-          .addEventListener('click', this.toggleDropdown);
+        .querySelector('[name="dropdown-toggle"]')
+        .addEventListener('click', this.toggleDropdown);
       document
-          .querySelector('[name="logout"]')
-          .addEventListener('click', this.logout);
+        .querySelector('[name="logout"]')
+        .addEventListener('click', this.logout);
 
       document.addEventListener('click', this.closeDropdown);
     }
 
     document
-        .querySelector('.navbar__search-form')
-        .addEventListener('submit', this.activateSearch);
+      .querySelector('.navbar__search-form')
+      .addEventListener('submit', this.activateSearch);
   }
 
   /**
@@ -80,11 +79,11 @@ export class Navbar extends Component {
 
     if (this._userIsAuthorized) {
       document
-          .querySelector('[name="dropdown-toggle"]')
-          .removeEventListener('click', this.toggleDropdown);
+        .querySelector('[name="dropdown-toggle"]')
+        .removeEventListener('click', this.toggleDropdown);
       document
-          .querySelector('[name="logout"]')
-          .removeEventListener('click', this.logout);
+        .querySelector('[name="logout"]')
+        .removeEventListener('click', this.logout);
 
       document.removeEventListener('click', this.closeDropdown);
     }
@@ -106,8 +105,6 @@ export class Navbar extends Component {
    * @param {Event} event
    */
   closeDropdown(event) {
-    event.preventDefault();
-
     const toggleButton = document.querySelector('[name="dropdown-toggle"]');
     const dropdown = document.querySelector('.navbar__dropdown-actions');
 
@@ -116,11 +113,11 @@ export class Navbar extends Component {
     }
 
     document
-        .querySelector('.navbar__search-wiper')
-        .removeEventListener('click', this.wipeSearchField);
+      .querySelector('.navbar__search-wiper')
+      .removeEventListener('click', this.wipeSearchField);
     document
-        .querySelector('.navbar__search-form')
-        .removeEventListener('submit', this.activateSearch);
+      .querySelector('.navbar__search-form')
+      .removeEventListener('submit', this.activateSearch);
   }
 
   /**
@@ -131,10 +128,10 @@ export class Navbar extends Component {
     event.preventDefault();
 
     const query = document
-        .querySelector('.navbar__search-input')
-        .value
-        .trim()
-        .replaceAll(/(\s+)/g, '+');
+      .querySelector('.navbar__search-input')
+      .value
+      .trim()
+      .replaceAll(/(\s+)/g, '+');
 
     if (query && query.replace('@', '')) {
       actions.common.search(query, query.startsWith('@') ? 'profiles' : 'pins');

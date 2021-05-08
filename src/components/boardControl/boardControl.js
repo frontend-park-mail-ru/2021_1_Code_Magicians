@@ -1,11 +1,11 @@
-import {Component} from '../component.js';
+import { userStore } from 'stores/userStore';
+import { boardsStore } from 'stores/boardsStore';
+import { toastBox } from 'components/toast/toast';
+import { actions } from 'actions/actions';
+import { Component } from '../component.js';
 
 import BoardControlTemplate from './boardControl.hbs';
 import './boardControl.scss';
-import {userStore} from 'stores/userStore/UserStore';
-import {boardsStore} from 'stores/boardsStore/boardsStore';
-import {toastBox} from 'components/toast/toast';
-import {actions} from 'actions/actions';
 
 /**
  * Vlist
@@ -26,8 +26,10 @@ export class BoardControl extends Component {
    * @return {string} final html
    */
   render() {
-    const profile = userStore.getUser() && userStore.getUser().profile;
+    const user = userStore.getUser();
+    const profile = user && user.profile;
     const userBoards = profile && boardsStore.getBoardsByProfileID(profile.ID);
+    this._userIsAuthorized = user && user.authorized();
 
     return this.tmpl({
       ...this.props,
@@ -40,27 +42,38 @@ export class BoardControl extends Component {
    * Did
    */
   didMount() {
-    if (!userStore.getUser() || !userStore.getUser().authorized()) {
-      // appRouter.back();
+    if (!this._userIsAuthorized) {
       return;
     }
 
-    document.getElementById('create-board').addEventListener('click', this.showBoardForm);
-    document.querySelector('.board-create-form').addEventListener('click', this.hideBoardForm);
-    document.querySelector('.board-create-form__button').addEventListener('click', this.createBoardSubmit);
-
-    super.didMount();
+    document
+      .getElementById('create-board')
+      .addEventListener('click', this.showBoardForm);
+    document
+      .querySelector('.board-create-form')
+      .addEventListener('click', this.hideBoardForm);
+    document
+      .querySelector('.board-create-form__button')
+      .addEventListener('click', this.createBoardSubmit);
   }
 
   /**
    * Will
    */
   willUnmount() {
-    document.getElementById('create-board').removeEventListener('click', this.showBoardForm);
-    document.querySelector('.board-create-form').removeEventListener('click', this.hideBoardForm);
-    document.querySelector('.board-create-form__button').removeEventListener('click', this.createBoardSubmit);
+    if (!this._userIsAuthorized) {
+      return;
+    }
 
-    super.willUnmount();
+    document
+      .getElementById('create-board')
+      .removeEventListener('click', this.showBoardForm);
+    document
+      .querySelector('.board-create-form')
+      .removeEventListener('click', this.hideBoardForm);
+    document
+      .querySelector('.board-create-form__button')
+      .removeEventListener('click', this.createBoardSubmit);
   }
 
   /**

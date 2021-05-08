@@ -1,15 +1,14 @@
-import {Component} from '../component';
-import {actions} from 'actions/actions';
-import {ChatBlock} from '../chatBlock/chatBlock';
-import {validateInputs} from '../../utils/validateUtils';
-import {usernameRegexp} from '../../consts/regexp';
-import {userStore} from '../../stores/userStore/UserStore';
-import {constants} from '../../consts/consts';
-import {toastBox} from '../toast/toast';
+import { actions } from 'actions/actions';
+import { Component } from '../component';
+import { ChatBlock } from '../chatBlock/chatBlock';
+import { validateInputs } from '../../utils/validateUtils';
+import { usernameRegexp } from '../../consts/regexp';
+import { userStore } from '../../stores/userStore';
+import { constants } from '../../consts/consts';
+import { toastBox } from '../toast/toast';
 
 import SliderTemplate from './slider.hbs';
 import './slider.scss';
-
 
 /**
  * Slider for notifications and messages
@@ -34,8 +33,8 @@ export class Slider extends Component {
    * @return {String} final html
    */
   render() {
-    this._nestedComponents.set('_chatBlock', new ChatBlock({...this.props}));
-    return this.tmpl({...this.props, chatBlock: this._nestedComponents.get('_chatBlock').render()});
+    this._nestedComponents.set('_chatBlock', new ChatBlock({ ...this.props }));
+    return this.tmpl({ ...this.props, chatBlock: this._nestedComponents.get('_chatBlock').render() });
   }
 
   /**
@@ -85,9 +84,9 @@ export class Slider extends Component {
     const targetUsername = document.querySelector('.message-form__target-input').value.trim();
 
     const inputsValid = validateInputs(
-        [targetUsername],
-        ['.chat-username-errors'],
-        [usernameRegexp],
+      [targetUsername],
+      ['.chat-username-errors'],
+      [usernameRegexp],
     );
 
     if (!inputsValid) {
@@ -105,41 +104,43 @@ export class Slider extends Component {
    */
   didMount() {
     switch (userStore.getStatus()) {
-      case constants.store.statuses.userStore.userNotFound:
-        toastBox.addToast('User not found. Message wasn\'t send', true);
-        actions.user.statusProcessed();
-        break;
-      case constants.store.statuses.userStore.messageSent:
-        toastBox.addToast('Message sent');
-        actions.user.statusProcessed();
-        break;
-      case constants.store.statuses.userStore.internalError:
-        toastBox.addToast(constants.toastMessages.unknownError, true);
-        actions.user.statusProcessed();
-        break;
+    case constants.store.statuses.userStore.userNotFound:
+      toastBox.addToast('User not found. Message wasn\'t send', true);
+      actions.user.statusProcessed();
+      break;
+    case constants.store.statuses.userStore.messageSent:
+      toastBox.addToast('Message sent');
+      actions.user.statusProcessed();
+      break;
+    case constants.store.statuses.userStore.internalError:
+      toastBox.addToast(constants.toastMessages.unknownError, true);
+      actions.user.statusProcessed();
+      break;
+    default:
+      break;
     }
 
     if (this.props.typeIsMessages) {
       document
-          .querySelector('.slider__message-button')
-          .addEventListener('click', this.showMessageForm);
+        .querySelector('.slider__message-button')
+        .addEventListener('click', this.showMessageForm);
       document
-          .querySelector('.message-form__close-button')
-          .addEventListener('click', this.closeMessageForm);
+        .querySelector('.message-form__close-button')
+        .addEventListener('click', this.closeMessageForm);
       document
-          .querySelector('.message-form')
-          .addEventListener('submit', this.submitMessageForm);
+        .querySelector('.message-form')
+        .addEventListener('submit', this.submitMessageForm);
 
       document
-          .querySelector('[name="MessagesSlider"]')
-          .querySelectorAll('.slider__item')
-          .forEach((chat) => chat.addEventListener('click', this.openChatBlock));
+        .querySelector('[name="MessagesSlider"]')
+        .querySelectorAll('.slider__item')
+        .forEach((chat) => chat.addEventListener('click', this.openChatBlock));
     } else {
       document
-          .querySelector('[name="NotificationsSlider"]')
-          .querySelectorAll('.slider__item').forEach((notification) => {
-            notification.addEventListener('click', this.markNotificationRead);
-          });
+        .querySelector('[name="NotificationsSlider"]')
+        .querySelectorAll('.slider__item').forEach((notification) => {
+          notification.addEventListener('click', this.markNotificationRead);
+        });
     }
 
     super.didMount();
@@ -151,25 +152,25 @@ export class Slider extends Component {
   willUnmount() {
     if (this.props.typeIsMessages) {
       document
-          .querySelector('.slider__message-button')
-          .removeEventListener('click', this.showMessageForm);
+        .querySelector('.slider__message-button')
+        .removeEventListener('click', this.showMessageForm);
       document
-          .querySelector('.message-form__close-button')
-          .removeEventListener('click', this.closeMessageForm);
+        .querySelector('.message-form__close-button')
+        .removeEventListener('click', this.closeMessageForm);
       document
-          .querySelector('.message-form')
-          .removeEventListener('submit', this.submitMessageForm);
+        .querySelector('.message-form')
+        .removeEventListener('submit', this.submitMessageForm);
 
       document
-          .querySelector('[name="MessagesSlider"]')
-          .querySelectorAll('.slider__item')
-          .forEach((chat) => chat.removeEventListener('click', this.openChatBlock));
+        .querySelector('[name="MessagesSlider"]')
+        .querySelectorAll('.slider__item')
+        .forEach((chat) => chat.removeEventListener('click', this.openChatBlock));
     } else {
       document
-          .querySelector('[name="NotificationsSlider"]')
-          .querySelectorAll('.slider__item').forEach((notification) => {
-            notification.removeEventListener('click', this.markNotificationRead);
-          });
+        .querySelector('[name="NotificationsSlider"]')
+        .querySelectorAll('.slider__item').forEach((notification) => {
+          notification.removeEventListener('click', this.markNotificationRead);
+        });
     }
 
     super.willUnmount();

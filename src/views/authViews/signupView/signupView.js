@@ -1,14 +1,13 @@
-import {actions} from 'actions/actions';
-import {myEmailRegexp, usernameRegexp, passwordRegexp} from 'consts/regexp';
-import {validateInputs} from 'utils/validateUtils';
-import {AuthView} from '../authView';
-import {userStore} from 'stores/userStore/UserStore';
-import {constants} from 'consts/consts';
-import {toastBox} from 'components/toast/toast';
+import { actions } from 'actions/actions';
+import { myEmailRegexp, usernameRegexp, passwordRegexp } from 'consts/regexp';
+import { validateInputs } from 'utils/validateUtils';
+import { userStore } from 'stores/userStore';
+import { constants } from 'consts/consts';
+import { toastBox } from 'components/toast/toast';
+import { AuthView } from '../authView';
 
 import SignupViewTemplate from './signupView.hbs';
 import './signupView.scss';
-
 
 /**
  * Signup page view
@@ -27,7 +26,7 @@ export class SignupView extends AuthView {
     };
 
     this.tmpl = SignupViewTemplate;
-    this.setState({payload: payload});
+    this.setState({ payload });
   }
 
   /**
@@ -35,7 +34,7 @@ export class SignupView extends AuthView {
      * @return {string}
      */
   render() {
-    return this.tmpl({...this.props, payload: this._state.payload});
+    return this.tmpl({ ...this.props, payload: this._state.payload });
   }
 
   /**
@@ -50,9 +49,9 @@ export class SignupView extends AuthView {
     const userEmail = document.querySelector('[name="email"]').value.trim();
 
     const inputsValid = validateInputs(
-        [userName, userEmail, userPassword],
-        ['.name-errors', '.email-errors', '.password-errors'],
-        [usernameRegexp, myEmailRegexp, passwordRegexp],
+      [userName, userEmail, userPassword],
+      ['.name-errors', '.email-errors', '.password-errors'],
+      [usernameRegexp, myEmailRegexp, passwordRegexp],
     );
 
     if (!inputsValid) {
@@ -65,7 +64,7 @@ export class SignupView extends AuthView {
       password: userPassword,
     };
 
-    this.setState({payload: payload});
+    this.setState({ payload });
     actions.user.signup(userName, userEmail, userPassword);
   }
 
@@ -73,11 +72,9 @@ export class SignupView extends AuthView {
    * Did
    */
   didMount() {
-    switch (userStore.getStatus()) {
-      case constants.store.statuses.userStore.signupConflict:
-        toastBox.addToast('This username or email already taken. Please, choose another one', true);
-        actions.user.statusProcessed();
-        break;
+    if (userStore.getStatus() === constants.store.statuses.userStore.signupConflict) {
+      toastBox.addToast('This username or email already taken. Please, choose another one', true);
+      actions.user.statusProcessed();
     }
 
     super.didMount();

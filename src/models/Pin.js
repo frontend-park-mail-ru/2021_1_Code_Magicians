@@ -1,6 +1,5 @@
-import {Model} from './Model';
-
-import {constants} from 'consts/consts';
+import { constants } from 'consts/consts';
+import { Model } from './Model';
 
 /**
  * Pin model

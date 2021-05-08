@@ -1,9 +1,9 @@
-import {Navbar} from '../navbar/navbar';
-import {Sidebar} from '../sidebar/sidebar';
-import {Component} from '../component';
-import {Slider} from '../slider/slider';
-import {userStore} from 'stores/userStore/UserStore';
-import {Profile} from '../../models/Profile';
+import { userStore } from 'stores/userStore';
+import { Navbar } from '../navbar/navbar';
+import { Sidebar } from '../sidebar/sidebar';
+import { Component } from '../component';
+import { Slider } from '../slider/slider';
+import { Profile } from '../../models/Profile';
 
 import PageTemplate from './page.hbs';
 import './page.scss';
