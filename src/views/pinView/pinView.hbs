@@ -1,8 +1,12 @@
 <div class="pin-browser">
-    <img src="{{pin.imageLink}}" class="pin-browser__image-panel">
+    <img src="{{pin.imageLink}}" style="background-color:#{{pin.imageAvgColor}}" class="pin-browser__image-panel pin-image">
     <div class="pin-browser__info-panel">
         <div class="pin-browser__wrapper">
             <h1 class="info-panel__title">{{pin.title}}</h1>
+            <div class="control-wrapper">
+                {{{feedbackControl}}}
+                {{{shareControl}}}
+            </div>
                 {{{boardControl}}}
             <div class="pin-stats">
                 <div class="pin-stats__item">
@@ -57,6 +61,8 @@
                             <div class="comment__text_message">{{this.comment.text}}</div>
                         </div>
                     </div>
+                {{else}}
+                    <div class="info-panel__bodies_text">Be first one to comment!</div>
                 {{/each}}
             </div>
             {{#if userIsAuthorized}}

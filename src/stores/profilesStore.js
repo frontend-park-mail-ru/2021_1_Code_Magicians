@@ -21,6 +21,7 @@ class ProfilesStore extends Store {
 
     this._profiles = [];
     this._profile = new Profile({ ID: 0 });
+    this._followers = [];
 
     this._lastAction = {
       actionType: null,
@@ -185,6 +186,36 @@ class ProfilesStore extends Store {
   }
 
   /**
+   * Fetch profile
+   * @param {Object} data
+   * @private
+   */
+  _fetchProfileFollowers(data) {
+    if (this._profile.ID === Number(data.profileID)) {
+      return;
+    }
+    this._fetchingProfileFollowers = true;
+
+    API.getProfileFollowersByID(data.profileID).then((response) => {
+      switch (response.status) {
+      case 200:
+        this._followers = response.responseBody.profiles.map((profileData) => new Profile(profileData));
+        break;
+      case 404:
+        this._status = storeStatuses.followersNotFound;
+        break;
+      case 400:
+      default:
+        this._status = storeStatuses.internalError;
+        break;
+      }
+
+      this._fetchingProfileFollowers = false;
+      this._trigger('change');
+    });
+  }
+
+  /**
    * Get profile
    * @param {String} ID
    * @return {Profile}
@@ -236,6 +267,27 @@ class ProfilesStore extends Store {
     }
 
     return query === this.lastSearchQuery ? this._profiles : null;
+  }
+
+  /**
+   * Get get Profile Followers By ID
+   * @param {String} ID
+   * @return {Profile}
+   */
+  getProfileFollowersByID(ID) {
+    if (!ID) {
+      return null;
+    }
+
+    if (this._profile.ID === Number(ID) || this._status === storeStatuses.followersNotFound) {
+      return this._followers;
+    }
+
+    if (!this._fetchingProfileFollowers) {
+      this._fetchProfileFollowers({ profileID: ID });
+    }
+
+    return this._followers;
   }
 }
 

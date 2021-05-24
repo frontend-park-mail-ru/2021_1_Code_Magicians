@@ -20,6 +20,9 @@ export const constants = {
       deleteProfile: '/profile/delete',
       changeAvatar: '/profile/avatar',
 
+      getFollowers: '/followers',
+      getFollowing: '/following',
+
       board: '/board',
       boards: '/boards',
       comment: '/comment',
@@ -114,6 +117,8 @@ export const constants = {
         followed: 'followed',
         unfollowed: 'unfollowed',
         profileNotFound: 'profile-not-found',
+
+        followersNotFound: 'followers-not-found',
 
         userUnauthorized: 'unauthorized',
 

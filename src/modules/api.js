@@ -76,6 +76,15 @@ export class API {
   }
 
   /**
+   * Get followers by ID
+   * @param {String} ID
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static getProfileFollowersByID(ID) {
+    return HTTPModule.get(`${paths.getFollowers}/${ID}`);
+  }
+
+  /**
    * Update profile
    * @param {Object} changes
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
@@ -213,7 +222,7 @@ export class API {
   }
 
   /**
-   * Get Comments gy pin id
+   * Get Comments by pin id
    * @param {Number} pinID
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */

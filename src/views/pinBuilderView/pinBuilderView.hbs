@@ -1,19 +1,22 @@
 <div class="pin-builder">
     <label for="file-input" class="pin-builder__file-window" id="preview-label">
-        <div class="pin-builder-uploader__wrapper"></div>
-        <div class="pin-builder-uploader__wrapper">
-            <i class="fas fa-arrow-circle-up pin-builder__upload-icon"></i>
-            <div class="pin-builder__tip-text_medium">Drag here or click to load them</div>
-            <div class="pin-builder__button_gray">Upload from site</div>
-        </div>
-        <div class="pin-builder-uploader__wrapper">
-            <div class="pin-builder__tip-text_small">Tip: Use high-quality .jpeg files (smaller than 10mb)</div>
+        <div class="pin-builder-uploader">
+            <div class="pin-builder-uploader__wrapper"></div>
+            <div class="pin-builder-uploader__wrapper">
+                <i class="fas fa-arrow-circle-up pin-builder__upload-icon"></i>
+                <div class="pin-builder__tip-text_medium">Drag here or click to load them</div>
+                <div class="pin-builder__button_gray">Upload from site</div>
+            </div>
+            <div class="pin-builder-uploader__wrapper">
+                <div class="pin-builder__tip-text_small">Tip: Use high-quality .jpeg files (smaller than 10mb)</div>
+            </div>
         </div>
     </label>
     <div class="pin-builder__pin-details">
         <form class="pin-builder-form">
-            <input id="file-input" type="file" style="display:none" name="pin-image">
+            <input id="file-input" type="file" style="display:none" name="pin-image" accept="image/x-png,image/gif,image/jpeg,video/mp4">
             <div class="pin-builder-form__group-wrapper">
+                <div class="pin-builder-form__title">Pin title</div>
                 <div class="pin-builder-form__wrapper">
                     <label>
                         <input class="pin-builder-form__input" type="text" name="name" placeholder="Add name">
@@ -40,6 +43,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="pin-builder-form__title">Pin description</div>
                 <div class="pin-builder-form__wrapper">
                     <label>
                         <input class="pin-builder-form__input" type="text" name="description" placeholder="Add description">
@@ -48,6 +52,7 @@
                 </div>
             </div>
             <div class="pin-builder-form__group-wrapper">
+                <div class="pin-builder-form__title">Pin link</div>
                 <div class="pin-builder-form__wrapper">
                     <label>
                         <input class="pin-builder-form__input" type="text" name="link" placeholder="Add target link">

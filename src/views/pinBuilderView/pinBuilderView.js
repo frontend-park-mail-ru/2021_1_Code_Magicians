@@ -133,7 +133,10 @@ export class PinBuilderView extends View {
 
     formData.append('pinInfo', JSON.stringify(payload));
     formData.append('pinImage', image.files[0]);
-    actions.pins.createPin(formData);
+
+    if (!this._state.description) {
+      actions.pins.createPin(formData);
+    }
 
     this.setState(payload);
   }
@@ -154,6 +157,8 @@ export class PinBuilderView extends View {
       };
 
       fileReader.readAsDataURL(file[0]);
+
+      document.querySelector('.pin-builder-uploader').style.visibility = 'hidden';
     }
   }
 }

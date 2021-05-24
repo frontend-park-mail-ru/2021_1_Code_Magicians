@@ -10,6 +10,7 @@ import { LoginView } from 'views/authViews/loginView/loginView';
 import { PinBuilderView } from 'views/pinBuilderView/pinBuilderView';
 import { PinView } from 'views/pinView/pinView';
 import { BoardView } from 'views/boardView/boardView';
+import { ProfileFollowersView } from 'views/profileViews/profileFollowersView/profileFollowersView';
 import { SearchView } from '../views/searchView/searchView';
 
 import 'assets/styles/base.scss';
@@ -31,12 +32,12 @@ class App {
       .register(paths.profile, new ProfileView({}))
       .register(paths.profileBoards, new ProfileBoardsView({}))
       .register(paths.profilePins, new ProfilePinsView({}))
-      .register(paths.profileFollowers, new ProfileView({}))
+      .register(paths.profileFollowers, new ProfileFollowersView({}))
       .register(paths.profileFollowing, new ProfileView({}))
       .register(paths.otherProfile, new ProfileView({}))
       .register(paths.otherProfileBoards, new ProfileBoardsView({}))
       .register(paths.otherProfilePins, new ProfilePinsView({}))
-      .register(paths.otherProfileFollowers, new ProfileView({}))
+      .register(paths.otherProfileFollowers, new ProfileFollowersView({}))
       .register(paths.otherProfileFollowing, new ProfileView({}))
       .register(paths.settings, new SettingsView({}))
       .register(paths.settingsSection, new SettingsView({}))

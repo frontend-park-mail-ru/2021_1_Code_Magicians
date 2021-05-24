@@ -31,8 +31,12 @@
   }
 
   &__logo-image {
-    width: inherit;
-    height: inherit;
+    width: 50px;
+    height: 50px;
+
+    font-size: 50px;
+
+    color: var(--red);
 
     transition: 0.4s;
 

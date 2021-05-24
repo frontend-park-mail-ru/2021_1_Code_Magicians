@@ -1,0 +1,17 @@
+{{#if userIsAuthorized}}
+    <div class="feedback-wrapper">
+        <i class="fas fa-flag feedback-button" id="feedback-button"></i>
+        <div class="feedback-form" style="visibility: hidden">
+            <div class="blur-background" id="feedback-form">
+                <div class="feedback-creator">
+                    <i class="fas fa-times-circle feedback-creator__close" id="feedback-close"></i>
+                    <div class="feedback-creator__title">Choose reason for report</div>
+                    <div class="feedback-form__hint">Description</div>
+                    <input type="text" class ="feedback-form__text"  id="feedback-text" placeholder="Inappropriate content, weak memes, [:|||:] ...">
+                    <div class="shadow-line"></div>
+                    <input type="submit" class="feedback-form__button" value="Submit report">
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
