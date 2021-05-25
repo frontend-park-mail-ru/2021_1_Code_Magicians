@@ -17,6 +17,7 @@ export const actionTypes = {
   pins: {
     createPin: 'create-pin',
     deletePin: 'delete-pin',
+    reportPin: 'report-pin',
 
     statusProcessed: 'pins-status-processed',
   },
@@ -128,6 +129,14 @@ export const actions = {
         actionType: actionTypes.pins.deletePin,
         data: {
           pinID,
+        },
+      });
+    },
+    reportPin: (reportData) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.pins.reportPin,
+        data: {
+          reportData,
         },
       });
     },

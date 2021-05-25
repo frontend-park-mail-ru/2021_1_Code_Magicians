@@ -1,13 +1,13 @@
 import { userStore } from 'stores/userStore';
 import { ProfileView } from '../profileView/profileView';
-import ProfileFollowersViewTemplate from './profileFollowersView.hbs';
-import './profileFollowersView.scss';
+import ProfileFollowingViewTemplate from './profileFollowingView.hbs';
+import './profileFollowingView.scss';
 import { profilesStore } from '../../../stores/profilesStore';
 
 /**
  * Profile boards view
  */
-export class ProfileFollowersView extends ProfileView {
+export class ProfileFollowingView extends ProfileView {
   /**
    * Makes profile boards view
    * @param {Object} props
@@ -15,7 +15,7 @@ export class ProfileFollowersView extends ProfileView {
   constructor(props = {}) {
     super(props);
 
-    this.tmpl = ProfileFollowersViewTemplate;
+    this.tmpl = ProfileFollowingViewTemplate;
   }
 
   /**
@@ -24,7 +24,7 @@ export class ProfileFollowersView extends ProfileView {
    */
   render() {
     const userID = this.props.pathArgs.profileID || (userStore.getUser() && userStore.getUser().profile.ID);
-    const followers = profilesStore.getProfileFollowersByID(
+    const followers = profilesStore.getProfileFollowingByID(
       userID,
     );
     this._profileMainContent = this.tmpl({

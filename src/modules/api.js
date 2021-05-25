@@ -85,6 +85,15 @@ export class API {
   }
 
   /**
+   * Get following by ID
+   * @param {String} ID
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static getProfileFollowingByID(ID) {
+    return HTTPModule.get(`${paths.getFollowing}/${ID}`);
+  }
+
+  /**
    * Update profile
    * @param {Object} changes
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
@@ -175,6 +184,15 @@ export class API {
   }
 
   /**
+   * Report pin
+   * @param {Object} pinInfo
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static reportPin(pinInfo) {
+    return HTTPModule.post(`${paths.reportPin}`, pinInfo);
+  }
+
+  /**
    * Get pins by board id of their board
    * @param {String} boardID
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
@@ -219,6 +237,15 @@ export class API {
    */
   static getPinsFeed(pinsNumber = 50) {
     return HTTPModule.get(`${paths.pinsFeed}/${pinsNumber}`);
+  }
+
+  /**
+   * Get subscription feed
+   * @param {}
+   * @return {Promise<{headers: Headers, responseBody: {}, status}>} // TODO: check response promise
+   */
+  static getSubscriptionPinsFeed() {
+    return HTTPModule.get(`${paths.pinsSubscriptionFeed}`);
   }
 
   /**

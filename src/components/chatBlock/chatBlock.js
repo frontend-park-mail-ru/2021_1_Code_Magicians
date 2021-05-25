@@ -5,6 +5,7 @@ import { actions } from '../../actions/actions';
 import ChatBlockTemplate from './chatBlock.hbs';
 import './chatBlock.scss';
 import { Profile } from '../../models/Profile';
+import { emojis } from '../../consts/emoji';
 
 /**
  * Chat block. Later can be used in mobile
@@ -45,6 +46,11 @@ export class ChatBlock extends Component {
    * Did
    */
   didMount() {
+    const emojiPicker = document.querySelector(`.chat__emoji-picker`);
+    emojis.forEach((emoji) => {
+      emojiPicker.innerHTML += `<div class="chat__emoji-picker_emoji">${emoji}</div>`;
+    });
+    document.querySelector('.chat__emoji-picker').addEventListener('click', this.pickEmoji);
     document
       .querySelector('.chat__send-button')
       .addEventListener('click', this.submitMessageForm);
@@ -57,12 +63,24 @@ export class ChatBlock extends Component {
    * Will
    */
   willUnmount() {
+    document.querySelector('.chat__emoji-picker').removeEventListener('click', this.pickEmoji);
     document
       .querySelector('.chat__send-button')
       .removeEventListener('click', this.submitMessageForm);
     document
       .querySelector('.chat__message-form')
       .removeEventListener('submit', this.submitMessageForm);
+  }
+
+  /**
+   * Pick an emoji
+   * @param {Event} event
+   */
+  pickEmoji(event) {
+    event.preventDefault();
+    if (event.target.className === 'chat__emoji-picker_emoji') {
+      document.querySelector('.chat__message-input').value += event.target.innerHTML;
+    }
   }
 
   /**

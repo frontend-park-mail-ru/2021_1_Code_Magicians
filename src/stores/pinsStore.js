@@ -29,6 +29,7 @@ class PinsStore extends Store {
     };
 
     this._pins = []; // []Pin
+    this._subscriptionPins = [];
     this._pin = new Pin();
     this._comments = null; // []Comment
 
@@ -59,6 +60,9 @@ class PinsStore extends Store {
       break;
     case actionTypes.pins.deletePin:
       this._deletePin(action.data);
+      break;
+    case actionTypes.pins.reportPin:
+      this._reportPin(action.data);
       break;
     case actionTypes.comments.postComment:
       this._postComment(action.data);
@@ -128,6 +132,38 @@ class PinsStore extends Store {
         this._pin = this._pin.ID === pinID ? null : this._pin;
         this._pins = this._pins.filter((pin) => pin.ID !== pinID);
         this._status = storeStatuses.pinDeleted;
+        this._trigger('change');
+        break;
+      case 401:
+      case 400:
+      case 403:
+      case 404:
+      case 409:
+        this._status = storeStatuses.clientSidedError;
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+        break;
+      }
+    });
+  }
+
+  /**
+   * Report pin from your profile
+   * @param {Object} pinData
+   * @private
+   */
+  _reportPin(pinData) {
+    if (!userStore.getUser().authorized()) {
+      this._status = storeStatuses.userUnauthorized;
+      return;
+    }
+
+    API.reportPin(pinData.reportData).then((response) => {
+      switch (response.status) {
+      case 204:
+      case 200:
+        this._status = storeStatuses.pinReported;
         this._trigger('change');
         break;
       case 401:
@@ -243,6 +279,29 @@ class PinsStore extends Store {
       switch (response.status) {
       case 200:
         this._pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
+        break;
+      default:
+        this._status = storeStatuses.internalError;
+      }
+
+      this._fetchingPins = false;
+      this._trigger('change');
+    });
+  }
+
+  /**
+   * Fetch subscription pins feed or do nothing if it's ready
+   * @param {}
+   * @private
+   */
+  _fetchSubscriptionFeed() {
+    this._pinsSource.sourceType = 'subscriptionFeed';
+    this._fetchingPins = true;
+
+    API.getSubscriptionPinsFeed().then((response) => {
+      switch (response.status) {
+      case 200:
+        this._subscriptionPins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
         break;
       default:
         this._status = storeStatuses.internalError;
@@ -397,6 +456,23 @@ class PinsStore extends Store {
 
     if (!this._fetchingPins) {
       this._fetchFeed(number);
+    }
+
+    return null;
+  }
+
+  /**
+   * Get subscription feed
+   * @param {}
+   * @return {null|[]}
+   */
+  getSubscriptionPinsFeed() {
+    if (this._pinsSource.sourceType === 'subscriptionFeed') {
+      return this._subscriptionPins;
+    }
+
+    if (!this._fetchingPins) {
+      this._fetchSubscriptionFeed();
     }
 
     return null;

@@ -18,6 +18,7 @@ export class FeedbackControl extends Component {
   constructor(props) {
     super(props);
 
+    this.feedbackSubmit = this.feedbackSubmit.bind(this);
     this.tmpl = FeedbackControlTemplate;
   }
 
@@ -84,8 +85,6 @@ export class FeedbackControl extends Component {
     // event.preventDefault();
     if (event.target.id === 'feedback-form' || event.target.id === 'feedback-close') {
       document.querySelector('.feedback-form').style.visibility = 'hidden';
-    } else {
-      document.querySelector('.feedback-form').style.visibility = 'visible';
     }
   }
 
@@ -110,18 +109,14 @@ export class FeedbackControl extends Component {
       return;
     }
 
-    const boardTitle = document.querySelector('.feedback-form__text').value.trim();
+    const description = document.querySelector('.feedback-form__text').value.trim();
 
-    if (!boardTitle) {
-      toastBox.addToast('Don\'t forget your board name!', true);
+    if (!description) {
+      toastBox.addToast('Don\'t forget your feedback', true);
       return;
     }
 
-    const boardData = {
-      title: boardTitle,
-      description: '',
-    };
-
-    // actions.boards.createBoard(boardData);
+    actions.pins.reportPin({ pinID: this.props.currentPin.ID, description });
+    document.querySelector('.feedback-form').style.visibility = 'hidden';
   }
 }

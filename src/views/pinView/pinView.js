@@ -55,6 +55,7 @@ export class PinView extends View {
     }));
     const feedbackControl = new FeedbackControl({
       userIsAuthorized,
+      currentPin,
     });
     const shareControl = new ShareControl({
       shareLink: window.location.href,

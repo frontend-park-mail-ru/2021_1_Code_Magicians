@@ -31,6 +31,8 @@ export const constants = {
       pin: '/pin',
       pins: '/pins',
       pinsFeed: '/pins/feed',
+      pinsSubscriptionFeed: '/pins/followed',
+      reportPin: '/pin/report',
 
       follow: '/follow',
 
@@ -91,6 +93,7 @@ export const constants = {
 
         pinCreated: 'pin-created',
         pinDeleted: 'pin-deleted',
+        pinReported: 'pin-reported',
 
         triedToDeleteForeignPin: 'foreign-pin-delete',
         userUnauthorized: 'unauthorized',

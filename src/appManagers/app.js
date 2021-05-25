@@ -14,6 +14,8 @@ import { ProfileFollowersView } from 'views/profileViews/profileFollowersView/pr
 import { SearchView } from '../views/searchView/searchView';
 
 import 'assets/styles/base.scss';
+import { ProfileFollowingView } from '../views/profileViews/profileFollowingView/profileFollowingView';
+import { ProfileFeedView } from '../views/profileViews/profileFeedView/profileFeedView';
 
 /**
  * Main app class
@@ -29,16 +31,16 @@ class App {
 
     appRouter
       .register(paths.index, new VirtualizedList({}))
-      .register(paths.profile, new ProfileView({}))
+      .register(paths.profile, new ProfileFeedView({}))
       .register(paths.profileBoards, new ProfileBoardsView({}))
       .register(paths.profilePins, new ProfilePinsView({}))
       .register(paths.profileFollowers, new ProfileFollowersView({}))
-      .register(paths.profileFollowing, new ProfileView({}))
+      .register(paths.profileFollowing, new ProfileFollowingView({}))
       .register(paths.otherProfile, new ProfileView({}))
       .register(paths.otherProfileBoards, new ProfileBoardsView({}))
       .register(paths.otherProfilePins, new ProfilePinsView({}))
       .register(paths.otherProfileFollowers, new ProfileFollowersView({}))
-      .register(paths.otherProfileFollowing, new ProfileView({}))
+      .register(paths.otherProfileFollowing, new ProfileFollowingView({}))
       .register(paths.settings, new SettingsView({}))
       .register(paths.settingsSection, new SettingsView({}))
       .register(paths.signup, new SignupView({}))
