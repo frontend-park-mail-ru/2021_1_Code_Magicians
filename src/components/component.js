@@ -14,7 +14,6 @@ export class Component {
     this.props = {
       ...props,
       paths: constants.network.routerPaths,
-      logoImage,
     };
 
     this._nestedComponents = new Map();
