@@ -3,8 +3,7 @@ name: Build and Delivery
 on:
   push:
     branches:
-    - main
-    - ChocolaterToba-yaml_addition
+    - '*'
 
 jobs:
   build:
