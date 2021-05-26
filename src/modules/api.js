@@ -232,11 +232,11 @@ export class API {
 
   /**
    * Get feed
-   * @param {Number} pinsNumber
+   * @param {Object} pinsNumber
    * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
-  static getPinsFeed(pinsNumber = 50) {
-    return HTTPModule.get(`${paths.pinsFeed}/${pinsNumber}`);
+  static getPinsFeed(payload) {
+    return HTTPModule.get(`${paths.pinsFeed}`);
   }
 
   /**

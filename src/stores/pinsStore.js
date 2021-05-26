@@ -268,14 +268,14 @@ class PinsStore extends Store {
 
   /**
    * Fetch pins feed or do nothing if it's ready
-   * @param {Number} number
+   * @param {Object} number
    * @private
    */
-  _fetchFeed(number = 50) {
+  _fetchFeed(payload = {}) {
     this._pinsSource.sourceType = 'feed';
     this._fetchingPins = true;
-
-    API.getPinsFeed(number).then((response) => {
+    console.log(payload);
+    API.getPinsFeed(payload).then((response) => {
       switch (response.status) {
       case 200:
         this._pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
@@ -446,16 +446,16 @@ class PinsStore extends Store {
 
   /**
    * Get feed
-   * @param {Number} number
+   * @param {Object}
    * @return {null|[]}
    */
-  getPinsFeed(number = 50) {
+  getPinsFeed(payload = {}) {
     if (this._pinsSource.sourceType === 'feed') {
       return this._pins;
     }
 
     if (!this._fetchingPins) {
-      this._fetchFeed(number);
+      this._fetchFeed(payload);
     }
 
     return null;

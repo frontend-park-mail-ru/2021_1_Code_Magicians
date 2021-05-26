@@ -3,7 +3,7 @@
   top: 0; bottom: 0;
   left: 495px;
 
-  //display: none;
+  display: flex;
   flex-direction: column;
 
   width: 500px;
@@ -117,6 +117,10 @@
     }
   }
 
+  &__send-button {
+    margin-right: 10px;
+  }
+
   &__button {
     display: flex;
     align-items: center;
@@ -124,7 +128,7 @@
 
     height: 100%;
 
-    padding: 0 15px;
+    padding: 0 5px;
 
     outline: none;
     border: none;
@@ -149,21 +153,55 @@
 
     position: absolute;
 
+    margin-bottom: 245px;
+
     background-color: var(--almost-white);
 
     padding: 5px;
 
-    font-size: 30px;
+    font-size: 15px;
 
-
-    //temp!
-
-    top: 50%;
+    visibility: hidden;
 
     &_emoji {
       margin: 5px;
 
       cursor: pointer;
+
+      &:hover {
+        background-color: var(--red);
+
+        border-radius: 3px;
+      }
+      text-decoration: none;
+    }
+  }
+
+  &__sticker-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    position: absolute;
+
+    margin-bottom: 265px;
+
+    background-color: var(--almost-white);
+
+    padding: 5px;
+
+    font-size: 15px;
+
+    visibility: hidden;
+
+    &_sticker {
+      margin: 5px;
+
+      cursor: pointer;
+
+      width: 70px;
 
       &:hover {
         background-color: var(--red);

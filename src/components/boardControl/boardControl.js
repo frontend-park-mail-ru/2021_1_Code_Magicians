@@ -46,6 +46,7 @@ export class BoardControl extends Component {
       return;
     }
 
+    document.querySelector('.pin-board-selector__select-button').addEventListener('click', this.savePin);
     document
       .getElementById('create-board')
       .addEventListener('click', this.showBoardForm);
@@ -65,6 +66,7 @@ export class BoardControl extends Component {
       return;
     }
 
+    document.querySelector('.pin-board-selector__select-button').removeEventListener('click', this.savePin);
     document
       .getElementById('create-board')
       .removeEventListener('click', this.showBoardForm);
@@ -97,6 +99,18 @@ export class BoardControl extends Component {
     event.preventDefault();
 
     document.querySelector('.board-create-form').style.visibility = 'visible';
+  }
+
+  /**
+   * savePin callback
+   * @param {Event} event
+   */
+  savePin(event) {
+    event.preventDefault();
+
+    // const boardID = Number(selectInput.options[selectInput.selectedIndex].getAttribute('data-boardID'));
+
+    // TODO: добавить сохранение пина в доску.
   }
 
   /**
