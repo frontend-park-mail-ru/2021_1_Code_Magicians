@@ -80,10 +80,6 @@ module.exports = {
 
   devServer: {
     host: '0.0.0.0',
-    https: debug ? false : {
-      key: fs.readFileSync(path.resolve('certs/privkey.pem')),
-      cert: fs.readFileSync(path.resolve('certs/fullchain.pem')),
-    },
     port,
     publicPath: '/',
     contentBase: path.resolve('src'),
