@@ -4,6 +4,7 @@
   "scripts": {
     "build": "webpack",
     "start": "PORT=3000 webpack serve",
+    "start_no_https": "PORT=3000 HTTPS_ON=false webpack serve",
     "debug": "PORT=8081 DEBUG=true webpack serve",
     "lint": "eslint src/",
     "postinstall": "husky install"

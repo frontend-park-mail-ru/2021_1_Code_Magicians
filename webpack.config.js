@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const debug = process.env.DEBUG === 'true';
+const httpsOn = process.env.HTTPS_ON === 'true';
 const port = process.env.PORT || 80;
 const babelOptions = JSON.parse(fs.readFileSync(path.resolve('./.babelrc.json')).toString());
 
@@ -75,12 +76,13 @@ module.exports = {
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       DEBUG: debug,
+      HTTPS_ON: httpsOn,
     }),
   ],
 
   devServer: {
     host: '0.0.0.0',
-    https: debug ? false : {
+    https: !httpsOn ? false : {
       key: fs.readFileSync(path.resolve('certs/privkey.pem')),
       cert: fs.readFileSync(path.resolve('certs/fullchain.pem')),
     },
