@@ -274,7 +274,6 @@ class PinsStore extends Store {
   _fetchFeed(payload = {}) {
     this._pinsSource.sourceType = 'feed';
     this._fetchingPins = true;
-    console.log(payload);
     API.getPinsFeed(payload).then((response) => {
       switch (response.status) {
       case 200:
@@ -369,7 +368,10 @@ class PinsStore extends Store {
    * @private
    */
   _searchPins(data) {
-    this.lastSearchQuery = data.query;
+    if (this._fetchingPins) {
+      return;
+    }
+    this.lastSearchQuery = data.query.key;
     this._fetchingPins = true;
 
     this._pinsSource.sourceType = 'search';

@@ -227,7 +227,7 @@ export class API {
    * @return {Promise<{headers: (*&{'Content-Type': string})|*, responseBody: {}, status: string}>}
    */
   static searchPins(query) {
-    return HTTPModule.get(`${paths.searchPins}/${query}`);
+    return HTTPModule.get(`${paths.searchPins}?searchKey=${query.key}&date=${query.date}`);
   }
 
   /**
@@ -236,7 +236,7 @@ export class API {
    * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
   static getPinsFeed(payload) {
-    return HTTPModule.get(`${paths.pinsFeed}`);
+    return HTTPModule.get(`${paths.pinsFeed}?offset=${payload.offset}&amount=${payload.amount}`);
   }
 
   /**

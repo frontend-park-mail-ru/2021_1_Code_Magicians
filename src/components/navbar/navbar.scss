@@ -48,6 +48,7 @@
   }
 
   &__search-icon {
+    font-size: 18px;
     color: var(--gray);
   }
 
@@ -83,6 +84,42 @@
     visibility: hidden;
 
     cursor: pointer;
+  }
+
+  &__date-picker {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+
+    width: 0;
+
+    padding-left: 10px;
+
+    overflow: hidden;
+
+    transition: ease-in-out all 0.35s;
+
+    &-text {
+      margin: 5px;
+
+      padding: 5px;
+
+      color: var(--gray);
+
+      cursor: pointer;
+
+      border-radius: 50%;
+      &:hover {
+        background-color: var(--red);
+      }
+    }
+
+  }
+
+  &__search-options {
+
+    font-size: 15px;
+
   }
 
   &__user-section {

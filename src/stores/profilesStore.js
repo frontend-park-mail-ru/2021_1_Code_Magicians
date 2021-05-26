@@ -168,10 +168,23 @@ class ProfilesStore extends Store {
    * @private
    */
   _searchProfiles(data) {
+    if (this._fetchingProfiles) {
+      return;
+    }
+    let key;
+    if (data.searchingItems === 'profiles') {
+      key = data.query;
+      if (key.key) {
+        key = key.key;
+      }
+    } else {
+      key = data.query.key;
+    }
+
     this.lastSearchQuery = data.query;
     this._fetchingProfiles = true;
 
-    API.searchProfiles(data.query.replace('@', '')).then((response) => {
+    API.searchProfiles(key.replace('@', '')).then((response) => {
       switch (response.status) {
       case 200:
         this._profiles = response.responseBody.profiles.map((profileData) => new Profile(profileData));
