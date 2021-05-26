@@ -44,7 +44,7 @@ jobs:
           name: dist
           path: dist
 
-      - name: Transfer build files to server
+      - name: Transfer build files to server 
         uses: appleboy/scp-action@master
         with:
           host: 52.59.228.167
