@@ -1,7 +1,7 @@
 import { userStore } from 'stores/userStore';
+import { actions } from 'actions/actions';
+import { appRouter } from 'appManagers/router';
 import { Component } from '../component';
-import { actions } from '../../actions/actions';
-import { appRouter } from '../../appManagers/router';
 
 import NavbarTemplate from './navbar.hbs';
 import './navbar.scss';
@@ -42,7 +42,8 @@ export class Navbar extends Component {
    * @param {Event} event
    */
   wipeSearchField(event) {
-    event.preventDefault();
+    // event.preventDefault();
+    event.stopImmediatePropagation();
 
     if (event.target.className.includes('navbar__search-options')) {
       return;
