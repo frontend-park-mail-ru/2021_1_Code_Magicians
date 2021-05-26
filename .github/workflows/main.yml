@@ -2,7 +2,8 @@ name: Build and Delivery
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - '**'
 
 jobs:
   build:
@@ -31,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: ./dist/
+          path: ./dist
 
   deploy:
     runs-on: ubuntu-latest
