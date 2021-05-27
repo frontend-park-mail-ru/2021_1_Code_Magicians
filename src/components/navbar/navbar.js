@@ -137,6 +137,8 @@ export class Navbar extends Component {
         event.target.style.backgroundColor = 'var(--red)';
       }
     });
+
+    document.querySelector('.navbar__search-input').focus();
   }
 
   /**
@@ -200,7 +202,10 @@ export class Navbar extends Component {
       appRouter.go(`/search/${query.key}`);
     }
 
-    document.querySelector('.navbar__dropdown-actions').style.display = 'none';
+    const dropdown = document.querySelector('.navbar__dropdown-actions');
+    if (dropdown) {
+      dropdown.style.display = 'none';
+    }
   }
 
   /**
