@@ -80,6 +80,7 @@ export class Sidebar extends Component {
           .querySelector(`[name="${sliderName.toLowerCase()}-toggle"]`)
           .classList
           .add('sidebar__toggle_active');
+        actions.user.viewClosed();
       } else {
         document
           .querySelector(`[name="${sliderName.toLowerCase()}-toggle"]`)
