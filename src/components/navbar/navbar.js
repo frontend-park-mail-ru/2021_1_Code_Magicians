@@ -42,8 +42,7 @@ export class Navbar extends Component {
    * @param {Event} event
    */
   wipeSearchField(event) {
-    // event.preventDefault();
-    event.stopImmediatePropagation();
+    event.preventDefault();
 
     if (event.target.className.includes('navbar__search-options')) {
       return;
