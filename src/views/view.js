@@ -42,6 +42,7 @@ export class View extends Component {
    */
   refresh() {
     if (this._active) {
+      this._refreshing = true;
       this.remove();
       this.show(this.props.pathArgs);
     }
@@ -76,7 +77,11 @@ export class View extends Component {
    * Will
    */
   willUnmount() {
-    actions.user.viewClosed();
+    if (!this._refreshing) {
+      actions.user.viewClosed();
+    }
+    this._refreshing = false;
+
     super.willUnmount();
   }
 }
