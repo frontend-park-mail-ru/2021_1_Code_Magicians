@@ -42,7 +42,6 @@ export const actionTypes = {
     sendMessage: 'send-message',
   },
   chats: {
-    markAsRead: 'mark-as-read',
     setActiveChat: 'set-active-chat',
   },
   common: {
@@ -238,12 +237,6 @@ export const actions = {
     },
   },
   chats: {
-    markAsRead: (chatID) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.chats.markAsRead,
-        data: { chatID },
-      });
-    },
     setActiveChat: (chatID) => {
       appDispatcher.dispatch({
         actionType: actionTypes.chats.setActiveChat,

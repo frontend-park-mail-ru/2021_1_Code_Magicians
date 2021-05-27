@@ -70,11 +70,9 @@ class UserStore extends Store {
     case actionTypes.messages.sendMessage:
       this._sendMessage(action.data);
       break;
-    case actionTypes.chats.markAsRead:
-      this._markChatRead(action.data);
-      break;
     case actionTypes.chats.setActiveChat:
       this._setActiveChat(action.data);
+      this._markChatRead(action.data);
       break;
     case actionTypes.user.sliderToggled:
       this._toggleSlider(action.data);
@@ -504,8 +502,6 @@ class UserStore extends Store {
    */
   _setActiveChat(data) {
     this._chat = this._chats && this._chats.length && this._chats.find((chat) => chat.ID === Number(data.chatID));
-
-    this._trigger('change');
   }
 
   _toggleSlider(data) {

@@ -135,6 +135,10 @@ export class Slider extends Component {
         .querySelector('[name="MessagesSlider"]')
         .querySelectorAll('.slider__item')
         .forEach((chat) => chat.addEventListener('click', this.openChatBlock));
+
+      if (userStore.getChat()) {
+        this.openChatBlock(new Event('click'), userStore.getChat().ID);
+      }
     } else {
       document
         .querySelector('[name="NotificationsSlider"]')
@@ -188,25 +192,14 @@ export class Slider extends Component {
   }
 
   /**
-   * Mark it
-   * @param {Event} event
-   */
-  markChatRead(event) {
-    event.preventDefault();
-
-    const chat = event.target.closest('.slider__item');
-    actions.chats.markAsRead(chat.getAttribute('data-id'));
-  }
-
-  /**
    * Open it
+   * @param {String} chatID
    * @param {Event} event
    */
-  openChatBlock(event) {
+  openChatBlock(event, chatID = null) {
     event.preventDefault();
-    this.markChatRead(event);
 
-    const chat = event.target.closest('.slider__item');
+    const chat = chatID ? event.target.closest('.slider__item') : document.querySelector(`[data-id="${chatID}"]`);
 
     const selectedChat = document.querySelector('.slider__item_selected');
     if (selectedChat) {
