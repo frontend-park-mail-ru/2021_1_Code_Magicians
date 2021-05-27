@@ -116,10 +116,10 @@ export const actions = {
       });
     },
 
-    sliderToggled: (sliderName) => {
+    sliderToggled: (sliderName, on = true) => {
       appDispatcher.dispatch({
         actionType: actionTypes.user.sliderToggled,
-        data: { sliderName },
+        data: { sliderName, on },
       });
     },
   },

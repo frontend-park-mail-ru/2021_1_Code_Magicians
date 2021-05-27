@@ -112,9 +112,9 @@ export class Sidebar extends Component {
 
     document.querySelector('.page__wrap').style.overflow = 'auto';
 
-    if (!initial) {
-      actions.user.sliderToggled('');
-    }
+    // if (!initial) {
+    //   actions.user.sliderToggled('');
+    // }
   }
 
   /**
