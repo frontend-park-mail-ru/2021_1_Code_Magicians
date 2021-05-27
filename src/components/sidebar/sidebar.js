@@ -68,10 +68,12 @@ export class Sidebar extends Component {
 
       Sidebar.hideSliders(event);
 
-      document
-        .querySelector(`[name="${sliderName}Slider"]`)
-        .style
-        .display = display === 'none' ? 'flex' : 'none';
+      const slider = document.querySelector(`[name="${sliderName}Slider"]`);
+      if (initial) {
+        slider.style.display = 'flex';
+      } else {
+        slider.style.display = display === 'none' ? 'flex' : 'none';
+      }
 
       if (display === 'none') {
         document
