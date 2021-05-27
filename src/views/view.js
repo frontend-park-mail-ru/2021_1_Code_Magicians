@@ -70,4 +70,12 @@ export class View extends Component {
 
     super.didMount();
   }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    this._sliderShown = '';
+    super.willUnmount();
+  }
 }
