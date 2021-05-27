@@ -1,5 +1,7 @@
 import { constants } from 'consts/consts';
 
+import logoImage from '../assets/img/Logo.png';
+
 /**
  * Base Component class (abstract)
  */

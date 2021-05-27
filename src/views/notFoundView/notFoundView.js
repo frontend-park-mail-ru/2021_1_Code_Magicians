@@ -1,3 +1,5 @@
+import notFoundBackground from 'assets/img/notFound-removebg-preview.png';
+
 import { appRouter } from 'appManagers/router';
 import { View } from '../view';
 
@@ -27,7 +29,7 @@ export class NotFoundView extends View {
      * @return {string}
      */
   render() {
-    return this.tmpl({ ...this.props });
+    return this.tmpl({ ...this.props, notFoundBackground });
   }
 
   /**

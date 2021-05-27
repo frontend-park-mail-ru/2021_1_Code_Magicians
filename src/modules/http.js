@@ -65,11 +65,11 @@ export class HTTPModule {
       responseBody = await response.json();
       // eslint-disable-next-line no-empty
     } catch (err) {}
-
-    if (!DEBUG) {
-      // eslint-disable-next-line no-console
-      console.clear();
-    }
+    //
+    // if (!DEBUG) {
+    //   // eslint-disable-next-line no-console
+    //   console.clear();
+    // }
 
     return {
       status,

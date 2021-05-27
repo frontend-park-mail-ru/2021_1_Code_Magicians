@@ -13,6 +13,8 @@ export const actionTypes = {
     changeAvatar: 'change-avatar',
 
     statusProcessed: 'error-processed',
+
+    sliderToggled: 'slider-toggled',
   },
   pins: {
     createPin: 'create-pin',
@@ -40,7 +42,6 @@ export const actionTypes = {
     sendMessage: 'send-message',
   },
   chats: {
-    markAsRead: 'mark-as-read',
     setActiveChat: 'set-active-chat',
   },
   common: {
@@ -112,6 +113,13 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.user.statusProcessed,
         data: {},
+      });
+    },
+
+    sliderToggled: (sliderName, on = true) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.user.sliderToggled,
+        data: { sliderName, on },
       });
     },
   },
@@ -229,12 +237,6 @@ export const actions = {
     },
   },
   chats: {
-    markAsRead: (chatID) => {
-      appDispatcher.dispatch({
-        actionType: actionTypes.chats.markAsRead,
-        data: { chatID },
-      });
-    },
     setActiveChat: (chatID) => {
       appDispatcher.dispatch({
         actionType: actionTypes.chats.setActiveChat,

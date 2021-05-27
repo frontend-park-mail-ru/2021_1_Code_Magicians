@@ -1,11 +1,11 @@
 import { boardsStore } from 'stores/boardsStore';
 import { userStore } from 'stores/userStore';
+import { toastBox } from 'components/toast/toast';
+import { actions } from 'actions/actions';
 import { ProfileView } from '../profileView/profileView';
 
 import ProfileBoardsViewTemplate from './profileBoardsView.hbs';
 import './profileBoardsView.scss';
-import { toastBox } from '../../../components/toast/toast';
-import { actions } from '../../../actions/actions';
 
 /**
  * Profile boards view
@@ -36,6 +36,7 @@ export class ProfileBoardsView extends ProfileView {
       ...this.props,
       boards: boardsList,
       userIsAuthorized: this._userIsAuthorized,
+      selfProfile: !this.props.pathArgs.profileID,
     });
 
     return super.render();
@@ -46,7 +47,7 @@ export class ProfileBoardsView extends ProfileView {
    */
   didMount() {
     super.didMount();
-    if (!this._userIsAuthorized) {
+    if (!this.props.pathArgs.profileID) {
       return;
     }
 
@@ -66,7 +67,7 @@ export class ProfileBoardsView extends ProfileView {
    */
   willUnmount() {
     super.willUnmount();
-    if (!this._userIsAuthorized) {
+    if (!this.props.pathArgs.profileID) {
       return;
     }
 

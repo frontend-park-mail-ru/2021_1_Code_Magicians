@@ -1,10 +1,10 @@
 import { actions } from 'actions/actions';
-import { Component } from '../component';
+import { validateInputs } from 'utils/validateUtils';
+import { usernameRegexp } from 'consts/regexp';
+import { userStore } from 'stores/userStore';
+import { constants } from 'consts/consts';
 import { ChatBlock } from '../chatBlock/chatBlock';
-import { validateInputs } from '../../utils/validateUtils';
-import { usernameRegexp } from '../../consts/regexp';
-import { userStore } from '../../stores/userStore';
-import { constants } from '../../consts/consts';
+import { Component } from '../component';
 import { toastBox } from '../toast/toast';
 
 import SliderTemplate from './slider.hbs';
@@ -135,6 +135,10 @@ export class Slider extends Component {
         .querySelector('[name="MessagesSlider"]')
         .querySelectorAll('.slider__item')
         .forEach((chat) => chat.addEventListener('click', this.openChatBlock));
+
+      if (userStore.getChat() && document.querySelector('.chat').style.display !== 'flex') {
+        document.querySelector(`[data-id="${userStore.getChat().ID}"]`).click();
+      }
     } else {
       document
         .querySelector('[name="NotificationsSlider"]')
@@ -188,25 +192,14 @@ export class Slider extends Component {
   }
 
   /**
-   * Mark it
-   * @param {Event} event
-   */
-  markChatRead(event) {
-    event.preventDefault();
-
-    const chat = event.target.closest('.slider__item');
-    actions.chats.markAsRead(chat.getAttribute('data-id'));
-  }
-
-  /**
    * Open it
+   * @param {String} chatID
    * @param {Event} event
    */
-  openChatBlock(event) {
+  openChatBlock(event, chatID = null) {
     event.preventDefault();
-    this.markChatRead(event);
 
-    const chat = event.target.closest('.slider__item');
+    const chat = chatID ? document.querySelector(`[data-id="${chatID}"]`) : event.target.closest('.slider__item');
 
     const selectedChat = document.querySelector('.slider__item_selected');
     if (selectedChat) {

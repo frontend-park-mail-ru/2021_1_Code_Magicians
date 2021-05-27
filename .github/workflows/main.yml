@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: ./dist/
+          path: ./dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
       - name: Transfer build files to server
         uses: appleboy/scp-action@master
         with:
-          host: 52.59.228.167
+          host: 3.67.64.110
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
           source: "dist/*"

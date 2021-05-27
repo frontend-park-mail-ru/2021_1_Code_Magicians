@@ -1,9 +1,9 @@
 import { userStore } from 'stores/userStore';
+import { Profile } from 'models/Profile';
 import { Navbar } from '../navbar/navbar';
 import { Sidebar } from '../sidebar/sidebar';
 import { Component } from '../component';
 import { Slider } from '../slider/slider';
-import { Profile } from '../../models/Profile';
 
 import PageTemplate from './page.hbs';
 import './page.scss';
@@ -40,6 +40,7 @@ export class Page extends Component {
           text: chat.messages && chat.messages.slice(-1).pop().text,
         };
       }),
+      shown: true,
     }));
 
     this._nestedComponents.set('_notificationsSlider', new Slider({

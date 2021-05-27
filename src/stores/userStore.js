@@ -4,9 +4,9 @@ import { User } from 'models/User';
 import { actionTypes } from 'actions/actions';
 import { constants } from 'consts/consts';
 import { NotificationModel } from 'models/NotificationModel';
+import { Chat } from 'models/Chat';
+import { MessageModel } from 'models/MessageModel';
 import Store from './Store';
-import { Chat } from '../models/Chat';
-import { MessageModel } from '../models/MessageModel';
 
 const storeStatuses = constants.store.statuses.userStore;
 
@@ -28,6 +28,8 @@ class UserStore extends Store {
     this._newNotification = false;
     this._chats = [];
     this._newMessage = false;
+
+    this._sliderShown = '';
   }
 
   /**
@@ -68,11 +70,12 @@ class UserStore extends Store {
     case actionTypes.messages.sendMessage:
       this._sendMessage(action.data);
       break;
-    case actionTypes.chats.markAsRead:
-      this._markChatRead(action.data);
-      break;
     case actionTypes.chats.setActiveChat:
       this._setActiveChat(action.data);
+      this._markChatRead(action.data);
+      break;
+    case actionTypes.user.sliderToggled:
+      this._toggleSlider(action.data);
       break;
     default:
       break;
@@ -471,6 +474,11 @@ class UserStore extends Store {
    * @private
    */
   _markChatRead(data) {
+    const chat = this._chats.find((chat) => chat.ID === Number(data.chatID));
+    if (chat && chat.isRead) {
+      return;
+    }
+
     API.markChatRead(data.chatID).then((response) => {
       switch (response.status) {
       case 204:
@@ -498,9 +506,15 @@ class UserStore extends Store {
    * @private
    */
   _setActiveChat(data) {
+    const oldChat = this._chat;
     this._chat = this._chats && this._chats.length && this._chats.find((chat) => chat.ID === Number(data.chatID));
+    if (!oldChat || oldChat.ID !== this._chat.ID) {
+      this._trigger('change');
+    }
+  }
 
-    this._trigger('change');
+  _toggleSlider(data) {
+    this._sliderShown = data.sliderName;
   }
 
   /**
@@ -557,6 +571,14 @@ class UserStore extends Store {
    */
   hasNewMessage() {
     return this._newMessage;
+  }
+
+  /**
+   * Check current slider active
+   * @return {string}
+   */
+  sliderShown() {
+    return this._sliderShown;
   }
 }
 

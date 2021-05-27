@@ -32,24 +32,15 @@ class Dispatcher {
   }
 
   /**
-   * Waits for the callbacks specified to be invoked before continuing execution
-   * of the current callback. This method should only be used by a callback in
-   * response to a dispatched payload.
-   * @param {Array} IDs array of dispatchToken strings
-   */
-  waitFor(IDs) {
-    IDs.forEach((ID) => (this._isPending.get(ID) ? false : this._invokeCallback(ID)));
-  }
-
-  /**
    * Call the callback stored with the given id.
    * @param {String} id
+   * @param {Object} payload
    * @private
    */
-  _invokeCallback(id) {
+  _invokeCallback(id, payload) {
     this._isPending.set(id, true);
     const callback = this._callbacks.get(id);
-    callback(this._pendingPayload);
+    callback(payload);
   }
 
   /**
@@ -58,7 +49,7 @@ class Dispatcher {
    */
   dispatch(payload) {
     this._startDispatching(payload);
-    [...this._callbacks.keys()].forEach((ID) => this._invokeCallback((ID)));
+    [...this._callbacks.keys()].forEach((ID) => this._invokeCallback(ID, payload));
     this._stopDispatching();
   }
 

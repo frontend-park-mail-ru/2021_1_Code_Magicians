@@ -1,5 +1,6 @@
 import { Component } from 'components/component';
 import { userStore } from 'stores/userStore';
+import { Sidebar } from 'components/sidebar/sidebar';
 
 /**
  * Base view class (abstract)
@@ -15,6 +16,8 @@ export class View extends Component {
 
     this._active = false;
     this._parent = parent;
+
+    this._sliderShown = '';
 
     this.refresh = this.refresh.bind(this);
     userStore.bind('change', this.refresh);
@@ -58,6 +61,13 @@ export class View extends Component {
    */
   didMount() {
     document.documentElement.setAttribute('theme', window.localStorage.getItem('theme'));
+
+    this._sliderShown = userStore.sliderShown();
+
+    if (this._sliderShown) {
+      Sidebar.toggleSlider(this._sliderShown, true)(new Event('click'));
+    }
+
     super.didMount();
   }
 }
