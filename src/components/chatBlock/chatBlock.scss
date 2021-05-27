@@ -156,6 +156,7 @@
     margin-bottom: 245px;
 
     background-color: var(--almost-white);
+    color: var(--black);
 
     padding: 5px;
 
@@ -170,6 +171,7 @@
 
       &:hover {
         background-color: var(--red);
+        color: var(--black);
 
         border-radius: 3px;
       }

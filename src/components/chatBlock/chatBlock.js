@@ -1,11 +1,11 @@
+import { userStore } from 'stores/userStore';
+import { actions } from 'actions/actions';
+import { Profile } from 'models/Profile';
+import { emojis, stickers } from 'consts/emoji';
 import { Component } from '../component';
-import { userStore } from '../../stores/userStore';
-import { actions } from '../../actions/actions';
 
 import ChatBlockTemplate from './chatBlock.hbs';
 import './chatBlock.scss';
-import { Profile } from '../../models/Profile';
-import { emojis, stickers } from '../../consts/emoji';
 
 /**
  * Chat block. Later can be used in mobile
@@ -54,9 +54,10 @@ export class ChatBlock extends Component {
 
     const stickerPicker = document.querySelector(`.chat__sticker-picker`);
     stickerPicker.innerHTML = '';
-    Object.entries(stickers).forEach((sticker) => {
-      stickerPicker.innerHTML += `<img class="chat__sticker-picker_sticker" data-link="&&${sticker[1]}" src="/assets/img/stickers/${sticker[1]}" >`;
+    Object.entries(stickers).forEach((sticker, index) => {
+      stickerPicker.innerHTML += `<img class="chat__sticker-picker_sticker" data-link="&&sticker${index}.png" src="${sticker[1]}" >`;
     });
+
     document.querySelector('.chat__emoji-picker').addEventListener('click', this.pickEmoji);
     document.querySelector('.chat__sticker-picker').addEventListener('click', this.pickSticker);
 
