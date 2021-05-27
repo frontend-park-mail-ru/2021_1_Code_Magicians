@@ -31,15 +31,23 @@ export class SearchView extends View {
    * @return {String}
    */
   render() {
-    const query = window
+    const val = window
       .location
       .pathname
       .replace('/search/', '');
-    const searchingProfiles = query.startsWith('@');
+    let date = window.location.search.replace('?', '');
+    if (!date) {
+      date = 'allTime';
+    }
+    const query = {
+      key: val,
+      date,
+    };
+    const searchingProfiles = query.key.startsWith('@');
+    const foundItems = searchingProfiles ? profilesStore.getFoundProfiles(query.key) : pinsStore.getFoundPins(query.key);
 
-    const foundItems = searchingProfiles ? profilesStore.getFoundProfiles(query) : pinsStore.getFoundPins(query);
     if (!foundItems) {
-      actions.common.search(query, searchingProfiles ? 'profiles' : 'pins');
+      actions.common.search(searchingProfiles ? query.key : query, searchingProfiles ? 'profiles' : 'pins');
     }
 
     let foundItemsFeed = {};
@@ -49,12 +57,11 @@ export class SearchView extends View {
       foundItemsFeed = new PinsFeed({ ...this.props, pins: foundItems });
     }
     this._nestedComponents.set('_foundItems', foundItemsFeed);
-
     const html = this.tmpl({
       ...this.props,
       searchType: searchingProfiles ? 'Profiles' : 'Pins',
       searchingProfiles,
-      query: query.replaceAll('+', ' ').replace('@', ''),
+      query: query.key.replaceAll('+', ' ').replace('@', ''),
       foundItems: this._nestedComponents.get('_foundItems').render(),
     });
 

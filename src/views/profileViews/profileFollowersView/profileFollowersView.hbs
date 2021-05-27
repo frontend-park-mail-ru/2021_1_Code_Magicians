@@ -1,0 +1,10 @@
+<div class="profiles">
+    {{#each profiles}}
+        <a href="/profile/{{ this.ID }}" class="profiles__avatar">
+            <img src="{{ this.avatarLink }}" alt="{{ this.username }}" class="profiles__avatar-image">
+            <span class="profiles__title">{{ this.username }}</span>
+        </a>
+    {{else}}
+        <div>Be nice and follow.</div>
+    {{/each}}
+</div>

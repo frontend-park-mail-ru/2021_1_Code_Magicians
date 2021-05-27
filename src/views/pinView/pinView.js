@@ -11,6 +11,8 @@ import { boardsStore } from '../../stores/boardsStore';
 
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
+import { ShareControl } from '../../components/shareControl/shareControl';
+import { FeedbackControl } from '../../components/feedbackControl/feedbackControl';
 
 /**
  * Build pin view
@@ -44,7 +46,6 @@ export class PinView extends View {
     const currentPin = pinsStore.getPinByID(this.props.pathArgs.pinID);
     const comments = pinsStore.getComments(this.props.pathArgs.pinID);
     const commentProfiles = comments && profilesStore.getProfiles(comments.map((comment) => comment.userID));
-
     this.profile = currentPin && profilesStore.getProfileByID(currentPin.userID);
     const pinIsSelfOwned = this.profile && selfProfile && this.profile.ID === selfProfile.ID;
 
@@ -52,8 +53,19 @@ export class PinView extends View {
       comment,
       author: commentProfiles[index],
     }));
-
+    const feedbackControl = new FeedbackControl({
+      userIsAuthorized,
+      currentPin,
+    });
+    const shareControl = new ShareControl({
+      shareLink: window.location.href,
+      shareTitle: currentPin ? currentPin.title : '',
+      shareDescription: currentPin ? currentPin.description : '',
+      shareImage: currentPin ? currentPin.imageLink : '',
+    });
     const boardControl = new BoardControl(this.props);
+    this._nestedComponents.set('_feedbackControl', feedbackControl);
+    this._nestedComponents.set('_shareControl', shareControl);
     this._nestedComponents.set('_boardControl', boardControl);
     this._nestedComponents.set('page', new Page({
       ...this.props,
@@ -64,7 +76,10 @@ export class PinView extends View {
         pinIsSelfOwned,
         pin: currentPin,
         comments: templateComments,
+        feedbackControl: this._nestedComponents.get('_feedbackControl').render(),
+        shareControl: this._nestedComponents.get('_shareControl').render(),
         boardControl: this._nestedComponents.get('_boardControl').render(),
+        shareLink: window.location.href,
       }),
     }));
 

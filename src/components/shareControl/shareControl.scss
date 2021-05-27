@@ -1,0 +1,32 @@
+.share-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+
+  position: relative;
+}
+
+.share-button {
+  color: var(--gray);
+
+  font-size: 20px;
+
+  padding: 5px;
+
+  cursor: pointer;
+}
+
+.share-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+
+  width: 0;
+
+  padding-left: 10px;
+
+  overflow: hidden;
+
+  transition: ease-in-out all 0.35s;
+}
+

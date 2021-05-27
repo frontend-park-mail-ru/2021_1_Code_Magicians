@@ -27,7 +27,12 @@ export class VirtualizedList extends View {
    * @return {String}
    */
   render() {
-    const pinArray = pinsStore.getPinsFeed(20);
+    const payload = {
+      offset: 0,
+      amount: 100,
+    };
+
+    const pinArray = pinsStore.getPinsFeed(payload);
 
     const vlist = new Vlist({
       ...this.props,

@@ -76,6 +76,24 @@ export class API {
   }
 
   /**
+   * Get followers by ID
+   * @param {String} ID
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static getProfileFollowersByID(ID) {
+    return HTTPModule.get(`${paths.getFollowers}/${ID}`);
+  }
+
+  /**
+   * Get following by ID
+   * @param {String} ID
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static getProfileFollowingByID(ID) {
+    return HTTPModule.get(`${paths.getFollowing}/${ID}`);
+  }
+
+  /**
    * Update profile
    * @param {Object} changes
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
@@ -166,6 +184,15 @@ export class API {
   }
 
   /**
+   * Report pin
+   * @param {Object} pinInfo
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static reportPin(pinInfo) {
+    return HTTPModule.post(`${paths.reportPin}`, pinInfo);
+  }
+
+  /**
    * Get pins by board id of their board
    * @param {String} boardID
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
@@ -200,20 +227,29 @@ export class API {
    * @return {Promise<{headers: (*&{'Content-Type': string})|*, responseBody: {}, status: string}>}
    */
   static searchPins(query) {
-    return HTTPModule.get(`${paths.searchPins}/${query}`);
+    return HTTPModule.get(`${paths.searchPins}?searchKey=${query.key}&date=${query.date}`);
   }
 
   /**
    * Get feed
-   * @param {Number} pinsNumber
+   * @param {Object} pinsNumber
    * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
    */
-  static getPinsFeed(pinsNumber = 50) {
-    return HTTPModule.get(`${paths.pinsFeed}/${pinsNumber}`);
+  static getPinsFeed(payload) {
+    return HTTPModule.get(`${paths.pinsFeed}?offset=${payload.offset}&amount=${payload.amount}`);
   }
 
   /**
-   * Get Comments gy pin id
+   * Get subscription feed
+   * @param {}
+   * @return {Promise<{headers: Headers, responseBody: {}, status}>} // TODO: check response promise
+   */
+  static getSubscriptionPinsFeed() {
+    return HTTPModule.get(`${paths.pinsSubscriptionFeed}`);
+  }
+
+  /**
+   * Get Comments by pin id
    * @param {Number} pinID
    * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
    */

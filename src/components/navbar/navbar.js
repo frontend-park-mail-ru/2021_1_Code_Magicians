@@ -43,6 +43,10 @@ export class Navbar extends Component {
    */
   wipeSearchField(event) {
     event.preventDefault();
+
+    if (event.target.className.includes('navbar__search-options')) {
+      return;
+    }
     document.querySelector('.navbar__search-input').value = '';
   }
 
@@ -53,6 +57,11 @@ export class Navbar extends Component {
     document
       .querySelector('.navbar__search-wiper')
       .addEventListener('click', this.wipeSearchField);
+    document
+      .querySelector('.navbar__search-options')
+      .addEventListener('click', this.showDateForm);
+    document
+      .querySelectorAll('.navbar__date-picker-text').forEach((element) => element.addEventListener('click', this.pickDate));
 
     if (this._userIsAuthorized) {
       document
@@ -76,6 +85,11 @@ export class Navbar extends Component {
   willUnmount() {
     const searchWiper = document.querySelector('.navbar__search-wiper');
     searchWiper.removeEventListener('click', this.wipeSearchField);
+    document
+      .querySelector('.navbar__search-options')
+      .removeEventListener('click', this.showDateForm);
+    document
+      .querySelectorAll('.navbar__date-picker-text').forEach((element) => element.removeEventListener('click', this.pickDate));
 
     if (this._userIsAuthorized) {
       document
@@ -87,6 +101,42 @@ export class Navbar extends Component {
 
       document.removeEventListener('click', this.closeDropdown);
     }
+  }
+
+  /**
+   * showDateForm callback
+   * @param {Event} event
+   */
+  showDateForm(event) {
+    event.preventDefault();
+
+    const element = document.querySelector('.navbar__date-picker');
+
+    if (element.dataset.visible === 'false') {
+      element.style.width = 'auto';
+      element.dataset.visible = 'true';
+    } else {
+      element.style.width = '0';
+      element.dataset.visible = 'false';
+    }
+  }
+
+  /**
+   * pickDate callback
+   * @param {Event} event
+   */
+  pickDate(event) {
+    document.querySelectorAll('.navbar__date-picker-text').forEach((element) => {
+      element.style.backgroundColor = 'transparent';
+      if (element !== event.target) {
+        element.dataset.selected = 'false';
+      } else if (event.target.dataset.selected === 'true') {
+        event.target.dataset.selected = 'false';
+      } else {
+        event.target.dataset.selected = 'true';
+        event.target.style.backgroundColor = 'var(--red)';
+      }
+    });
   }
 
   /**
@@ -127,15 +177,27 @@ export class Navbar extends Component {
   activateSearch(event) {
     event.preventDefault();
 
-    const query = document
+    if (event.target.className.includes('navbar__search-options')) {
+      return;
+    }
+
+    const val = document
       .querySelector('.navbar__search-input')
       .value
       .trim()
       .replaceAll(/(\s+)/g, '+');
 
-    if (query && query.replace('@', '')) {
-      actions.common.search(query, query.startsWith('@') ? 'profiles' : 'pins');
-      appRouter.go(`/search/${query}`);
+    const selectedDate = document.querySelector('[data-selected="true"]');
+    const date = selectedDate !== null ? selectedDate.dataset.date : 'allTime';
+
+    const query = {
+      key: val,
+      date,
+    };
+
+    if (query && query.key.replace('@', '')) {
+      actions.common.search(query, query.key.startsWith('@') ? 'profiles' : 'pins');
+      appRouter.go(`/search/${query.key}`);
     }
 
     document.querySelector('.navbar__dropdown-actions').style.display = 'none';

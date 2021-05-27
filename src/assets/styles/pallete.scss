@@ -9,10 +9,14 @@
 }
 
 :root[theme='dark'] {
-  --white: rgba(37, 37, 37, 1);
-  --almost-white: rgba(66, 66, 66, 1);
-  --red: rgba(203, 7, 15, 1);
+  --white: #202225;
+  --almost-white: #2f3136;
+  --red:  #E60023;
   --gray: rgba(169, 169, 169, 1);
   --black: rgba(230, 230, 230, 1);
   --perm-white: rgba(255, 255, 255, 1);
+}
+
+:root[theme='dark'] .pin-image {
+  filter: brightness(0.75);
 }

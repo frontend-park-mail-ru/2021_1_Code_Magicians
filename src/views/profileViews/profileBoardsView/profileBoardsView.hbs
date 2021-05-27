@@ -1,8 +1,29 @@
 <div class="profile-boards">
+    {{#if userIsAuthorized}}
+        <div class="profile-boards__board" id="create-board">
+            <i class="fas fa-plus-square profile-boards__board-avatar profile-boards__create-board"></i>
+            <span class="profile-boards__title">Create a new board</span>
+        </div>
+    {{/if}}
     {{#each boards}}
         <a href="/board/{{ this.ID }}" class="profile-boards__board">
             <img src="{{ this.avatarLink }}" alt="{{ this.title }}" class="profile-boards__board-avatar">
             <span class="profile-boards__title">{{ this.title }}</span>
         </a>
     {{/each}}
+    {{#if userIsAuthorized}}
+        <div class="board-create-form">
+            <div class="blur-background" id="board-form">
+                <div class="board-creator">
+                    <i class="fas fa-times-circle board-creator__close" id="board-close"></i>
+                    <div class="board-creator__title">Create your own board</div>
+                    <div class="board-create-form__hint">Add board name</div>
+                    <input type="text" class ="board-create-form__text"  id="board-name" placeholder="Shopping list? Ideas? Memes...">
+                    <div class="shadow-line"></div>
+                    <input type="submit" class="board-create-form__button" value="Create board">
+                </div>
+            </div>
+        </div>
+    {{/if}}
 </div>
+

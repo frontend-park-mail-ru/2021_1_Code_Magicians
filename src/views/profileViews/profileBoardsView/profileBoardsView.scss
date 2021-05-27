@@ -36,6 +36,16 @@
     object-fit: cover;
   }
 
+  &__create-board {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 100px;
+
+    color: var(--gray);
+  }
+
   &__title {
     margin-top: 4px;
 
@@ -45,5 +55,142 @@
     font-size: 18px;
 
     transition: 0.3s;
+  }
+}
+
+
+.pin-board-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+
+  padding: 2px 10px;
+
+  border-radius: 5px;
+  outline: none;
+
+  cursor: pointer;
+
+  width:fit-content;
+
+  background-color: var(--white);
+
+  &__input {
+    border:none;
+    outline:none;
+
+    background-color: var(--white);
+    color: var(--black);
+  }
+
+  &__select-button {
+    border:none;
+    outline:none;
+
+    background:none;
+  }
+
+  &__favorite-button {
+    border:none;
+    outline:none;
+
+    background:none;
+  }
+}
+
+.shadow-line {
+  border: 1px solid rgba(169, 169, 169, 0.02);
+  box-sizing: border-box;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.25);
+}
+
+.board-create-form {
+  visibility: hidden;
+}
+
+.board-creator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 250px);
+
+  height: 300px;
+  width: 500px;
+
+  padding: 2px 50px;
+
+  border: none;
+  border-radius: 5px;
+  outline: none;
+
+  background-color: var(--white);
+  color: var(--black);
+
+  font-size: 30px;
+
+  &__close {
+    align-self: flex-end;
+    color: var(--red);
+  }
+  &__title {
+
+    padding-bottom: 50px;
+  }
+}
+
+.blur-background {
+  background-color: var(--perm-blur);
+  backdrop-filter: blur(2px);
+  top:0;
+  left:75px;
+  position:fixed;
+  width:calc(100% - 75px);
+  height: 100%;
+}
+
+.board-create-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  width: 80%;
+
+  cursor: pointer;
+
+
+  &__hint {
+    padding-bottom: 20px;
+
+    color: var(--gray);
+
+    font-size: 14px;
+  }
+
+  &__text {
+    border:none;
+    outline:none;
+
+    font-size: 18px;
+
+    background-color: var(--white);
+    color: var(--black);
+
+  }
+
+  &__button {
+    width: fit-content;
+
+    padding: 15px 20px;
+    margin-top: 10px;
+
+    border-radius: 45px;
+    border:none;
+
+    font-size: 20px;
+    color: white;
+    background-color: var(--red);
   }
 }

@@ -137,9 +137,13 @@ export class Vlist extends Component {
 
     const columns = Array(this._state.lastCols).fill(0).map(() => []);
     const colWidth = this._state.lastWidth;
-    API.getPinsFeed(50).then((response) => {
+    const payload = {
+      offset: 0,
+      amount: 50,
+    };
+    API.getPinsFeed(payload).then((response) => {
       let pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
-      pins = pins.slice(20);
+      pins = pins.slice(30);
       pins.forEach((pin, index) => {
         pin.imageHeight = pin.imageHeight / pin.imageWidth * colWidth;
         pin.imageWidth = colWidth;

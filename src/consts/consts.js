@@ -20,6 +20,9 @@ export const constants = {
       deleteProfile: '/profile/delete',
       changeAvatar: '/profile/avatar',
 
+      getFollowers: '/followers',
+      getFollowing: '/following',
+
       board: '/board',
       boards: '/boards',
       comment: '/comment',
@@ -28,6 +31,8 @@ export const constants = {
       pin: '/pin',
       pins: '/pins',
       pinsFeed: '/pins/feed',
+      pinsSubscriptionFeed: '/pins/followed',
+      reportPin: '/pin/report',
 
       follow: '/follow',
 
@@ -88,6 +93,7 @@ export const constants = {
 
         pinCreated: 'pin-created',
         pinDeleted: 'pin-deleted',
+        pinReported: 'pin-reported',
 
         triedToDeleteForeignPin: 'foreign-pin-delete',
         userUnauthorized: 'unauthorized',
@@ -114,6 +120,8 @@ export const constants = {
         followed: 'followed',
         unfollowed: 'unfollowed',
         profileNotFound: 'profile-not-found',
+
+        followersNotFound: 'followers-not-found',
 
         userUnauthorized: 'unauthorized',
 

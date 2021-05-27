@@ -22,13 +22,12 @@
     border-radius: 5px;
 
     align-self: end;
+
   }
 
   &__info-panel {
     display: flex;
     flex-direction: column;
-
-    justify-content: space-between;
 
     overflow:scroll;
 
@@ -94,7 +93,7 @@
 
     padding-bottom: 30px;
 
-    color: var(--red);
+    color: var(--black);
     font-size: 22px;
     font-weight: bold;
   }
@@ -103,8 +102,16 @@
     overflow: auto;
     max-height: 250px;
 
-    height: 150px;
+    min-height: 50px;
 
+    height: auto;
+
+    &_text {
+      margin-top: 10px;
+
+      font-size: 18px;
+      color: var(--black);
+    }
     &::-webkit-scrollbar {
       display: none;
     }
@@ -148,13 +155,17 @@
   flex-direction: row;
   align-items: center;
 
-  margin: 0 0 20px 0;
+  flex-wrap: wrap;
+
+  margin: 15px 0 15px 0;
+
 
   &__avatar {
     width: 60px;
     height: 60px;
 
     border-radius: 50%;
+    object-fit: cover;
   }
 
   &__text {
@@ -249,7 +260,6 @@
 
   &__text {
     height: 50px;
-    width: 400px;
 
     padding: 5px;
 
@@ -283,10 +293,12 @@
 
 
 .pin-stats {
-  display: flex;
+  display: none;
   flex-direction: row;
 
   padding: 10px 0;
+
+  float: right;
 
   &__item {
     display: flex;
@@ -316,4 +328,10 @@
   font-size: 16px;
   color: var(--gray);
   margin-bottom: 20px;
+}
+
+.control-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 }

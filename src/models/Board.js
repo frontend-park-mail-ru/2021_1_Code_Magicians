@@ -17,7 +17,7 @@ export class Board extends Model {
    */
   constructor(props = {}) {
     props.avatarLink = props.avatarLink
-      ? `${constants.network.bucketURL}/${props.avatarLink}`
+      ? `${constants.network.bucketURL}${props.avatarLink}`
       : '/assets/img/default-board.jpg';
 
     super(props);
