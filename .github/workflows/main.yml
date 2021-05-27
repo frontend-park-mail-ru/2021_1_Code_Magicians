@@ -3,7 +3,7 @@ name: Build and Delivery
 on:
   push:
     branches:
-      - main
+      - '**'
 
 jobs:
   build:
