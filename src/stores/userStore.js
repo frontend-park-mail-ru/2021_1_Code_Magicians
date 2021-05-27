@@ -474,6 +474,11 @@ class UserStore extends Store {
    * @private
    */
   _markChatRead(data) {
+    const chat = this._chats.find((chat) => chat.ID === Number(data.chatID));
+    if (chat && chat.isRead) {
+      return;
+    }
+
     API.markChatRead(data.chatID).then((response) => {
       switch (response.status) {
       case 204:
@@ -501,7 +506,11 @@ class UserStore extends Store {
    * @private
    */
   _setActiveChat(data) {
+    const oldChat = this._chat;
     this._chat = this._chats && this._chats.length && this._chats.find((chat) => chat.ID === Number(data.chatID));
+    if (oldChat && oldChat.ID !== this._chat.ID) {
+      this._trigger('change');
+    }
   }
 
   _toggleSlider(data) {

@@ -136,8 +136,8 @@ export class Slider extends Component {
         .querySelectorAll('.slider__item')
         .forEach((chat) => chat.addEventListener('click', this.openChatBlock));
 
-      if (userStore.getChat()) {
-        this.openChatBlock(new Event('click'), userStore.getChat().ID);
+      if (userStore.getChat() && document.querySelector('.chat').style.display !== 'flex') {
+        document.querySelector(`[data-id="${userStore.getChat().ID}"]`).click();
       }
     } else {
       document
