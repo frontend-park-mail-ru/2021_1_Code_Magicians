@@ -1,6 +1,7 @@
 import { Component } from 'components/component';
 import { userStore } from 'stores/userStore';
 import { Sidebar } from 'components/sidebar/sidebar';
+import { actions } from 'actions/actions';
 
 /**
  * Base view class (abstract)
@@ -75,7 +76,7 @@ export class View extends Component {
    * Will
    */
   willUnmount() {
-    this._sliderShown = '';
+    actions.user.viewClosed();
     super.willUnmount();
   }
 }
