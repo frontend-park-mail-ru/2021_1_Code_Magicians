@@ -4,9 +4,9 @@ import { User } from 'models/User';
 import { actionTypes } from 'actions/actions';
 import { constants } from 'consts/consts';
 import { NotificationModel } from 'models/NotificationModel';
+import { Chat } from 'models/Chat';
+import { MessageModel } from 'models/MessageModel';
 import Store from './Store';
-import { Chat } from '../models/Chat';
-import { MessageModel } from '../models/MessageModel';
 
 const storeStatuses = constants.store.statuses.userStore;
 
@@ -28,6 +28,8 @@ class UserStore extends Store {
     this._newNotification = false;
     this._chats = [];
     this._newMessage = false;
+
+    this._sliderShown = '';
   }
 
   /**
@@ -73,6 +75,9 @@ class UserStore extends Store {
       break;
     case actionTypes.chats.setActiveChat:
       this._setActiveChat(action.data);
+      break;
+    case actionTypes.user.sliderToggled:
+      this._toggleSlider(action.data);
       break;
     default:
       break;
@@ -503,6 +508,10 @@ class UserStore extends Store {
     this._trigger('change');
   }
 
+  _toggleSlider(data) {
+    this._sliderShown = data.sliderName;
+  }
+
   /**
    * Returns user data
    * @return {User}
@@ -557,6 +566,14 @@ class UserStore extends Store {
    */
   hasNewMessage() {
     return this._newMessage;
+  }
+
+  /**
+   * Check current slider active
+   * @return {string}
+   */
+  sliderShown() {
+    return this._sliderShown;
   }
 }
 

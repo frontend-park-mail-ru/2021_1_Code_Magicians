@@ -13,6 +13,8 @@ export const actionTypes = {
     changeAvatar: 'change-avatar',
 
     statusProcessed: 'error-processed',
+
+    sliderToggled: 'slider-toggled',
   },
   pins: {
     createPin: 'create-pin',
@@ -112,6 +114,13 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.user.statusProcessed,
         data: {},
+      });
+    },
+
+    sliderToggled: (sliderName) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.user.sliderToggled,
+        data: { sliderName },
       });
     },
   },

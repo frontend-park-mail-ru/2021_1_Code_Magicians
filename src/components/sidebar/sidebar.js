@@ -1,5 +1,6 @@
 import { urlRegexp } from 'consts/regexp';
 import { userStore } from 'stores/userStore';
+import { actions } from 'actions/actions';
 import { Component } from '../component';
 
 import SidebarTemplate from './sidebar.hbs';
@@ -59,7 +60,7 @@ export class Sidebar extends Component {
    * @param {String} sliderName
    * @return {(function(*=): void)|*}
    */
-  toggleSlider(sliderName) {
+  static toggleSlider(sliderName) {
     return (event) => {
       event.preventDefault();
 
@@ -85,6 +86,8 @@ export class Sidebar extends Component {
       }
 
       document.querySelector('.page__wrap').style.overflow = 'hidden';
+
+      actions.user.sliderToggled(sliderName);
     };
   }
 
@@ -92,7 +95,7 @@ export class Sidebar extends Component {
    * Hides slider
    * @param {Event} event
    */
-  hideSliders(event) {
+  static hideSliders(event) {
     event.preventDefault();
 
     document
@@ -103,6 +106,8 @@ export class Sidebar extends Component {
       .forEach((toggle) => toggle.classList.remove('sidebar__toggle_active'));
 
     document.querySelector('.page__wrap').style.overflow = 'auto';
+
+    actions.user.sliderToggled('');
   }
 
   /**
@@ -127,13 +132,13 @@ export class Sidebar extends Component {
     if (this._userIsAuthorized) {
       document
         .querySelectorAll('.page-shader')
-        .forEach((button) => button.addEventListener('click', this.hideSliders));
+        .forEach((button) => button.addEventListener('click', Sidebar.hideSliders));
       document
         .querySelector('[name="messages-toggle"]')
-        .addEventListener('click', this.toggleSlider('Messages'));
+        .addEventListener('click', Sidebar.toggleSlider('Messages'));
       document
         .querySelector('[name="notifications-toggle"]')
-        .addEventListener('click', this.toggleSlider('Notifications'));
+        .addEventListener('click', Sidebar.toggleSlider('Notifications'));
     }
   }
 
@@ -148,13 +153,13 @@ export class Sidebar extends Component {
     if (this._userIsAuthorized) {
       document
         .querySelectorAll('.page-shader')
-        .forEach((button) => button.removeEventListener('click', this.hideSliders));
+        .forEach((button) => button.removeEventListener('click', Sidebar.hideSliders));
       document
         .querySelector('[name="messages-toggle"]')
-        .removeEventListener('click', this.toggleSlider('Messages'));
+        .removeEventListener('click', Sidebar.toggleSlider('Messages'));
       document
         .querySelector('[name="notifications-toggle"]')
-        .removeEventListener('click', this.toggleSlider('Notifications'));
+        .removeEventListener('click', Sidebar.toggleSlider('Notifications'));
 
       this._userIsAuthorized = false;
     }
