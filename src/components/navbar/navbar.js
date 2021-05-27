@@ -48,6 +48,9 @@ export class Navbar extends Component {
       return;
     }
     document.querySelector('.navbar__search-input').value = '';
+    const element = document.querySelector('.navbar__date-picker');
+    element.style.width = '0';
+    element.dataset.visible = 'false';
   }
 
   /**
@@ -55,7 +58,7 @@ export class Navbar extends Component {
    */
   didMount() {
     document
-      .querySelector('.navbar__search-wiper')
+      .getElementById('search-wiper')
       .addEventListener('click', this.wipeSearchField);
     document
       .querySelector('.navbar__search-options')
@@ -83,7 +86,7 @@ export class Navbar extends Component {
    * Will
    */
   willUnmount() {
-    const searchWiper = document.querySelector('.navbar__search-wiper');
+    const searchWiper = document.getElementById('search-wiper');
     searchWiper.removeEventListener('click', this.wipeSearchField);
     document
       .querySelector('.navbar__search-options')
@@ -163,7 +166,7 @@ export class Navbar extends Component {
     }
 
     document
-      .querySelector('.navbar__search-wiper')
+      .getElementById('search-wiper')
       .removeEventListener('click', this.wipeSearchField);
     document
       .querySelector('.navbar__search-form')
