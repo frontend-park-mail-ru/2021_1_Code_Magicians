@@ -18,7 +18,6 @@ export class Sidebar extends Component {
     super(props);
 
     this.tmpl = SidebarTemplate;
-    this.hideSliders = this.hideSliders.bind(this);
   }
 
   /**
@@ -66,7 +65,7 @@ export class Sidebar extends Component {
 
       const display = document.querySelector(`[name="${sliderName}Slider"]`).style.display || 'none';
 
-      this.hideSliders(event);
+      Sidebar.hideSliders(event);
 
       document
         .querySelector(`[name="${sliderName}Slider"]`)
