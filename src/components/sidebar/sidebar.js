@@ -57,9 +57,10 @@ export class Sidebar extends Component {
   /**
    * Returns event listener
    * @param {String} sliderName
+   * @param {Boolean} initial
    * @return {(function(*=): void)|*}
    */
-  static toggleSlider(sliderName) {
+  static toggleSlider(sliderName, initial = false) {
     return (event) => {
       event.preventDefault();
 
@@ -86,15 +87,18 @@ export class Sidebar extends Component {
 
       document.querySelector('.page__wrap').style.overflow = 'hidden';
 
-      actions.user.sliderToggled(sliderName);
+      if (!initial) {
+        actions.user.sliderToggled(sliderName);
+      }
     };
   }
 
   /**
    * Hides slider
+   * @param {Boolean} initial
    * @param {Event} event
    */
-  static hideSliders(event) {
+  static hideSliders(event, initial = false) {
     event.preventDefault();
 
     document
@@ -106,7 +110,9 @@ export class Sidebar extends Component {
 
     document.querySelector('.page__wrap').style.overflow = 'auto';
 
-    actions.user.sliderToggled('');
+    if (!initial) {
+      actions.user.sliderToggled('');
+    }
   }
 
   /**

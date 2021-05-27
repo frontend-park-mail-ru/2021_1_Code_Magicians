@@ -65,7 +65,7 @@ export class View extends Component {
     this._sliderShown = userStore.sliderShown();
 
     if (this._sliderShown) {
-      Sidebar.toggleSlider(this._sliderShown)(new Event('click'));
+      Sidebar.toggleSlider(this._sliderShown, true)(new Event('click'));
     }
 
     super.didMount();

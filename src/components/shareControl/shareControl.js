@@ -15,6 +15,15 @@ export class ShareControl extends Component {
     super(props);
 
     this.tmpl = ShareControlTemplate;
+
+    document.querySelector('meta[property="og:title"]').setAttribute('content', this.props.shareTitle);
+    document.querySelector('meta[property="og:description"]').setAttribute('content', this.props.shareDescription);
+    document.querySelector('meta[property="og:image"]').setAttribute('content', this.props.shareImage);
+    document.querySelector('meta[property="og:url"]').setAttribute('content', this.props.shareLink);
+    document.querySelector('meta[property="og:site_name"]').setAttribute('content', 'Pinter-best');
+    document.querySelector('meta[name="twitter:site"]').setAttribute('content', this.props.shareLink);
+    document.querySelector('meta[name="twitter:title"]').setAttribute('content', this.props.shareTitle);
+    document.querySelector('meta[name="twitter:description"]').setAttribute('content', this.props.shareDescription);
   }
 
   /**
@@ -31,15 +40,6 @@ export class ShareControl extends Component {
    * Did
    */
   didMount() {
-    document.querySelector('meta[property="og:title"]').setAttribute('content', this.props.shareTitle);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', this.props.shareDescription);
-    document.querySelector('meta[property="og:image"]').setAttribute('content', this.props.shareImage);
-    document.querySelector('meta[property="og:url"]').setAttribute('content', this.props.shareLink);
-    document.querySelector('meta[property="og:site_name"]').setAttribute('content', 'Pinter-best');
-    document.querySelector('meta[name="twitter:site"]').setAttribute('content', this.props.shareLink);
-    document.querySelector('meta[name="twitter:title"]').setAttribute('content', this.props.shareTitle);
-    document.querySelector('meta[name="twitter:description"]').setAttribute('content', this.props.shareDescription);
-
     document
       .querySelector('.show-button')
       .addEventListener('click', this.showBoardForm);
