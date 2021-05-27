@@ -2,47 +2,47 @@
 
 export const constants = {
   network: {
-    backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'https://pinter-best.com:8080',
+    backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'https://pinter-best.com',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
     bucketURL: 'https://pinterbestbucket.s3.eu-central-1.amazonaws.com/',
     wsURL: DEBUG ? 'ws://127.0.0.1:8080/socket' : 'wss://pinter-best.com:8080/socket',
 
     pathsAPI: {
-      signup: '/auth/signup',
-      login: '/auth/login',
-      logout: '/auth/logout',
-      authCheck: '/auth/check',
+      signup: '/api/auth/signup',
+      login: '/api/auth/login',
+      logout: '/api/auth/logout',
+      authCheck: '/api/auth/check',
 
-      profile: '/profile',
-      selfProfile: '/profile',
-      editProfile: '/profile/edit',
-      changePassword: '/profile/password',
-      deleteProfile: '/profile/delete',
-      changeAvatar: '/profile/avatar',
+      profile: '/api/profile',
+      selfProfile: '/api/profile',
+      editProfile: '/api/profile/edit',
+      changePassword: '/api/profile/password',
+      deleteProfile: '/api/profile/delete',
+      changeAvatar: '/api/profile/avatar',
 
-      getFollowers: '/followers',
-      getFollowing: '/following',
+      getFollowers: '/api/followers',
+      getFollowing: '/api/following',
 
-      board: '/board',
-      boards: '/boards',
-      comment: '/comment',
-      comments: '/comments',
+      board: '/api/board',
+      boards: '/api/boards',
+      comment: '/api/comment',
+      comments: '/api/comments',
 
-      pin: '/pin',
-      pins: '/pins',
-      pinsFeed: '/pins/feed',
-      pinsSubscriptionFeed: '/pins/followed',
-      reportPin: '/pin/report',
+      pin: '/api/pin',
+      pins: '/api/pins',
+      pinsFeed: '/api/pins/feed',
+      pinsSubscriptionFeed: '/api/pins/followed',
+      reportPin: '/api/pin/report',
 
-      follow: '/follow',
+      follow: '/api/follow',
 
-      notificationRead: '/notifications/read',
+      notificationRead: '/api/notifications/read',
 
-      postMessage: '/message',
-      chatRead: '/chats/read',
+      postMessage: '/api/message',
+      chatRead: '/api/chats/read',
 
-      searchProfiles: '/profiles/search',
-      searchPins: '/pins/search',
+      searchProfiles: '/api/profiles/search',
+      searchPins: '/api/pins/search',
     },
 
     routerPaths: {
