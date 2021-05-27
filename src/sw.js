@@ -1,7 +1,7 @@
 /* eslint-disable no-invalid-this */
 // noinspection ThisExpressionReferencesGlobalObjectJS
 
-const backendURL = 'https://pinter-best.com';
+const backendURL = 'https://pinter-best.com/api';
 
 const CACHE_NAME = 'pinterbest-main-cache';
 const cacheURLs = [
