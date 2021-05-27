@@ -24,6 +24,7 @@ export class ShareControl extends Component {
     document.querySelector('meta[name="twitter:site"]').setAttribute('content', this.props.shareLink);
     document.querySelector('meta[name="twitter:title"]').setAttribute('content', this.props.shareTitle);
     document.querySelector('meta[name="twitter:description"]').setAttribute('content', this.props.shareDescription);
+    document.querySelector('meta[name="twitter:image"]').setAttribute('content', this.props.shareImage);
   }
 
   /**
