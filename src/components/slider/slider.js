@@ -199,7 +199,7 @@ export class Slider extends Component {
   openChatBlock(event, chatID = null) {
     event.preventDefault();
 
-    const chat = chatID ? event.target.closest('.slider__item') : document.querySelector(`[data-id="${chatID}"]`);
+    const chat = chatID ? document.querySelector(`[data-id="${chatID}"]`) : event.target.closest('.slider__item');
 
     const selectedChat = document.querySelector('.slider__item_selected');
     if (selectedChat) {
