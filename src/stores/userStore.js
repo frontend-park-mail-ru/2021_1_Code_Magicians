@@ -508,7 +508,7 @@ class UserStore extends Store {
   _setActiveChat(data) {
     const oldChat = this._chat;
     this._chat = this._chats && this._chats.length && this._chats.find((chat) => chat.ID === Number(data.chatID));
-    if (oldChat && oldChat.ID !== this._chat.ID) {
+    if (!oldChat || oldChat.ID !== this._chat.ID) {
       this._trigger('change');
     }
   }
