@@ -1,6 +1,7 @@
 import { Component } from 'components/component';
 import { userStore } from 'stores/userStore';
 import { Sidebar } from 'components/sidebar/sidebar';
+import { actions } from 'actions/actions';
 
 /**
  * Base view class (abstract)
@@ -41,6 +42,7 @@ export class View extends Component {
    */
   refresh() {
     if (this._active) {
+      this._refreshing = true;
       this.remove();
       this.show(this.props.pathArgs);
     }
@@ -69,5 +71,17 @@ export class View extends Component {
     }
 
     super.didMount();
+  }
+
+  /**
+   * Will
+   */
+  willUnmount() {
+    if (!this._refreshing) {
+      actions.user.viewClosed();
+    }
+    this._refreshing = false;
+
+    super.willUnmount();
   }
 }

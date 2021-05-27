@@ -77,6 +77,9 @@ class UserStore extends Store {
     case actionTypes.user.sliderToggled:
       this._toggleSlider(action.data);
       break;
+    case actionTypes.user.viewClosed:
+      this._sliderShown = '';
+      break;
     default:
       break;
     }

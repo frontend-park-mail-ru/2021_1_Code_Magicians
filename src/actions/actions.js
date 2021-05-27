@@ -15,6 +15,7 @@ export const actionTypes = {
     statusProcessed: 'error-processed',
 
     sliderToggled: 'slider-toggled',
+    viewClosed: 'view-closed',
   },
   pins: {
     createPin: 'create-pin',
@@ -120,6 +121,12 @@ export const actions = {
       appDispatcher.dispatch({
         actionType: actionTypes.user.sliderToggled,
         data: { sliderName, on },
+      });
+    },
+    viewClosed: () => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.user.viewClosed,
+        data: {},
       });
     },
   },
