@@ -31,7 +31,12 @@ export class ChatBlock extends Component {
 
     const messages = chat && chat.messages.map((message) => {
       message.isSelf = message.authorID === (user && user.profile.ID);
-
+      const regExp = '^(&&sticker[1-8].png)$';
+      if (message.text.match(regExp)) {
+        message.sticker = message.text.substring(2);
+      } else {
+        message.textMessage = true;
+      }
       return message;
     });
 
@@ -55,7 +60,7 @@ export class ChatBlock extends Component {
     const stickerPicker = document.querySelector(`.chat__sticker-picker`);
     stickerPicker.innerHTML = '';
     Object.entries(stickers).forEach((sticker, index) => {
-      stickerPicker.innerHTML += `<img class="chat__sticker-picker_sticker" data-link="&&sticker${index}.png" src="${sticker[1]}" >`;
+      stickerPicker.innerHTML += `<img class="chat__sticker-picker_sticker" data-link="&&sticker${index + 1}.png" src="${sticker[1]}" >`;
     });
 
     document.querySelector('.chat__emoji-picker').addEventListener('click', this.pickEmoji);
