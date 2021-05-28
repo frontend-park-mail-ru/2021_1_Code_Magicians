@@ -7,9 +7,15 @@
     </div>
     <div class="chat__messages">
         {{#each messages}}
-            <div class="chat__message chat__message{{#if this.isSelf}}_secondary{{else}}_primary{{/if}}">
-                <p class="chat__message-text">{{this.text}}</p>
-            </div>
+            {{#if this.textMessage}}
+                <div class="chat__message chat__message{{#if this.isSelf}}_secondary{{else}}_primary{{/if}}">
+                    <p class="chat__message-text">{{this.text}}</p>
+                </div>
+            {{else}}
+                <div class="chat__message chat__message{{#if this.isSelf}}_secondary{{else}}_primary{{/if}}">
+                    <img src="{{this.sticker}}" class="chat__messages_sticker">
+                </div>
+            {{/if}}
         {{/each}}
     </div>
     <form class="chat__message-form">

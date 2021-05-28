@@ -57,6 +57,14 @@
     &::-webkit-scrollbar {
       display: none;
     }
+
+    &_sticker {
+      background: none;
+
+      width: 250px;
+      height: 250px;
+
+    }
   }
 
   &__message {
@@ -99,6 +107,7 @@
 
       background-color: var(--almost-white);
     }
+
 
     &-input {
       flex-grow: 1;
