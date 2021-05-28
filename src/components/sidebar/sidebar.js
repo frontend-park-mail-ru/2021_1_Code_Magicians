@@ -116,7 +116,6 @@ export class Sidebar extends Component {
     // if (!initial) {
     //   actions.user.sliderToggled('');
     // }
-    actions.user.viewClosed();
   }
 
   /**

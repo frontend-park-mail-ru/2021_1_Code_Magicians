@@ -45,6 +45,7 @@ export class View extends Component {
       this._refreshing = true;
       this.remove();
       this.show(this.props.pathArgs);
+      this._refreshing = false;
     }
   }
 
@@ -80,8 +81,6 @@ export class View extends Component {
     if (!this._refreshing) {
       actions.user.viewClosed();
     }
-
-    this._refreshing = false;
 
     super.willUnmount();
   }
