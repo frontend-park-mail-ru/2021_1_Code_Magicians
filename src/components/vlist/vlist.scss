@@ -28,21 +28,26 @@
 
 .vlist-element {
   margin-bottom: 20px;
+  height: auto;
 
   width: 100%;
 
   &__media {
     width: inherit;
 
-    border-radius: 5px;
+    border-radius: 10px;
   }
 
   &__link {
     width: 100%;
 
-    font-size: 16px;
+    font-size: 18px;
 
     color: var(--black);
+
+    overflow: hidden;
+
+    line-height: 20px;
 
     float: right;
   }

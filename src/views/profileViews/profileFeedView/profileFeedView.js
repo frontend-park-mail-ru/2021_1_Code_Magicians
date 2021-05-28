@@ -1,5 +1,5 @@
-import { PinsFeed } from 'components/pinsFeed/pinsFeed';
 import { pinsStore } from 'stores/pinsStore';
+import { Vlist } from 'components/vlist/vlist';
 import { ProfileView } from '../profileView/profileView';
 
 /**
@@ -19,14 +19,17 @@ export class ProfileFeedView extends ProfileView {
    * @return {String}
    */
   render() {
-    const pins = pinsStore.getSubscriptionPinsFeed();
+    const pinArray = pinsStore.getSubscriptionPinsFeed();
 
-    this._nestedComponents.set('_pinsFeed', new PinsFeed({
+    const vlist = new Vlist({
       ...this.props,
-      pins,
-    }));
+      pins: pinArray,
+      width: this._parent.clientWidth,
+      height: this._parent.clientHeight,
+    });
+    this._nestedComponents.set('_vlist', vlist);
 
-    this._profileMainContent = this._nestedComponents.get('_pinsFeed').render();
+    this._profileMainContent = this._nestedComponents.get('_vlist').render();
 
     return super.render();
   }
