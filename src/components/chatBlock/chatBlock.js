@@ -116,10 +116,11 @@ export class ChatBlock extends Component {
   pickSticker(event) {
     event.preventDefault();
     if (event.target.className === 'chat__sticker-picker_sticker') {
-      document.querySelector('.chat__message-input').value += event.target.dataset.link;
+      document.querySelector('.chat__message-input').value = event.target.dataset.link;
       document.querySelector('.chat__sticker-picker').style.visibility = 'hidden';
       document.querySelector('.chat__sticker-button').style.color = 'var(--gray)';
       document.querySelector('.chat__emoji-button').style.color = 'var(--gray)';
+      document.querySelector('.chat__message-form').submit();
     }
   }
 
