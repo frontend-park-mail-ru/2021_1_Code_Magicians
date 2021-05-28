@@ -93,11 +93,11 @@ export class Vlist extends Component {
    * Did
    */
   didMount() {
-    // document.querySelector('.page__content').addEventListener('scroll', this.scrollHandler);
-    const tmp = document.querySelector('.vlist-load-button');
-    if (tmp) {
-      tmp.addEventListener('click', this.loadMore);
-    }
+    document.querySelector('.page__content').addEventListener('scroll', this.loadMore);
+    // const tmp = document.querySelector('.vlist-load-button');
+    // if (tmp) {
+    //   tmp.addEventListener('scroll', this.loadMore);
+    // }
     super.didMount();
   }
 
@@ -105,11 +105,11 @@ export class Vlist extends Component {
    * Will
    */
   willUnmount() {
-    // document.querySelector('.page__content').removeEventListener('scroll', this.scrollHandler);
-    const tmp = document.querySelector('.vlist-load-button');
-    if (tmp) {
-      tmp.removeEventListener('click', this.loadMore);
-    }
+    document.querySelector('.page__content').removeEventListener('scroll', this.loadMore);
+    // const tmp = document.querySelector('.vlist-load-button');
+    // if (tmp) {
+    //   tmp.removeEventListener('click', this.loadMore);
+    // }
 
     super.willUnmount();
   }
@@ -119,27 +119,30 @@ export class Vlist extends Component {
    * @param {Event} e
    */
   loadMore(e) {
-    e.preventDefault();
+    const pageContent = document.querySelector('.page__content');
+    console.log((pageContent.scrollTop + window.innerHeight));
+    console.log(pageContent.scrollHeight);
+    if ((pageContent.scrollTop + window.innerHeight) === pageContent.scrollHeight) {
+      document.querySelector('.vlist-load-button').style.display = 'none';
 
-    document.querySelector('.vlist-load-button').style.display = 'none';
-
-    const columns = Array(this._state.lastCols).fill(0).map(() => []);
-    const colWidth = this._state.lastWidth;
-    const payload = {
-      offset: 50,
-      amount: 50,
-    };
-    API.getPinsFeed(payload).then((response) => {
-      const pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
-      pins.forEach((pin, index) => {
-        pin.imageHeight = pin.imageHeight / pin.imageWidth * colWidth;
-        pin.imageWidth = colWidth;
-        columns[index % columns.length].push(pin);
+      const columns = Array(this._state.lastCols).fill(0).map(() => []);
+      const colWidth = this._state.lastWidth;
+      const payload = {
+        offset: 50,
+        amount: 50,
+      };
+      API.getPinsFeed(payload).then((response) => {
+        const pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
+        pins.forEach((pin, index) => {
+          pin.imageHeight = pin.imageHeight / pin.imageWidth * colWidth;
+          pin.imageWidth = colWidth;
+          columns[index % columns.length].push(pin);
+        });
+        columns.forEach((array, index) => {
+          document.querySelector(`.vlist-col-${index}`).innerHTML += vlistPinsTemplate({ pins: array });
+        });
       });
-      columns.forEach((array, index) => {
-        document.querySelector(`.vlist-col-${index}`).innerHTML += vlistPinsTemplate({ pins: array });
-      });
-    });
+    }
   }
 
 // // TODO: fix scrolling / loading content
