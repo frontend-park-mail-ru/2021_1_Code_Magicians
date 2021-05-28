@@ -573,7 +573,7 @@ class UserStore extends Store {
    * @return {Boolean}
    */
   hasNewMessage() {
-    return this._chats.some((chat) => !chat.isRead);
+    return this._chats && this._chats.some((chat) => !chat.isRead);
   }
 
   /**
