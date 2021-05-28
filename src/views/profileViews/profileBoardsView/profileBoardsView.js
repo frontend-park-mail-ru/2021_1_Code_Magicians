@@ -47,7 +47,7 @@ export class ProfileBoardsView extends ProfileView {
    */
   didMount() {
     super.didMount();
-    if (this.props.pathArgs.profileID) {
+    if (this.props.pathArgs.profileID || userStore.getUser()) {
       return;
     }
 
@@ -67,7 +67,7 @@ export class ProfileBoardsView extends ProfileView {
    */
   willUnmount() {
     super.willUnmount();
-    if (this.props.pathArgs.profileID) {
+    if (this.props.pathArgs.profileID || userStore.getUser()) {
       return;
     }
 
