@@ -120,8 +120,8 @@ export class Vlist extends Component {
    */
   loadMore(e) {
     const pageContent = document.querySelector('.page__content');
-    console.log((pageContent.scrollTop + window.innerHeight));
-    console.log(pageContent.scrollHeight);
+    // console.log((pageContent.scrollTop + window.innerHeight));
+    // console.log(pageContent.scrollHeight);
     if ((pageContent.scrollTop + window.innerHeight) === pageContent.scrollHeight) {
       document.querySelector('.vlist-load-button').style.display = 'none';
 
