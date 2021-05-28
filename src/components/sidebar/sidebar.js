@@ -112,11 +112,6 @@ export class Sidebar extends Component {
       .forEach((toggle) => toggle.classList.remove('sidebar__toggle_active'));
 
     document.querySelector('.page__wrap').style.overflow = 'auto';
-
-    actions.user.viewClosed();
-    // if (!initial) {
-    //   actions.user.sliderToggled('');
-    // }
   }
 
   /**
