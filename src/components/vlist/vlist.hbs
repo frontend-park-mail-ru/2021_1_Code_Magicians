@@ -2,14 +2,11 @@
     {{#each cols}}
         <div class="vlist-col vlist-col-{{@index}}" style="width:{{../colWidth}}px">
         {{#each pins}}
-            <a href="/pin/{{this.ID}}"  class="vlist-element" style="height:{{this.imageHeight}}px;">
-                <img src="{{this.imageLink}}" alt="{{this.title}}" class="vlist-element__media pin-image" style=" background-color:#{{this.imageAvgColor}};" loading="lazy">
+            <a href="/pin/{{this.ID}}" class="vlist-element">
+                <img src="{{this.imageLink}}" alt="{{this.title}}" class="vlist-element__media pin-image" style="background-color:#{{this.imageAvgColor}}; min-height:{{this.imageHeight}}px" loading="lazy">
                 <div class="vlist-element__link"> {{this.title}} </div>
             </a>
         {{/each}}
         </div>
     {{/each}}
-</div>
-<div class="vlist-load-container">
-    <div class="vlist-load-button">Load more...</div>
 </div>

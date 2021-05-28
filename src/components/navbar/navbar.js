@@ -202,7 +202,7 @@ export class Navbar extends Component {
 
     if (query && query.key.replace('@', '')) {
       actions.common.search(query, query.key.startsWith('@') ? 'profiles' : 'pins');
-      appRouter.go(`/search/${query.key}`);
+      appRouter.go(`/search/${query.key}&date=${query.date}`);
     }
 
     const dropdown = document.querySelector('.navbar__dropdown-actions');

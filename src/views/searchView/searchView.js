@@ -35,10 +35,7 @@ export class SearchView extends View {
       .location
       .pathname
       .replace('/search/', '');
-    let date = window.location.search.replace('?', '');
-    if (!date) {
-      date = 'allTime';
-    }
+    const date = window.location.search.replace('?', '');
     const query = {
       key: val,
       date,
@@ -57,6 +54,7 @@ export class SearchView extends View {
       foundItemsFeed = new PinsFeed({ ...this.props, pins: foundItems });
     }
     this._nestedComponents.set('_foundItems', foundItemsFeed);
+
     const html = this.tmpl({
       ...this.props,
       searchType: searchingProfiles ? 'Profiles' : 'Pins',
@@ -71,5 +69,39 @@ export class SearchView extends View {
     }));
 
     return this._nestedComponents.get('page').render();
+  }
+
+  didMount() {
+    const val = window
+      .location
+      .pathname
+      .replace('/search/', '');
+    let date = window.location.pathname.replace('/search/', '');
+    // date = date.substr('^&date=');
+    date = date.search('&date=') !== -1 ? date.substr(date.search('&date=') + 6) : 'allTime';
+
+    if (!['hour', 'day', 'week', 'allTime'].includes(date)) {
+      date = 'allTime';
+    }
+
+    const dateElement = document.querySelector(`[data-date=${date}]`);
+    const datePicker = document.querySelector('.navbar__date-picker');
+    if (dateElement && datePicker) {
+      datePicker.style.width = 'auto';
+      dateElement.dataset.selected = 'true';
+      dateElement.style.backgroundColor = 'var(--red)';
+    }
+
+    const navbarInput = document.querySelector('.navbar__search-input');
+    const queryString = document.querySelector('.search-page__search-description');
+
+    if (navbarInput && queryString) {
+      const subStr = val.search('&date') !== -1 ? val.substr(0, val.search('&date')) : val;
+      queryString.innerHTML = `found by query ${subStr}`;
+      navbarInput.value = subStr;
+      navbarInput.focus();
+    }
+
+    super.didMount();
   }
 }

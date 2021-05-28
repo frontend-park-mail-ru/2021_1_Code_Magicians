@@ -39,8 +39,11 @@ export class Vlist extends Component {
     if (!this.props.pins) {
       return '';
     }
-    const numberCols = Math.floor(this.props.width / 400);
-    const colWidth = 400;
+    if (this.props.pins.length === 0) {
+      return '';
+    }
+    const numberCols = Math.floor((this.props.width - 72) / (300 + 20)); // 70 - sidebar, 20 margin of the col
+    const colWidth = 300;
 
     const cols = Array(numberCols).fill(0).map(() => ({
       heights: [],
@@ -50,46 +53,31 @@ export class Vlist extends Component {
       idx: 0,
     }));
 
-    let maxColHeight = 0;
-    let elHeight = 0;
-    let elWidth = 0;
+    let minHeight = 0;
     let pinsLeft = this.props.pins.length;
-    let index = 0;
-
-    let layer = 0;
+    let pinNum = 0;
     const { pins } = this.props;
 
-    const statePayload = this._state;
-    index = statePayload.startIdx;
-
-    while ((maxColHeight < (this.props.height * 5)) && (pinsLeft > 0)) {
-      for (let i = 0; i < numberCols; i++) {
-        if (!pinsLeft) {
-          break;
+    while (pinsLeft > 0) {
+      // eslint-disable-next-line no-loop-func
+      cols.forEach((col) => {
+        if (col.colHeight <= minHeight) {
+          const pin = pins[pinNum];
+          if (pin) {
+            col.colHeight += pin.imageHeight;
+            col.pins[col.idx] = pin;
+            col.pins[col.idx].imageHeight = pin.imageHeight / pin.imageWidth * colWidth;
+            col.pins[col.idx].imageWidth = colWidth;
+            pinsLeft--;
+            col.idx++;
+            pinNum++;
+          }
         }
-        const pin = pins[index];
-        cols[i].pins.push(pin);
-
-        elHeight = pin.imageHeight;
-        elWidth = pin.imageWidth;
-        if (!elHeight || !elWidth) {
-          cols[i].heights.push(500);
-        } else {
-          cols[i].heights.push(elHeight / elWidth * colWidth); // by=400*by/bx
-          cols[i].pins[layer].imageHeight = cols[i].heights[layer];
-        }
-        cols[i].colHeight += cols[i].heights[layer] + 20;
-        cols[i].pins[layer].imageWidth = colWidth;
-        if (cols[i].colHeight > maxColHeight) {
-          maxColHeight = cols[i].colHeight;
-        }
-        index++;
-        pinsLeft--;
-      }
-      layer++;
+      });
+      minHeight = Math.min(...(cols.map((col) => col.colHeight)));
     }
 
-    statePayload.startIdx = index;
+    const statePayload = this._state;
     statePayload.lastCols = numberCols;
     statePayload.lastWidth = colWidth;
     this.setState(statePayload);
@@ -105,11 +93,11 @@ export class Vlist extends Component {
    * Did
    */
   didMount() {
-    // document.querySelector('.page__content').addEventListener('scroll', this.scrollHandler);
-    const tmp = document.querySelector('.vlist-load-button');
-    if (tmp) {
-      tmp.addEventListener('click', this.loadMore);
-    }
+    document.querySelector('.page__content').addEventListener('scroll', this.loadMore);
+    // const tmp = document.querySelector('.vlist-load-button');
+    // if (tmp) {
+    //   tmp.addEventListener('scroll', this.loadMore);
+    // }
     super.didMount();
   }
 
@@ -117,11 +105,11 @@ export class Vlist extends Component {
    * Will
    */
   willUnmount() {
-    // document.querySelector('.page__content').removeEventListener('scroll', this.scrollHandler);
-    const tmp = document.querySelector('.vlist-load-button');
-    if (tmp) {
-      tmp.removeEventListener('click', this.loadMore);
-    }
+    document.querySelector('.page__content').removeEventListener('scroll', this.loadMore);
+    // const tmp = document.querySelector('.vlist-load-button');
+    // if (tmp) {
+    //   tmp.removeEventListener('click', this.loadMore);
+    // }
 
     super.willUnmount();
   }
@@ -131,28 +119,29 @@ export class Vlist extends Component {
    * @param {Event} e
    */
   loadMore(e) {
-    e.preventDefault();
+    const pageContent = document.querySelector('.page__content');
 
-    document.querySelector('.vlist-load-button').style.display = 'none';
+    if ((pageContent.scrollTop + window.innerHeight) === pageContent.scrollHeight) {
+      document.querySelector('.vlist-load-button').style.display = 'none';
 
-    const columns = Array(this._state.lastCols).fill(0).map(() => []);
-    const colWidth = this._state.lastWidth;
-    const payload = {
-      offset: 0,
-      amount: 50,
-    };
-    API.getPinsFeed(payload).then((response) => {
-      let pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
-      pins = pins.slice(30);
-      pins.forEach((pin, index) => {
-        pin.imageHeight = pin.imageHeight / pin.imageWidth * colWidth;
-        pin.imageWidth = colWidth;
-        columns[index % columns.length].push(pin);
+      const columns = Array(this._state.lastCols).fill(0).map(() => []);
+      const colWidth = this._state.lastWidth;
+      const payload = {
+        offset: 50,
+        amount: 50,
+      };
+      API.getPinsFeed(payload).then((response) => {
+        const pins = response.responseBody && response.responseBody.pins.map((pinData) => new Pin(pinData));
+        pins.forEach((pin, index) => {
+          pin.imageHeight = pin.imageHeight / pin.imageWidth * colWidth;
+          pin.imageWidth = colWidth;
+          columns[index % columns.length].push(pin);
+        });
+        columns.forEach((array, index) => {
+          document.querySelector(`.vlist-col-${index}`).innerHTML += vlistPinsTemplate({ pins: array });
+        });
       });
-      columns.forEach((array, index) => {
-        document.querySelector(`.vlist-col-${index}`).innerHTML += vlistPinsTemplate({ pins: array });
-      });
-    });
+    }
   }
 
 // // TODO: fix scrolling / loading content
