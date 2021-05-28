@@ -80,6 +80,7 @@ export class View extends Component {
     if (!this._refreshing) {
       actions.user.viewClosed();
     }
+
     this._refreshing = false;
 
     super.willUnmount();
