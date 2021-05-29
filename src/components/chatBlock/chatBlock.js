@@ -75,6 +75,9 @@ export class ChatBlock extends Component {
     document
       .querySelector('.chat__message-form')
       .addEventListener('submit', this.submitMessageForm);
+
+    const messages = document.querySelector('.chat__messages');
+    messages.scrollTop = messages.scrollHeight;
   }
 
   /**
