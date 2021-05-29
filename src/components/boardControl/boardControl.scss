@@ -7,19 +7,28 @@
 
   border-radius: 5px;
   outline: none;
+  border: none;
 
   cursor: pointer;
 
   width:fit-content;
 
-  background-color: var(--white);
+  background-color: var(--almost-white);
+
+  &__option {
+    background-color: var(--almost-white);
+    color: var(--black);
+    cursor: pointer;
+  }
 
   &__input {
     border:none;
     outline:none;
 
-    background-color: var(--white);
+    background-color: transparent;
     color: var(--black);
+
+    cursor: pointer;
   }
 
   &__select-button {
