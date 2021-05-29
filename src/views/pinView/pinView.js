@@ -6,13 +6,13 @@ import { constants } from 'consts/consts';
 import { userStore } from 'stores/userStore';
 import { appRouter } from 'appManagers/router';
 import { BoardControl } from 'components/boardControl/boardControl';
+import { boardsStore } from 'stores/boardsStore';
+import { ShareControl } from 'components/shareControl/shareControl';
+import { FeedbackControl } from 'components/feedbackControl/feedbackControl';
 import { View } from '../view.js';
-import { boardsStore } from '../../stores/boardsStore';
 
 import PinViewTemplate from './pinView.hbs';
 import './pinView.scss';
-import { ShareControl } from '../../components/shareControl/shareControl';
-import { FeedbackControl } from '../../components/feedbackControl/feedbackControl';
 
 /**
  * Build pin view

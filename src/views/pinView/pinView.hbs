@@ -1,30 +1,15 @@
 <div class="pin-browser">
-    <img src="{{pin.imageLink}}" style="background-color:#{{pin.imageAvgColor}}" class="pin-browser__image-panel pin-image">
+    <img src="{{pin.imageLink}}" class="pin-browser__image-panel pin-image">
     <div class="pin-browser__info-panel">
-        <div class="pin-browser__wrapper">
+        <div class="pin-browser__pin-info">
             <h1 class="info-panel__title">{{pin.title}}</h1>
             <div class="control-wrapper">
-                {{{feedbackControl}}}
+                <div class="info-panel__feedback-wrapper">
+                    {{{feedbackControl}}}
+                </div>
                 {{{shareControl}}}
             </div>
                 {{{boardControl}}}
-            <div class="pin-stats">
-                <div class="pin-stats__item">
-                    <i class="fas fa-eye pin-icon"></i>
-                    <div class="pin-stats__item_val">420</div>
-                    <div class="pin-stats__item_descr">views</div>
-                </div>
-                <div class="pin-stats__item">
-                    <i class="fas fa-thumbtack pin-icon"></i>
-                    <div class="pin-stats__item_val">69</div>
-                    <div class="pin-stats__item_descr">saves</div>
-                </div>
-                <div class="pin-stats__item">
-                    <i class="fas fa-external-link-alt pin-icon"></i>
-                    <div class="pin-stats__item_val">13</div>
-                    <div class="pin-stats__item_descr">link clicks</div>
-                </div>
-            </div>
             <div class="user-info">
                 <div class="user-info__avatar">
                     <img src="{{profile.avatarLink}}" alt="upload-logo" class="user-info__avatar">
@@ -49,8 +34,9 @@
             </div>
             <div class="pin-description"> {{pin.description}}</div>
         </div>
-        <div class="info-panel__comments">Comments
-            <div class="info-panel__bodies">
+        <div class="info-panel__comments-section">
+            <h2 class="info-panel__comments-section-title">Comments</h2>
+            <div class="info-panel__comments">
                 {{#each comments}}
                     <div class="comment">
                         <img src="{{this.author.avatarLink}}" alt="logo" class="comment__avatar">
@@ -62,31 +48,16 @@
                         </div>
                     </div>
                 {{else}}
-                    <div class="info-panel__bodies_text">Be first one to comment!</div>
+                    <div class="info-panel__comments_text">Be first one to comment!</div>
                 {{/each}}
             </div>
             {{#if userIsAuthorized}}
-                <div class="">Add comment</div>
                 <form class="comment-form">
+                    <label for="comment-input" class="comment-form__label">Add comment</label>
                     <textarea class="comment-form__text" id="comment-input"></textarea>
                     <input type="submit" class="comment-form__submit" value="Send">
                 </form>
             {{/if}}
-        </div>
-    </div>
-    <div class="pin-browser__tags-panel">
-        <div class="pin-browser__search-title">
-            <i class="fas fa-search pin-icon pin-browser__search-title_icon"></i>
-            <div class="">
-                Ideas that may interest you
-            </div>
-        </div>
-        <div class="tags-list">
-            <div class="tags-list__tag">Photo</div>
-            <div class="tags-list__tag">Photo Editing</div>
-            <div class="tags-list__tag">Passing Reviews</div>
-            <div class="tags-list__tag">Finding hopes and dreams</div>
-            <div class="tags-list__tag">Abracadabra</div>
         </div>
     </div>
 </div>

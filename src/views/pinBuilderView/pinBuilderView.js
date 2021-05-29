@@ -7,10 +7,11 @@ import { appRouter } from 'appManagers/router';
 import { descriptionRegexp } from 'consts/regexp';
 import { Page } from 'components/page/page';
 import { BoardControl } from 'components/boardControl/boardControl';
+import { boardsStore } from 'stores/boardsStore';
 import { View } from '../view.js';
+
 import PinBuilderViewTemplate from './pinBuilderView.hbs';
 import './pinBuilderView.scss';
-import { boardsStore } from '../../stores/boardsStore';
 
 /**
  * Build pin view
@@ -158,7 +159,8 @@ export class PinBuilderView extends View {
 
       fileReader.readAsDataURL(file[0]);
 
-      document.querySelector('.pin-builder-uploader').style.visibility = 'hidden';
+      document.querySelectorAll('.pin-builder-uploader__wrapper').forEach((wrapper) => wrapper.style.visibility = 'hidden');
+      document.querySelector('.pin-builder__file-window').style.backgroundColor = 'transparent';
     }
   }
 }
