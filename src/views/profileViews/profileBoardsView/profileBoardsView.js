@@ -53,6 +53,7 @@ export class ProfileBoardsView extends ProfileView {
       return;
     }
 
+    this.selfProfile = true;
     document
       .getElementById('create-board')
       .addEventListener('click', this.showBoardForm);
@@ -69,11 +70,10 @@ export class ProfileBoardsView extends ProfileView {
    */
   willUnmount() {
     super.willUnmount();
-    const profileIDs = this.props.pathArgs.profileID;
-    const user = userStore.getUser();
-    if (profileIDs || !user) {
+    if (!this.selfProfile) {
       return;
     }
+    this.selfProfile = false;
 
     document
       .getElementById('create-board')
