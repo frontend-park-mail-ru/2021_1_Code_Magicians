@@ -320,6 +320,8 @@
     &__image-panel {
       max-width: 1000px;
       max-height: 600px;
+      min-height: 400px;
+      min-width: 600px;
     }
   }
 }
@@ -327,8 +329,14 @@
 @media only screen and (max-width: 1500px) {
   .pin-browser {
     &__image-panel {
-      max-width: 850px;
-      max-height: 450px;
+      max-width: 800px;
+      max-height: 550px;
+      min-height: 550px;
+      min-width: 450px;
+    }
+
+    &__info-panel {
+      height: 600px;
     }
   }
 }
