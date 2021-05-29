@@ -270,39 +270,6 @@
   }
 }
 
-
-.pin-stats {
-  display: none;
-  flex-direction: row;
-
-  padding: 10px 0;
-
-  float: right;
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-
-    margin: 0 20px 0 0;
-
-    &_val {
-      font-size: 22px;
-      color: var(--black);
-
-      margin: 4px 0;
-    }
-    &_descr {
-      font-size: 16px;
-      color: var(--gray);
-    }
-  }
-}
-
-.pin-icon {
-  font-size: 16px;
-  color: var(--gray);
-}
-
 .pin-description {
   font-size: 16px;
   color: var(--gray);
@@ -375,7 +342,7 @@
 @media only screen and (max-width: 500px) {
   .pin-browser__image-panel {
     width: auto;
-    max-width: 500px;
+    max-width: 250px;
     min-width: 200px;
 
     height: auto;
@@ -384,10 +351,23 @@
   }
 
   .pin-browser__info-panel {
-    flex-direction: column;;
+    flex-direction: column;
+  }
+
+  .pin-browser__pin-info {
+    max-width: 250px;
   }
 
   .info-panel {
-    max-width: 500px;
+    max-width: 250px;
+
+    &__comments-section {
+      width: 250px;
+      height: 500px;
+    }
+  }
+
+  .comment-form__submit {
+    margin-bottom: 25px;
   }
 }
