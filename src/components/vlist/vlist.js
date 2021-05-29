@@ -121,7 +121,7 @@ export class Vlist extends Component {
   loadBelow(e) {
     const pageContent = document.querySelector('.page__content');
 
-    if ((pageContent.scrollTop + window.innerHeight + 300) >= (pageContent.scrollHeight + 72)) {
+    if ((pageContent.scrollTop + window.innerHeight) >= (pageContent.scrollHeight + 72)) {
       const colWidth = this._state.lastWidth;
       const offset = this._state.maxPinID;
 
