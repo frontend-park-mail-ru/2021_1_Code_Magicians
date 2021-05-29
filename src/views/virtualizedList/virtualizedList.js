@@ -29,7 +29,7 @@ export class VirtualizedList extends View {
   render() {
     const payload = {
       offset: 0,
-      amount: 100,
+      amount: 30,
     };
 
     const pinArray = pinsStore.getPinsFeed(payload);
@@ -39,6 +39,8 @@ export class VirtualizedList extends View {
       pins: pinArray,
       width: this._parent.clientWidth,
       height: this._parent.clientHeight,
+      scrollLoad: true,
+      batchSize: 30,
     });
     this._nestedComponents.set('_vlist', vlist);
 
