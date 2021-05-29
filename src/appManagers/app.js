@@ -36,7 +36,7 @@ class App {
       .register(paths.profilePins, new ProfilePinsView({}))
       .register(paths.profileFollowers, new ProfileFollowersView({}))
       .register(paths.profileFollowing, new ProfileFollowingView({}))
-      .register(paths.otherProfile, new ProfileView({}))
+      .register(paths.otherProfile, new ProfilePinsView({}))
       .register(paths.otherProfileBoards, new ProfileBoardsView({}))
       .register(paths.otherProfilePins, new ProfilePinsView({}))
       .register(paths.otherProfileFollowers, new ProfileFollowersView({}))
