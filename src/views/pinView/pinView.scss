@@ -315,6 +315,24 @@
   justify-content: left;
 }
 
+@media only screen and (max-width: 1700px) {
+  .pin-browser {
+    &__image-panel {
+      max-width: 1000px;
+      max-height: 600px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  .pin-browser {
+    &__image-panel {
+      max-width: 850px;
+      max-height: 450px;
+    }
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   .pin-browser {
     flex-direction: column;
