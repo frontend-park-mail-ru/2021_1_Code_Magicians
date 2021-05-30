@@ -19,6 +19,8 @@
 .vlist-col {
   display: flex;
 
+  height: fit-content;
+
   flex-direction: column;
 
   justify-content: left;

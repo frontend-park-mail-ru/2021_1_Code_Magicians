@@ -1,9 +1,9 @@
 <div class="vlist-wrapper">
     {{#each cols}}
-        <div class="vlist-col vlist-col-{{@index}}" style="width:{{../colWidth}}px">
+        <div class="vlist-col vlist-col-{{@index}}" data-margin="0" style="width:{{../colWidth}}px; margin-top:0px;">
         {{#each pins}}
-            <a href="/pin/{{this.ID}}" class="vlist-element">
-                <img src="{{this.imageLink}}" alt="{{this.title}}" class="vlist-element__media pin-image" style="background-color:#{{this.imageAvgColor}}; min-height:{{this.imageHeight}}px" loading="lazy">
+            <a href="/pin/{{this.ID}}" class="vlist-element" id="{{this.pinNum}}">
+                <img src="{{this.imageLink}}" alt="{{this.title}}" class="vlist-element__media pin-image" style="background-color:#{{this.imageAvgColor}}; height:{{this.imageHeight}}px" loading="lazy">
                 <div class="vlist-element__link"> {{this.title}} </div>
             </a>
         {{/each}}
