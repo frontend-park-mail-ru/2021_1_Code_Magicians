@@ -190,7 +190,7 @@ class ProfilesStore extends Store {
         this._profiles = response.responseBody.profiles.map((profileData) => new Profile(profileData));
         break;
       case 404:
-        this._profiles = [];
+        this._status = storeStatuses.internalError;
         break;
       default:
         this._status = storeStatuses.internalError;
