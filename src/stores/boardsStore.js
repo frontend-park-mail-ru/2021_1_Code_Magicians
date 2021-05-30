@@ -166,7 +166,7 @@ class BoardsStore extends Store {
         break;
       case 400:
       case 404:
-        this._status = storeStatuses.clientSidedError;
+        this._status = storeStatuses.internalError;
         break;
       default:
         this._status = storeStatuses.internalError;

@@ -227,13 +227,13 @@ export class API {
    * @return {Promise<{headers: (*&{'Content-Type': string})|*, responseBody: {}, status: string}>}
    */
   static searchPins(query) {
-    return HTTPModule.get(`${paths.searchPins}?searchKey=${query.key}&date=${query.date}`);
+    return HTTPModule.get(`${paths.searchPins}?searchKey=${query.key}&interval=${query.date}`);
   }
 
   /**
    * Get feed
-   * @param {Object} pinsNumber
    * @return {Promise<{headers: Headers, responseBody: {}, status: number}>}
+   * @param payload
    */
   static getPinsFeed(payload) {
     return HTTPModule.get(`${paths.pinsFeed}?offset=${payload.offset}&amount=${payload.amount}`);
@@ -241,7 +241,6 @@ export class API {
 
   /**
    * Get subscription feed
-   * @param {}
    * @return {Promise<{headers: Headers, responseBody: {}, status}>} // TODO: check response promise
    */
   static getSubscriptionPinsFeed() {

@@ -268,8 +268,8 @@ class PinsStore extends Store {
 
   /**
    * Fetch pins feed or do nothing if it's ready
-   * @param {Object} number
    * @private
+   * @param payload
    */
   _fetchFeed(payload = {}) {
     this._pinsSource.sourceType = 'feed';
@@ -290,7 +290,6 @@ class PinsStore extends Store {
 
   /**
    * Fetch subscription pins feed or do nothing if it's ready
-   * @param {}
    * @private
    */
   _fetchSubscriptionFeed() {
@@ -326,7 +325,7 @@ class PinsStore extends Store {
         break;
       case 400:
       case 404:
-        this._status = storeStatuses.clientSidedError;
+        this._status = storeStatuses.internalError;
         this._comments = null;
         break;
       default:
@@ -351,7 +350,7 @@ class PinsStore extends Store {
       break;
     case 400:
     case 404:
-      this._pins = [];
+      this._status = storeStatuses.internalError;
       break;
     default:
       this._status = storeStatuses.internalError;
@@ -448,8 +447,8 @@ class PinsStore extends Store {
 
   /**
    * Get feed
-   * @param {Object}
    * @return {null|[]}
+   * @param payload
    */
   getPinsFeed(payload = {}) {
     if (this._pinsSource.sourceType === 'feed') {
@@ -465,7 +464,6 @@ class PinsStore extends Store {
 
   /**
    * Get subscription feed
-   * @param {}
    * @return {null|[]}
    */
   getSubscriptionPinsFeed() {
