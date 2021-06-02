@@ -74,6 +74,13 @@ export class LoginView extends AuthView {
       actions.user.statusProcessed();
     }
 
+    if (userStore.getStatus() !== constants.store.statuses.userStore.ok) {
+      if (document.location.search) {
+        const code = document.location.search.slice(6);
+        actions.user.vklogin(code);
+      }
+    }
+
     super.didMount();
   }
 }

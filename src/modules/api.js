@@ -27,6 +27,20 @@ export class API {
   }
 
   /**
+   * Create user profile via vk
+   * @param {String} code
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static vksignupUser({ code }) {
+    return HTTPModule.post(
+      paths.vksignup,
+      {
+        code,
+      },
+    );
+  }
+
+  /**
    * Log in user into the app
    * @param {String} username
    * @param {String} password
@@ -38,6 +52,20 @@ export class API {
       {
         username,
         password,
+      },
+    );
+  }
+
+  /**
+   * Log in user into the app via vk
+   * @param {String} code
+   * @return {Promise<{headers: Headers | Headers, responseBody: {}, status: number}>}
+   */
+  static vkloginUser({ code }) {
+    return HTTPModule.post(
+      paths.vklogin,
+      {
+        code,
       },
     );
   }

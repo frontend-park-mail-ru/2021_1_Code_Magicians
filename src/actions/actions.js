@@ -3,7 +3,9 @@ import { appDispatcher } from 'appManagers/dispatcher';
 export const actionTypes = {
   user: {
     signup: 'signup',
+    vksignup: 'vksignup',
     login: 'login',
+    vklogin: 'vklogin',
     logout: 'logout',
     checkAuth: 'check-auth',
 
@@ -62,12 +64,28 @@ export const actions = {
         },
       });
     },
+    vksignup: (code) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.user.vksignup,
+        data: {
+          code,
+        },
+      });
+    },
     login: (username, password) => {
       appDispatcher.dispatch({
         actionType: actionTypes.user.login,
         data: {
           username,
           password,
+        },
+      });
+    },
+    vklogin: (code) => {
+      appDispatcher.dispatch({
+        actionType: actionTypes.user.vklogin,
+        data: {
+          code,
         },
       });
     },
