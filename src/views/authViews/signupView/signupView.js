@@ -75,9 +75,18 @@ export class SignupView extends AuthView {
     if (userStore.getStatus() === constants.store.statuses.userStore.signupConflict) {
       toastBox.addToast('This username or email already taken. Please, choose another one', true);
       actions.user.statusProcessed();
+      const status = 'sign conflict';
+      this.setState(status);
     }
+
+    if (this._state === 'processing data') {
+      return;
+    }
+
     if (userStore.getStatus() !== constants.store.statuses.userStore.internalError) {
       if (document.location.search) {
+        const status = 'processing data';
+        this.setState(status);
         const code = document.location.search.slice(6);
         actions.user.vksignup(code);
       }
