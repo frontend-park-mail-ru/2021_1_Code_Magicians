@@ -9,7 +9,9 @@ export const constants = {
 
     pathsAPI: {
       signup: '/api/auth/signup',
+      vksignup: '/api/vk_token/signup',
       login: '/api/auth/login',
+      vklogin: '/api/vk_token/login',
       logout: '/api/auth/logout',
       authCheck: '/api/auth/check',
 
@@ -62,7 +64,9 @@ export const constants = {
       settings: '/settings',
       settingsSection: '/settings/:section{String}',
       signup: '/signup',
+      vksignup: '/signup/callback',
       login: '/login',
+      vklogin: '/login/callback',
       createPin: '/create-pin',
       pin: '/pin/:pinID{Number}',
       board: '/board/:boardID{Number}',
@@ -84,6 +88,7 @@ export const constants = {
         badAvatarImage: 'bad avatar',
         signupConflict: 'signup conflict',
         userNotFound: 'user not found',
+        vkprocessing: 'processing vk data',
 
         clientError: 'client error',
         internalError: 'internal error',

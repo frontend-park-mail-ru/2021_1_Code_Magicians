@@ -43,11 +43,17 @@ class UserStore extends Store {
     case actionTypes.user.login:
       this._login(action.data);
       break;
+    case actionTypes.user.vklogin:
+      this._vklogin(action.data);
+      break;
     case actionTypes.user.logout:
       this._logout();
       break;
     case actionTypes.user.signup:
       this._signup(action.data);
+      break;
+    case actionTypes.user.vksignup:
+      this._vksignup(action.data);
       break;
     case actionTypes.user.deleteProfile:
       this._deleteProfile();
@@ -116,6 +122,36 @@ class UserStore extends Store {
   }
 
   /**
+   * vklogin
+   * @param {Object} credentials
+   * @private
+   */
+  _vklogin(credentials) {
+    if (this._user.authorized()) {
+      return;
+    }
+    this._status = storeStatuses.vkprocessing;
+    API.vkloginUser(credentials).then((response) => {
+      switch (response.status) {
+      case 204:
+        this._fetchUserData();
+        break;
+      case 404:
+      case 401:
+        this._status = storeStatuses.invalidCredentials;
+        break;
+      case 403:
+      default:
+        this._status = storeStatuses.internalError;
+      }
+
+      if (response.status !== 204) {
+        this._trigger('change');
+      }
+    });
+  }
+
+  /**
    * signup
    * @param {Object} credentials
    * @private
@@ -125,8 +161,38 @@ class UserStore extends Store {
       this._status = storeStatuses.clientError;
       return;
     }
-
     API.signupUser(credentials).then((response) => {
+      switch (response.status) {
+      case 201:
+        this._fetchUserData();
+        break;
+      case 409:
+        this._status = storeStatuses.signupConflict;
+        break;
+      case 403:
+      case 400:
+      default:
+        this._status = storeStatuses.internalError;
+      }
+
+      if (response.status !== 201) {
+        this._trigger('change');
+      }
+    });
+  }
+
+  /**
+   * signup via vk
+   * @param {Object} credentials
+   * @private
+   */
+  _vksignup(credentials) {
+    if (this._user.authorized()) {
+      this._status = storeStatuses.clientError;
+      return;
+    }
+    this._status = storeStatuses.vkprocessing;
+    API.vksignupUser(credentials).then((response) => {
       switch (response.status) {
       case 201:
         this._fetchUserData();

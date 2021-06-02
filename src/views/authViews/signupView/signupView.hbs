@@ -33,7 +33,12 @@
                                 value="{{payload.password}}">
                     </label>
                     <div class="errors password-errors input-error-text"></div>
-                    <input class="auth-form__submit auth-view__button" type="submit" value="Register">
+                    <div class="auth-view__buttons-wrapper">
+                        <input class="auth-form__submit auth-view__button" type="submit" value="Register">
+                        <a class="auth-page__logo_vk" href="https://oauth.vk.com/authorize?client_id=7869738&display=page&redirect_uri=https://pinter-best.com{{paths.signup}}/callback&scope=friends&response_type=code&v=5.131">
+                            <div class="">Signup via VK</div>
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>

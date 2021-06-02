@@ -76,6 +76,12 @@ export class SignupView extends AuthView {
       toastBox.addToast('This username or email already taken. Please, choose another one', true);
       actions.user.statusProcessed();
     }
+    if (userStore.getStatus() !== constants.store.statuses.userStore.internalError) {
+      if (document.location.search) {
+        const code = document.location.search.slice(6);
+        actions.user.vksignup(code);
+      }
+    }
 
     super.didMount();
   }

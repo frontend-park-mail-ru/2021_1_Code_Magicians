@@ -38,6 +38,30 @@
     &:hover {
       transform: scale(1.02);
     }
+
+    &_vk {
+      text-decoration: none;
+
+      font: 400 13.3333px Arial;
+
+      justify-content: space-between;
+      align-items: center;
+
+      width: fit-content;
+
+      margin: 5px;
+      padding: 10px 15px;
+
+      outline: 0;
+      border: 2px solid rgb(39, 135, 245);
+      border-radius: 5px;
+
+      color: var(--perm-white);
+      background-color: rgb(39, 135, 245);
+
+      cursor: pointer;
+      user-select: none;
+    }
   }
 
   &__logo-image {
@@ -141,6 +165,13 @@
   border-radius: 5px;
 
   cursor: pointer;
+}
+
+.auth-view__buttons-wrapper {
+  display: flex;
+  align-items: center;
+
+  width: fit-content;
 }
 
 .auth-button {
