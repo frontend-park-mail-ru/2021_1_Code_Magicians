@@ -4,7 +4,7 @@ export const constants = {
   network: {
     backendURL: DEBUG ? 'http://127.0.0.1:8080' : 'https://pinter-best.com',
     defaultAvatarLink: '/assets/img/default-avatar.jpg',
-    bucketURL: 'https://pinterbestbucket.s3.eu-central-1.amazonaws.com/',
+    bucketURL: 'https://pinterbest-bucket.s3.eu-central-1.amazonaws.com/',
     wsURL: DEBUG ? 'ws://127.0.0.1:8080/socket' : 'wss://pinter-best.com:8080/socket',
 
     pathsAPI: {
