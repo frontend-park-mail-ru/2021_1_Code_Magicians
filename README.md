@@ -12,7 +12,7 @@
 
 ## Production
 
-[pinter-best.com](https://pinter-best.com)
+[pinterbest.ru](https://pinterbest.ru)
 
 ## API (openAPI)
 
